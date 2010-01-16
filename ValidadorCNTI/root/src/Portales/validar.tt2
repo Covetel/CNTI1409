@@ -1,0 +1,19 @@
+[% titulo = 'Validador CNTI' %]
+[% WRAPPER simple/xhtml 
+	menu 	= 1
+	js_ext 	= ['static/js/jquery.js']	 
+%]
+
+[% BLOCK validar %]
+	[% FOREACH portal = portales %]	
+	<input name="validar_[%portal%]" value="Validar" type="checkbox" />	<span id="[% portal %]"> [% portal %] </span> <br />
+	[% END %]
+	<p>
+	<button name="validar_todos" value="validartodos" type="submit">Validar Todos</button> 
+	<button name="validar_solo" value="validarsolo" type="submit"> Validar los Seleccionados </button> 
+	</p>
+[% END %]
+
+[% PROCESS validar %]
+
+[%END%]

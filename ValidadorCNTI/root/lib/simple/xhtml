@@ -1,0 +1,111 @@
+[%#
+xhtml_simple - Organizado como TTSite, pero simple ;-)
+
+Parametros (en orden de apariciÃ³n):
+   config       : Archivo de configuraciÃ³n, si vale "-" no se cargara ninguno
+                  si no se especifica se cargara: "simple/config", tenga cuidado
+                  la configuraciÃ³n por defecto define variables que se asumen
+                  durante el proceso de evaluaciÃ³n, p.ej: site
+   nocss        : evita que se carge el ccs global (/static/css/ttsite.css)
+   js_init      : un bloque de javascript que se incluye inline en head (antes de js_ext)
+   js_ext       : un arreglo de archivos de js a enlazar
+   js_local     : un bloque de javascript que se incluye inline en head
+   css_ext      : un arreglo de archivos de CSS a enlazar
+   ccs_local    : un bloque de CSS que se incluye en lÃ­nea
+   localhead    : un bloque que se incluye inline en head
+   body         : una etiqueta body personalizada 
+   header       : el nombre de un template de header (defecto: simple/header)
+   footer       : el nombre de un template de footer (defecto: simple/footer)
+
+Licencia:
+    GPLv3
+-%]
+[%  IF config;
+        UNLESS config == '-';
+            PROCESS $config;
+        END;
+    ELSE;
+        PROCESS simple/config;
+        site.base;
+    END -%]
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>[% template.title or title or site.title %]</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+[% UNLESS nocss %]
+<link rel="stylesheet" href="[% site.url.base %]static/css/estilo.css" type="text/css" title="Estilo CSS" media="screen" />
+[% END %]
+
+[% IF js_init %]
+<script type="text/javascript">
+//<![CDATA[
+    [% js_local %]
+//]]>
+</script>
+[% END %]
+
+[% FOR s = js_ext %]
+    <script type="text/javascript" src="[% site.url.base _ s %]"></script>
+[% END %]
+
+[% IF js_local %]
+<script type="text/javascript">
+//<![CDATA[
+    [% js_local %]
+//]]>
+</script>
+[% END %]
+
+[% IF menu %]
+	<link rel="stylesheet" type="text/css" media="screen" href="/static/css/menu.css" />
+[% END %]
+
+[% FOR s = css_ext %]
+    <link rel="stylesheet" type="text/css" media="screen" href="[% site.url.base _ s %]" />
+[% END %]
+
+[% IF css_local %]
+<style type="text/css">
+/*<![CDATA[*/
+  [% css_local %]
+/*]]>*/
+</style>
+[% END %]
+
+[% IF localhead %]
+    [% localhead %]
+[% END %]
+</head>
+
+
+[% IF body %]
+    [% body %]
+[% ELSE %]
+    <body>
+[% END %]
+
+<div id="main">
+	<div id="header"> 
+		<img alt="Cintillo" src="/static/images/cintillo.png" />
+	</div>
+	[% IF menu %]
+		[% INCLUDE simple/menu %]
+	[% END %]
+
+	<div id="content">
+	[% content %]
+	</div>
+
+</div>
+	[% IF footer %]
+		<div id="footer">[% INCLUDE $footer %]</div>
+	[% ELSE %]
+		<div id="footer">[% INCLUDE simple/footer %]</div>
+	[% END %]
+</body>
+</html>

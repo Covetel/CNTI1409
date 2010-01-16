@@ -1,0 +1,3 @@
+<!-- BEGIN site/footer -->
+<div id="copyright">[% site.copyright %]</div>
+<!-- END site/footer -->

@@ -1,0 +1,11 @@
+[% BLOCK menu %]
+	<div id="menu"> 
+		<ul>
+			<li id="cargarPortales"> <a href="/portales/upload" alt="Cargar Portales"> Cargar Portales </a> </li>
+			<li id="validarPortales"> <a href="/portales/validar" alt="Cargar Portales"> Validar Portales </a> </li>
+			<li> <a href="/logout" alt="Salir">  Salir </a> </li>
+		</ul>
+	</div> 
+[% END %]
+[% PROCESS menu %]
+
