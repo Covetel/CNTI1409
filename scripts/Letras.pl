@@ -1,6 +1,6 @@
 #!/usr/bin/perl 
 use strict;
 
-my @letras = ('a'..'z');
+my @letras = ('a'..'Z');
 
 1;
