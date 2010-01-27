@@ -1,0 +1,26 @@
+[% titulo = 'Validador CNTI' %]
+[% WRAPPER simple/xhtml 
+	menu 	= 1
+	js_ext 	= ['static/js/jquery.js', 'static/js/Portales/validar.js','static/js/menu.js', 'static/js/jquery/jquery.curvycorners.packed.js']	 
+	css_ext 	= ['static/css/global.css']	 
+%]
+
+[% BLOCK validar %]
+	<div id="validar_form">
+	<div id="ajax">
+		<img src="/static/images/loading.gif" alt="Validando ..." />
+	</div>
+	<div class="mensaje"> Por favor seleccione los portales a ser validados. </div> 
+	[% FOREACH portal = portales %]	
+	<input class="checkbox" id="validar_[%portal%]" name="validar_[%portal%]" value="[%portal%]" type="checkbox" />	<label title="[%portal%]" for="validar_[%portal%]"> [% portal %] </label> <br />
+	[% END %]
+	<p>
+	<button disabled="disabled" id="validar_todos" name="validar_todos" value="validartodos" type="submit">Validar Todos</button> 
+	<button id="validar_solo" name="validar_solo" value="validarsolo" type="submit"> Validar los Seleccionados </button> 
+	</p>
+	</div>
+[% END %]
+
+[% PROCESS validar %]
+
+[%END%]

@@ -1,0 +1,8 @@
+[% BLOCK menu %]
+	<ul id="menu">
+		<li><a href="/portales/upload">Cargar Portales</a></li>
+		<li><a href="/portales/validar">Validar Portales</a></li>
+	</ul>
+[% END %]
+[% PROCESS menu %]
+

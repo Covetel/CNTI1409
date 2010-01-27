@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Validador de Portales - CNTI</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<style type="text/css" media="all"> 
+@import "global.css"; 
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="uphead"></div>
+  <div id="head">
+    <div id="logobox"> <img src="img/logo_image.png" alt="Logo CNTI" />
+      <h1>Validador</h1>
+      <h4>@ Portales</h4>
+    </div>
+    <img src="img/head_image.jpg" alt="" style="float:left" /> </div>
+  <div id="topnavi">
+    <ul>
+      <li class="select"><a href="#">Cargar Portales</a></li>
+      <li><a href="#">Validar Portales</a></li>
+    </ul>
+  </div>
+  <div id="contentbody">
+    <div id="contentbox">
+      <div class="inlay">
+        <div class="welcomebox"> <img src="img/welcomebox_image.jpg" style="float:right" alt="" class="right" />
+          <h1>Free Template Blue-Skyscraper,</h1>
+          <p>"Blue-Skyscraper" is a free, tableless, W3C-compliant web design layout by MediaUp. This template has been tested and proven compatible with all major browser environments and operating systems. You are free to modify the design to suit your tastes in any way you like.</p>
+          <p>We only ask you to not remove "Webdesign MediaUp" and the link http://www.mediaup.de from the footer of the template. Have fun! ;) </p>
+        </div>
+        <div class="teaserbox" style="border-right:2px solid #1986e8">
+          <div class="inlay2">
+            <h2>Lorem ipsum no affert</h2>
+            <p>Vim odio disputationi cu. Et dicit habemus prodesset has. Quot electram no est, mel soluta legimus in, quo ea integre imperdiet appellantur.<br />
+              <br />
+              <img src="img/teaser_image.jpg" alt="" /> </p>
+          </div>
+        </div>
+        <div class="teaserbox">
+          <div class="inlay2">
+            <h2>Lorem ipsum no affert</h2>
+            <p>&quot;Blue-Skyscraper&quot; is a free, tableless, W3C-compliant web design layout by MediaUp. This template has been tested and proven compatible with all major browser environments and operating systems. You are free to modify the design to suit your tastes in any way you like.</p>
+            <p>We only ask you to not remove &quot;Webdesign MediaUp&quot; and the link http://www.mediaup.de from the footer of the template. Have fun! ;)</p>
+          </div>
+        </div>
+        <div class="sep">&nbsp;</div>
+        <div class="teaserbox2">
+          <div class="inlay2">
+            <h2>Lorem ipsum no affert</h2>
+            <p><img class="right" src="img/teaser_image2.jpg" style="float:right" alt="" />&quot;Blue-Skyscraper&quot; is a free, tableless, W3C-compliant web design layout by MediaUp. This template has been tested and proven compatible with all major browser environments and operating systems. You are free to modify the design to suit your tastes in any way you like.</p>
+            <p>We only ask you to not remove &quot;Webdesign MediaUp&quot; and the link http://www.mediaup.de from the footer of the template.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="rightbox">
+      <ul>
+        <li class="select"><a href="http://validator.w3.org/check?uri=referer">+ XHTML</a></li>
+        <li><a href="http://www.free-css.com/">- Item</a></li>
+        <li><a href="http://www.free-css.com/">- Item</a></li>
+        <li><a href="http://www.free-css.com/">- Item</a></li>
+        <li><a href="http://www.free-css.com/">- Item</a></li>
+      </ul>
+      <h3>Informationen</h3>
+      <p>Omnis denique probatus duo et.</p>
+      <p>Ut iuvaret comprehensam vel. Debet splendide democritum per ea, ne nam iriure scripta delicatissimi. Ex ius virtute elaboraret, suscipit gubergren sed ex.</p>
+      <p>At usu minim error dicam, maiorum ponderum eos ei, iuvaret admodum torquatos in mei. In delectus laboramus incorrupte quo, ad facilis atomorum mei, pri an volutpat consetetur. </p>
+      <p>An meliore detracto per, sed id modo democritum sententiae. </p>
+      <p>Ut iuvaret comprehensam vel. Debet splendide democritum per ea, ne nam iriure scripta delicatissimi. </p>
+      <p>Ex ius virtute elaboraret, suscipit gubergren sed ex.</p>
+    </div>
+  </div>
+  <div id="footer"> Copyright 2008 yourname.com. All Rights Reserved. Blue-Skyscraper is a free template by <a href="http://www.mediaup.de">Webdesign</a> MediaUp</div>
+</div>
+</body>
+</html>
