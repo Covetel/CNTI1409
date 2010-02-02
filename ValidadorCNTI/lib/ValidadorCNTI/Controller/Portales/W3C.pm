@@ -5,23 +5,24 @@ use warnings;
 use parent 'Catalyst::Controller';
 use WebService::Validator::HTML::W3C;
 
-=head1 NAME
+=head1 NOMBRE
 
-ValidadorCNTI::Controller::Portales::W3C - Catalyst Controller
+ValidadorCNTI::Controller::Portales::W3C - Disposición HTML
 
-=head1 DESCRIPTION
+=head1 DESCRIPCION
 
-Catalyst Controller.
+Esta controladora se encarga de validar el código XHTML/HTML de un documento. 
 
-=head1 METHODS
+=head1 METODOS
 
 =cut
 
 
 =head2 index 
 
-=cut
+Este es el método principal de la controladora. 
 
+=cut
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
@@ -33,7 +34,6 @@ sub index :Path :Args(0) {
 Verificar si el dominio termina en .gob.ve
 
 =cut
-
 sub dominio : Local {
 	my ($self, $c, $url) = @_;
 	# contenido
@@ -49,7 +49,6 @@ sub dominio : Local {
 Verificar contra W3C si es valida la maquetacion
 
 =cut
-
 sub html : Local {
 	my ($self, $c, $url) = @_;
 	$DB::single = 1;
@@ -73,7 +72,6 @@ sub html : Local {
 Metodo privado para arreglar la URL pasada
 
 =cut
-
 sub fixurl : Private {
 	my ($c, $url) = @_;
 	$url = "http://" . $url if !($url=~/^(http(|s)):\/\//);
@@ -83,7 +81,7 @@ sub fixurl : Private {
 
 =head1 AUTHOR
 
-root
+Cooperativa Venezolana de Tecnologías Libres R.S. <info@covetel.com.ve>
 
 =head1 LICENSE
 

@@ -10,44 +10,44 @@ use parent 'Catalyst::Controller';
 #
 __PACKAGE__->config->{namespace} = '';
 
-=head1 NAME
+=head1 NOMBRE
 
-ValidadorCNTI::Controller::Root - Root Controller for ValidadorCNTI
+ValidadorCNTI::Controller::Root - Controladora Raíz de ValidadorCNTI
 
-=head1 DESCRIPTION
+=head1 DESCRIPCION
 
-[enter your description here]
+Esta es la controladora principal del sistema
 
-=head1 METHODS
+=head1 METODOS
 
 =cut
 
 =head2 index
 
+Este es el método principal de la controladora, se encarga de despachar y entregrar el control de la 
+aplicación a la controladora correspondiente. 
+
 =cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    # Hello World
 	$c->forward("/portales/upload/")
 }
 
-sub prueba : Local {
-    my ( $self, $c ) = @_;
-	$c->stash->{'template'} = 'ValidadorCnti.tt2';
-}
+=head2 default
 
+Este método se encarga de capturar todas aquellas solicitudes que no se encuentren definidas en otra controladora. 
+
+=cut 
 sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );
     $c->response->status(404);
-    
 }
 
 =head2 end
 
-Attempt to render a view, if needed.
+Intenta Crear la vista, si es necesaria. 
 
 =cut 
 
@@ -55,7 +55,7 @@ sub end : ActionClass('RenderView') {}
 
 =head1 AUTHOR
 
-,,,
+Cooperativa Venezolana de Tecnologías Libres R.S. <info@covetel.com.ve>
 
 =head1 LICENSE
 

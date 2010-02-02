@@ -3,29 +3,36 @@ package ValidadorCNTI::Controller::Portales;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
-=head1 NAME
+=head1 NOMBRE
 
-ValidadorCNTI::Controller::Portales - Catalyst Controller
+ValidadorCNTI::Controller::Portales - Controladora Portales.
 
-=head1 DESCRIPTION
+=head1 DESCRIPCION
 
-Catalyst Controller.
+Esta controladora se encarga de validar todas las disposiciones de la norma. 
+A medida que se vallan programando, seran creadas controladoras hijas de esta,
+que serán responsables de automatizar cada disposición. 
 
-=head1 METHODS
+=head1 METODOS
 
 =cut
 
 
 =head2 index 
 
+Este es el método principal de la controladora. 
+
 =cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    $c->response->body('Matched ValidadorCNTI::Controller::Portales in Portales.');
 }
 
+=head2 upload 
+
+Este es el método encargado de subir el archivo sitios.txt al sistema. 
+
+=cut
 sub upload : Local {
     my ( $self, $c ) = @_;
 	if ( $c->request->parameters->{form_submit} eq 'yes' ) {
@@ -44,6 +51,11 @@ sub upload : Local {
 
 }
 
+=head2 validar 
+
+Este es el método encargado de despachar las disposiciones de la norma. 
+
+=cut
 sub validar : Local {
 
 	my ($self, $c ) = @_; 
@@ -103,6 +115,11 @@ sub validar : Local {
 	}
 }
 
+=head2 reportePDF 
+
+Este es el método encargado de generar el reporte PDF.
+
+=cut
 sub reportePDF : Local {
 	my ($self, $c, @portales)  = @_;
 	my $logo = ValidadorCNTI->path_to('root','static','images','logo_cnti.jpeg');
@@ -179,11 +196,13 @@ sub reportePDF2 {
 }
 
 
+=head2 portales 
 
+Este es el método devuelve la lista de portales a chequear. 
+Por ahora salen de un archivo en /tmp llamado sitios.txt
+
+=cut
 sub portales {
-	# Esta rutina devuelve la lista de portales a chequear. 
-	
-	# Por ahora los saco de un archivo de texto en /tmp/sitios.txt 
 	open PORTALES, "<:encoding(UTF-8)", "/tmp/sitios.txt";
 	my @portales = <PORTALES>;
 	map { chomp } @portales;
@@ -191,6 +210,11 @@ sub portales {
 }
 
 
+=head2 dominio 
+
+Este es el método se encarga de validar el domino. 
+
+=cut
 sub dominio : Local {
 	my ($self, $c, $url) = @_;
 	# contenido
@@ -203,7 +227,7 @@ sub dominio : Local {
 
 =head2 html
 
-Verificar contra W3C si es valida la maquetacion
+Este método se encarga de verificar contra W3C si es valida la maquetacion
 
 =cut
 
@@ -224,12 +248,7 @@ sub html : Local {
 
 =head1 AUTHOR
 
-root
-
-=head1 LICENSE
-=head1 AUTHOR
-
-,,,
+Cooperativa Venezolana de Tecnologías Libres R.S. <info@covetel.com.ve>
 
 =head1 LICENSE
 
