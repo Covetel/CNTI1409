@@ -149,53 +149,6 @@ sub reportePDF : Local {
 	1;
 }
 
-sub reportePDF2 {
-	my ($self, $c, @portales)  = @_;
-		{
-       no warnings 'redefine';  # right here, you can tell bad things will happen
-       local *Template::Latex::system = sub {
-
-         my $ret = system(@_);
-
-         my ($filename) = $_[0] =~ m[\\input{(.*?)}] ;
-         my $fh = new IO::File "${filename}.log"
-           or die "Unable to open pdflatex logfile ${filename}.log: $!";
-
-         my $line;
-         while ( defined($_ = $fh->getline) ) {
-             $line = $_;
-         }
-
-         return 0 if $line =~ /^Output written on ${filename}.pdf \(\d+ pages?, \d+ bytes?\).$/;
-         return $ret;
-       } 
-
-     }
-
-	use Template::Latex; 
-	my $template = Template::Latex->new({
-		INCLUDE_PATH => '/home/elsanto/covetel/validador_cnti/branches/walter/ValidadorCNTI/root/src/Portales',
-		OUTPUT_PATH => '/tmp/',
-		LATEX_FORMAT  => 'pdf',
-    });
-	foreach my $portal (@portales){
-		my $vars = {
-		  portal  	=> 'Hello World',
-		  #cumple  	=> $portal->{'cumple'},
-		  #dominio  	=> $portal->{'criterios'}->{'Dominio'}->{'cumple'},
-		  #html  	=> $portal->{'criterios'}->{'HTML'}->{'cumple'},
-		};
-		my $nombre = 'w3c';
-		my $pdf = "$nombre.pdf";
-		$template->process('plantilla.tt2', $vars, 'nojoda.pdf', binmode => 1) || die $template->error(); 
-		#my @args = ("/usr/bin/pdflatex", "/tmp/nojoda.tex");
-        #system(@args);
-        #system(@args);
-	}
-	1;
-}
-
-
 =head2 portales 
 
 Este es el método devuelve la lista de portales a chequear. 
@@ -207,43 +160,6 @@ sub portales {
 	my @portales = <PORTALES>;
 	map { chomp } @portales;
 	return @portales;
-}
-
-
-=head2 dominio 
-
-Este es el método se encarga de validar el domino. 
-
-=cut
-sub dominio : Local {
-	my ($self, $c, $url) = @_;
-	# contenido
-	if ($url =~ /.+\.gob\.ve(|\/)$/) {
-		return 1;
-	} else {
-		return 0;
-	}
-}
-
-=head2 html
-
-Este método se encarga de verificar contra W3C si es valida la maquetacion
-
-=cut
-
-sub html : Local {
-	my ($self, $c, $url) = @_;
-	my $v = WebService::Validator::HTML::W3C->new(detailed => 1);
-	# Descomentar esta linea en produccion cuando se tenga instalado
-	# el validador W3C en modo local
-	# $v->validator_uri('http://localhost/w3c-markup-validator/check');
-	$url = "http://" . $url if !($url=~/^(http(|s)):\/\//);
-	my $cool = $v->validate($url) or warn ("No se pudo validar el sitio");
-	if ($v->is_valid) {
-        	return 1;
-	} else {
-        	return 0;
-	}
 }
 
 =head1 AUTHOR
