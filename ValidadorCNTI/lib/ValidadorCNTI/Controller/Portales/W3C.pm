@@ -7,7 +7,7 @@ use WebService::Validator::HTML::W3C;
 
 =head1 NOMBRE
 
-ValidadorCNTI::Controller::Portales::W3C - Disposición HTML
+ValidadorCNTI::Controller::Portales::W3C - Evalua Disposición HTML
 
 =head1 DESCRIPCION
 
