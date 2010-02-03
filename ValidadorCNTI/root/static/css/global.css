@@ -91,7 +91,7 @@ h2 {
 	color:#1e88e8;
 	font-size:12px;
 	font-weight:bold;
-	background-image:url('../images/bg_h2.jpg');
+	background-image:url('../images/bg_h2.png');
 	background-repeat:no-repeat;
 	padding-left:20px;
 }
@@ -113,7 +113,7 @@ div.welcomebox {
 	height:142px;
 	background-color:#1e88e8;
 	color:#ffffff;
-	background-image:url('../images/bg_welcomebox.jpg');
+	background-image:url('../images/bg_welcomebox.png');
 	background-repeat:no-repeat;
 	background-position:top left;
 	margin:auto;
@@ -175,14 +175,14 @@ div.sep {
 	width:956px;
 	margin:0 auto;
 	height:100%;
-	background-image:url('../images/bg_wrapper.jpg');
+	background-image:url('../images/bg_wrapper.png');
 }
 
 #uphead {
 	float:left;
 	width:956px;
 	height:51px;
-	background-image:url('../images/bg_uphead.jpg');
+	background-image:url('../images/bg_uphead.png');
 }
 
 #head {
@@ -195,7 +195,7 @@ div.sep {
 	float:left;
 	width:294px;
 	height:161px;
-	background-image:url('../images/bg_logo.jpg');
+	background-image:url('../images/bg_logo.png');
 }
 
 #logobox img {
@@ -231,7 +231,7 @@ div.sep {
 	float:left;
 	width:956px;
 	height:42px;
-	background-image:url('../images/bg_topnavi.jpg');
+	background-image:url('../images/bg_topnavi.png');
 }
 
 #topnavi ul {
@@ -245,7 +245,7 @@ div.sep {
 	float:left;
 	margin-top:6px;
 	height:25px;
-	background-image:url('../images/topnavi_norm.jpg');
+	background-image:url('../images/topnavi_norm.png');
 	margin-left:4px;
 }
 
@@ -253,7 +253,7 @@ div.sep {
 	float:left;
 	margin-top:6px;
 	height:25px;
-	background-image:url('../images/topnavi_select.jpg');
+	background-image:url('../images/topnavi_select.png');
 	margin-left:4px;
 }
 
@@ -304,7 +304,7 @@ div.sep {
 #contentbody {
 	float:left;
 	width:956px;
-	background-image:url('../images/bg_contentbody.jpg');
+	background-image:url('../images/bg_contentbody.png');
 }
 
 #contentbox {
@@ -327,7 +327,7 @@ div.sep {
 	width:956px;
 	height:60px;
 	margin-bottom:20px;
-	background-image:url('../images/bg_footer.jpg');
+	background-image:url('../images/bg_footer.png');
 	text-align:center;
 	line-height:45px;
 	color:#ffffff;
