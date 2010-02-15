@@ -139,11 +139,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1892328"
-     inkscape:cx="372.00521"
-     inkscape:cy="868.16556"
+     inkscape:zoom="0.46942014"
+     inkscape:cx="372.04724"
+     inkscape:cy="598.54668"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer4"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -156,12 +156,8 @@
        position="746.6586,894.26505"
        id="guide3743" />
     <sodipodi:guide
-       orientation="0,1"
-       position="188.22776,911.72823"
-       id="guide3957" />
-    <sodipodi:guide
        orientation="1,0"
-       position="138.96328,774.7203"
+       position="0,957.50646"
        id="guide5581" />
   </sodipodi:namedview>
   <metadata
@@ -187,13 +183,13 @@
        height="62.09198"
        x="4.4248095"
        y="3.7116919"
-       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
        inkscape:export-xdpi="72.083527"
        inkscape:export-ydpi="72.083527" />
     <g
        id="g4264"
        transform="translate(-69.696292,-141.56766)"
-       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
        inkscape:export-xdpi="72.083527"
        inkscape:export-ydpi="72.083527">
       <path
@@ -417,13 +413,13 @@
        width="105.68262"
        id="rect4481"
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
        inkscape:export-xdpi="72.083527"
        inkscape:export-ydpi="72.083527" />
     <g
        id="g4474"
        transform="matrix(1.0916814,0,0,1.0916814,364.63241,-314.44721)"
-       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
        inkscape:export-xdpi="72.083527"
        inkscape:export-ydpi="72.083527">
       <g
@@ -446,7 +442,7 @@
        height="5.4581652"
        x="0.75747317"
        y="65.655792"
-       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
        inkscape:export-xdpi="72.083527"
        inkscape:export-ydpi="72.083527" />
     <text
@@ -462,9 +458,108 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Zonificacion"
+     style="display:inline">
+    <rect
+       style="fill:#ffff66;fill-opacity:1;stroke:none;stroke-width:0.5371778;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5658"
+       width="119.46282"
+       height="293.19919"
+       x="7.712831"
+       y="99.59967"
+       ry="0"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72" />
+    <rect
+       ry="0"
+       y="99.59967"
+       x="134.24048"
+       height="293.19919"
+       width="601.63574"
+       id="rect5660"
+       style="fill:#ffff66;fill-opacity:1;stroke:none;stroke-width:0.5371778;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72" />
+    <rect
+       style="fill:#ffff66;fill-opacity:1;stroke:none;stroke-width:0.5371778;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5662"
+       width="727.76819"
+       height="19.999989"
+       x="8.1087427"
+       y="74.765404"
+       ry="0"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72" />
+    <text
+       xml:space="preserve"
+       style="font-size:18.74571037px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
+       x="11.40313"
+       y="16.631668"
+       id="text5664"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72"><tspan
+         sodipodi:role="line"
+         id="tspan5666"
+         x="11.40313"
+         y="16.631668"
+         style="font-size:18.74571037px;font-weight:bold;fill:#ff0000;-inkscape-font-specification:FreeSans Bold">A</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5668"
+       y="92.631668"
+       x="11.351004"
+       style="font-size:18.74571037px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72"><tspan
+         style="font-size:18.74571037px;font-weight:bold;fill:#ff0000;-inkscape-font-specification:FreeSans Bold"
+         y="92.631668"
+         x="11.351004"
+         id="tspan5670"
+         sodipodi:role="line">B</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18.49434471px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
+       x="11.494753"
+       y="120.51125"
+       id="text5672"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72"><tspan
+         sodipodi:role="line"
+         id="tspan5674"
+         x="11.494753"
+         y="120.51125"
+         style="font-size:18.49434471px;font-weight:bold;fill:#ff0000;-inkscape-font-specification:FreeSans Bold">C</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text5676"
+       y="120.51125"
+       x="139.49475"
+       style="font-size:18.49434471px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/zonificacion.png"
+       inkscape:export-xdpi="72"
+       inkscape:export-ydpi="72"><tspan
+         style="font-size:18.49434471px;font-weight:bold;fill:#ff0000;-inkscape-font-specification:FreeSans Bold"
+         y="120.51125"
+         x="139.49475"
+         id="tspan5678"
+         sodipodi:role="line">D</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Login"
-     style="display:inline">
+     style="display:none">
     <text
        xml:space="preserve"
        style="font-size:29.67380333px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
@@ -632,7 +727,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Login-tech"
-     style="opacity:1;display:inline">
+     style="opacity:1;display:none">
     <g
        style="display:inline"
        id="g4044"
