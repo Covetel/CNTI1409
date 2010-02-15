@@ -15,9 +15,22 @@
    sodipodi:version="0.32"
    inkscape:version="0.46"
    sodipodi:docname="Layout.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   enable-background="new">
   <defs
      id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5573">
+      <stop
+         style="stop-color:#999999;stop-opacity:1;"
+         offset="0"
+         id="stop5575" />
+      <stop
+         style="stop-color:#999999;stop-opacity:0;"
+         offset="1"
+         id="stop5577" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient3871">
@@ -111,40 +124,13 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient3861"
-       id="linearGradient4003"
-       gradientUnits="userSpaceOnUse"
-       x1="339.95319"
-       y1="385.67529"
-       x2="339.95319"
-       y2="387.21045" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3871"
-       id="linearGradient4005"
-       gradientUnits="userSpaceOnUse"
-       x1="331.59506"
-       y1="401.19748"
-       x2="331.59506"
-       y2="400.42517" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3861"
-       id="linearGradient4031"
-       gradientUnits="userSpaceOnUse"
-       x1="339.95319"
-       y1="385.67529"
-       x2="339.95319"
-       y2="387.21045" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3871"
-       id="linearGradient4033"
-       gradientUnits="userSpaceOnUse"
-       x1="331.59506"
-       y1="401.19748"
-       x2="331.59506"
-       y2="400.42517" />
+       xlink:href="#linearGradient5573"
+       id="linearGradient5579"
+       x1="336.00006"
+       y1="407.9165"
+       x2="336.00006"
+       y2="397.07053"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -153,11 +139,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.76768441"
-     inkscape:cx="375.9958"
-     inkscape:cy="854.24542"
+     inkscape:zoom="1.1892328"
+     inkscape:cx="372.00521"
+     inkscape:cy="868.16556"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer3"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -173,6 +159,10 @@
        orientation="0,1"
        position="188.22776,911.72823"
        id="guide3957" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="138.96328,774.7203"
+       id="guide5581" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -196,10 +186,16 @@
        width="518.76233"
        height="62.09198"
        x="4.4248095"
-       y="3.7116919" />
+       y="3.7116919"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
     <g
        id="g4264"
-       transform="translate(-69.696292,-141.56766)">
+       transform="translate(-69.696292,-141.56766)"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
       <path
          sodipodi:nodetypes="ccccccccc"
          id="path2531"
@@ -420,10 +416,16 @@
        height="62.09198"
        width="105.68262"
        id="rect4481"
-       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
     <g
        id="g4474"
-       transform="matrix(1.0916814,0,0,1.0916814,364.63241,-314.44721)">
+       transform="matrix(1.0916814,0,0,1.0916814,364.63241,-314.44721)"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
       <g
          transform="matrix(0.2820088,0,0,0.3005982,294.91275,53.526436)"
          id="g4470">
@@ -443,7 +445,10 @@
        width="742.49548"
        height="5.4581652"
        x="0.75747317"
-       y="65.655792" />
+       y="65.655792"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
@@ -460,133 +465,284 @@
      id="layer2"
      inkscape:label="Login"
      style="display:inline">
-    <g
-       id="g4007"
-       transform="translate(16.623177,0)">
-      <text
-         id="text3749"
+    <text
+       xml:space="preserve"
+       style="font-size:29.67380333px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       x="161.6528"
+       y="174.19244"
+       id="text3749"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527"><tspan
+         sodipodi:role="line"
+         id="tspan3751"
+         x="161.6528"
          y="174.19244"
-         x="145.02962"
-         style="font-size:29.67380333px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-         xml:space="preserve"><tspan
-           style="font-size:10.38583183px"
-           y="174.19244"
-           x="145.02962"
-           id="tspan3751"
-           sodipodi:role="line">Entrar al Sistema Automatizado del Protocolo de Prueba de Portales de Internet</tspan></text>
-      <text
-         id="text3755"
+         style="font-size:10.38583183px">Entrar al Sistema Automatizado del Protocolo de Prueba de Portales de Internet</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       x="234.27377"
+       y="212.54482"
+       id="text3755"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527"><tspan
+         sodipodi:role="line"
+         id="tspan3757"
+         x="234.27377"
          y="212.54482"
-         x="217.65059"
-         style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-         xml:space="preserve"><tspan
-           y="212.54482"
-           x="217.65059"
-           id="tspan3757"
-           sodipodi:role="line">Dirección de </tspan><tspan
-           id="tspan3759"
-           y="223.53508"
-           x="217.65059"
-           sodipodi:role="line">corre </tspan><tspan
-           id="tspan3763"
-           y="234.52534"
-           x="217.65059"
-           sodipodi:role="line">electrónico:</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-         x="217.80043"
+         style="font-weight:bold;-inkscape-font-specification:FreeSans Bold">Dirección de </tspan><tspan
+         sodipodi:role="line"
+         x="234.27377"
+         y="223.53508"
+         id="tspan3759"
+         style="font-weight:bold;-inkscape-font-specification:FreeSans Bold">corre </tspan><tspan
+         sodipodi:role="line"
+         x="234.27377"
+         y="234.52534"
+         id="tspan3763"
+         style="font-weight:bold;-inkscape-font-specification:FreeSans Bold">electrónico:</tspan></text>
+    <text
+       id="text3832"
+       y="254.79198"
+       x="234.42361"
+       style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527"><tspan
+         id="tspan3838"
          y="254.79198"
-         id="text3832"><tspan
-           sodipodi:role="line"
-           x="217.80043"
-           y="254.79198"
-           id="tspan3838">Contraseña:</tspan></text>
+         x="234.42361"
+         sodipodi:role="line"
+         style="font-weight:bold;-inkscape-font-specification:FreeSans Bold">Contraseña:</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3845"
+       width="132.44002"
+       height="16.47761"
+       x="307.01224"
+       y="211.58073"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3849"
+       width="132.44002"
+       height="16.47761"
+       x="307.01224"
+       y="244.31987"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
+    <g
+       id="g3879"
+       transform="translate(-1.583825,-91.135181)"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
       <rect
-         y="211.58073"
-         x="290.38907"
-         height="16.47761"
-         width="132.44002"
-         id="rect3845"
-         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4117"
+         width="52.479809"
+         height="15.891773"
+         x="308.96564"
+         y="385.27728" />
       <rect
-         y="244.31987"
-         x="290.38907"
-         height="16.47761"
-         width="132.44002"
-         id="rect3849"
-         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <g
-         transform="translate(-18.207002,-91.135181)"
-         id="g3879">
-        <rect
-           style="fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect3851"
-           width="52.479809"
-           height="15.891773"
-           x="308.96564"
-           y="385.27728" />
-        <text
-           xml:space="preserve"
-           style="font-size:7.56307602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-           x="324.45148"
-           y="395.34048"
-           id="text3853"><tspan
-             sodipodi:role="line"
-             id="tspan3855"
-             x="324.45148"
-             y="395.34048"
-             style="fill:#ffffff">Entrar</tspan></text>
-        <rect
-           y="385.27728"
-           x="308.96564"
-           height="15.891773"
-           width="52.479809"
-           id="rect3859"
-           style="fill:url(#linearGradient4031);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-        <rect
-           style="fill:url(#linearGradient4033);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect3869"
-           width="52.479809"
-           height="15.891773"
-           x="308.96564"
-           y="385.27728" />
-      </g>
+         y="385.27728"
+         x="308.96564"
+         height="15.891773"
+         width="52.479809"
+         id="rect3851"
+         style="fill:#f9f9f9;fill-opacity:1;stroke:#666666;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         rx="1.5731946"
+         ry="1.5731946" />
+      <rect
+         ry="1.5731946"
+         rx="1.5731946"
+         style="fill:url(#linearGradient5579);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect5571"
+         width="52.479809"
+         height="15.891773"
+         x="308.96564"
+         y="385.27728" />
       <text
-         id="text3890"
-         y="304.44717"
-         x="356.39481"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         id="text3853"
+         y="395.34048"
+         x="326.71094"
+         style="font-size:7.56307602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
          xml:space="preserve"><tspan
-           style="font-size:8px;font-weight:bold;fill:#ff000c;fill-opacity:1;-inkscape-font-specification:FreeSans Bold"
-           y="304.44717"
-           x="356.39481"
-           id="tspan3892"
-           sodipodi:role="line">Registrarse</tspan></text>
+           style="font-size:6px;fill:#333333"
+           y="395.34048"
+           x="326.71094"
+           id="tspan3855"
+           sodipodi:role="line">Entrar</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0073ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       x="373.01797"
+       y="304.44717"
+       id="text3890"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527"><tspan
+         sodipodi:role="line"
+         id="tspan3892"
+         x="373.01797"
+         y="304.44717"
+         style="font-size:8px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#0073ff;fill-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans Bold">Registrarse</tspan></text>
+    <text
+       id="text3894"
+       y="331.31461"
+       x="306.70041"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#0073ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527"><tspan
+         style="font-size:8px;font-weight:bold;fill:#0073ff;fill-opacity:1;-inkscape-font-specification:FreeSans Bold"
+         y="331.31461"
+         x="306.70041"
+         id="tspan3896"
+         sodipodi:role="line">¿Has olvidado tu contraseña?</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect3898"
+       width="465.47266"
+       height="223.04704"
+       x="139.31091"
+       y="141.13452"
+       ry="7.3458605"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 164.03195,182.53844 L 581.41039,182.53844"
+       id="path3900"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Login-tech"
+     style="opacity:1;display:inline">
+    <g
+       style="display:inline"
+       id="g4044"
+       transform="translate(17.724906,104.27324)"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
+      <path
+         d="M 211.71357,115.18442 A 9.2049379,9.2049379 0 1 1 193.3037,115.18442 A 9.2049379,9.2049379 0 1 1 211.71357,115.18442 z"
+         sodipodi:ry="9.2049379"
+         sodipodi:rx="9.2049379"
+         sodipodi:cy="115.18442"
+         sodipodi:cx="202.50864"
+         id="path4038"
+         style="fill:none;fill-opacity:1;stroke:#fff500;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:6, 2;stroke-dashoffset:0;stroke-opacity:1"
+         sodipodi:type="arc" />
+      <text
+         id="text4040"
+         y="119.30785"
+         x="198.81491"
+         style="font-size:14.16981602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         xml:space="preserve"><tspan
+           y="119.30785"
+           x="198.81491"
+           id="tspan4042"
+           sodipodi:role="line">1</tspan></text>
+    </g>
+    <g
+       transform="translate(94.244826,103.43236)"
+       id="g4053"
+       style="display:inline"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
+      <path
+         sodipodi:type="arc"
+         style="fill:none;fill-opacity:1;stroke:#fff500;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:6, 2;stroke-dashoffset:0;stroke-opacity:1"
+         id="path4055"
+         sodipodi:cx="202.50864"
+         sodipodi:cy="115.18442"
+         sodipodi:rx="9.2049379"
+         sodipodi:ry="9.2049379"
+         d="M 211.71357,115.18442 A 9.2049379,9.2049379 0 1 1 193.3037,115.18442 A 9.2049379,9.2049379 0 1 1 211.71357,115.18442 z" />
       <text
          xml:space="preserve"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
-         x="290.07724"
-         y="331.31461"
-         id="text3894"><tspan
+         style="font-size:14.16981602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         x="198.81491"
+         y="119.30785"
+         id="text4057"><tspan
            sodipodi:role="line"
-           id="tspan3896"
-           x="290.07724"
-           y="331.31461"
-           style="font-size:8px;font-weight:bold;fill:#ff000c;fill-opacity:1;-inkscape-font-specification:FreeSans Bold">¿Has olvidado tu contraseña?</tspan></text>
-      <rect
-         ry="7.3458605"
-         y="141.13452"
-         x="122.68774"
-         height="223.04704"
-         width="465.47266"
-         id="rect3898"
-         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         id="path3900"
-         d="M 147.40877,182.53844 L 564.78721,182.53844"
-         style="fill:none;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           id="tspan4059"
+           x="198.81491"
+           y="119.30785">2</tspan></text>
     </g>
+    <g
+       id="g4070"
+       transform="translate(-4.7768628,-92.497435)"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
+      <path
+         transform="translate(97.565202,279.27347)"
+         sodipodi:type="arc"
+         style="fill:none;fill-opacity:1;stroke:#fff500;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:6, 2;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+         id="path4061"
+         sodipodi:cx="202.50864"
+         sodipodi:cy="115.18442"
+         sodipodi:rx="9.2049379"
+         sodipodi:ry="9.2049379"
+         d="M 211.71357,115.18442 A 9.2049379,9.2049379 0 1 1 193.3037,115.18442 A 9.2049379,9.2049379 0 1 1 211.71357,115.18442 z" />
+      <text
+         xml:space="preserve"
+         style="font-size:14.16981602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         x="296.38013"
+         y="398.58133"
+         id="text4063"><tspan
+           sodipodi:role="line"
+           id="tspan4065"
+           x="296.38013"
+           y="398.58133">3</tspan></text>
+    </g>
+    <g
+       transform="translate(131.1466,-93.365956)"
+       id="g4075"
+       inkscape:export-filename="/home/elsanto/CNTI-14-09/Layout/Imagenes/Pantallas/inicio.png"
+       inkscape:export-xdpi="72.083527"
+       inkscape:export-ydpi="72.083527">
+      <path
+         d="M 211.71357,115.18442 A 9.2049379,9.2049379 0 1 1 193.3037,115.18442 A 9.2049379,9.2049379 0 1 1 211.71357,115.18442 z"
+         sodipodi:ry="9.2049379"
+         sodipodi:rx="9.2049379"
+         sodipodi:cy="115.18442"
+         sodipodi:cx="202.50864"
+         id="path4077"
+         style="fill:none;fill-opacity:1;stroke:#fff500;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:6, 2;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+         sodipodi:type="arc"
+         transform="translate(97.565202,279.27347)" />
+      <text
+         id="text4079"
+         y="398.58133"
+         x="296.38013"
+         style="font-size:14.16981602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         xml:space="preserve"><tspan
+           y="398.58133"
+           x="296.38013"
+           id="tspan4081"
+           sodipodi:role="line">4</tspan></text>
+    </g>
+    <g
+       id="g4083"
+       transform="translate(136.79198,-66.87608)" />
   </g>
 </svg>
