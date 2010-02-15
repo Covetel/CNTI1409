@@ -6,6 +6,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="210mm"
@@ -17,6 +18,30 @@
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3871">
+      <stop
+         style="stop-color:#550000;stop-opacity:1;"
+         offset="0"
+         id="stop3873" />
+      <stop
+         style="stop-color:#550000;stop-opacity:0;"
+         offset="1"
+         id="stop3875" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3861">
+      <stop
+         style="stop-color:#ffaaaa;stop-opacity:1;"
+         offset="0"
+         id="stop3863" />
+      <stop
+         style="stop-color:#ffaaaa;stop-opacity:0;"
+         offset="1"
+         id="stop3865" />
+    </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 526.18109 : 1"
@@ -52,6 +77,74 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 526.18109 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3699"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3826"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3861"
+       id="linearGradient3867"
+       x1="339.95319"
+       y1="385.67529"
+       x2="339.95319"
+       y2="387.21045"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3871"
+       id="linearGradient3877"
+       x1="331.59506"
+       y1="401.19748"
+       x2="331.59506"
+       y2="400.42517"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3861"
+       id="linearGradient4003"
+       gradientUnits="userSpaceOnUse"
+       x1="339.95319"
+       y1="385.67529"
+       x2="339.95319"
+       y2="387.21045" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3871"
+       id="linearGradient4005"
+       gradientUnits="userSpaceOnUse"
+       x1="331.59506"
+       y1="401.19748"
+       x2="331.59506"
+       y2="400.42517" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3861"
+       id="linearGradient4031"
+       gradientUnits="userSpaceOnUse"
+       x1="339.95319"
+       y1="385.67529"
+       x2="339.95319"
+       y2="387.21045" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3871"
+       id="linearGradient4033"
+       gradientUnits="userSpaceOnUse"
+       x1="331.59506"
+       y1="401.19748"
+       x2="331.59506"
+       y2="400.42517" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -60,9 +153,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.028531"
-     inkscape:cx="373.86551"
-     inkscape:cy="973.54153"
+     inkscape:zoom="0.76768441"
+     inkscape:cx="375.9958"
+     inkscape:cy="854.24542"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -73,29 +166,13 @@
      inkscape:window-x="-5"
      inkscape:window-y="25">
     <sodipodi:guide
-       orientation="0,1"
-       position="386.40727,1016.2009"
-       id="guide2664" />
+       orientation="1,0"
+       position="746.6586,894.26505"
+       id="guide3743" />
     <sodipodi:guide
        orientation="0,1"
-       position="625.24206,986.78787"
-       id="guide2694" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="99.026185,997.77418"
-       id="guide2821" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="131.12433,936.65112"
-       id="guide2823" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="13.376653,925.87721"
-       id="guide3597" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="13.650266,920.40494"
-       id="guide3599" />
+       position="188.22776,911.72823"
+       id="guide3957" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -109,9 +186,10 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Capa 1"
+     inkscape:label="Cintillo"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     style="display:inline">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4304"
@@ -366,5 +444,149 @@
        height="5.4581652"
        x="0.75747317"
        y="65.655792" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+       x="79.554123"
+       y="334.45807"
+       id="text3745"><tspan
+         sodipodi:role="line"
+         id="tspan3747"
+         x="79.554123"
+         y="334.45807" /></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Login"
+     style="display:inline">
+    <g
+       id="g4007"
+       transform="translate(16.623177,0)">
+      <text
+         id="text3749"
+         y="174.19244"
+         x="145.02962"
+         style="font-size:29.67380333px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         xml:space="preserve"><tspan
+           style="font-size:10.38583183px"
+           y="174.19244"
+           x="145.02962"
+           id="tspan3751"
+           sodipodi:role="line">Entrar al Sistema Automatizado del Protocolo de Prueba de Portales de Internet</tspan></text>
+      <text
+         id="text3755"
+         y="212.54482"
+         x="217.65059"
+         style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         xml:space="preserve"><tspan
+           y="212.54482"
+           x="217.65059"
+           id="tspan3757"
+           sodipodi:role="line">Dirección de </tspan><tspan
+           id="tspan3759"
+           y="223.53508"
+           x="217.65059"
+           sodipodi:role="line">corre </tspan><tspan
+           id="tspan3763"
+           y="234.52534"
+           x="217.65059"
+           sodipodi:role="line">electrónico:</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:8.79221439px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         x="217.80043"
+         y="254.79198"
+         id="text3832"><tspan
+           sodipodi:role="line"
+           x="217.80043"
+           y="254.79198"
+           id="tspan3838">Contraseña:</tspan></text>
+      <rect
+         y="211.58073"
+         x="290.38907"
+         height="16.47761"
+         width="132.44002"
+         id="rect3845"
+         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="244.31987"
+         x="290.38907"
+         height="16.47761"
+         width="132.44002"
+         id="rect3849"
+         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         transform="translate(-18.207002,-91.135181)"
+         id="g3879">
+        <rect
+           style="fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect3851"
+           width="52.479809"
+           height="15.891773"
+           x="308.96564"
+           y="385.27728" />
+        <text
+           xml:space="preserve"
+           style="font-size:7.56307602px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+           x="324.45148"
+           y="395.34048"
+           id="text3853"><tspan
+             sodipodi:role="line"
+             id="tspan3855"
+             x="324.45148"
+             y="395.34048"
+             style="fill:#ffffff">Entrar</tspan></text>
+        <rect
+           y="385.27728"
+           x="308.96564"
+           height="15.891773"
+           width="52.479809"
+           id="rect3859"
+           style="fill:url(#linearGradient4031);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           style="fill:url(#linearGradient4033);fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect3869"
+           width="52.479809"
+           height="15.891773"
+           x="308.96564"
+           y="385.27728" />
+      </g>
+      <text
+         id="text3890"
+         y="304.44717"
+         x="356.39481"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         xml:space="preserve"><tspan
+           style="font-size:8px;font-weight:bold;fill:#ff000c;fill-opacity:1;-inkscape-font-specification:FreeSans Bold"
+           y="304.44717"
+           x="356.39481"
+           id="tspan3892"
+           sodipodi:role="line">Registrarse</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ff000c;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:FreeSans;-inkscape-font-specification:FreeSans"
+         x="290.07724"
+         y="331.31461"
+         id="text3894"><tspan
+           sodipodi:role="line"
+           id="tspan3896"
+           x="290.07724"
+           y="331.31461"
+           style="font-size:8px;font-weight:bold;fill:#ff000c;fill-opacity:1;-inkscape-font-specification:FreeSans Bold">¿Has olvidado tu contraseña?</tspan></text>
+      <rect
+         ry="7.3458605"
+         y="141.13452"
+         x="122.68774"
+         height="223.04704"
+         width="465.47266"
+         id="rect3898"
+         style="fill:none;fill-opacity:1;stroke:#b3b3b3;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cc"
+         id="path3900"
+         d="M 147.40877,182.53844 L 564.78721,182.53844"
+         style="fill:none;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
   </g>
 </svg>
