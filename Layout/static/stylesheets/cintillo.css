@@ -1,7 +1,9 @@
 div#gbv {
- background-image: url("../images/gbv.png");
+ border: 0px;
+ background: url("../images/gbv.png") no-repeat scroll;
 }
 
 div#bicentenario {
- background-image: url("../images/200.png");
+ border: 0px;
+ background: url("../images/200.png") no-repeat scroll;
 }

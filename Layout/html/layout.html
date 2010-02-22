@@ -14,34 +14,55 @@
                 <meta name="Description" content="__DESCRIPTION__" />
 		<title>[% site.title %]</title>
                 <link href="../static/stylesheets/master.css" rel="stylesheet" type="text/css" media="all" />
+                <link href="../static/stylesheets/cnti1409/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" media="all" />
                 <!-- import the DOM logic from external javascript files -->
-                <script type="text/javascript" src="/static/javascripts/application.js"></script>
+                <script type="text/javascript" src="../static/javascripts/jquery-1.3.2.min.js"></script>
+                <script type="text/javascript" src="../static/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="../static/javascripts/application.js"></script>
         </head>
 
         <body>
 		<div id="cintillo_institucional">
-			<div id="gbv"> Gobierno Bolivariano de Venezuela </div>
-			<div id="bicentenario"> Bicentenario </div>
+			<div id="gbv"> &nbsp; </div>
+			<div id="bicentenario"> &nbsp; </div>
 		</div>
 		<div id="informacion_sesion">
-			información de la sesión
+			<div id="is_usuario">
+				<div id="is_usuario_uid">walter@covetel.com.ve</div>
+			</div>
+			<div id="is_enlaces">
+				<ul>
+					<li><a href="http://www.cnti.gob.ve/">Configuración de la Cuenta</a> | </li>
+					<li><a href="http://www.cnti.gob.ve/">Norma Técnica</a> | </li>
+					<li><a href="http://www.w3.org/">W3C</a> | </li>
+					<li><a href="http://www.google.co.ve/">Ayuda</a> | </li>
+					<li> <a href="#">Salir</a> </li>
+				</ul>
+			</div>
 		</div>
 		<div id="menu_vertical">
-			menu_vertical
+			<h3><a href="#"> Modulo 1 </a></h3>
 			<div>
-			<ul> 
-				<li> Opcion </li>
-				<li> Opcion </li>
-				<li> Opcion </li>
-				<li> Opcion </li>
-			</ul>
+				<a href="#"> Opcion 1 </a> <br />
+				<a href="#"> Opcion 2 </a> <br />
+				<a href="#"> Opcion 3 </a> <br />
+			</div>
+			<h3><a href="#"> Modulo 2 </a></h3>
+			<div>
+				<a href="#"> Opcion 1 </a> <br />
+				<a href="#"> Opcion 2 </a> <br />
+				<a href="#"> Opcion 3 </a> <br />
 			</div>
 		</div>
 		<div id="area_aplicacion">
-			Area de Aplicación
+			<h3><a href="#"> Area de Aplicación </a> </h3>
 			<div> 
 				Esto es un div interno 
+				<p>
+				<label for="calendario"> Calendario:  </label> <input type="text" id="calendario" name="calendario" />
+				</p>
 			</div> 
+		
 		</div>
 		<div class="clear">
 			&nbsp;
