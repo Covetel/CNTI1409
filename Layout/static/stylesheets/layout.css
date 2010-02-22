@@ -1,0 +1,60 @@
+/* 
+Archivo: 	layout.css
+Autor: 		Walter Vargas <walter@covetel.com.ve>
+Descripción: 	Esta hoja de estilo, configura el layout de la aplicación, para los 4 div principales. 
+		cintillo_institucional
+		informacion_sesion
+		menu_horizontal
+		area_aplicacion 
+*/
+
+/* Configuración Global */ 
+body {
+ margin-top: 0px;
+}
+
+div {
+ border: 1px solid #aaa;
+ padding: 5px;
+}
+
+.clear {
+ clear: both; 
+}
+
+/* Fin Configuración Global */ 
+
+div#cintillo_institucional {
+ height:	71px; 
+ border-bottom: 6px solid #ff000c
+}
+
+div#gbv {
+ width: 	452px;
+ float: 	left;
+}
+
+div#bicentenario {
+ width: 	110px;
+ float: 	right;
+}
+
+div#informacion_sesion {
+ height: 			20px;
+ margin-top: 		5px;
+ margin-bottom: 	5px;
+}
+
+div#menu_vertical {
+ width: 	125px;
+ display: 	inline; 
+ float: 	left;
+ height: 	200px;
+}
+
+div#area_aplicacion {
+ width: 		83%;
+ margin-left: 	146px;
+}
+
+@import "cintillo.css";
