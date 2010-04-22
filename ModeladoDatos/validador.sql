@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Started on 2010-04-21 12:51:00 VET
+-- Started on 2010-04-22 12:43:43 VET
 
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = off;
@@ -38,7 +38,8 @@ CREATE TABLE "Auditoria" (
     portal character(50) NOT NULL,
     "fechaIni" date NOT NULL,
     "fechaFin" date,
-    "URL" text NOT NULL
+    "URL" text NOT NULL,
+    "fechaCreacion" date NOT NULL
 );
 
 
@@ -129,7 +130,8 @@ CREATE TABLE "AuditoriaDetalle" (
     "Resultado" boolean DEFAULT true NOT NULL,
     "ResDetalle" text,
     "Comentario" character(200),
-    "Resolutoria" character(200)
+    "Resolutoria" character(200),
+    "URL" character(300)
 );
 
 
@@ -694,7 +696,7 @@ ALTER TABLE "Insititucion" ALTER COLUMN "ID" SET DEFAULT nextval('"Insititucion_
 -- Data for Name: Auditoria; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY "Auditoria" ("ID", "IDEV", "IDInstitucion", portal, "fechaIni", "fechaFin", "URL") FROM stdin;
+COPY "Auditoria" ("ID", "IDEV", "IDInstitucion", portal, "fechaIni", "fechaFin", "URL", "fechaCreacion") FROM stdin;
 \.
 
 
@@ -704,7 +706,7 @@ COPY "Auditoria" ("ID", "IDEV", "IDInstitucion", portal, "fechaIni", "fechaFin",
 -- Data for Name: AuditoriaDetalle; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY "AuditoriaDetalle" ("ID", "IDAuditoria", "IDDisposicion", "Resultado", "ResDetalle", "Comentario", "Resolutoria") FROM stdin;
+COPY "AuditoriaDetalle" ("ID", "IDAuditoria", "IDDisposicion", "Resultado", "ResDetalle", "Comentario", "Resolutoria", "URL") FROM stdin;
 \.
 
 
@@ -1020,7 +1022,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2010-04-21 12:51:01 VET
+-- Completed on 2010-04-22 12:43:43 VET
 
 --
 -- PostgreSQL database dump complete
