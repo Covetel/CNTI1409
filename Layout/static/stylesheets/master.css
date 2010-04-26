@@ -1,0 +1,9 @@
+/* 
+Archivo: 	master.css
+Autor: 		Walter Vargas <walter@covetel.com.ve>
+Descripción:  	Hoja de estilo principal, desde aqui importo otras hojas de estilo necesarias. 
+*/
+@import "tipografia.css"; 
+@import "layout.css";
+@import "cintillo.css";
+@import "informacion_sesion.css";
