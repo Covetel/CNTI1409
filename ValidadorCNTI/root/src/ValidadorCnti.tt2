@@ -1,7 +1,0 @@
-[% titulo = 'Validador CNTI' %]
-[% WRAPPER simple/xhtml 
-	menu 	= 1
-	js_ext 	= ['static/js/jquery.js']	 
-%]
-
-[%END%]
