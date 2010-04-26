@@ -1,0 +1,20 @@
+[% # config/main
+   #
+   # This is the main configuration template which is processed before
+   # any other page, by virtue of it being defined as a PRE_PROCESS 
+   # template.  This is the place to define any extra template variables,
+   # macros, load plugins, and perform any other template setup.
+
+   IF Catalyst.debug;
+     # define a debug() macro directed to Catalyst's log
+     MACRO debug(message) CALL Catalyst.log.debug(message);
+   END;
+
+   # define a data structure to hold sitewide data
+   site = {
+     title     => 'CNTI1409',
+     copyright => '2010 Cooperativa Venezolana de Tecnologías Libre R.S.',
+   };
+
+-%]
+
