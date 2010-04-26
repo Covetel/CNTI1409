@@ -28,6 +28,7 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+	# Cargo la template.
 	$c->stash->{template} = 'index.tt2';
 }
 
