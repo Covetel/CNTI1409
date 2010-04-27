@@ -57,12 +57,10 @@
                 <div id="area_aplicacion">
                         <h3><a href="#"> Area de Aplicaci√≥n </a> </h3>
                         <div>
-			[% content %]
-                                Esto es un div interno
-                                <p>
-                                <label for="calendario"> Calendario:  </label>
-                                <input type="text" id="calendario" name="calendario" />
-                                </p>
+				<!-- en esta variable se sustituye por los archivos .tt2 con informaciÛn
+                                     sobre el contenido del sitio
+                                --!>
+				[% content %]
                         </div>
                 </div>
 
