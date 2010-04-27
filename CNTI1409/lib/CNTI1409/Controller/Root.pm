@@ -1,6 +1,7 @@
 package CNTI1409::Controller::Root;
 use Moose;
 use namespace::autoclean;
+# Hola esto es un comentario
 
 BEGIN { extends 'Catalyst::Controller' }
 
