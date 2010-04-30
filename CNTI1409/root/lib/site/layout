@@ -59,7 +59,7 @@
                         <div>
 				<!-- en esta variable se sustituye por los archivos .tt2 con información
                                      sobre el contenido del sitio
-                                --!>
+                                -->
 				[% content %]
                         </div>
                 </div>
