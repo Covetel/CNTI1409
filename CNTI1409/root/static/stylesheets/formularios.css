@@ -1,0 +1,73 @@
+/* 
+Archivo:        formularios.css
+Autor:          Walter Vargas <walter@covetel.com.ve>
+Descripción:    Controla los elementos involucrados en los formularios
+*/
+
+form {
+margin: 0;
+padding: 0;
+width: 600px;
+}
+
+label {
+font-weight: bold;
+width:5em; /* Set a width so the inputs line up */
+vertical-align: middle;
+font-size: 0.8em;
+}
+
+fieldset {
+border:1px solid #dedede; /* Default fieldset borders vary cross browser, so make them the same */
+width: 430px;
+background-color: #eaeaea;
+border-top: 40px solid #eaeaea;
+margin-bottom: 10px;
+padding: 10px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+}
+
+legend {
+position: relative; 
+left: -7px;
+top: -0.75em;
+font-size: 1.4em;
+font-weight: bold;
+}
+
+div.text, div.label  {
+text-align: right;
+border-bottom: 1px solid #d4d4d4;
+padding-bottom: 7px;
+padding-top: 6px;
+}
+
+textarea {
+height: 50px;
+width: 250px;
+border: 2px solid #a6a6a6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+input.input_text {
+width: 250px;
+text-align: left;
+height: 25px;
+border: 2px solid #a6a6a6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+div.informacion {
+margin-top: -25px;
+padding-bottom: 5px;
+border-bottom: 1px solid #d4d4d4;
+padding-left: 2px;
+}
+
+label, input, textarea {
+vertical-align: middle;
+}
+
