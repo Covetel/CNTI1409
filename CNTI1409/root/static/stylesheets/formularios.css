@@ -51,11 +51,28 @@ border: 2px solid #a6a6a6;
 -moz-border-radius: 5px;
 }
 
+textarea.textarea_focus {
+height: 50px;
+width: 250px;
+border: 2px solid #88c1f0;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
 input.input_text {
 width: 250px;
 text-align: left;
 height: 25px;
 border: 2px solid #a6a6a6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+input.input_text_focus {
+width: 250px;
+text-align: left;
+height: 25px;
+border: 2px solid #88c1f0;
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 }

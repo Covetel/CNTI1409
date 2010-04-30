@@ -10,4 +10,25 @@ $(document).ready(function(){
 	
 	// Pestañas
 	$("#tabs").tabs();
+
+	// Formularios. 
+	// Borde de color en el foco al input
+	$("input.input_text").focus(
+		function(){
+			$(this).addClass("input_text_focus");
+		}).blur(
+		function(){
+			$(this).removeClass("input_text_focus");
+		}
+	);
+	// Borde de color en el foco al textarea
+	$("textarea").focus(
+		function(){
+			console.log("Text Area");
+			$(this).addClass("textarea_focus");
+		}).blur(
+		function(){
+			$(this).removeClass("textarea_focus");
+		}
+	);
 });
