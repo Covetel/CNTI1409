@@ -5,6 +5,7 @@ use base 'Catalyst::View::TT';
 
 __PACKAGE__->config({
     CATALYST_VAR => 'c',
+	ENCODING     => 'utf-8',
     INCLUDE_PATH => [
         CNTI1409->path_to( 'root', 'src' ),
         CNTI1409->path_to( 'root', 'lib' )
