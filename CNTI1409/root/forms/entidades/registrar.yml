@@ -53,6 +53,20 @@ elements:
               title: 'Por favor indique los nombres y apellidos del representante legal de la entidad verificadora, Ejemplo: Walter Vargas'
               class: input_text
 
+        - type: Text
+          name: correo_electronico
+          label: Correo Electrónico
+          attributes:
+              title: 'Por favor indique el correo electrónico, que a su vez servira como identificador para autenticarse en el sistema, Ejemplo: info@covetel.com.ve.'
+              class: input_text
+
+        - type: Text
+          name: pagina_web
+          label: Página Web
+          attributes:
+              title: 'Por favor indique la dirección electrónica (URL) de la página web de la entidad, Ejemplo: http://www.covetel.com.ve.'
+              class: input_text
+
 
     # The Submit button
     - type: Multi
