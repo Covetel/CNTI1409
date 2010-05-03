@@ -1,0 +1,76 @@
+action: /entidades/registrar
+# indicator is the field that is used to test for form submission
+indicator: submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+elements:
+    - type: Fieldset
+      name: datos_entidad_verificadora
+      legend: Datos de la Entidad Verificadora
+      elements:
+        - type: Block
+          tag: div
+          content: 'A través de este formulario podrá registrar una entidad verificadora.'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: nombre
+          label: Nombre Entidad Verificadora
+          attributes:
+              title: 'Por favor indique correctamente el nombre de la entidad verificadora, Ejemplo: Asoc. Cooperativa Venezolana de Tecnologías Libres R.S.' 
+              class: input_text
+          constraints:
+              - Required
+
+        - type: Text
+          name: rif
+          label: R.I.F.
+          attributes:
+              title: 'Por favor indique correctamente el RIF de la entidad verificadora, Ejemplo: J-29532381-6'
+              class: input_text
+          constraints:
+              - Required
+
+        - type: Text
+          name: telefono
+          label: Teléfono
+          attributes:
+              title: 'Por favor indique el número telefónico de la entidad verificadora, con su respectivo código de área'
+              class: input_text
+
+        - type: Textarea
+          name: direccion
+          label: Dirección
+          attributes:
+              title: 'Por favor indique la dirección, Calle, AV, Ciudad, Estado'
+
+        - type: Text
+          name: representante
+          label: Representante
+          attributes:
+              title: 'Por favor indique los nombres y apellidos del representante legal de la entidad verificadora, Ejemplo: Walter Vargas'
+              class: input_text
+
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Registrar Entidad
+          attributes:
+              title: Presione este botón para registrar la entidad verificadora.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+    

@@ -35,7 +35,8 @@ $VERSION = eval $VERSION;
 
 __PACKAGE__->config(
     name => 'CNTI1409',
-    # Disable deprecated behavior needed by old applications
+	encoding => 'UTF-8',
+	# Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
 );
 
