@@ -83,8 +83,22 @@ elements:
           name: foto
 
         # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
         - type: Submit
           name: submit
           # The text to be displayed
           value: Login
-
+          attributes:
+              title: Texto de ayuda, este bloque de texto aparece cuando el usuario hace foco en el control e indica la información de ay
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Texto de ayuda, este bloque de texto aparece cuando el usuario hace foco en el control e indica la información de ay
+              class: input_reset
+    
