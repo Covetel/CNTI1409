@@ -23,17 +23,20 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
     $c->response->body('Matched CNTI1409::Controller::Instituciones in Instituciones.');
 }
 
 sub registrar : Local : FormConfig {
     	my ( $self, $c ) = @_;
 		my $form = $c->stash->{form};
-        $c->stash->{template} = 'instituciones/registrar.tt2';
+		use Data::Dumper; 
+		my $d = Dumper($form);
+
+		$c->log->debug($d);
         if ($form->submitted_and_valid) {
                 $c->res->body("Formulario enviado exitosamente");
         }
+        $c->stash->{template} = 'instituciones/registrar.tt2';
 }
 
 
