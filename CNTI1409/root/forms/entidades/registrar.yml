@@ -1,6 +1,6 @@
 action: /entidades/registrar
 # indicator is the field that is used to test for form submission
-indicator: submit
+indicator: Botones.submit
 
 # Start listing the form elements
 #auto_fieldset: 1
