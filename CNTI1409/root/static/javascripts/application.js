@@ -8,7 +8,7 @@ $(document).ready(function(){
 	// Calendario 
 	$("#calendario").datepicker();
 	
-	// PestaÃ±as
+	// Pestañas
 	$("#tabs").tabs();
 
 	// Formularios. 
