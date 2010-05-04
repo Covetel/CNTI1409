@@ -46,6 +46,27 @@ elements:
           attributes:
               title: 'Por favor indique la dirección, Calle, AV, Ciudad, Estado'
 
+        - type: Text
+          name: contacto
+          label: Persona Contacto
+          attributes:
+              title: 'Por favor indique el nombre completo de la persona contacto en la institución.'
+              class: input_text
+
+        - type: Text
+          name: correo
+          label: Correo Electrónico
+          attributes:
+              title: 'Por favor indique un correo electrónico correspondiente a la institución.'
+              class: input_text
+
+        - type: Text
+          name: web
+          label: Página Web
+          attributes:
+              title: 'Por favor indique la dirección electrónica (URL) de la página web de la institución.'
+              class: input_text
+
 
     # The Submit button
     - type: Multi
