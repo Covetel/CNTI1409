@@ -31,4 +31,7 @@ $(document).ready(function(){
 			$(this).removeClass("textarea_focus");
 		}
 	);
+	
+	// Foco al primer input de los formularios
+	$(".input_text:first").focus();
 });
