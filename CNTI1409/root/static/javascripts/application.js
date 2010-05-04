@@ -34,4 +34,7 @@ $(document).ready(function(){
 	
 	// Foco al primer input de los formularios
 	$(".input_text:first").focus();
+
+	//
+	$(".input_submit").button();
 });
