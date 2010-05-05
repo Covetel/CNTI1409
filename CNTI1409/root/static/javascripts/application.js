@@ -41,6 +41,28 @@ $(document).ready(function(){
 
 	//
 	$(".input_submit").button();
+
+function submitEdit(value, settings)
+{ 
+   var origvalue = this.revert;
+   var textbox = this;
+   var result = value;
+   var datos = {'value': value};
+   var returned = $.ajax({
+           dataType : "json",
+		   contentType: 'application/json',
+           data : datos,
+           url: "/ajax/tabla/instituciones", 
+           type: "PUT",
+		   processData: false,
+           complete : function (xhr, textStatus) 
+           {
+               var response =  xhr.responseText;
+           }
+           });
+   return(result);
+ }
+	
 	
 	oTable = $("#tabla_instituciones").dataTable({
 		"sAjaxSource": '/ajax/tabla/instituciones',
@@ -60,20 +82,29 @@ $(document).ready(function(){
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
-			$("#tabla_instituciones tbody td").editable('/ajax/instituciones', {
+			$("#tabla_instituciones tbody td").editable(submitEdit, {
+				"ajaxoptions": {'contentType': 'application/json', 'dataType': 'json', 'type': 'PUT'},
 				"callback": function (sValue, y){
 					var aPos = oTable.fnGetPosition( this );
 					oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+					 console.log(this);
+			         console.log(sValue);
+         			 console.log(y);
+
 				},
 				// esta rutina costo sangre, no tocar!
 				"submitdata": function (value,settings) {
+						console.log(settings);
 						var aPos = oTable.fnGetPosition( this );
 						var tr = this.parentNode;
 						var datos = oTable.fnGetData(tr);
-						return { "id": datos[0] };
+						var json = { 'valor': value, 'id': datos[0] };
+						return { "id": datos[0], };
 				},
 				});
 		},
 	});
+
+	
 
 });

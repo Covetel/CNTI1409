@@ -4,8 +4,13 @@ use namespace::autoclean;
 use utf8;
 
 BEGIN {extends 'Catalyst::Controller::REST'; }
-__PACKAGE__->config(default => 'application/json');
-sub instituciones : Local ActionClass('REST') {}
+
+__PACKAGE__->config(
+  'default'   => 'application/json',
+);
+
+
+sub instituciones : Local : ActionClass('REST') {}
 
 =head1 NAME
 
@@ -51,6 +56,16 @@ sub instituciones_GET {
 	$self->status_ok($c, entity => \%data);
 }
 
+sub instituciones_PUT {
+	my ($self, $c) = @_;
+	$self->status_accepted(
+               $c,
+               entity => {
+                   value => 'bicho',
+               }
+	);
+	
+}
 =head1 AUTHOR
 
 ,,,
