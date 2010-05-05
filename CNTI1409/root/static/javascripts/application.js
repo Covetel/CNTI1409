@@ -1,6 +1,9 @@
 /*
 
 */
+var oTable;
+var giRedraw = false;
+
 $(document).ready(function(){
 	$("#menu_vertical").accordion({ collapsible: true ,active: 20 });
 	$("#area_aplicacion").accordion({ collapsible: false ,active: 0 });
@@ -24,7 +27,6 @@ $(document).ready(function(){
 	// Borde de color en el foco al textarea
 	$("textarea").focus(
 		function(){
-			console.log("Text Area");
 			$(this).addClass("textarea_focus");
 		}).blur(
 		function(){
@@ -37,4 +39,9 @@ $(document).ready(function(){
 
 	//
 	$(".input_submit").button();
+	
+	oTable = $("#tabla_instituciones").dataTable({
+		"sAjaxSource": '/ajax/tabla/instituciones',
+		"bProcessing": false,
+	});
 });

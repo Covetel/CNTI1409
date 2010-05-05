@@ -1,0 +1,13 @@
+/* 
+Archivo:        tablas.css
+Autor:          Walter Vargas <walter@covetel.com.ve>
+Descripción:    Estilo para los controles tipo tablas.
+*/
+
+table.dataTable {
+
+}
+
+div.tabla {
+min-height: 200px;
+}

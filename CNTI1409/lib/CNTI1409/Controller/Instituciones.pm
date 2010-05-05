@@ -1,6 +1,8 @@
 package CNTI1409::Controller::Instituciones;
 use Moose;
 use namespace::autoclean;
+use utf8;
+use Try::Tiny;
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -29,19 +31,29 @@ sub index :Path :Args(0) {
 sub registrar : Local : FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
+    $c->stash->{template} = 'instituciones/registrar.tt2';
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
-        if ($form->model->update($instituciones)) {
+		try {
+			$c->log->debug("Entro a la vaina");
+	        $form->model->update($instituciones);
             $c->stash->{error} = 0;
-            $c->stash->{mensaje} = "La institución $c->request->params->{nombre} se ha registrado con exito";
-            $c->response->redirect($c->uri_for($self->action_for('registrar')));
-            $c->detach;
-        } else {
+    		$c->stash->{mensaje} = "La institución " . $c->request->params->{nombre} . " se ha registrado con exito";
+		}
+		catch {
             $c->stash->{error} = 1;
-        }
+    		$c->stash->{mensaje} = $_;
+            #$c->response->redirect($c->uri_for($self->action_for('registrar')));
+		}
+        $c->detach;
     } 
-    $c->stash->{template} = 'instituciones/registrar.tt2';
 }
+
+sub listar : Local {
+    my ( $self, $c ) = @_;
+	$c->stash->{template} = 'instituciones/listar.tt2';	
+
+} 
 
 
 =head1 AUTHOR

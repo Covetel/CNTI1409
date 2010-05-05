@@ -1,4 +1,4 @@
-[% BLOCK mensaje %]
+[% BLOCK msj %]
 <div class="mensaje">
 	<div class="ui-widget">
 		 <div class="ui-state-highlight ui-corner-all">
@@ -22,7 +22,6 @@
 
 [% IF error %]
 	[% PROCESS error %]
-[% END %]
-[% IF mensaje %]
-	[% PROCESS mensaje %]
+[% ELSIF mensaje %]
+	[% PROCESS msj %]
 [% END%] 
