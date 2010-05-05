@@ -34,12 +34,17 @@ Este método crea el formulario para registrar entidades verificadoras
 =cut
 
 sub registrar : Local : FormConfig {
-    	my ( $self, $c ) = @_;
-		my $form = $c->stash->{form};
-        $c->stash->{template} = 'entidades/registrar.tt2';
-        if ($form->submitted_and_valid) {
-                $c->res->body("Formulario enviado exitosamente");
-        }
+    my ( $self, $c ) = @_;
+    my $form = $c->stash->{form};
+    if ($form->submitted_and_valid) { 
+        # $c->res->body("Formulario enviado exitosamente");
+        my $entidades = $c->model('DB::Entidadverificadora')->new_result({});
+        $form->model->update($entidades);
+        # $c->flash->{status_msg} = 'Entidad Verificadora Registrada Correctamente...';
+        $c->response->redirect($c->uri_for($self->action_for('registrar')));
+        $c->detach;
+    } 
+    $c->stash->{template} = 'entidades/registrar.tt2';
 }
 
 =head1 AUTHOR

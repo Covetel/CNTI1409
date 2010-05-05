@@ -34,10 +34,21 @@ sub index :Path :Args(0) {
 sub crear : Local : FormConfig {
     	my ( $self, $c ) = @_;
 		my $form = $c->stash->{form};
-        $c->stash->{template} = 'auditoria/crear.tt2';
         if ($form->submitted_and_valid) {
-                $c->res->body("Formulario enviado exitosamente");
+            # my $upload = $c->request->upload('Examinar');
+            # my $pop = $upload->filename;
+            # my $archivo = "/tmp/$pop";
+            # $upload->copy_to($archivo);
+            # open ARCHIVO, "<encoding(UTF-8)", $archivo;
+            # my @portales = <ARCHIVO>;
+            # $c->res->body("Formulario enviado exitosamente");
+            my $auditorias = $c->model('DB::Auditoria')->new_result({});
+            $form->model->update($auditorias);
+            # $c->flash->{status_msg} = 'Institucion Registrada Correctamente...';
+            $c->response->redirect($c->uri_for($self->action_for('crear')));
+            $c->detach;
         }
+        $c->stash->{template} = 'auditoria/crear.tt2';
 }
 
 =head1 AUTHOR

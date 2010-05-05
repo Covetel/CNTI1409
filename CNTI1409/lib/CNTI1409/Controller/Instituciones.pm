@@ -30,11 +30,10 @@ sub registrar : Local : FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
-        # $c->res->body("Formulario enviado exitosamente");
         my $instituciones = $c->model('DB::Institucion')->new_result({});
         $form->model->update($instituciones);
         # $c->flash->{status_msg} = 'Institucion Registrada Correctamente...';
-        $c->response->redirect($c->uri_for($self->action_for('listar')));
+        $c->response->redirect($c->uri_for($self->action_for('registrar')));
         $c->detach;
     } 
     $c->stash->{template} = 'instituciones/registrar.tt2';
