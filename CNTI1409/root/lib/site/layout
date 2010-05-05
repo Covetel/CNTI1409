@@ -19,6 +19,7 @@
                 <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.dataTables.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.jeditable.mini.js"></script>
+                <script type="text/javascript" src="/static/javascripts/json.js"></script>
                 <script type="text/javascript" src="/static/javascripts/application.js"></script>
         </head>
         <body>

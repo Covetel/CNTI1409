@@ -44,24 +44,28 @@ sub instituciones_GET {
 	my $rs = $c->model('DB::Institucion')->search;
 	my %data;
     $data{aaData} = [
-        map {
-            [
-                $_->id,        $_->nombre,   $_->rif,
-                $_->correo,    $_->telefono, $_->contacto,
-                $_->direccion, $_->web,      
-            ]
-          } $rs->all
+       map {
+           [
+               $_->id,        $_->nombre,   $_->rif,
+               $_->correo,    $_->telefono, $_->contacto,
+               $_->direccion, $_->web,      
+           ]
+         } $rs->all
     ];
-
 	$self->status_ok($c, entity => \%data);
 }
 
-sub instituciones_PUT {
+sub instituciones_POST {
 	my ($self, $c) = @_;
+	use Data::Dumper;
+	my $d = $c->req->data->{valor};
+	my $i = $c->req->data->{id};
+	$c->log->debug($d);
+	$c->log->debug($i);
 	$self->status_accepted(
                $c,
                entity => {
-                   value => 'bicho',
+                   value => $d,
                }
 	);
 	

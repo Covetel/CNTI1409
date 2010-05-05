@@ -3,14 +3,14 @@
 <table id="tabla_instituciones" class="dataTable" cellpadding="2" cellspaccing="2" border="0" width="100%"> 
 	<thead> 
 	<tr>
-		<th>ID </th>
-		<th>Nombre</th>
-		<th>R.I.F.</th>
-		<th>Correo Eletrónico</th>
-		<th>Teléfono</th>
-		<th>Persona Contacto</th>
-		<th>Dirección</th>
-		<th>Página Web</th>
+		<th id="id">ID </th>
+		<th id="nombre">Nombre</th>
+		<th id="rif">R.I.F.</th>
+		<th id="correo">Correo Eletrónico</th>
+		<th id="telefono">Teléfono</th>
+		<th id="contacto">Persona Contacto</th>
+		<th id="direccion">Dirección</th>
+		<th id="web">Página Web</th>
 	</tr>
 	</thead>
 </table>
