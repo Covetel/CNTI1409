@@ -37,12 +37,15 @@ sub registrar : Local : FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
-        # $c->res->body("Formulario enviado exitosamente");
         my $entidades = $c->model('DB::Entidadverificadora')->new_result({});
-        $form->model->update($entidades);
-        # $c->flash->{status_msg} = 'Entidad Verificadora Registrada Correctamente...';
-        $c->response->redirect($c->uri_for($self->action_for('registrar')));
-        $c->detach;
+        if ($form->model->update($entidades)) {
+            $c->stash->{error} = 0;
+            $c->stash->{mensaje} = "La entidad $c->request->params->{nombre} se ha registrado con exito";
+            $c->response->redirect($c->uri_for($self->action_for('registrar')));
+            $c->detach;
+        } else {
+            $c->stash->{error} = 1;
+        }
     } 
     $c->stash->{template} = 'entidades/registrar.tt2';
 }
