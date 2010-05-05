@@ -31,10 +31,14 @@ sub registrar : Local : FormConfig {
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
-        $form->model->update($instituciones);
-        # $c->flash->{status_msg} = 'Institucion Registrada Correctamente...';
-        $c->response->redirect($c->uri_for($self->action_for('registrar')));
-        $c->detach;
+        if ($form->model->update($instituciones)) {
+            $c->stash->{error} = 0;
+            $c->stash->{mensaje} = "La institución $c->request->params->{nombre} se ha registrado con exito";
+            $c->response->redirect($c->uri_for($self->action_for('registrar')));
+            $c->detach;
+        } else {
+            $c->stash->{error} = 1;
+        }
     } 
     $c->stash->{template} = 'instituciones/registrar.tt2';
 }
