@@ -9,5 +9,16 @@ table.dataTable {
 }
 
 div.tabla {
-min-height: 200px;
+height: 500px;
+margin: -20px;
+margin-bottom: -5px;
+}
+
+th {
+font-size: 0.8em;
+padding: 5px;
+}
+
+table.dataTable th {
+cursor: pointer;
 }

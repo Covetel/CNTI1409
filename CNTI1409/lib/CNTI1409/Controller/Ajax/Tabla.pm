@@ -1,6 +1,7 @@
 package CNTI1409::Controller::Ajax::Tabla;
 use Moose;
 use namespace::autoclean;
+use utf8;
 
 BEGIN {extends 'Catalyst::Controller::REST'; }
 __PACKAGE__->config(default => 'application/json');
@@ -37,12 +38,6 @@ sub instituciones_GET {
 	my ($self, $c) = @_;
 	my $rs = $c->model('DB::Institucion')->search;
 	my %data;
-	$DB::single=1;
-	foreach my $institucion ($rs->all){
-		map { $institucion->$_ =~ s/\s+$// } $institucion->columns;
-		1;
-	}
-	#map { [ s/\s+$//g ] } $rs->all;   
     $data{aaData} = [
         map {
             [

@@ -10,6 +10,7 @@ __PACKAGE__->config(
         dsn => 'dbi:Pg:dbname=validador;host=localhost',
         user => 'admin',
         password => '123321...',
+		pg_enable_utf8 => 1,
     }
 );
 

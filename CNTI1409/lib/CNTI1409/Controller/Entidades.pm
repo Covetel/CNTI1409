@@ -40,9 +40,8 @@ sub registrar : Local : FormConfig {
         my $entidades = $c->model('DB::Entidadverificadora')->new_result({});
         if ($form->model->update($entidades)) {
             $c->stash->{error} = 0;
-            $c->stash->{mensaje} = "La entidad $c->request->params->{nombre} se ha registrado con exito";
-            $c->response->redirect($c->uri_for($self->action_for('registrar')));
-            $c->detach;
+            my $mensaje = "La entidad $c->request->params->{nombre} se ha registrado con exito";
+            $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje}));
         } else {
             $c->stash->{error} = 1;
         }

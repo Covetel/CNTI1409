@@ -29,24 +29,20 @@ sub index :Path :Args(0) {
 }
 
 sub registrar : Local : FormConfig {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $mensaje, $error ) = @_;
+	$c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
-    $c->stash->{template} = 'instituciones/registrar.tt2';
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
-		try {
-			$c->log->debug("Entro a la vaina");
-	        $form->model->update($instituciones);
-            $c->stash->{error} = 0;
-    		$c->stash->{mensaje} = "La institución " . $c->request->params->{nombre} . " se ha registrado con exito";
-		}
-		catch {
+        if ($form->model->update($instituciones)) {
+            my $mensaje = "La institución " . $c->request->params->{nombre} . " se ha registrado con exito";
+            $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
+        } 
+    } elsif ($form->submitted && !$form->valid) {
             $c->stash->{error} = 1;
-    		$c->stash->{mensaje} = $_;
-            #$c->response->redirect($c->uri_for($self->action_for('registrar')));
-		}
-        $c->detach;
-    } 
+            $c->stash->{mensaje} = "Hay un error";
+	}
+    $c->stash->{template} = 'instituciones/registrar.tt2';
 }
 
 sub listar : Local {

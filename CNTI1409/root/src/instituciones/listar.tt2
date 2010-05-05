@@ -1,6 +1,6 @@
 [% titulo = 'Instituciones Registradas' %] 
 <div class="tabla">
-<table id="tabla_instituciones" class="dataTable" cellpadding="2" cellspaccing="2" border="0"> 
+<table id="tabla_instituciones" class="dataTable" cellpadding="2" cellspaccing="2" border="0" width="100%"> 
 	<thead> 
 	<tr>
 		<th>ID </th>
@@ -13,17 +13,5 @@
 		<th>Página Web</th>
 	</tr>
 	</thead>
-	<tfoot> 
-	<tr>
-		<th>ID </th>
-		<th>Nombre</th>
-		<th>R.I.F.</th>
-		<th>Correo Eletrónico</th>
-		<th>Teléfono</th>
-		<th>Persona Contacto</th>
-		<th>Dirección</th>
-		<th>Página Web</th>
-	</tr>
-	</tfoot>
 </table>
 </div>
