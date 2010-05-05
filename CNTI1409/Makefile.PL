@@ -15,7 +15,9 @@ requires 'namespace::autoclean';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 requires 'Catalyst::Controller::HTML::FormFu';
-requires 'HTML::FormFu::Model::DBIC';
+
+requires 'HTML::FormFu::Model::DBIC'; 
+requires 'DBD::Pg';# Este módulo requiere del paquete de Debian libpq-dev, aptitude install libpq-dev
 test_requires 'Test::More' => '0.88';
 catalyst;
 
