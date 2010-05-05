@@ -121,4 +121,11 @@ cursor: pointer;
 margin-left: 5px;
 }
 
+div.mensaje {
+width: 445px; 
+}
 
+span.ui-icon,span.ui-icon-info {
+float: left;
+margin-right: .3em;
+}
