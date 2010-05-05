@@ -29,7 +29,7 @@ CREATE TABLE auditoria (
     id bigint NOT NULL,
     idev bigint NOT NULL,
     idinstitucion bigint NOT NULL,
-    portal character(50) NOT NULL,
+    portal character varying(100) NOT NULL,
     fechaini date NOT NULL,
     fechafin date,
     url text NOT NULL,
@@ -132,9 +132,8 @@ CREATE TABLE auditoriadetalle (
     iddisposicion bigint NOT NULL,
     resultado boolean DEFAULT true NOT NULL,
     resdetalle text,
-    comentario character(200),
-    resolutoria character(200),
-    url character(300)
+    comentario character varying(200),
+    resolutoria character varying(200)
 );
 
 
@@ -258,8 +257,8 @@ SELECT pg_catalog.setval('auditoriadetalle_iddisposicion_seq', 1, false);
 
 CREATE TABLE disposicion (
     id integer NOT NULL,
-    nombre character(25) NOT NULL,
-    descripcion character(70) NOT NULL,
+    nombre character varying(25) NOT NULL,
+    descripcion character varying(100) NOT NULL,
     habilitado boolean DEFAULT true NOT NULL
 );
 
@@ -335,13 +334,13 @@ SELECT pg_catalog.setval('disposicion_id_seq', 1, false);
 
 CREATE TABLE entidadverificadora (
     id integer NOT NULL,
-    nombre character(50) NOT NULL,
-    rif character(15),
-    correo character(30) NOT NULL,
-    telefono character(15) NOT NULL,
-    contacto character(30) NOT NULL,
-    direccion character(500),
-    web character(100)
+    nombre character varying(250) NOT NULL,
+    rif character varying(15),
+    correo character varying(100) NOT NULL,
+    telefono character varying(15) NOT NULL,
+    contacto character varying(250) NOT NULL,
+    direccion character varying(500),
+    web character varying(250)
 );
 
 
@@ -429,13 +428,13 @@ SELECT pg_catalog.setval('entidadverificadora_id_seq', 5, true);
 
 CREATE TABLE institucion (
     id integer NOT NULL,
-    nombre character(50) NOT NULL,
-    rif character(15),
-    correo character(30),
-    telefono character(15) NOT NULL,
-    contacto character(50),
-    direccion character(500),
-    web character(100)
+    nombre character varying(250) NOT NULL,
+    rif character varying(15),
+    correo character varying(100),
+    telefono character varying(15) NOT NULL,
+    contacto character varying(250),
+    direccion character varying(500),
+    web character varying(250)
 );
 
 
@@ -514,7 +513,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 4, true);
+SELECT pg_catalog.setval('institucion_id_seq', 7, true);
 
 
 --
@@ -571,7 +570,7 @@ COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, url, fechac
 -- Data for Name: auditoriadetalle; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY auditoriadetalle (id, idauditoria, iddisposicion, resultado, resdetalle, comentario, resolutoria, url) FROM stdin;
+COPY auditoriadetalle (id, idauditoria, iddisposicion, resultado, resdetalle, comentario, resolutoria) FROM stdin;
 \.
 
 
@@ -588,9 +587,9 @@ COPY disposicion (id, nombre, descripcion, habilitado) FROM stdin;
 --
 
 COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion, web) FROM stdin;
-2	COVETEL                                           	J-992929       	info@covetel.com.ve           	0412-9889285   	Juan Mesa                     	Cordero                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             	www.covetel.com.ve                                                                                  
-4	Cooperativa GNU                                   	J-12312391     	gnu@cooperativa.com           	0414-9999999   	Richard Stallman              	Internet                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	http://www.gnu.org                                                                                  
-5	Network IT                                        	j-00000000     	info@networkit.com.ve         	0414-000.0000  	Ninguno                       	Caracas                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             	http://networkit.com.ve                                                                             
+2	COVETEL	J-992929	info@covetel.com.ve	0412-9889285	Juan Mesa	Cordero	www.covetel.com.ve
+4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org
+5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Caracas	http://networkit.com.ve
 \.
 
 
@@ -599,9 +598,10 @@ COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion
 --
 
 COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web) FROM stdin;
-2	Ministerio de Finanzas                            	G-1234567890   	info@finanzas.gob.ve          	0212-222.2222  	Joel Gonzales                                     	Por allí                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	\N
-3	Centro Nacional de Tecnologías de la Información  	G-000000000    	info@cnti.gob.ve              	0212-222.2222  	Fany Hernandez                                    	Av. Urdaneta                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        	http://www.cnti.gob.ve                                                                              
-4	CANTV                                             	G-0987654321   	info@cantv.com.ve             	0212-333.3333  	Juan Rodriguez                                    	Colegio de Ingenieros                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	http://www.cantv.com.ve                                                                             
+2	Ministerio de Finanzas	G-1234567890	info@finanzas.gob.ve	0212-222.2222	Joel Gonzales	Por allí	\N
+3	Centro Nacional de Tecnologías de la Información	G-000000000	info@cnti.gob.ve	0212-222.2222	Fany Hernandez	Av. Urdaneta	http://www.cnti.gob.ve
+4	CANTV	G-0987654321	info@cantv.com.ve	0212-333.3333	Juan Rodriguez	Colegio de Ingenieros	http://www.cantv.com.ve
+5	Insitucion	22203	info@institucion.com	2292092	Walter	Por alli	www.notiene.com
 \.
 
 
@@ -695,24 +695,10 @@ CREATE UNIQUE INDEX idxnombredisp ON disposicion USING btree (nombre);
 
 
 --
--- Name: INDEX idxnombredisp; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxnombredisp IS 'Indice del nombre de la disposicion';
-
-
---
 -- Name: idxnomev; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE INDEX idxnomev ON entidadverificadora USING btree (nombre);
-
-
---
--- Name: INDEX idxnomev; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxnomev IS 'Indice por nombre de entidad verificadora';
 
 
 --
@@ -723,24 +709,10 @@ CREATE INDEX idxnominst ON institucion USING btree (nombre);
 
 
 --
--- Name: INDEX idxnominst; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxnominst IS 'Indice nombre de la institucion';
-
-
---
 -- Name: idxportal; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE INDEX idxportal ON auditoria USING btree (portal);
-
-
---
--- Name: INDEX idxportal; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxportal IS 'Indice por portal de la tabla auditoria';
 
 
 --
@@ -751,24 +723,10 @@ CREATE UNIQUE INDEX idxrifev ON entidadverificadora USING btree (rif);
 
 
 --
--- Name: INDEX idxrifev; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxrifev IS 'Indice por rif de la Entidad Verificadora';
-
-
---
 -- Name: idxrifinst; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
 --
 
 CREATE UNIQUE INDEX idxrifinst ON institucion USING btree (rif);
-
-
---
--- Name: INDEX idxrifinst; Type: COMMENT; Schema: public; Owner: admin
---
-
-COMMENT ON INDEX idxrifinst IS 'Indice rif de la institucion';
 
 
 --
