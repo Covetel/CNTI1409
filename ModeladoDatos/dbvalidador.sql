@@ -339,8 +339,8 @@ CREATE TABLE entidadverificadora (
     correo character varying(100) NOT NULL,
     telefono character varying(15) NOT NULL,
     contacto character varying(250) NOT NULL,
-    direccion character varying(500),
-    web character varying(250)
+    direccion character varying(500) DEFAULT 'N/A'::character varying,
+    web character varying(250) DEFAULT 'N/A'::character varying
 );
 
 
@@ -419,7 +419,7 @@ ALTER SEQUENCE entidadverificadora_id_seq OWNED BY entidadverificadora.id;
 -- Name: entidadverificadora_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('entidadverificadora_id_seq', 5, true);
+SELECT pg_catalog.setval('entidadverificadora_id_seq', 6, true);
 
 
 --
@@ -429,12 +429,12 @@ SELECT pg_catalog.setval('entidadverificadora_id_seq', 5, true);
 CREATE TABLE institucion (
     id integer NOT NULL,
     nombre character varying(250) NOT NULL,
-    rif character varying(15),
-    correo character varying(100),
+    rif character varying(15) DEFAULT 'N/A'::character varying,
+    correo character varying(100) DEFAULT 'N/A'::character varying,
     telefono character varying(15) NOT NULL,
-    contacto character varying(250),
-    direccion character varying(500),
-    web character varying(250)
+    contacto character varying(250) DEFAULT 'N/A'::character varying,
+    direccion character varying(500) DEFAULT 'N/A'::character varying,
+    web character varying(250) DEFAULT 'N/A'::character varying
 );
 
 
@@ -513,7 +513,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 7, true);
+SELECT pg_catalog.setval('institucion_id_seq', 8, true);
 
 
 --
@@ -590,6 +590,7 @@ COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion
 2	COVETEL	J-992929	info@covetel.com.ve	0412-9889285	Juan Mesa	Cordero	www.covetel.com.ve
 4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org
 5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Caracas	http://networkit.com.ve
+6	El Pollo Loco	J-432149595	pollo@charvenca.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org
 \.
 
 
@@ -598,10 +599,11 @@ COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion
 --
 
 COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web) FROM stdin;
-2	Ministerio de Finanzas	G-1234567890	info@finanzas.gob.ve	0212-222.2222	Joel Gonzales	Por allí	\N
 3	Centro Nacional de Tecnologías de la Información	G-000000000	info@cnti.gob.ve	0212-222.2222	Fany Hernandez	Av. Urdaneta	http://www.cnti.gob.ve
 4	CANTV	G-0987654321	info@cantv.com.ve	0212-333.3333	Juan Rodriguez	Colegio de Ingenieros	http://www.cantv.com.ve
 5	Insitucion	22203	info@institucion.com	2292092	Walter	Por alli	www.notiene.com
+2	Ministerio de Finanzas	G-1234567890	info@finanzas.gob.ve	0212-222.2222	Joel Gonzales	Por allí	http://www.mppef.gob.ve
+8	Juan Technology	v-14951432	juan@covetel.com.ve	0412-9889285	Juan Mesa	Cordero Edo. Tachira	http://blogs.covetel.com.ve/overdrive
 \.
 
 
