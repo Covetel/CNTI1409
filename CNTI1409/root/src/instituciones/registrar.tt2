@@ -1,3 +1,0 @@
-[% titulo = 'Registro de Instituciones Públicas'%]
-[% INCLUDE mensajes.tt2 %]
-[% form %]

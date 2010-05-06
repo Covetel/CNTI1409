@@ -1,3 +1,0 @@
-[% titulo = 'Crear Auditoría'%]
-[% INCLUDE mensajes.tt2 %]
-[% form %]

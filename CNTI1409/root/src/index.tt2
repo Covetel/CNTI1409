@@ -1,2 +1,0 @@
-[% titulo = "Título del control" %]
-<p>Welcome to your Simple TT View!</p>
