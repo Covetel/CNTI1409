@@ -4,6 +4,10 @@ indicator: Botones.submit
 
 # Start listing the form elements
 #auto_fieldset: 1
+
+languages:
+    - es
+
 elements:
     - type: Fieldset
       name: datos_institucion
