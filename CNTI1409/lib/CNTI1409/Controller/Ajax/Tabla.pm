@@ -70,6 +70,44 @@ sub instituciones_POST {
 	);
 	
 }
+
+=head2 Entidades
+
+Seccion REST para procesar las entidades verificadoras
+
+=cut
+
+sub entidades : Local : ActionClass('REST') {}
+
+sub entidades_GET {
+	my ($self, $c) = @_;
+	my $rs = $c->model('DB::Entidadverificadora')->search;
+	my %data;
+    $data{aaData} = [
+       map {
+           [
+               $_->id,        $_->nombre,   $_->rif,
+               $_->correo,    $_->telefono, $_->contacto,
+               $_->direccion, $_->web,      
+           ]
+         } $rs->all
+    ];
+	$self->status_ok($c, entity => \%data);
+}
+
+sub entidades_POST {
+	my ($self, $c) = @_;
+	my $d = $c->req->data->{valor};
+	my $i = $c->req->data->{id};
+	$self->status_accepted(
+               $c,
+               entity => {
+                   value => $d,
+               }
+	);
+	
+}
+
 =head1 AUTHOR
 
 ,,,

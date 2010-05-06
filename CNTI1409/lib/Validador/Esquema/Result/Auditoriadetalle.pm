@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoriadetalle");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x99728a8)
+  default_value: SCALAR(0x99aa870)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -45,7 +45,7 @@ Clave que relaciona los detalles de la auditoria con sus datos maestros
 =head2 iddisposicion
 
   data_type: bigint
-  default_value: SCALAR(0x995d150)
+  default_value: SCALAR(0x99a5850)
   is_auto_increment: 1
   is_foreign_key: 1
   is_nullable: 0
@@ -55,7 +55,7 @@ Clave que relaciona los detalles de las auditorias con cada disposicion
 =head2 resultado
 
   data_type: boolean
-  default_value: SCALAR(0x9972798)
+  default_value: SCALAR(0x99aa860)
   is_nullable: 0
 
 Determina si una disposicion es valida o no
@@ -70,7 +70,7 @@ Detalle del resultado de una disposicion si esta no es valida
 
 =head2 comentario
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 1
   size: 200
@@ -79,19 +79,12 @@ comentario del auditor por cada disposicion evaluada en algun portal
 
 =head2 resolutoria
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 1
   size: 200
 
 resolutoria del auditor por cada disposicion evaluada a un portal
-
-=head2 url
-
-  data_type: character
-  default_value: undef
-  is_nullable: 1
-  size: 300
 
 =cut
 
@@ -124,24 +117,17 @@ __PACKAGE__->add_columns(
   { data_type => "text", default_value => undef, is_nullable => 1 },
   "comentario",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 1,
     size => 200,
   },
   "resolutoria",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 1,
     size => 200,
-  },
-  "url",
-  {
-    data_type => "character",
-    default_value => undef,
-    is_nullable => 1,
-    size => 300,
   },
 );
 __PACKAGE__->set_primary_key("id");
@@ -179,8 +165,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-03 23:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:is3H7OWXTSdBNuCIYEuRnQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-06 07:49:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:vn3ZEb1WzC9mjSgmS3RwpQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

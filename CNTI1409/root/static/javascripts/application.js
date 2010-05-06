@@ -2,6 +2,7 @@
 
 */
 var oTable;
+var oEntidades;
 var giRedraw = false;
 
 $(document).ready(function(){
@@ -61,7 +62,27 @@ function submitEdit(value, settings)
    	});
  return value;
 }
-	
+
+
+function submitEditEntidad(value, settings)
+{ 
+	var n = $(this).index();
+	var o = $("th").get(n);
+	var campo = $(o).attr('id');
+	var aPos = oTable.fnGetPosition( this );
+	var tr = this.parentNode;
+	var d = oTable.fnGetData(tr);
+   	var datos = ({'valor': value, 'id': d[0], 'campo': campo});
+   	var jsoon = $.JSON.encode(datos);
+   	$.ajax({
+		url: "/ajax/tabla/entidades", 
+		type: "POST",
+		data: jsoon,
+		processData: false,
+		contentType: 'application/json',
+   	});
+ return value;
+}
 	
 	oTable = $("#tabla_instituciones").dataTable({
 		"sAjaxSource": '/ajax/tabla/instituciones',
@@ -86,5 +107,26 @@ function submitEdit(value, settings)
 	});
 
 	
+	oEntidades = $("#tabla_entidades").dataTable({
+		"sAjaxSource": '/ajax/tabla/entidades',
+		"bProcessing": false,
+		"bJQueryUI": true,
+		"aoColumns": [
+						{"bSearchable": false, "bVisible": false},
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+						null,
+					], 
+ 		"oLanguage": {
+            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+        },
+		"fnDrawCallback": function () {
+			$("#tabla_instituciones tbody td").editable(submitEditEntidad);
+		},
+	});
 
 });

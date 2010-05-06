@@ -30,25 +30,24 @@ sub index :Path :Args(0) {
 
 sub registrar : Local : FormConfig {
     my ( $self, $c, $mensaje, $error ) = @_;
-	$c->stash->{mensaje} = $c->req->params->{mensaje};
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
-        if ($form->model->update($instituciones)) {
-            my $mensaje = "La institución " . $c->request->params->{nombre} . " se ha registrado con exito";
-            $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
-        } 
-    } elsif ($form->submitted && !$form->valid) {
-            $c->stash->{error} = 1;
-            $c->stash->{mensaje} = "Hay un error";
-	}
+        $form->model->update($instituciones);
+        $mensaje = "La institución " . $form->param_value('nombre') . " se ha registrado con exito";
+        $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
+	} elsif ($form->has_errors && $form->submitted) {
+        $c->stash->{error} = 1;
+        my @err_fields = $form->has_errors;
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+    }
     $c->stash->{template} = 'instituciones/registrar.tt2';
 }
 
 sub listar : Local {
     my ( $self, $c ) = @_;
 	$c->stash->{template} = 'instituciones/listar.tt2';	
-
 } 
 
 
