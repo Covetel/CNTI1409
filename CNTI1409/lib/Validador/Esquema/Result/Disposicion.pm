@@ -23,7 +23,7 @@ __PACKAGE__->table("disposicion");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x9972ba8)
+  default_value: SCALAR(0x99a9198)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -31,7 +31,7 @@ Numero de identificacion unica de la disposicion
 
 =head2 nombre
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
   size: 25
@@ -40,17 +40,17 @@ nombre de la disposicion
 
 =head2 descripcion
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
-  size: 70
+  size: 100
 
 Descripcion de la disposicion
 
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0x9972748)
+  default_value: SCALAR(0x99aa720)
   is_nullable: 0
 
 Campo booleano que representa si la disposicion esta habilitada o no, este campo es pensado en caracteristicas futuras de la aplicacion
@@ -67,17 +67,17 @@ __PACKAGE__->add_columns(
   },
   "nombre",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
     size => 25,
   },
   "descripcion",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
-    size => 70,
+    size => 100,
   },
   "habilitado",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
@@ -102,8 +102,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-03 23:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XVA4wInoBSIo5Iob+348Fg
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-06 07:49:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:l3dZBMF+gptMplEMr0rgeQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

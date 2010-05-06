@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x984d6c0)
+  default_value: SCALAR(0x9885828)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -53,10 +53,10 @@ Clave que relaciona las instituciones con las auditorias
 
 =head2 portal
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
-  size: 50
+  size: 100
 
 Almacena el nombre del portal a auditar
 
@@ -116,10 +116,10 @@ __PACKAGE__->add_columns(
   },
   "portal",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
-    size => 50,
+    size => 100,
   },
   "fechaini",
   { data_type => "date", default_value => undef, is_nullable => 0 },
@@ -179,8 +179,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-03 23:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YdtNxddyYP7TzIj3l5Wiyg
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-06 07:49:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:NnXSH4bsLN3fyQfDLiLo7A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

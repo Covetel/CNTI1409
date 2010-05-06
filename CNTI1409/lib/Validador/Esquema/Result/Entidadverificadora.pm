@@ -23,7 +23,7 @@ __PACKAGE__->table("entidadverificadora");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x99722a8)
+  default_value: SCALAR(0x99aa630)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -31,16 +31,16 @@ Numero de identificacion unico para las Entidades Verificadoras
 
 =head2 nombre
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
-  size: 50
+  size: 250
 
 nombre o Razon Social de la Entidad Verificadora
 
 =head2 rif
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 1
   size: 15
@@ -49,16 +49,16 @@ Numero fiscal de la Entidad Verificadora
 
 =head2 correo
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
-  size: 30
+  size: 100
 
 correo electronico de la entidad verificadora
 
 =head2 telefono
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
   size: 15
@@ -67,33 +67,26 @@ Numero de telefono de la Entidad Verificadora
 
 =head2 contacto
 
-  data_type: character
+  data_type: character varying
   default_value: undef
   is_nullable: 0
-  size: 30
+  size: 250
 
 nombre de la persona contacto de la Entidad Verificadora
 
-=head2 password
-
-  data_type: character
-  default_value: undef
-  is_nullable: 0
-  size: 20
-
 =head2 direccion
 
-  data_type: character
-  default_value: undef
+  data_type: character varying
+  default_value: N/A
   is_nullable: 1
   size: 500
 
 =head2 web
 
-  data_type: character
-  default_value: undef
+  data_type: character varying
+  default_value: N/A
   is_nullable: 1
-  size: 100
+  size: 250
 
 =cut
 
@@ -107,59 +100,52 @@ __PACKAGE__->add_columns(
   },
   "nombre",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
-    size => 50,
+    size => 250,
   },
   "rif",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 1,
     size => 15,
   },
   "correo",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
-    size => 30,
+    size => 100,
   },
   "telefono",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
     size => 15,
   },
   "contacto",
   {
-    data_type => "character",
+    data_type => "character varying",
     default_value => undef,
     is_nullable => 0,
-    size => 30,
-  },
-  "password",
-  {
-    data_type => "character",
-    default_value => undef,
-    is_nullable => 0,
-    size => 20,
+    size => 250,
   },
   "direccion",
   {
-    data_type => "character",
-    default_value => undef,
+    data_type => "character varying",
+    default_value => "N/A",
     is_nullable => 1,
     size => 500,
   },
   "web",
   {
-    data_type => "character",
-    default_value => undef,
+    data_type => "character varying",
+    default_value => "N/A",
     is_nullable => 1,
-    size => 100,
+    size => 250,
   },
 );
 __PACKAGE__->set_primary_key("id");
@@ -182,8 +168,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-03 23:51:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:nu0e9Ns4mh9sMCaR9KnVmA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-06 07:49:50
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tT5pOdW0gNEzZt+voGmBLg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
