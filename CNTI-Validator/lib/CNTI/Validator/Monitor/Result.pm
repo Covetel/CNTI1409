@@ -2,7 +2,7 @@ package CNTI::Validator::Monitor::Result;
 use Moose;
 use utf8;
 
-extends 'CNTI::Validator::MonitorBase';
+extends 'CNTI::Validator::Monitor::Base';
 
 has name => ( is => "ro" );
 has pass => ( is => "ro" );
@@ -33,6 +33,8 @@ CNTI::Validator::Monitor::Result - Descripción de un resultado en el validador
 =head1 DESCRIPTION
 
 Estructura para monitorear un resultado de un trabajo de validación.
+
+Extiende CNTI::Validator::Monitor::Base.
 
 =head1 ATRIBUTOS
 
@@ -112,13 +114,13 @@ La clase para el objeto padre
 
 =head2 refresh
 
-Este método se hereda de CNTI::Validator::MonitorBase, pero los
+Este método se hereda de CNTI::Validator::Monitor::Base, pero los
 objetos de tipo resultado no son inmutables y por ello este método
 no tiene mucho sentido para esta clase de objetos.
 
 =head2 children
 
-Este método se hereda de CNTI::Validator::MonitorBase.
+Este método se hereda de CNTI::Validator::Monitor::Base.
 
 Obtiene un iterador que permite recorrer los hijos del trabajo, 
 el iterador devuelto es un clausura que se invoca sin argumentos
@@ -132,7 +134,7 @@ y retorna elementos de la clase CNTI::Validator::Monitor::Event.
 
 =head2 add_children( @lista_de_eventos )
 
-Este método se hereda de CNTI::Validator::MonitorBase.
+Este método se hereda de CNTI::Validator::Monitor::Base.
 
 Agrega la @lista_de_eventos al objeto, cada evento es un hash con
 los atributos apropiados para crear objetos del tipo

@@ -57,7 +57,7 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 8,
   },
-  "parent",
+  "pid",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
 );
 __PACKAGE__->set_primary_key("id");
@@ -65,12 +65,12 @@ __PACKAGE__->add_unique_constraint("jobs_pkey", ["id"]);
 __PACKAGE__->has_many(
   "urls",
   "CNTI::ValidatorDB::Result::Urls",
-  { "foreign.parent" => "self.id" },
+  { "foreign.pid" => "self.id" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 19:51:07
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ir3cnigO4rO2vtEWG+7xpw
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 20:33:22
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EdJYN9AAUgLzU6lDrSpKmA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

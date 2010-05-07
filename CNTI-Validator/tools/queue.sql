@@ -1,7 +1,6 @@
-ALTER TABLE ONLY public.urls DROP CONSTRAINT urls_parent_fkey;
-ALTER TABLE ONLY public.results DROP CONSTRAINT results_url_id_fkey;
-ALTER TABLE ONLY public.events DROP CONSTRAINT events_result_id_fkey;
-DROP INDEX public.urls_parent_state;
+ALTER TABLE ONLY public.results DROP CONSTRAINT results_pid_fkey;
+ALTER TABLE ONLY public.events DROP CONSTRAINT events_pid_fkey;
+DROP INDEX public.urls_pid_state;
 ALTER TABLE ONLY public.urls DROP CONSTRAINT urls_pkey;
 ALTER TABLE ONLY public.results DROP CONSTRAINT results_pkey;
 ALTER TABLE ONLY public.jobs DROP CONSTRAINT jobs_pkey;
@@ -19,30 +18,30 @@ CREATE TABLE jobs (
     state       VARCHAR(10), -- new, run, done 
     ctime       TIMESTAMP,
     mtime       TIMESTAMP,
-    parent      INTEGER
+    pid         INTEGER
 );
 
 CREATE TABLE urls (
     id          SERIAL PRIMARY KEY,
-    parent      INTEGER REFERENCES jobs(id) ON DELETE CASCADE,
+    pid         INTEGER REFERENCES jobs(id) ON DELETE CASCADE,
     path        TEXT,
     state       VARCHAR(10), -- new, run, done
     ctime       TIMESTAMP,
     mtime       TIMESTAMP
 );
 
-CREATE INDEX urls_parent_state ON urls (parent, state);
+CREATE INDEX urls_pid_state ON urls (pid, state);
 
 CREATE TABLE results (
     id          SERIAL PRIMARY KEY,
-    parent      INTEGER REFERENCES urls(id) ON DELETE CASCADE,
+    pid         INTEGER REFERENCES urls(id) ON DELETE CASCADE,
     pass        VARCHAR(10),
     name        TEXT
 );
 
 CREATE TABLE events (
     id          SERIAL PRIMARY KEY,
-    parent      INTEGER REFERENCES results(id) ON DELETE CASCADE,
+    pid         INTEGER REFERENCES results(id) ON DELETE CASCADE,
     class       TEXT,
     message     TEXT,
     data        TEXT

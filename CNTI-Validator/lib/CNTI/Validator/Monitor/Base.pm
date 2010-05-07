@@ -1,20 +1,20 @@
-package CNTI::Validator::MonitorBase;
+package CNTI::Validator::Monitor::Base;
 use Moose;
 
-has _record => ( is => "ro", required => 1 );
-has _parent => ( is => "ro", isa => "Int" );
-has id      => ( is => "ro", isa => "Int" );
+has _rec => ( is => "ro", required => 1 );
+has pid  => ( is => "ro", isa => "Maybe[Int]" );
+has id   => ( is => "ro", isa => "Maybe[Int]" );
 
 around BUILDARGS => sub {
     my $orig   = shift;
     my $class  = shift;
     my $record = shift;
-    $class->$orig( $record->get_columns, _record => $record );
+    $class->$orig( $record->get_columns, _rec => $record );
 };
 
 sub refresh {
     my $self = shift;
-    my $rec  = $self->_record;
+    my $rec  = $self->_rec;
     $rec->discard_changes();
 
     # Cheat, low level hack, interface violation but quick :-) XXX
@@ -23,15 +23,19 @@ sub refresh {
 
 sub children {
     my $self = shift;
-    my $rs = $self->_record->search_related( $self->child_class->table, @_ );
+    my $rs = $self->_rec->search_related( $self->child_class->model_class->table, @_ );
 
     # Making a proper Moose iterator will take some time so ...
-    return sub { $self->child_class->new( $rs->next ) };
+    return sub {
+        my $next = $rs->next;
+        return undef unless $next;
+        $self->child_class->new( $next )
+    };
 }
 
 sub add_children {
     my $self   = shift;
-    my $rec    = $self->_record;
+    my $rec    = $self->_rec;
     my $childc = $self->child_class;
     my $childt = $childc->model_class->table;
     $rec->create_related( $childt, $_ ) for @_;
@@ -39,9 +43,9 @@ sub add_children {
 
 sub parent {
     my $self   = shift;
-    my $parent = $self->parent;
-    return undef unless $parent;
-    my $rs = $self->_record->search_related( $self->parent_class->table, { _parent => $parent } );
+    my $pid = $self->pid;
+    return undef unless $pid;
+    my $rs = $self->_rec->search_related( $self->parent_class->table, { pid => $pid } );
     return $self->parent_class->new( $rs->next );
 }
 
@@ -55,14 +59,14 @@ __END__
 
 =head1 NAME
 
-CNTI::Validator::MonitorBase - Clase base de los objetos de monitoreo
+CNTI::Validator::Monitor::Base - Clase base de los objetos de monitoreo
 
 =head1 SYNOPSIS
 
     package CNTI::Validator::Monitor::Objeto
     use Moose;
 
-    extends 'CNTI::Validator::MonitorBase'
+    extends 'CNTI::Validator::Monitor::Base'
 
     ...
 
@@ -116,7 +120,7 @@ Propiedades: Solo Lectura, Obligatorio
 
 =head2 Privados
 
-=head3 _record
+=head3 _rec
 
 =over 4
 

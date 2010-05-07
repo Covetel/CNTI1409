@@ -3,13 +3,11 @@ use Moose;
 use utf8;
 use URI;
 
-extends 'CNTI::Validator::MonitorBase';
+extends 'CNTI::Validator::Monitor::Base';
+with 'CNTI::Validator::Monitor::Queued';
 
 has id    => ( is => "ro" );
 has path  => ( is => "ro" );
-has state => ( is => "ro" );
-has ctime => ( is => "ro" );
-has mtime => ( is => "ro" );
 
 sub model_class  {'CNTI::ValidatorDB::Result::Urls'}
 sub child_class  {'CNTI::Validator::Monitor::Result'}
@@ -44,6 +42,10 @@ CNTI::Validator::Monitor::URL - Descripción de un URL en el validador
 =head1 DESCRIPTION
 
 Estructura para monitorear un url de un trabajo de validación.
+
+Extiende CNTI::Validator::Monitor::Base.
+
+Implementa: CNTI::Validator::Monitor::Queued.
 
 =head1 ATRIBUTOS
 
@@ -161,7 +163,7 @@ Retorna el URL absoluto de este objeto.
 
 =head2 refresh
 
-Este método se hereda de CNTI::Validator::MonitorBase.
+Este método se hereda de CNTI::Validator::Monitor::Base.
 
 Refresca los atributos que han cambiado en un objeto desde que fué
 creado, por ejemplo si se desea verificar el estado (state) actual
@@ -172,7 +174,7 @@ se pude hacer:
 
 =head2 children
 
-Este método se hereda de CNTI::Validator::MonitorBase.
+Este método se hereda de CNTI::Validator::Monitor::Base.
 
 Obtiene un iterador que permite recorrer los hijos del trabajo, 
 el iterador devuelto es un clausura que se invoca sin argumentos
@@ -186,7 +188,7 @@ y retorna elementos de la clase CNTI::Validator::Monitor::URL.
 
 =head2 add_children( @lista_de_resultados )
 
-Este método se hereda de CNTI::Validator::MonitorBase.
+Este método se hereda de CNTI::Validator::Monitor::Base.
 
 Agrega la @lista_de_resultados al objeto, cada camino es un hash con
 los atributos apropiados para crear objetos del tipo

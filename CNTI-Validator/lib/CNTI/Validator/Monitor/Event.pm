@@ -2,7 +2,7 @@ package CNTI::Validator::Monitor::Event;
 use Moose;
 use utf8;
 
-extends 'CNTI::Validator::MonitorBase';
+extends 'CNTI::Validator::Monitor::Base';
 
 has class   => ( is => "ro" );
 has message => ( is => "ro" );
@@ -35,6 +35,8 @@ CNTI::Validator::Monitor::Event - Descripción de un evento en el validador
 =head1 DESCRIPTION
 
 Crea una estructura para describir un evento.
+
+Extiende CNTI::Validator::Monitor::Base.
 
 =head1 ATRIBUTOS
 
@@ -112,19 +114,19 @@ La clase para el objeto padre
 
 =head2 refresh
 
-Este método se hereda de CNTI::Validator::MonitorBase, pero los
+Este método se hereda de CNTI::Validator::Monitor::Base, pero los
 objetos de este tipo son inmutables y por ello este método
 no tiene mucho sentido para ellos.
 
 =head2 children
 
-Este método se hereda de CNTI::Validator::MonitorBase, pero los
+Este método se hereda de CNTI::Validator::Monitor::Base, pero los
 objetos de este tipo no tienen hijos así que su invocación
 genera una excepción.
     
 =head2 add_children
 
-Este método se hereda de CNTI::Validator::MonitorBase, pero los
+Este método se hereda de CNTI::Validator::Monitor::Base, pero los
 objetos de este tipo no tienen hijos así que su invocación
 genera una excepción.
     
