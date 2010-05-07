@@ -35,7 +35,7 @@ CREATE INDEX urls_job_id_state ON urls (job_id, state);
 CREATE TABLE results (
     id          SERIAL PRIMARY KEY,
     url_id      INTEGER REFERENCES urls(id) ON DELETE CASCADE,
-    pass        INTEGER,
+    pass        VARCHAR(10),
     name        TEXT
 );
 

@@ -18,7 +18,12 @@ __PACKAGE__->add_columns(
   "url_id",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
   "pass",
-  { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 1,
+    size => 10,
+  },
   "name",
   {
     data_type => "text",
@@ -41,8 +46,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 08:09:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:XPb+XgsCRTu9QmelMZUATg
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 08:23:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ApebhwP/sBc8NIEWUFIYNA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

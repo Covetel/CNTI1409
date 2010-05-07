@@ -1,3 +1,12 @@
+El validador utiliza su propia base de datos, sorry.
+
+La base de datos se llama validador y los parametros de conexión
+se ajustan por ahora en CNTI/Validator/Schema.pm
+
+El esquema de la base de datos se encuentra en queue.sql
+
+
+
 CNTI-Validator version 0.01
 ===========================
 
