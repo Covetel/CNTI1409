@@ -27,6 +27,9 @@ elements:
               class: input_text
           constraints:
             - Required
+            - type: Length
+              min: 4
+              max: 250
 
     - type: Fieldset
       name: seleccionar_entidad
@@ -46,6 +49,9 @@ elements:
               class: input_text
           constraints:
             - Required
+            - type: Length
+              min: 4
+              max: 250
 
     - type: Fieldset
       name: producto
@@ -64,7 +70,10 @@ elements:
               title: 'Por favor ingrese correctamente el nombre del portal.' 
               class: input_text
           constraints:
-              - Required
+            - Required
+            - type: Length
+              min: 4
+              max: 250
  
     - type: Fieldset
       name: muestra
@@ -105,4 +114,8 @@ elements:
           attributes:
               title: Presione este botón para inicializar en blanco los campos del formulario.
               class: input_reset
-    
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape    

@@ -23,7 +23,7 @@ __PACKAGE__->table("institucion");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x99b2808)
+  default_value: SCALAR(0x983dd00)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -88,6 +88,12 @@ nombre de la persona contacto en la institucion
   is_nullable: 1
   size: 250
 
+=head2 habilitado
+
+  data_type: boolean
+  default_value: SCALAR(0x98508c8)
+  is_nullable: 0
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -147,6 +153,8 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 250,
   },
+  "habilitado",
+  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("idxrifinst", ["rif"]);
@@ -168,8 +176,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-06 07:49:50
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yfgPKoXsx4CeSOwMlYHVrw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-07 07:29:56
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:9bQJVo0MzL4poBTj6OxKYA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

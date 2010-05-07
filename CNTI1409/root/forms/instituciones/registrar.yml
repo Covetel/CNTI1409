@@ -26,7 +26,10 @@ elements:
               title: 'Por favor indique correctamente el nombre de la institución, Ejemplo: Centro Nacional de Tecnologías de Información' 
               class: input_text
           constraints:
-              - Required
+            - Required
+            - type: Length
+              min: 4
+              max: 250
 
         - type: Text
           name: rif
@@ -63,6 +66,9 @@ elements:
           attributes:
               title: 'Por favor indique un correo electrónico correspondiente a la institución.'
               class: input_text
+          constraints:
+            - Required
+            - type: Email
 
         - type: Text
           name: web
@@ -70,6 +76,9 @@ elements:
           attributes:
               title: 'Por favor indique la dirección electrónica (URL) de la página web de la institución.'
               class: input_text
+          constraints:
+            - type: Regex
+              common: [ URI, HTTP, { '-scheme': 'ftp|https?' } ]
 
 
     # The Submit button
@@ -91,4 +100,7 @@ elements:
           attributes:
               title: Presione este botón para inicializar en blanco los campos del formulario.
               class: input_reset
-    
+
+filter:
+    - TrimEdges
+    - HTMLEscape 

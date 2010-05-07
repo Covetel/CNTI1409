@@ -39,17 +39,9 @@ Procesa la petición de datos por GET
 
 =cut
 
-sub instituciones_DELETE {
-	my ($self, $c) = @_;
-	use Data::Dumper;
-	my $id = Dumper($c->req->data);
-	$c->log->debug($id);
-	$self->status_ok($c, entity => { valor => 1,});
-}
-
 sub instituciones_GET {
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Institucion')->search;
+	my $rs = $c->model('DB::Institucion')->search({ habilitado => "true" });
 	my %data;
     $data{aaData} = [
        map {
@@ -79,6 +71,15 @@ sub instituciones_POST {
 	);
 }
 
+sub instituciones_DELETE {
+	my ($self, $c) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Institucion')->find($id);
+    $rs->habilitado("false");
+    $rs->update;
+    $self->status_ok($c, entity => { valor => 1,});
+}
+
 =head2 Entidades
 
 Seccion REST para procesar las entidades verificadoras
@@ -89,7 +90,7 @@ sub entidades : Local : ActionClass('REST') {}
 
 sub entidades_GET {
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Entidadverificadora')->search;
+	my $rs = $c->model('DB::Entidadverificadora')->search({ habilitado => "true" });
 	my %data;
     $data{aaData} = [
        map {
