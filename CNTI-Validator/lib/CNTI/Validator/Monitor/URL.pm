@@ -1,5 +1,7 @@
 package CNTI::Validator::Monitor::URL;
 use Moose;
+use utf8;
+use URI;
 
 extends 'CNTI::Validator::MonitorBase';
 
@@ -13,6 +15,11 @@ sub model_class  {'CNTI::ValidatorDB::Result::Urls'}
 sub child_class  {'CNTI::Validator::Monitor::Result'}
 sub parent_class {'CNTI::Validator::Monitor::Jobs'}
 
+sub url {
+    my $self = shift;
+    URI->new( $self->parent->site . $self->path );
+}
+
 no Moose;
 __PACKAGE__->meta->make_immutable;
 1;
@@ -23,7 +30,7 @@ __END__
 
 =head1 NAME
 
-CNTI::Validator::Monitor::URL - Descripción de un evento en el validador
+CNTI::Validator::Monitor::URL - Descripción de un URL en el validador
 
 =head1 SYNOPSIS
 
@@ -140,7 +147,56 @@ La clase de DBIx::Class que se utiliza como modelo para esta.
 
 =head2 child_class
 
-La clase de monitoreo de los hijos de esta clase.
+La clase de monitoreo para los objetos hijos.
+
+=head parent_class
+
+La clase para el objeto padre
+
+=head1 METODOS PÚBLICOS
+
+=head2 url
+
+Retorna el URL absoluto de este objeto.
+
+=head2 refresh
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Refresca los atributos que han cambiado en un objeto desde que fué
+creado, por ejemplo si se desea verificar el estado (state) actual
+se pude hacer:
+
+    $obj->refresh
+    printf "El estado actual del url es: %s\n", $obj->state
+
+=head2 children
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Obtiene un iterador que permite recorrer los hijos del trabajo, 
+el iterador devuelto es un clausura que se invoca sin argumentos
+y retorna elementos de la clase CNTI::Validator::Monitor::URL.
+
+    printf "Los Reultados para el url %s\n", $obj->url
+    my $it = $job->children;
+    while ( my $r = $it->() ) {
+        printf "Resultado: para %s: %s\n", $r->name, $r->pass;
+    }
+
+=head2 add_children( @lista_de_resultados )
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Agrega la @lista_de_resultados al objeto, cada camino es un hash con
+los atributos apropiados para crear objetos del tipo
+CNTI::Validator::Monitor::Resultado
+
+    $obj->add_children( $r1, $r2, $r3 )
+
+=head2 parent
+
+Este método retorna el job al que pertenece este URL.
 
 =head1 CAVEATS AND NOTES
 

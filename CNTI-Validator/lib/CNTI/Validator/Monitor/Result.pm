@@ -1,5 +1,6 @@
 package CNTI::Validator::Monitor::Result;
 use Moose;
+use utf8;
 
 extends 'CNTI::Validator::MonitorBase';
 
@@ -101,7 +102,47 @@ La clase de DBIx::Class que se utiliza como modelo para esta.
 
 =head2 child_class
 
-La clase de monitoreo de los hijos de esta clase.
+La clase de monitoreo para los objetos hijos.
+
+=head parent_class
+
+La clase para el objeto padre
+
+=head1 METODOS PÚBLICOS
+
+=head2 refresh
+
+Este método se hereda de CNTI::Validator::MonitorBase, pero los
+objetos de tipo resultado no son inmutables y por ello este método
+no tiene mucho sentido para esta clase de objetos.
+
+=head2 children
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Obtiene un iterador que permite recorrer los hijos del trabajo, 
+el iterador devuelto es un clausura que se invoca sin argumentos
+y retorna elementos de la clase CNTI::Validator::Monitor::Event.
+
+    printf "Los eventos asociados al resultado %d\n", $res->id
+    my $it = $res->children
+    while ( my $e = $it->() ) {
+        printf "%s: %s\n", $r->class, $r->mesg;
+    }
+
+=head2 add_children( @lista_de_eventos )
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Agrega la @lista_de_eventos al objeto, cada evento es un hash con
+los atributos apropiados para crear objetos del tipo
+CNTI::Validator::Monitor::Event
+
+    $obj->add_children( $r1, $r2, $r3 )
+    
+=head2 parent
+
+Este método retorna el URL al que aplica este resultado.
 
 =head1 CAVEATS AND NOTES
 

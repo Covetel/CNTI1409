@@ -1,5 +1,6 @@
 package CNTI::Validator::Monitor::Event;
 use Moose;
+use utf8;
 
 extends 'CNTI::Validator::MonitorBase';
 
@@ -9,6 +10,7 @@ has data    => ( is => "ro" );
 
 sub model_class  {'CNTI::ValidatorDB::Result::Events'}
 sub parent_class {'CNTI::Validator::Monitor::Result'}
+sub child_class  { die "Events have no children" }
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
@@ -98,9 +100,37 @@ Propiedades: Solo Lectura, Opcional
 
 La clase de DBIx::Class que se utiliza como modelo para esta.
 
-=head2 parent_class
+=head2 child_class
 
-La clase de monitoreo del padre de esta.
+La clase de monitoreo para los objetos hijos.
+
+=head parent_class
+
+La clase para el objeto padre
+
+=head1 METODOS PÚBLICOS
+
+=head2 refresh
+
+Este método se hereda de CNTI::Validator::MonitorBase, pero los
+objetos de este tipo son inmutables y por ello este método
+no tiene mucho sentido para ellos.
+
+=head2 children
+
+Este método se hereda de CNTI::Validator::MonitorBase, pero los
+objetos de este tipo no tienen hijos así que su invocación
+genera una excepción.
+    
+=head2 add_children
+
+Este método se hereda de CNTI::Validator::MonitorBase, pero los
+objetos de este tipo no tienen hijos así que su invocación
+genera una excepción.
+    
+=head2 parent
+
+Este método retorna el resultado al que aplica este evento.
 
 =head1 CAVEATS AND NOTES
 

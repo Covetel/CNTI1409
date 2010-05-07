@@ -1,10 +1,10 @@
 package CNTI::Validator::Monitor::Job;
 use Moose;
+use utf8;
 use JSON::XS;
 
 extends 'CNTI::Validator::MonitorBase';
 
-has id    => ( is => "ro" );
 has site  => ( is => "ro" );
 has cb    => ( is => "ro" );
 has data  => ( is => "ro" );
@@ -179,7 +179,48 @@ La clase de DBIx::Class que se utiliza como modelo para esta.
 
 =head2 child_class
 
-La clase de monitoreo de los hijos de esta clase.
+La clase de monitoreo para los objetos hijos.
+
+=head1 METODOS PÚBLICOS
+
+=head2 refresh
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Refresca los atributos que han cambiado en un objeto desde que fué
+creado, por ejemplo si se desea verificar el estado (state) actual
+se pude hacer:
+
+    $obj->refresh
+    printf "El estado actual del trabajo es: %s\n", $obj->state
+
+=head2 children
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Obtiene un iterador que permite recorrer los hijos del trabajo, 
+el iterador devuelto es un clausura que se invoca sin argumentos
+y retorna elementos de la clase CNTI::Validator::Monitor::URL.
+
+    printf "Los URLs asociados al job %d\n", $job->id
+    my $it = $job->children
+    while ( my $u = $it->() ) {
+        printf "URL: %s\n", $u->url;
+    }
+
+=head2 add_children( @lista_de_caminos )
+
+Este método se hereda de CNTI::Validator::MonitorBase.
+
+Agrega la @lista_de_caminos al objeto, cada camino es una cadena de
+caracteres que se convertirá internamente a objetos de tipo 
+CNTI::Validator::Monitor::URL.
+
+    $obj->add_children( "/principal", "/contacto", "/institucion" )
+
+=head2 parent
+
+Este método retorna undef.
 
 =head1 CAVEATS AND NOTES
 
@@ -191,7 +232,10 @@ José Rey mié may  5 06:59:19 VET 2010 versión inicial
 
 =head1 SEE ALSO
 
-L<CNTI::Validator::Monitor::Result>
+L<CNTI::Validator::MonitorBase>,
+L<CNTI::Validator::Monitor::URL>,
+L<CNTI::Validator::Monitor::Result>,
+L<CNTI::Validator::Monitor::Event>
 
 =head1 AUTHOR
 

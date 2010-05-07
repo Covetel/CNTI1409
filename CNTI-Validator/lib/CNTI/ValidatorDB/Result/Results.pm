@@ -15,7 +15,7 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
     size => 4,
   },
-  "url_id",
+  "parent",
   { data_type => "integer", default_value => undef, is_nullable => 1, size => 4 },
   "pass",
   {
@@ -37,17 +37,17 @@ __PACKAGE__->add_unique_constraint("results_pkey", ["id"]);
 __PACKAGE__->has_many(
   "events",
   "CNTI::ValidatorDB::Result::Events",
-  { "foreign.result_id" => "self.id" },
+  { "foreign.parent" => "self.id" },
 );
 __PACKAGE__->belongs_to(
-  "url_id",
+  "parent",
   "CNTI::ValidatorDB::Result::Urls",
-  { id => "url_id" },
+  { id => "parent" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 08:23:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ApebhwP/sBc8NIEWUFIYNA
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-05-05 19:51:07
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6A3ujjLq6YjYlDWnioe2bQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

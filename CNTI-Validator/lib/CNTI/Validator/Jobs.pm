@@ -1,11 +1,15 @@
 package CNTI::Validator::Jobs;
 use strict;
+use utf8;
 
 use CNTI::Validator::Schema;
+
+# Todos estos deberían ser componentes cargados dinámicamente peeero ...
 use CNTI::Validator::Monitor::Job;
 use CNTI::Validator::Monitor::URL;
 use CNTI::Validator::Monitor::Result;
 use CNTI::Validator::Monitor::Event;
+
 use common::sense;
 use JSON::XS;
 use POSIX qw(strftime);
@@ -33,16 +37,18 @@ sub new_job {
     $record{'mtime'} = $record{'ctime'};
 
     $DB::single = 1;
-    my $job = CNTI::Validator::Schema->resultset('Jobs')->create( \%record );
-    my $mjob = CNTI::Validator::Monitor::Job->new( $job );
+    my $job  = CNTI::Validator::Schema->resultset('Jobs')->create( \%record );
+    my $mjob = CNTI::Validator::Monitor::Job->new($job);
 
-    $mjob->add_children( map {
+    $mjob->add_children(
+        map {
             {   path  => $_,
                 state => "new",
                 ctime => $record{'ctime'},
                 mtime => $record{'ctime'},
             }
-        } keys %sample );
+            } keys %sample
+    );
 
     return $mjob;
 }
@@ -54,7 +60,7 @@ sub find_job {
     # Buscar el job
     my $job = CNTI::Validator::Schema->resultset('Jobs')->find($id);
     return undef unless $job;
-    return CNTI::Validator::Monitor::Job->new( $job );
+    return CNTI::Validator::Monitor::Job->new($job);
 }
 
 sub search_jobs {
