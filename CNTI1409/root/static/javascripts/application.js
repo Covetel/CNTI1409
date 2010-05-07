@@ -69,9 +69,9 @@ function submitEditEntidad(value, settings)
 	var n = $(this).index();
 	var o = $("th").get(n);
 	var campo = $(o).attr('id');
-	var aPos = oTable.fnGetPosition( this );
+	var aPos = oEntidades.fnGetPosition( this );
 	var tr = this.parentNode;
-	var d = oTable.fnGetData(tr);
+	var d = oEntidades.fnGetData(tr);
    	var datos = ({'valor': value, 'id': d[0], 'campo': campo});
    	var jsoon = $.JSON.encode(datos);
    	$.ajax({
@@ -125,7 +125,7 @@ function submitEditEntidad(value, settings)
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
-			$("#tabla_instituciones tbody td").editable(submitEditEntidad);
+			$("#tabla_entidades tbody td").editable(submitEditEntidad);
 		},
 	});
 
