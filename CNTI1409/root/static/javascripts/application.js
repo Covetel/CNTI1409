@@ -26,7 +26,8 @@ $(document).ready(function(){
 	$("div.error").ready(function(){
 		var mensaje = $(this).find('span.error_message').html();
 		$(this).find('span.error_message').remove();
-		$('div.error_constraint_required > input.input_text').focus(function(){
+		//$('div.error_constraint_required > input.input_text').focus(function(){
+		$('div.error > input.input_text').focus(function(){
 			$(this).qtip({
 				   	content: mensaje,
 				   	show: { 'ready': true},
