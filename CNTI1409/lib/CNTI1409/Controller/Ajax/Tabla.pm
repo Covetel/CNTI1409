@@ -88,7 +88,7 @@ sub entidades_GET {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      
+               $_->direccion, $_->web,      "<div id='borrar_" . $_->id . "'></div>",
            ]
          } $rs->all
     ];

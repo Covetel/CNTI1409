@@ -111,23 +111,25 @@ function submitEditEntidad(value, settings)
 	
 	oEntidades = $("#tabla_entidades").dataTable({
 		"sAjaxSource": '/ajax/tabla/entidades',
+        "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
-						null,
-						null,
-						null,
-						null,
-						null,
-						null,
-						null,
-					], 
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"bSearchable": false, "bSortable": false, "sWidth": "20px"},
+                    ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
-			$("#tabla_entidades tbody td").editable(submitEditEntidad);
+			$("#tabla_entidades tbody td.tEdit").editable(submitEditEntidad);
 		},
 	});
 
