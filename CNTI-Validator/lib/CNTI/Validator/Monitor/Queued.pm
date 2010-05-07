@@ -1,10 +1,29 @@
 package CNTI::Validator::Monitor::Queued;
 use Moose::Role;
 use utf8;
+use POSIX qw(strftime);
 
 has state => ( is => "ro" );
 has ctime => ( is => "ro" );
 has mtime => ( is => "ro" );
+
+sub set_state {
+    my $self = shift;
+    $self->_rec->update( { state => shift, mtime => strftime( "%F %T", localtime time ) } );
+    $self->refresh;
+}
+
+sub refresh {
+    my $self = shift;
+    my $rec  = $self->_rec;
+    $rec->discard_changes();
+
+    my %cols = $rec->get_columns;
+    while ( my ($name, $value) = each %cols ) {
+        # interface violation but quick :-) XXX
+        $self->{$name} = $value;
+    }
+}
 
 1;
 

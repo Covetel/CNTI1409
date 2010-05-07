@@ -10,7 +10,7 @@ has data    => ( is => "ro" );
 
 sub model_class  {'CNTI::ValidatorDB::Result::Events'}
 sub parent_class {'CNTI::Validator::Monitor::Result'}
-sub child_class  { die "Events have no children" }
+sub child_class  {  }
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
@@ -112,17 +112,11 @@ La clase para el objeto padre
 
 =head1 METODOS PÚBLICOS
 
-=head2 refresh
-
-Este método se hereda de CNTI::Validator::Monitor::Base, pero los
-objetos de este tipo son inmutables y por ello este método
-no tiene mucho sentido para ellos.
-
 =head2 children
 
 Este método se hereda de CNTI::Validator::Monitor::Base, pero los
 objetos de este tipo no tienen hijos así que su invocación
-genera una excepción.
+retorna undef.
     
 =head2 add_children
 
@@ -144,6 +138,9 @@ José Rey mié may  5 06:59:19 VET 2010 versión inicial
 
 =head1 SEE ALSO
 
+L<CNTI::Validator::Monitor::Base>,
+L<CNTI::Validator::Monitor::Job>,
+L<CNTI::Validator::Monitor::URL>,
 L<CNTI::Validator::Monitor::Result>
 
 =head1 AUTHOR

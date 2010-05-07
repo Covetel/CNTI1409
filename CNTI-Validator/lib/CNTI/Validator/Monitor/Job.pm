@@ -187,7 +187,7 @@ La clase de monitoreo para los objetos hijos.
 
 =head2 refresh
 
-Este método se hereda de CNTI::Validator::Monitor::Base.
+Este método es mezclado por CNTI::Validator::Monitor::Queued.
 
 Refresca los atributos que han cambiado en un objeto desde que fué
 creado, por ejemplo si se desea verificar el estado (state) actual
@@ -235,6 +235,7 @@ José Rey mié may  5 06:59:19 VET 2010 versión inicial
 =head1 SEE ALSO
 
 L<CNTI::Validator::Monitor::Base>,
+L<CNTI::Validator::Monitor::Queued>,
 L<CNTI::Validator::Monitor::URL>,
 L<CNTI::Validator::Monitor::Result>,
 L<CNTI::Validator::Monitor::Event>

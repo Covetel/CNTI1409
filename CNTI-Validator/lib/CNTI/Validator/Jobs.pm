@@ -11,7 +11,6 @@ use CNTI::Validator::Monitor::Result;
 use CNTI::Validator::Monitor::Event;
 
 use common::sense;
-use JSON::XS;
 use POSIX qw(strftime);
 
 sub new_job {
@@ -31,26 +30,22 @@ sub new_job {
     my $unknown = join ", ", keys %args;
     die "Unknown fields: $unknown" if $unknown;
 
-    $record{'data'}  = encode_json( $record{'data'} );
+    $record{'data'}  = $record{'data'};
     $record{'state'} = 'new';
     $record{'ctime'} = strftime( "%F %T", localtime time );
     $record{'mtime'} = $record{'ctime'};
 
-    $DB::single = 1;
-    my $job  = CNTI::Validator::Schema->resultset('Jobs')->create( \%record );
-    my $mjob = CNTI::Validator::Monitor::Job->new($job);
-
-    $mjob->add_children(
+    $record{'children'} = [
         map {
             {   path  => $_,
                 state => "new",
                 ctime => $record{'ctime'},
                 mtime => $record{'ctime'},
             }
-            } keys %sample
-    );
+            } sort keys %sample
+    ];
 
-    return $mjob;
+    CNTI::Validator::Monitor::Job->hash_new( \%record );
 }
 
 sub find_job {
@@ -65,10 +60,48 @@ sub find_job {
 
 sub search_jobs {
     my $self = shift;
-    my $cond = shift;
 
-    my $rs = CNTI::Validator::Schema->resultset('Jobs')->search($cond);
+    my $rs = CNTI::Validator::Schema->resultset('Jobs')->search(@_);
     return sub { CNTI::Validator::Monitor::Job->new( $rs->next ) };
+}
+
+sub cancel_job {
+    my $self = shift;
+    my $id   = shift;
+    my $job  = $self->find_job($id);
+    $job->set_state('cancel');
+    my $it = $job->children();
+    while ( my $u = $it->() ) {
+        if ( $u->state ~~ [qw(new open)] ) {
+            $u->set_state('cancel');
+        }
+    }
+}
+
+sub delete_job {
+    my $self = shift;
+    my $id   = shift;
+    my $job  = $self->find_job($id);
+    $job->set_state('cancel');
+    my $it = $job->children();
+    while ( my $url = $it->() ) {
+        my $u_it = $url->children;
+        while ( my $result = $u_it->() ) {
+            my $r_it = $result->children;
+            while ( my $event = $r_it->() ) {
+                $event->_rec->delete;
+            }
+            $result->_rec->delete;
+        }
+        $url->_rec->delete;
+    }
+    $job->_rec->delete;
+}
+
+sub get_next_new_job {
+    my $self = shift;
+    my $it = $self->search_jobs( { state => "new" }, { order_by => 'ctime' } );
+    return $it->();
 }
 
 1;
@@ -129,19 +162,31 @@ un POST al url de callback.
 El valor de retorno sera un monitor de job es decir un objeto de tipo
 CNTI::Validador::Monitor::Job.
 
-=head2 find_job
+=head2 find_job( $id )
 
 Busca un trabajo de validación en la cola y devuelve un monitor de job.
 
 Recibe como argumento el id del job.
 
-=head2 search_jobs
+=head2 search_jobs( $condicion )
 
 Busca un conjunto de trabajos de validación en la cola y devuelve un 
 iterador a los mismos.
 
 El iterador retorna los monitores de job de cada trabajo encontrado o
 undef al final de la lista
+
+=head2 cancel_job( $id )
+
+Cancela un trabajo de validación.
+
+Recibe como argumento el id del job.
+
+=head2 delete_job( $id )
+
+Elimina un trabajo de validación.
+
+Recibe como argumento el id del job.
 
 =head1 CAVEATS AND NOTES
 

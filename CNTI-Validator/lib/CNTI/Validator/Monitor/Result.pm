@@ -112,12 +112,6 @@ La clase para el objeto padre
 
 =head1 METODOS PÚBLICOS
 
-=head2 refresh
-
-Este método se hereda de CNTI::Validator::Monitor::Base, pero los
-objetos de tipo resultado no son inmutables y por ello este método
-no tiene mucho sentido para esta clase de objetos.
-
 =head2 children
 
 Este método se hereda de CNTI::Validator::Monitor::Base.
@@ -156,7 +150,10 @@ José Rey mié may  5 06:59:19 VET 2010 versión inicial
 
 =head1 SEE ALSO
 
-L<CNTI::Validator::Monitor::Result>
+L<CNTI::Validator::Monitor::Base>,
+L<CNTI::Validator::Monitor::Job>,
+L<CNTI::Validator::Monitor::URL>,
+L<CNTI::Validator::Monitor::Event>
 
 =head1 AUTHOR
 

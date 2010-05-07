@@ -1,9 +1,10 @@
 package CNTI::Validator::Monitor::Base;
 use Moose;
+use JSON::XS;
 
 has _rec => ( is => "ro", required => 1 );
-has pid  => ( is => "ro", isa => "Maybe[Int]" );
-has id   => ( is => "ro", isa => "Maybe[Int]" );
+has pid => ( is => "ro", isa => "Maybe[Int]" );
+has id  => ( is => "ro", isa => "Maybe[Int]" );
 
 around BUILDARGS => sub {
     my $orig   = shift;
@@ -12,41 +13,79 @@ around BUILDARGS => sub {
     $class->$orig( $record->get_columns, _rec => $record );
 };
 
-sub refresh {
-    my $self = shift;
-    my $rec  = $self->_rec;
-    $rec->discard_changes();
-
-    # Cheat, low level hack, interface violation but quick :-) XXX
-    %$self = $rec->get_columns;
-}
-
 sub children {
     my $self = shift;
-    my $rs = $self->_rec->search_related( $self->child_class->model_class->table, @_ );
+
+    # get the child class or return a dummy iterator
+    my $childc = $self->child_class || return undef;
+
+    # make a recordset to be closured in iterator
+    my $rs = $self->_rec->search_related( $childc->model_class->table, @_ );
 
     # Making a proper Moose iterator will take some time so ...
     return sub {
         my $next = $rs->next;
         return undef unless $next;
-        $self->child_class->new( $next )
+        $self->child_class->new($next);
     };
 }
 
 sub add_children {
     my $self   = shift;
     my $rec    = $self->_rec;
-    my $childc = $self->child_class;
+    my $childc = $self->child_class || die ref($self) . " does not allow children";
     my $childt = $childc->model_class->table;
     $rec->create_related( $childt, $_ ) for @_;
 }
 
 sub parent {
-    my $self   = shift;
-    my $pid = $self->pid;
+    my $self = shift;
+    my $pid  = $self->pid;
     return undef unless $pid;
     my $rs = $self->_rec->search_related( $self->parent_class->table, { pid => $pid } );
     return $self->parent_class->new( $rs->next );
+}
+
+sub as_hash {
+    my $self   = shift;
+    my %fields = $self->_rec->get_columns;
+    my $it     = $self->children;
+    if ($it) {
+        my @children;
+        while ( my $ch = $it->() ) {
+            push @children, $ch->as_hash;
+        }
+        $fields{'children'} = \@children if @children;
+    }
+    return \%fields;
+}
+
+sub as_json {
+    my $self = shift;
+    my $hash = $self->as_hash;
+    for ( values %$hash ) {
+        $_ = encode_json($_) if ref $_;
+    }
+    encode_json( $self->as_hash );
+}
+
+sub hash_new {
+    my $self     = shift;
+    my $data     = shift;
+    my $children = delete $data->{'children'};
+    for ( values %$data ) {
+        $_ = encode_json($_) if ref $_;
+    }
+    $DB::single = 1;
+    my $rec = CNTI::Validator::Schema->resultset( $self->model_class )->create($data);
+    my $obj = $self->new($rec);
+    $obj->add_children(@$children);
+    return $obj;
+}
+
+sub json_new {
+    my $self = shift;
+    $self->from_hash( decode_json(shift) );
 }
 
 no Moose;
@@ -151,13 +190,15 @@ se pude hacer:
 =head2 children
 
 Obtiene un iterador que permite recorrer los hijos de un objeto,
-el iterador devuelto es un clausura que se invoca sin argumentos
-y retorna otros elementos.
+el iterador será un clausura que se invoca sin argumentos
+y retorna un hijo cada vez que se invoca.
 
     my $it = $obj->children
     while ( my $h = $it->() ) {
         printf "Hijo: %s\n", $h->id;
     }
+
+En el caso de objetos que no permitan hijos, el método devuelve undef
 
 =head2 add_children( @lista )
 
@@ -170,6 +211,22 @@ tipo apropiado para crear hijos de un objeto específico.
 
 Este método el padre de un objeto o undef si el objeto no tiene ningún
 padre.
+
+=head2 as_hash
+
+Retorna un hash con los atributos del objeto y todos sus descendientes.
+
+=head2 as_json
+
+Retorna el objeto serializado como JSON
+
+=head2 from_hash
+
+Crea un nuevo objeto basado en un hash
+
+=head2 from_json
+
+Crea un nuevo objeto a partir de una cadena JSON
 
 =head1 CAVEATS AND NOTES
 
