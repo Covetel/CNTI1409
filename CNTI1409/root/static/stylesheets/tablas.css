@@ -23,6 +23,6 @@ table.dataTable th {
 cursor: pointer;
 }
 
-th.tEliminar {
+td.tEliminar {
     width: 20px;
 }
