@@ -30,6 +30,7 @@ elements:
             - type: Length
               min: 4
               max: 250
+              message: "El nombre debe contener al menos 4 caracteres"
 
         - type: Text
           name: rif
@@ -59,6 +60,11 @@ elements:
           attributes:
               title: 'Por favor indique el nombre completo de la persona contacto en la institución.'
               class: input_text
+          constraints:
+            - type: Length
+              min: 4
+              max: 250
+              message: "El nombre debe contener al menos 4 caracteres"
 
         - type: Text
           name: correo

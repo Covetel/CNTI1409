@@ -1,6 +1,6 @@
 /* 
 Archivo:        tablas.css
-Autor:          Walter Vargas <walter@covetel.com.ve>
+Autor:          Walter Vargas <walter@covetel.com.ve>, Juan Mesa <juan@covetel.com.ve>
 Descripción:    Estilo para los controles tipo tablas.
 */
 
@@ -21,4 +21,8 @@ padding: 5px;
 
 table.dataTable th {
 cursor: pointer;
+}
+
+th.tEliminar {
+    width: 20px;
 }

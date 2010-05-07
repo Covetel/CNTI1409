@@ -120,6 +120,15 @@ sub entidades_POST {
 	);
 }
 
+sub entidades_DELETE {
+	my ($self, $c) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Entidadverificadora')->find($id);
+    $rs->habilitado("false");
+    $rs->update;
+    $self->status_ok($c, entity => { valor => 1,});
+}
+
 =head1 AUTHOR
 
 ,,,
