@@ -48,21 +48,25 @@ sub parent {
 
 sub as_hash {
     my $self   = shift;
+    my $depth  = shift;
     my %fields = $self->_rec->get_columns;
-    my $it     = $self->children;
-    if ($it) {
-        my @children;
-        while ( my $ch = $it->() ) {
-            push @children, $ch->as_hash;
+    if ( !defined($depth) || $depth-- ) {
+        my $it = $self->children;
+        if ($it) {
+            my @children;
+            while ( my $ch = $it->() ) {
+                push @children, $ch->as_hash( $depth );
+            }
+            $fields{'children'} = \@children if @children;
         }
-        $fields{'children'} = \@children if @children;
     }
     return \%fields;
 }
 
 sub as_json {
     my $self = shift;
-    my $hash = $self->as_hash;
+    my $depth = shift;
+    my $hash = $self->as_hash($depth);
     for ( values %$hash ) {
         $_ = encode_json($_) if ref $_;
     }
@@ -76,7 +80,6 @@ sub hash_new {
     for ( values %$data ) {
         $_ = encode_json($_) if ref $_;
     }
-    $DB::single = 1;
     my $rec = CNTI::Validator::Schema->resultset( $self->model_class )->create($data);
     my $obj = $self->new($rec);
     $obj->add_children(@$children);
@@ -212,21 +215,34 @@ tipo apropiado para crear hijos de un objeto específico.
 Este método el padre de un objeto o undef si el objeto no tiene ningún
 padre.
 
-=head2 as_hash
+=head2 as_hash( $depth )
 
 Retorna un hash con los atributos del objeto y todos sus descendientes.
 
-=head2 as_json
+El argumento opcional $depth indica con cuanta profundidad se desea
+obtener el objeto, si se omite (o es cero) solo se retorna el objeto
+actual, si es 1 se retorna el objeto actual y sus hijos, si es 2 se
+incluyen los nietos, etc.
+
+=head2 as_json( $depth )
 
 Retorna el objeto serializado como JSON
 
-=head2 from_hash
+El argumento opcional $depth indica con cuanta profundidad se desea
+obtener el objeto, si se omite (o es cero) solo se retorna el objeto
+actual, si es 1 se retorna el objeto actual y sus hijos, si es 2 se
+incluyen los nietos, etc.
 
-Crea un nuevo objeto basado en un hash
+=head2 hash_new
 
-=head2 from_json
+Crea un nuevo objeto basado en un hash, si el objeto incluye descendientes
+especificados en clave children, estos también se crearán recursivamente.
 
-Crea un nuevo objeto a partir de una cadena JSON
+=head2 json_new
+
+Crea un nuevo objeto a partir de una cadena JSON, si el objeto incluye
+descendientes especificados en clave children, estos también se crearán
+recursivamente.
 
 =head1 CAVEATS AND NOTES
 
