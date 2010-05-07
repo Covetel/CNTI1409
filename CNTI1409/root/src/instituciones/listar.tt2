@@ -3,7 +3,7 @@
 <table id="tabla_instituciones" class="dataTable" cellpadding="2" cellspaccing="2" border="0" width="100%"> 
 	<thead> 
 	<tr>
-		<th id="id">ID </th>
+		<th id="id">ID</th>
 		<th id="nombre">Nombre</th>
 		<th id="rif">R.I.F.</th>
 		<th id="correo">Correo Eletrónico</th>
@@ -11,6 +11,7 @@
 		<th id="contacto">Persona Contacto</th>
 		<th id="direccion">Dirección</th>
 		<th id="web">Página Web</th>
+		<th id="eliminar">Eliminar</th>
 	</tr>
 	</thead>
 </table>

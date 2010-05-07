@@ -48,7 +48,7 @@ sub instituciones_GET {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      
+               $_->direccion, $_->web,      "<div id='borrar_" . $_->id . "'></div>",
            ]
          } $rs->all
     ];
@@ -57,18 +57,18 @@ sub instituciones_GET {
 
 sub instituciones_POST {
 	my ($self, $c) = @_;
-	use Data::Dumper;
-	my $d = $c->req->data->{valor};
-	my $i = $c->req->data->{id};
-	$c->log->debug($d);
-	$c->log->debug($i);
+	my $valor = $c->req->data->{valor};
+	my $id = $c->req->data->{id};
+    my $campo = $c->req->data->{campo};
+    my $rs = $c->model('DB::Institucion')->find($id);
+    $rs->$campo($valor);
+    $rs->update;
 	$self->status_accepted(
                $c,
                entity => {
-                   value => $d,
+                   value => $valor,
                }
 	);
-	
 }
 
 =head2 Entidades
@@ -97,15 +97,18 @@ sub entidades_GET {
 
 sub entidades_POST {
 	my ($self, $c) = @_;
-	my $d = $c->req->data->{valor};
-	my $i = $c->req->data->{id};
+	my $valor = $c->req->data->{valor};
+	my $id = $c->req->data->{id};
+    my $campo = $c->req->data->{campo};
+    my $rs = $c->model('DB::Entidadverificadora')->find($id);
+    $rs->$campo($valor);
+    $rs->update;
 	$self->status_accepted(
                $c,
                entity => {
-                   value => $d,
+                   value => $valor,
                }
 	);
-	
 }
 
 =head1 AUTHOR
