@@ -16,6 +16,7 @@
                 <link href="/static/stylesheets/cnti1409/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" media="all" />
                 <link type="image/x-icon" rel="shortcut icon" href="/static/images/favicon.ico"/>
                 <script type="text/javascript" src="/static/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.dataTables.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.jeditable.mini.js"></script>
@@ -64,9 +65,6 @@
                 <div id="area_aplicacion">
                         <h3><a href="#"> [% titulo %] </a> </h3>
                         <div>
-				<!-- en esta variable se sustituye por los archivos .tt2 con información
-                                     sobre el contenido del sitio
-                                -->
 							[% content %]
                         </div>
                 </div>

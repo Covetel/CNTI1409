@@ -39,6 +39,14 @@ Procesa la petición de datos por GET
 
 =cut
 
+sub instituciones_DELETE {
+	my ($self, $c) = @_;
+	use Data::Dumper;
+	my $id = Dumper($c->req->data);
+	$c->log->debug($id);
+	$self->status_ok($c, entity => { valor => 1,});
+}
+
 sub instituciones_GET {
 	my ($self, $c) = @_;
 	my $rs = $c->model('DB::Institucion')->search;

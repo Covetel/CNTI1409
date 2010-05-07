@@ -5,6 +5,7 @@ var oTable;
 var oEntidades;
 var giRedraw = false;
 
+function delTr (tr) {tr.remove();}
 $(document).ready(function(){
 	// Edit in Place, para las tablas. 
 
@@ -105,8 +106,32 @@ function submitEditEntidad(value, settings)
         },
 		"fnDrawCallback": function () {
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
+			$("div.borrar").html("<button class='borrar'> Eliminar </button>");
+			$("button.borrar").click(function (){
+				var c = confirm("Esta seguro de eliminar este registro ?");
+				if (c) {	
+	 				var id 		= $(this).parent().attr('id');
+	 				var codigo 	= id.split('_'); 
+	 				codigo 		= ({ 'codigo': codigo[1]});
+	 				var jsoon 	= $.JSON.encode(codigo);
+	 				console.log(jsoon);
+	 				var tr 		= $(this).parent().parent().parent();
+	 				$.ajax({
+	 					url: "/ajax/tabla/instituciones", 
+	 					type: "DELETE",
+	 					data: jsoon,
+	 					processData: false,
+	 					contentType: 'application/json',
+	 					complete: function (data) {
+	 							delTr(tr);
+	 					},
+	 				}); // Fin de ajax
+				} else {
+					return false;	
+				} 
+			
+			}); // Fin de click 
 		},
-       
 	});
 	
 	oEntidades = $("#tabla_entidades").dataTable({
