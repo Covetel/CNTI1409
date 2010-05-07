@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/CNTI-Validator.t
+lib/CNTI/Validator.pm
