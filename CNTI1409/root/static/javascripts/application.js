@@ -6,8 +6,13 @@ var oEntidades;
 var giRedraw = false;
 
 function delTr (tr) {tr.remove();}
+
+
+
 $(document).ready(function(){
 	// Edit in Place, para las tablas. 
+	// Elimina los mensajes de error de los formularios. 
+	$("span.error_message").remove();
 
 	$("#menu_vertical").accordion({ collapsible: true ,active: 20 });
 	$("#area_aplicacion").accordion({ collapsible: false ,active: 0 });

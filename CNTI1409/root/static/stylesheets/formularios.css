@@ -129,3 +129,17 @@ span.ui-icon,span.ui-icon-info {
 float: left;
 margin-right: .3em;
 }
+
+div.error {
+background-color: #F3D8D8;
+background-image: url("images/ui-bg_diagonals-medium_20_f3d8d8_40x40.png");
+background-attachment: scroll;
+background-position:50% 50%;
+background-repeat:repeat;
+/*border-left: 1px dashed #ff0000;
+border-right: 1px dashed #ff0000;*/
+}
+
+span.error_message {
+float: left; 
+}
