@@ -5,14 +5,29 @@ var oTable;
 var oEntidades;
 var giRedraw = false;
 
-function delTr (tr) {tr.remove();}
+function delTr (tr) { 
+ oTable.fnDeleteRow(tr);
+}
 
 
 
 $(document).ready(function(){
 	// Edit in Place, para las tablas. 
 	// Elimina los mensajes de error de los formularios. 
-	$("span.error_message").remove();
+	//$("span.error_message").remove();
+	$("div.error").ready(function(){
+		var mensaje = $(this).find('span.error_message').html();
+		$(this).find('span.error_message').remove();
+		$('div.error_constraint_required > input.input_text').focus(function(){
+			$(this).qtip({
+				   	content: mensaje,
+				   	show: { 'ready': true},
+   					hide: 'mouseout',
+					position: { adjust: { x: 0, y: -42}}
+
+			});
+		});
+	});
 
 	$("#menu_vertical").accordion({ collapsible: true ,active: 20 });
 	$("#area_aplicacion").accordion({ collapsible: false ,active: 0 });
@@ -113,14 +128,13 @@ function submitEditEntidad(value, settings)
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
 			$("div.borrar").html("<button class='borrar'> Eliminar </button>");
 			$("button.borrar").click(function (){
+ 				var tr = oTable.fnGetPosition(this.parentNode.parentNode.parentNode); 
 				var c = confirm("Esta seguro de eliminar este registro ?");
 				if (c) {	
 	 				var id 		= $(this).parent().attr('id');
 	 				var codigo 	= id.split('_'); 
 	 				codigo 		= ({ 'codigo': codigo[1]});
 	 				var jsoon 	= $.JSON.encode(codigo);
-	 				console.log(jsoon);
-	 				var tr 		= $(this).parent().parent().parent();
 	 				$.ajax({
 	 					url: "/ajax/tabla/instituciones", 
 	 					type: "DELETE",
