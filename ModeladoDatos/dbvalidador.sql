@@ -30,10 +30,10 @@ CREATE TABLE auditoria (
     idev bigint NOT NULL,
     idinstitucion bigint NOT NULL,
     portal character varying(100) NOT NULL,
-    fechaini date NOT NULL,
+    fechaini date,
     fechafin date,
-    url text NOT NULL,
-    fechacreacion date NOT NULL
+    fechacreacion date NOT NULL,
+    url character varying(1000)[]
 );
 
 
@@ -89,6 +89,13 @@ COMMENT ON COLUMN auditoria.fechafin IS 'Fecha de finalizacion de la auditoria, 
 
 
 --
+-- Name: COLUMN auditoria.fechacreacion; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN auditoria.fechacreacion IS 'Fecha de creacion de la audioria';
+
+
+--
 -- Name: COLUMN auditoria.url; Type: COMMENT; Schema: public; Owner: admin
 --
 
@@ -119,7 +126,7 @@ ALTER SEQUENCE auditoria_id_seq OWNED BY auditoria.id;
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoria_id_seq', 2, true);
+SELECT pg_catalog.setval('auditoria_id_seq', 4, true);
 
 
 --
@@ -564,7 +571,8 @@ ALTER TABLE institucion ALTER COLUMN id SET DEFAULT nextval('institucion_id_seq'
 -- Data for Name: auditoria; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, url, fechacreacion) FROM stdin;
+COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url) FROM stdin;
+4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}
 \.
 
 
@@ -591,8 +599,8 @@ COPY disposicion (id, nombre, descripcion, habilitado) FROM stdin;
 COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion, web, habilitado) FROM stdin;
 2	COVETEL	J-992929	info@covetel.com.ve	0412-9889285	Juan Mesa	Cordero	www.covetel.com.ve	t
 4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org	t
-5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Caracas	http://networkit.com.ve	t
-6	El Pollo Loco	J-432149595	pollo@alabroaster.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org	t
+5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Distrito Federal	http://networkit.com.ve	f
+6	El Pollo Loco	J-432149595	pollo@enbrasa.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org	t
 \.
 
 
@@ -604,9 +612,9 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 3	Centro Nacional de Tecnologías de la Información	G-000000000	info@cnti.gob.ve	0212-222.2222	Fany Hernandez	Av. Urdaneta	http://www.cnti.gob.ve	t
 4	CANTV	G-0987654321	info@cantv.com.ve	0212-333.3333	Juan Rodriguez	Colegio de Ingenieros	http://www.cantv.com.ve	t
 2	Ministerio de Finanzas	G-1234567890	info@finanzas.gob.ve	0212-222.2222	Joel Gonzales	Por aca	http://www.mppef.gob.ve	t
-5	Insitucion	G-432123	info@institucion.com	2292092	Walter	Por alli	www.notiene.com	t
 8	Juan Technology	v-14951432	juan@covetel.com.ve	0412-9889285	Juan Mesa	Cordero Edo. Tachira	http://blogs.covetel.com.ve/overdrive	f
 9	Ministerio de Cosas	G-00000000	ministro@cosas.gob.ve	555-555.5555	El Ministro	Por estas calles	http://www.cosas.gob.ve	t
+5	Insitucion	G-432123	info@institucion.com	2292092	Walter	Por alli	www.notiene.com	f
 \.
 
 
