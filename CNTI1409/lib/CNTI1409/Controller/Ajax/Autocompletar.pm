@@ -11,6 +11,7 @@ __PACKAGE__->config(
 
 
 sub instituciones : Local : ActionClass('REST') {}
+sub entidades : Local : ActionClass('REST') {}
 
 
 =head1 NAME
@@ -36,10 +37,32 @@ sub index :Path :Args(0) {
     $c->response->body('Matched CNTI1409::Controller::Ajax::Autocompletar in Ajax::Autocompletar.');
 }
 
+=head2 instituciones_GET 
+
+Este método, devuelve la lista de instituciones en JSON, para llenar el control autocomplete
+
+=cut
+
 sub instituciones_GET {
 	my ($self, $c) = @_;
-    my $requ = $c->req->params->{q};
-	my $rs = $c->model('DB::Institucion')->search({ 'lower(nombre)' => { -like => "$requ%" } });
+    my $requ = $c->req->params->{term};
+	my $rs = $c->model('DB::Institucion')->search_like({ nombre => "$requ%"});
+	#my $rs = $c->model('DB::Institucion')->search({ 'lower(nombre)' => { like => "$requ%" } });
+	my @datos = map { { value => $_->nombre, label => $_->nombre } } $rs->all;
+    $self->status_ok($c, entity => \@datos);
+}
+
+=head2 entidades_GET
+
+Este método, devuelve la lista de entidades en JSON, para llenar el control autocomplete
+
+=cut
+
+sub entidades_GET {
+	my ($self, $c) = @_;
+    my $requ = $c->req->params->{term};
+	#my $rs = $c->model('DB::Entidadverificadora')->search({ 'lower(nombre)' => { like => "$requ%" } });
+	my $rs = $c->model('DB::Entidadverificadora')->search_like({ nombre => "$requ%"});
 	my @datos = map { { value => $_->nombre, label => $_->nombre } } $rs->all;
     $self->status_ok($c, entity => \@datos);
 }

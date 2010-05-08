@@ -48,7 +48,7 @@ elements:
           attributes:
               title:  'Por favor ingrese correctamente el nombre de la entidad verificadora, o las primeras 4 letras del nombre, y seleccione el la entidad que desea, de la lista de entidades que se desplegará bajo el campo.' 
               class: input_text
-              id: entidad
+              id: idev
           constraints:
             - Required
             - type: Length

@@ -27,8 +27,14 @@ $(document).ready(function(){
 	// Autocomplete para el campo Institucion.
 	$("#idinstitucion").autocomplete({
 		source: '/ajax/autocompletar/instituciones',
-		minLength: 0,
+		minLength: 3,
 	})	
+	
+	$("#idev").autocomplete({
+		source: '/ajax/autocompletar/entidades',
+		minLength: 3,
+	})	
+
 
 	// Edit in Place, para las tablas. 
 	// Elimina los mensajes de error de los formularios. 
