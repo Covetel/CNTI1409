@@ -25,7 +25,7 @@ elements:
           attributes:
               title: 'Por favor ingrese correctamente el nombre de la institución, o las primeras 4 letras del nombre, y seleccione el la institución que desea, de la lista de instituciones que se desplegará bajo el campo.' 
               class: input_text
-              id: institucion
+              id: idinstitucion
           constraints:
             - Required
             - type: Length

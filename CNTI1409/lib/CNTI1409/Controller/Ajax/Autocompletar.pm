@@ -6,7 +6,7 @@ BEGIN {extends 'Catalyst::Controller::REST'; }
 
 
 __PACKAGE__->config(
-  'default'   => 'application/json',
+  'default'   => 'application/javascript',
 );
 
 
@@ -40,15 +40,8 @@ sub instituciones_GET {
 	my ($self, $c) = @_;
     my $requ = $c->req->params->{q};
 	my $rs = $c->model('DB::Institucion')->search({ 'lower(nombre)' => { -like => "$requ%" } });
-	my %dato;
-    $dato{item} = [
-       map {
-           [
-               $_->id,        $_->nombre,
-           ]
-         } $rs->all
-    ];
-    $self->status_ok($c, entity => \%dato);
+	my @datos = map { { value => $_->nombre, label => $_->nombre } } $rs->all;
+    $self->status_ok($c, entity => \@datos);
 }
 
 =head1 AUTHOR

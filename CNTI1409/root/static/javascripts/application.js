@@ -17,10 +17,18 @@ function delTr (tr, tabla) {
     
 }
 
-
+function sugerencia (label, value){
+	this.label = label;
+	this.value = value;
+}
 
 $(document).ready(function(){
 
+	// Autocomplete para el campo Institucion.
+	$("#idinstitucion").autocomplete({
+		source: '/ajax/autocompletar/instituciones',
+		minLength: 0,
+	})	
 
 	// Edit in Place, para las tablas. 
 	// Elimina los mensajes de error de los formularios. 
