@@ -11,7 +11,7 @@ languages:
 elements:
     - type: Fieldset
       name: datos_institucion
-      legend: Datos de la InstituciÃ³n
+      legend: Datos de la Institución
       elements:
         - type: Block
           tag: div
@@ -21,9 +21,9 @@ elements:
 
         - type: Text
           name: nombre
-          label: Nombre de la InstituciÃ³n
+          label: Nombre de la Institución
           attributes:
-              title: 'Por favor indique correctamente el nombre de la instituciÃ³n, Ejemplo: Centro Nacional de TecnologÃ­as de InformaciÃ³n'
+              title: 'Por favor indique correctamente el nombre de la institución, Ejemplo: Centro Nacional de Tecnologías de Información'
               class: input_text
           constraints:
             - Required
@@ -36,29 +36,29 @@ elements:
           name: rif
           label: R.I.F.
           attributes:
-              title: 'Por favor indique correctamente el RIF de la instituciÃ³n, Ejemplo: G-00000008'
+              title: 'Por favor indique correctamente el RIF de la institución, Ejemplo: G-00000008'
               class: input_text
           constraints:
               - Required
 
         - type: Text
           name: telefono
-          label: TelÃ©fono
+          label: Teléfono
           attributes:
-              title: 'Por favor indique el nÃºmero telefÃ³nico de la instituciÃ³n, con su respectivo cÃ³digo de Ã¡rea'
+              title: 'Por favor indique el número telefónico de la institución, con su respectivo código de área'
               class: input_text
 
         - type: Textarea
           name: direccion
-          label: DirecciÃ³n
+          label: Dirección
           attributes:
-              title: 'Por favor indique la direcciÃ³n, Calle, AV, Ciudad, Estado'
+              title: 'Por favor indique la dirección, Calle, AV, Ciudad, Estado'
 
         - type: Text
           name: contacto
           label: Persona Contacto
           attributes:
-              title: 'Por favor indique el nombre completo de la persona contacto en la instituciÃ³n.'
+              title: 'Por favor indique el nombre completo de la persona contacto en la institución.'
               class: input_text
           constraints:
             - type: Length
@@ -68,9 +68,9 @@ elements:
 
         - type: Text
           name: correo
-          label: Correo ElectrÃ³nico
+          label: Correo Electrónico
           attributes:
-              title: 'Por favor indique un correo electrÃ³nico correspondiente a la instituciÃ³n.'
+              title: 'Por favor indique un correo electrónico correspondiente a la institución.'
               class: input_text
           constraints:
             - Required
@@ -78,9 +78,9 @@ elements:
 
         - type: Text
           name: web
-          label: PÃ¡gina Web
+          label: Página Web
           attributes:
-              title: 'Por favor indique la direcciÃ³n electrÃ³nica (URL) de la pÃ¡gina web de la instituciÃ³n.'
+              title: 'Por favor indique la dirección electrónica (URL) de la página web de la institución.'
               class: input_text
           constraints:
             - type: Regex
@@ -94,9 +94,9 @@ elements:
         - type: Submit
           name: submit
           # The text to be displayed
-          value: Registrar InstituciÃ³n
+          value: Registrar Institución
           attributes:
-              title: Presione este botÃ³n para registrar la instituciÃ³n.
+              title: Presione este botón para registrar la institución.
               class: input_submit
        
         - type: Reset
@@ -104,7 +104,7 @@ elements:
           # The text to be displayed
           value: Reiniciar
           attributes:
-              title: Presione este botÃ³n para inicializar en blanco los campos del formulario.
+              title: Presione este botón para inicializar en blanco los campos del formulario.
               class: input_reset
 
 filter:
