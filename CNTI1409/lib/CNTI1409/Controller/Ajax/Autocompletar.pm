@@ -63,6 +63,7 @@ Este método, devuelve la lista de entidades en JSON, para llenar el control aut
 sub entidades_GET {
 	my ($self, $c) = @_;
     my $requ = $c->req->params->{term};
+	$requ = lc $requ;
 	my $rs = $c->model('DB::Entidadverificadora')->search(
                                                             { 'lower(nombre)' => { like => "$requ%" } },
                                                             { columns => [ qw / nombre / ] }
