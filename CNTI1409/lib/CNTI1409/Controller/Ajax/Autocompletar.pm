@@ -45,7 +45,7 @@ Este método, devuelve la lista de instituciones en JSON, para llenar el control
 
 sub instituciones_GET {
 	my ($self, $c) = @_;
-    my $requ = $c->req->params->{term};
+    my $requ = lc($c->req->params->{term});
 	my $rs = $c->model('DB::Institucion')->search(
                                                     { 'lower(nombre)' => { like => "$requ%" } },
                                                     { columns => [ qw / nombre / ] }
@@ -62,7 +62,7 @@ Este método, devuelve la lista de entidades en JSON, para llenar el control aut
 
 sub entidades_GET {
 	my ($self, $c) = @_;
-    my $requ = $c->req->params->{term};
+    my $requ = lc($c->req->params->{term});
 	my $rs = $c->model('DB::Entidadverificadora')->search(
                                                             { 'lower(nombre)' => { like => "$requ%" } },
                                                             { columns => [ qw / nombre / ] }
