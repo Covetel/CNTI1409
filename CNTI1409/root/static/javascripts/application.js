@@ -20,6 +20,23 @@ function delTr (tr, tabla) {
 
 
 $(document).ready(function(){
+
+	$("input#institucion").autocomplete({
+		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+	});
+	
+	$("input#ins").autocomplete({
+		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+	});
+	
+	$("input#ev").autocomplete({
+		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+	});
+	
+	$("input#auto").autocomplete({
+		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
+	});
+
 	// Edit in Place, para las tablas. 
 	// Elimina los mensajes de error de los formularios. 
 	//$("span.error_message").remove();

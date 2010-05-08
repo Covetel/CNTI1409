@@ -51,6 +51,11 @@ sub crear : Local : FormConfig {
         $c->stash->{template} = 'auditoria/crear.tt2';
 }
 
+sub prueba : Local {
+	my ( $self, $c ) = @_;
+	$c->stash->{template} = 'prueba.tt2';
+}
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>
