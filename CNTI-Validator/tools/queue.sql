@@ -1,3 +1,4 @@
+ALTER TABLE ONLY public.urls DROP CONSTRAINT urls_pid_fkey;
 ALTER TABLE ONLY public.results DROP CONSTRAINT results_pid_fkey;
 ALTER TABLE ONLY public.events DROP CONSTRAINT events_pid_fkey;
 DROP INDEX public.urls_pid_state;
@@ -16,6 +17,7 @@ CREATE TABLE jobs (
     callback    TEXT,
     data        TEXT,
     state       VARCHAR(10), -- new, run, done 
+    proc        INTEGER,
     ctime       TIMESTAMP,
     mtime       TIMESTAMP,
     pid         INTEGER
@@ -26,6 +28,7 @@ CREATE TABLE urls (
     pid         INTEGER REFERENCES jobs(id) ON DELETE CASCADE,
     path        TEXT,
     state       VARCHAR(10), -- new, run, done
+    proc        INTEGER,
     ctime       TIMESTAMP,
     mtime       TIMESTAMP
 );

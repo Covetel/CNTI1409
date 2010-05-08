@@ -9,7 +9,10 @@ has mtime => ( is => "ro" );
 
 sub set_state {
     my $self = shift;
-    $self->_rec->update( { state => shift, mtime => strftime( "%F %T", localtime time ) } );
+    my $args = { state => shift };
+    $args->{'proc'} = shift if @_;
+    $args->{'mtime'} = strftime( "%F %T", localtime time ) };
+    $self->_rec->update( $args );
     $self->refresh;
 }
 
@@ -69,6 +72,24 @@ Propiedades: Solo Lectura, Opcional
 
 =back
 
+=head3 proc
+
+=over 4
+
+=item * 
+
+Descripción: Proceso que está utilizando el objeto.
+
+=item *
+
+Tipo de datos: Int
+
+=item *
+
+Propiedades: Solo Lectura, Opcional
+
+=back
+
 =head3 ctime
 
 =over 4
@@ -104,6 +125,24 @@ Tipo de datos: Fecha
 Propiedades: Solo Lectura, Obligatorio
 
 =back
+
+=head1 METHODS
+
+=head2 refresh
+
+Refresca los atributos que han cambiado en un objeto desde que fué
+creado, por ejemplo si se desea verificar el estado (state) actual
+se pude hacer:
+
+    $obj->refresh
+
+=head2 set_state( $state [, $pid ] )
+
+Cambia el estado del elemento a $state y opcionalmente cambia el 
+id del proceso que está utilizando el objeto.
+
+Como cualquier otra modificación del objeto, esta operación cambia
+la fecha de modificación (mtime) del mismo.
 
 =head1 CAVEATS AND NOTES
 
