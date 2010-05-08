@@ -10,7 +10,7 @@ has mtime => ( is => "ro" );
 sub set_state {
     my $self = shift;
     my $args = { state => shift };
-    $args->{'proc'} = shift if @_;
+    $args->{'proc'} = shift || $$;
     $args->{'mtime'} = strftime( "%F %T", localtime time ) };
     $self->_rec->update( $args );
     $self->refresh;
@@ -138,8 +138,9 @@ se pude hacer:
 
 =head2 set_state( $state [, $pid ] )
 
-Cambia el estado del elemento a $state y opcionalmente cambia el 
-id del proceso que está utilizando el objeto.
+Cambia el estado del elemento a $state y cambia el id del proceso
+que efectuó el cambio, si no se especifica el $pid, se utilizará 
+el pid del proceso actual ($$)
 
 Como cualquier otra modificación del objeto, esta operación cambia
 la fecha de modificación (mtime) del mismo.
