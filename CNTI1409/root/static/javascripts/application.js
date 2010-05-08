@@ -21,21 +21,6 @@ function delTr (tr, tabla) {
 
 $(document).ready(function(){
 
-	$("input#institucion").autocomplete({
-		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-	});
-	
-	$("input#ins").autocomplete({
-		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-	});
-	
-	$("input#ev").autocomplete({
-		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-	});
-	
-	$("input#auto").autocomplete({
-		source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby"]
-	});
 
 	// Edit in Place, para las tablas. 
 	// Elimina los mensajes de error de los formularios. 
@@ -238,8 +223,13 @@ $(document).ready(function(){
 	});
 
     // Función de autocompletar para los formularios
-    $("#institucion").autocomplete({
-        source: "/ajax/autocompletar/instituciones",
-        minLength: 3,
-    });
+ 	/*
+    $("#institucion").autocomplete("/ajax/autocompletar/instituciones", {
+		minChars: 3,
+		max: 12,
+		autoFill: true,
+		mustMatch: true,
+		matchContains: false,
+        scroll: false,
+    }); */
 });

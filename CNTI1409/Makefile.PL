@@ -18,6 +18,7 @@ requires 'Catalyst::Controller::HTML::FormFu';
 
 requires 'HTML::FormFu::Model::DBIC'; 
 requires 'DBD::Pg';# Este módulo requiere del paquete de Debian libpq-dev, aptitude install libpq-dev
+requires 'DateTime::Format::Pg';
 test_requires 'Test::More' => '0.88';
 catalyst;
 

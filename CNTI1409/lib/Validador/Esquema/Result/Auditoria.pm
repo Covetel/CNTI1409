@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x9723938)
+  default_value: SCALAR(0xa387748)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -64,7 +64,7 @@ Almacena el nombre del portal a auditar
 
   data_type: date
   default_value: undef
-  is_nullable: 0
+  is_nullable: 1
 
 Fecha de inicio de la auditoria
 
@@ -76,19 +76,20 @@ Fecha de inicio de la auditoria
 
 Fecha de finalizacion de la auditoria, si este campo contiene un dato se da la auditoria como cerrada
 
-=head2 url
-
-  data_type: text
-  default_value: undef
-  is_nullable: 0
-
-Almacena el listado de las url a auditar en un portal
-
 =head2 fechacreacion
 
   data_type: date
   default_value: undef
   is_nullable: 0
+
+=head2 url
+
+  data_type: character varying[]
+  default_value: undef
+  is_nullable: 1
+  size: 1000
+
+Fecha de creacion de la audioria
 
 =cut
 
@@ -122,13 +123,18 @@ __PACKAGE__->add_columns(
     size => 100,
   },
   "fechaini",
-  { data_type => "date", default_value => undef, is_nullable => 0 },
+  { data_type => "date", default_value => undef, is_nullable => 1 },
   "fechafin",
   { data_type => "date", default_value => undef, is_nullable => 1 },
-  "url",
-  { data_type => "text", default_value => undef, is_nullable => 0 },
   "fechacreacion",
   { data_type => "date", default_value => undef, is_nullable => 0 },
+  "url",
+  {
+    data_type => "character varying[]",
+    default_value => undef,
+    is_nullable => 1,
+    size => 1000,
+  },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -179,8 +185,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-07 07:29:56
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mxEoyl72ju0ELN+sliA/pw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-08 09:03:31
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OPtJO+V7D3f7B1A+QYW8sQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

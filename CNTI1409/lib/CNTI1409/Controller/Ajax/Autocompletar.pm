@@ -38,17 +38,17 @@ sub index :Path :Args(0) {
 
 sub instituciones_GET {
 	my ($self, $c) = @_;
-    my $requ = $c->req->params->{term};
-	my $rs = $c->model('DB::Institucion')->search({ nombre => { -like => "%$requ%" } });
+    my $requ = $c->req->params->{q};
+	my $rs = $c->model('DB::Institucion')->search({ 'lower(nombre)' => { -like => "$requ%" } });
 	my %dato;
-    $dato{data} = [
+    $dato{item} = [
        map {
            [
                $_->id,        $_->nombre,
            ]
          } $rs->all
     ];
-	$self->status_ok($c, entity => \%dato);
+    $self->status_ok($c, entity => \%dato);
 }
 
 =head1 AUTHOR
