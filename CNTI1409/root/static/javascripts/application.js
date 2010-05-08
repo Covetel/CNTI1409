@@ -28,7 +28,7 @@ $(document).ready(function(){
 	$("#idinstitucion").autocomplete({
 		source: '/ajax/autocompletar/instituciones',
 		minLength: 3,
-	})	
+	})
 	
 	$("#idev").autocomplete({
 		source: '/ajax/autocompletar/entidades',
@@ -236,14 +236,4 @@ $(document).ready(function(){
 		},
 	});
 
-    // Función de autocompletar para los formularios
- 	/*
-    $("#institucion").autocomplete("/ajax/autocompletar/instituciones", {
-		minChars: 3,
-		max: 12,
-		autoFill: true,
-		mustMatch: true,
-		matchContains: false,
-        scroll: false,
-    }); */
 });
