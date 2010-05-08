@@ -75,6 +75,17 @@ sub crear : Local : FormConfig {
     $c->stash->{template} = 'auditoria/crear.tt2';
 }
 
+=head2 listar
+
+Carga la template con la tabla HTML preparada. 
+
+=cut 
+
+sub reporte : Local {
+    my ( $self, $c ) = @_;
+	$c->stash->{template} = 'auditoria/listar.tt2';	
+} 
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>

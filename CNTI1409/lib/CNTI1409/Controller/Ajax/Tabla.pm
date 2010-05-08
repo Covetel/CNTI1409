@@ -129,6 +129,25 @@ sub entidades_DELETE {
     $self->status_ok($c, entity => { valor => 1,});
 }
 
+
+sub auditorias : Local : ActionClass('REST') {}
+
+sub auditorias_GET {
+	my ($self, $c) = @_;
+	my $rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
+	my %data;
+    $data{aaData} = [
+       map {
+           [
+               $_->id,        $_->idev->nombre,   $_->idinstitucion->nombre,
+               $_->portal,    $_->fechacreacion,  $_->fechaini,
+               $_->fechafin,
+           ]
+         } $rs->all
+    ];
+	$self->status_ok($c, entity => \%data);
+}
+
 =head1 AUTHOR
 
 ,,,
