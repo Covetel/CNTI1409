@@ -25,6 +25,7 @@ elements:
           attributes:
               title: 'Por favor ingrese correctamente el nombre de la institución, o las primeras 4 letras del nombre, y seleccione el la institución que desea, de la lista de instituciones que se desplegará bajo el campo.' 
               class: input_text
+              id: institucion
           constraints:
             - Required
             - type: Length
@@ -47,6 +48,7 @@ elements:
           attributes:
               title:  'Por favor ingrese correctamente el nombre de la entidad verificadora, o las primeras 4 letras del nombre, y seleccione el la entidad que desea, de la lista de entidades que se desplegará bajo el campo.' 
               class: input_text
+              id: entidad
           constraints:
             - Required
             - type: Length

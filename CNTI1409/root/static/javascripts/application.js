@@ -219,4 +219,10 @@ $(document).ready(function(){
                 }); // Fin de click
 		},
 	});
+
+    // Función de autocompletar para los formularios
+    $("#institucion").autocomplete({
+        source: "/ajax/autocompletar/instituciones",
+        minLength: 3,
+    });
 });
