@@ -213,4 +213,63 @@ sub run {
     $self->ok( $errors == 0 );
 }
 
+package CNTI::Validator::Test::JS;
+use Moose;
+use HTML::TreeBuilder;
+use File::MMagic;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    my $mm   = File::MMagic->new();
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $resp->content );
+    my @scripts   = $tree->find('script');
+    my $errors    = 0;
+    my $warnings  = 0;
+    my $lang_flag = 0;
+    $DB::single = 1;
+    for my $script (@scripts) {
+
+        if ( my $lang = $script->attr('language') ) {
+            $lang_flag = 1;
+            $warnings++;
+            $self->event_log( warning => "Atributo obsoleto 'language'" );
+            unless ( $lang =~ /^javascript$/i ) {
+                $errors++;
+                $self->event_log( error => "Lenguaje ilegal: $lang" );
+            }
+        }
+        if ( my $lang = $script->attr('type') ) {
+            $lang_flag = 2;
+            if ( $lang =~ m!text/javascript(?:;(\S+))?! ) {
+            }
+            else {
+                $errors++;
+                $self->event_log( error => "Lenguaje ilegal: $lang" );
+            }
+        }
+        unless ($lang_flag) {
+            $warnings++;
+            $self->event_log( warning => "No se especifica el lenguaje" );
+        }
+        if ( $script->attr('src') ) {
+            if ( $script->attr('src') =~ /\.js$/ ) {
+                $errors++;
+                $self->event_log( error => "El archivo externo no tiene extension .js" );
+            }
+        }
+        else {
+            $errors++;
+            $self->event_log( error => "Script en línea" );
+        }
+    }
+    $self->ok( $errors == 0 );
+}
+
 1;
