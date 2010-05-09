@@ -256,8 +256,15 @@ $(document).ready(function(){
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
-            $("#tabla_auditorias tbody").click(function(event){
-                $(event.target.parentNode).addClass('row_selected');
+			$("#tabla_auditorias tbody tr").css('cursor','pointer');
+			// En el click de la fila, el browser es dirigido al método /auditoria/resumen/id
+            $("#tabla_auditorias tbody tr").click(function(event){
+				var aPos 	= oAuditorias.fnGetPosition(this);
+				var aData 	= oAuditorias.fnGetData(this);
+				var id 		= aData[0];
+				var u 		= "/auditoria/resumen/" + id;
+				// Linea probada en Firefox, Chrome, Epiphany
+				window.location.href = u;
             });
         },
 	});

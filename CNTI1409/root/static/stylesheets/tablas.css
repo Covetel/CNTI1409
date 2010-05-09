@@ -3,6 +3,18 @@ Archivo:        tablas.css
 Autor:          Walter Vargas <walter@covetel.com.ve>, Juan Mesa <juan@covetel.com.ve>
 Descripción:    Estilo para los controles tipo tablas.
 */
+table {
+ width: 100%;
+}
+
+pre { margin: 0; padding: 0;}
+
+label {vertical-align: middle;}
+
+table td {
+ padding: 2px;
+ margin: 2px;
+}
 
 table.dataTable {
 

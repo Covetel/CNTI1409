@@ -1,6 +1,6 @@
 [% titulo = 'Auditorías Registradas' %] 
 <div class="tabla">
-<table id="tabla_auditorias" class="dataTable" cellpadding="2" cellspaccing="2" border="0" width="100%"> 
+<table id="tabla_auditorias" class="dataTable" border="0"> 
 	<thead> 
 	<tr>
 		<th>ID</th>
