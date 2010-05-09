@@ -107,9 +107,9 @@ sub run {
     my $content;
     my @errors;
     my @warnings;
-    if ( $ct_charset ) {
+    if ($ct_charset) {
         if ( $ct_charset =~ /^UTF-?8$/ ) {
-            $content = eval { decode("utf8", $resp->content, Encode::FB_CROAK) };
+            $content = eval { decode( "utf8", $resp->content, Encode::FB_CROAK ) };
             push @errors, $@ if $@;
         }
         else {
@@ -122,7 +122,7 @@ sub run {
     $content ||= $resp->content;
 
     my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $content );
+    $tree->parse($content);
     my $node = $tree->find('html');
     unless ($node) {
         $self->event_log( 'error', 'No es HTML' );
@@ -133,8 +133,8 @@ sub run {
         $self->event_log( 'error', 'No tiene HEAD' );
         return $self->ok(0);
     }
-    my @metas = $node->look_down(_tag => 'meta', 'http-equiv' => qr/^Content-Type$/i );
-    for my $m ( @metas ) {
+    my @metas = $node->look_down( _tag => 'meta', 'http-equiv' => qr/^Content-Type$/i );
+    for my $m (@metas) {
         my $c = $m->attr('content');
         if ( $c =~ /^([^;]+)(?:;\s*charset=(\S+))?/ ) {
             push @errors, "HTTP charset '$ct_charset' does not match META charset '$2'"
@@ -142,7 +142,7 @@ sub run {
         }
     }
     $self->event_log( warnings => $_ ) for @warnings;
-    if ( @errors ) {
+    if (@errors) {
         $self->event_log( error => $_ ) for @errors;
         $self->ok(0);
     }
@@ -164,15 +164,15 @@ sub run {
     $cache->get( $self->job->site . $self->url->path );
     my $resp = $cache->response;
 
-    my $mm = File::MMagic->new();
+    my $mm   = File::MMagic->new();
     my $tree = HTML::TreeBuilder->new;
     $tree->parse( $resp->content );
     my @images = $tree->find('img');
     my $errors = 0;
-    for my $img ( @images ) {
+    for my $img (@images) {
         my $src = $img->attr('src');
         my $uri = URI->new_abs( $src, $self->job->site . $self->url->path );
-        $cache->get( $uri );
+        $cache->get($uri);
         $resp = $cache->response;
         my $type = $mm->checktype_contents( $resp->content );
         unless ( $type eq 'image/png' ) {
@@ -180,7 +180,36 @@ sub run {
             $errors++;
         }
     }
+    $self->ok( $errors == 0 );
+}
+
+package CNTI::Validator::Test::Alt;
+use Moose;
+use HTML::TreeBuilder;
+use File::MMagic;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    my $mm   = File::MMagic->new();
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $resp->content );
+    my @images   = $tree->find('img');
+    my $errors   = 0;
+    my $warnings = 0;
     $DB::single = 1;
+    for my $img (@images) {
+        my $alt = $img->attr('alt');
+        if ( defined $alt ) { $warnings++ unless $alt }
+        else { $errors++ }
+    }
+    $self->event_log( error   => "Hay $errors imagenes sin atributo ALT" )          if $errors;
+    $self->event_log( warning => "Hay $warnings imagenes con atributo ALT vacío" ) if $warnings;
     $self->ok( $errors == 0 );
 }
 
