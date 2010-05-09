@@ -2,7 +2,12 @@ package CNTI::Validator::Test;
 use Moose;
 
 has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1 );
-has task => ( is => 'ro', isa => 'CNTI::Validator::Tests', required => 1, handles => { job => 'job', cache => 'cache' } );
+has task => (
+    is       => 'ro',
+    isa      => 'CNTI::Validator::Tests',
+    required => 1,
+    handles  => { job => 'job', cache => 'cache' }
+);
 has events => (
     is      => 'ro',
     isa     => 'ArrayRef[HashRef]',
@@ -20,10 +25,10 @@ sub ok {
 }
 
 sub event_log {
-    my ($self, $class, $mesg, $data) = @_;
+    my ( $self, $class, $mesg, $data ) = @_;
     my $ev = { class => $class, message => $mesg };
     $ev->{'data'} = shift if $data;
-    $self->event_add( $ev );
+    $self->event_add($ev);
 }
 
 sub name {
@@ -42,7 +47,6 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self = shift;
     my $uri  = URI->new( $self->job->site );
-    $self->event_log('info', 'Un comentario banal');
     $self->ok( $uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
 }
 
@@ -54,46 +58,98 @@ use HTML::TreeBuilder;
 extends 'CNTI::Validator::Test';
 
 sub run {
-    my $self = shift;
+    my $self  = shift;
     my $cache = $self->cache;
     $cache->get( $self->job->site . $self->url->path );
-    
+
     my $tree = HTML::TreeBuilder->new;
     $tree->parse( $cache->response->content );
     my $node = $tree->find('html');
-    unless ( $node ) {
-        $self->event_log('error', 'No es HTML');
+    unless ($node) {
+        $self->event_log( 'error', 'No es HTML' );
         return $self->ok(0);
     }
     $node = $node->find('head');
-    unless ( $node ) {
-        $self->event_log('error', 'No tiene HEAD');
+    unless ($node) {
+        $self->event_log( 'error', 'No tiene HEAD' );
         return $self->ok(0);
     }
     $node = $node->find('title');
-    unless ( $node ) {
-        $self->event_log('error', 'No tiene TITLE');
+    unless ($node) {
+        $self->event_log( 'error', 'No tiene TITLE' );
         return $self->ok(0);
     }
     my @cont = $node->content_list;
-    if ( @cont == 1 and ! ref $cont[0] ) {
+    if ( @cont == 1 and !ref $cont[0] ) {
         return $self->ok(1);
     }
     else {
-        $self->event_log('error', 'TITLE mal formado: ' . $node->as_HTML);
+        $self->event_log( 'error', 'TITLE mal formado: ' . $node->as_HTML );
         return $self->ok(0);
     }
+}
 
-# Nunca se llega aqui XXX    
-    my $xp = CNTI::Validator::LibXML->new( xml => $tree->as_XML, options => {recover=>1} );
-    my $title = $xp->xpc->findvalue('/html/head/title', $xp->doc);
-    if ( $title ) {
-        $self->ok( 1, "TITLE" );
+package CNTI::Validator::Test::UTF8;
+use Moose;
+use CNTI::Validator::LibXML;
+use HTML::TreeBuilder;
+use Encode;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    $DB::single = 1;
+    my $ct_charset = $resp->content_type_charset;
+    my $content;
+    my @errors;
+    my @warnings;
+    if ( $ct_charset ) {
+        if ( $ct_charset =~ /^UTF-?8$/ ) {
+            $content = eval { decode("utf8", $resp->content, Encode::FB_CROAK) };
+            push @errors, $@ if $@;
+        }
+        else {
+            push @warnings, "HTTP charset: $ct_charset";
+        }
     }
     else {
-        $self->ok( 1, "No hay TITLE" );
+        push @warnings, "No HTTP Charset";
     }
-    return;
+    $content ||= $resp->content;
+
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $content );
+    my $node = $tree->find('html');
+    unless ($node) {
+        $self->event_log( 'error', 'No es HTML' );
+        return $self->ok(0);
+    }
+    $node = $node->find('head');
+    unless ($node) {
+        $self->event_log( 'error', 'No tiene HEAD' );
+        return $self->ok(0);
+    }
+    my @metas = $node->look_down(_tag => 'meta', 'http-equiv' => qr/^Content-Type$/i );
+    for my $m ( @metas ) {
+        my $c = $m->attr('content');
+        if ( $c =~ /^([^;]+)(?:;\s*charset=(\S+))?/ ) {
+            push @errors, "HTTP charset '$ct_charset' does not match META charset '$2'"
+                if lc($ct_charset) ne lc($2);
+        }
+    }
+    $self->event_log( warnings => $_ ) for @warnings;
+    if ( @errors ) {
+        $self->event_log( error => $_ ) for @errors;
+        $self->ok(0);
+    }
+    else {
+        $self->ok(1);
+    }
 }
 
 1;

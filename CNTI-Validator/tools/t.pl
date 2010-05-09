@@ -29,6 +29,12 @@ while ( my $u = $it->() ) {
     printf "    %s\n", $u->path;
 }
 
+while ( $j->state ne "done" ) { 
+    printf "Wait for termination (%s)\n", $j->state;
+    $j->refresh;
+    #sleep(1);
+}
+
 use YAML;
 
 print YAML::Dump $j->as_hash;
@@ -36,4 +42,6 @@ print $j->as_json;
 
 #CNTI::Validator::Jobs->cancel_job( $j->id );
 #CNTI::Validator::Jobs->delete_job( $j->id );
+$j->refresh;
+print YAML::Dump $j->as_hash;
 print "done\n";
