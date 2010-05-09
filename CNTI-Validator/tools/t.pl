@@ -32,7 +32,7 @@ while ( my $u = $it->() ) {
 while ( $j->state ne "done" ) { 
     printf "Wait for termination (%s)\n", $j->state;
     $j->refresh;
-    #sleep(1);
+    sleep(1);
 }
 
 use YAML;

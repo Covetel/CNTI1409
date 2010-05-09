@@ -7,7 +7,7 @@ use CNTI::Validator::Test;
 has job   => ( is => 'ro', isa => 'CNTI::Validator::Monitor::Job', required => 1 );
 has cache => ( is => 'ro', isa => 'WWW::Mechanize::Cached',        required => 1 );
 
-my @tests = qw(Domain Title UTF8);
+my @tests = qw(Domain Title UTF8 Img);
 
 around BUILDARGS => sub {
     my ( $orig, $class, $job ) = @_;

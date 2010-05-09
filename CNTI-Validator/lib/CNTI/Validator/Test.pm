@@ -103,7 +103,6 @@ sub run {
     $cache->get( $self->job->site . $self->url->path );
     my $resp = $cache->response;
 
-    $DB::single = 1;
     my $ct_charset = $resp->content_type_charset;
     my $content;
     my @errors;
@@ -150,6 +149,39 @@ sub run {
     else {
         $self->ok(1);
     }
+}
+
+package CNTI::Validator::Test::Img;
+use Moose;
+use HTML::TreeBuilder;
+use File::MMagic;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    my $mm = File::MMagic->new();
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $resp->content );
+    my @images = $tree->find('img');
+    my $errors = 0;
+    for my $img ( @images ) {
+        my $src = $img->attr('src');
+        my $uri = URI->new_abs( $src, $self->job->site . $self->url->path );
+        $cache->get( $uri );
+        $resp = $cache->response;
+        my $type = $mm->checktype_contents( $resp->content );
+        unless ( $type eq 'image/png' ) {
+            $self->event_log( error => "Tipo de imagen ilegal $type" );
+            $errors++;
+        }
+    }
+    $DB::single = 1;
+    $self->ok( $errors == 0 );
 }
 
 1;
