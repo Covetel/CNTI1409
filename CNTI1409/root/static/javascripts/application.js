@@ -34,7 +34,7 @@ $(document).ready(function(){
 	$("#idev").autocomplete({
 		source: '/ajax/autocompletar/entidades',
 		minLength: 3,
-	})	
+	})
 
 
 	// Edit in Place, para las tablas. 
