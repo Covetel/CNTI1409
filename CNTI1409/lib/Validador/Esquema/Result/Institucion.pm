@@ -23,7 +23,7 @@ __PACKAGE__->table("institucion");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xa4ab058)
+  default_value: SCALAR(0x96f7438)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -91,7 +91,7 @@ nombre de la persona contacto en la institucion
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0xa4b56a0)
+  default_value: SCALAR(0x96feb30)
   is_nullable: 0
 
 =cut
@@ -176,8 +176,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-08 09:03:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uW0oq/HmaSB8hU/si0LCrg
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-09 22:20:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CVDF1XwT+DoRVGJW6f/cWA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

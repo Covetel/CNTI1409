@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0xa387748)
+  default_value: SCALAR(0x95d59b0)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -91,6 +91,13 @@ Fecha de finalizacion de la auditoria, si este campo contiene un dato se da la a
 
 Fecha de creacion de la audioria
 
+=head2 estado
+
+  data_type: character
+  default_value: p
+  is_nullable: 0
+  size: 1
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -135,6 +142,8 @@ __PACKAGE__->add_columns(
     is_nullable => 1,
     size => 1000,
   },
+  "estado",
+  { data_type => "character", default_value => "p", is_nullable => 0, size => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -185,8 +194,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-08 09:03:31
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OPtJO+V7D3f7B1A+QYW8sQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-09 22:20:13
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wwsKeUtwA/MAy8rMmrlRqA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
