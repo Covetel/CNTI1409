@@ -1,18 +1,40 @@
 package CNTI::Validator::Tests;
+use Moose;
 
-my @tests = qw();
+use WWW::Mechanize::Cached;
+use CNTI::Validator::Test;
+
+has job => ( is => 'ro', isa => 'CNTI::Validator::Monitor::Job', required => 1 );
+has cache => ( is => 'ro', isa => 'WWW::Mechanize::Cached', required => 1 );
+has stash => ( is => 'rw', isa => 'HashRef', default => sub { {} } );
+
+my @tests = qw(Domain Title);
+
+around BUILDARGS => sub {
+    my ($orig, $class, $job) = @_;
+    my $cache = WWW::Mechanize::Cached->new;
+    $cache->agent_alias("Linux Mozilla");
+    { job => $job, cache => $cache };
+};
 
 sub run {
     my $self = shift;
-    my ($job, $url) = @_;
-    $self->run_test( $_, $job, $url ) for @tests;
+    my $ch = $self->job->children;
+    return unless $ch;
+
+    $DB::single = 1;
+    while ( my $url = $ch->() ) {
+        $url->set_state( 'run' );
+        $self->run_test( $_, $url ) for @tests;
+        $url->set_state( 'done' );
+    }    
 }
 
 sub run_test {
     my $self = shift;
-    my ($name, $job, $url) = @_;
+    my ($name, $url) = @_;
     my $class = "CNTI::Validator::Test::$name";
-    $class->new( $job, $url )->new;
+    $class->new( task => $self, url => $url )->run;
 }
 
 1;

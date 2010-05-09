@@ -45,7 +45,16 @@ sub new_job {
             } sort keys %sample
     ];
 
-    CNTI::Validator::Monitor::Job->hash_new( \%record );
+    my $job = CNTI::Validator::Monitor::Job->hash_new( \%record );
+    if ( my $pid = fork ) {
+        # Nothing
+    }
+    else {
+        # Child process
+        $self->validate;
+        exit 0;
+    }
+    return $job;
 }
 
 sub find_job {
@@ -105,7 +114,21 @@ sub delete_job {
 sub get_next_new_job {
     my $self = shift;
     my $it = $self->search_jobs( { state => "new" }, { order_by => 'ctime' } );
-    return $it->();
+    return $it && $it->();
+}
+
+use CNTI::Validator::Tests;
+
+sub validate {
+    my $self = shift;
+
+    my $job = $self->get_next_new_job;
+    return unless $job;
+    
+    $job->set_state('run');
+    my $test = CNTI::Validator::Tests->new( $job );
+    $test->run;
+    $job->set_state('done');
 }
 
 1;

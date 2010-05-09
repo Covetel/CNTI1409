@@ -35,7 +35,15 @@ sub add_children {
     my $rec    = $self->_rec;
     my $childc = $self->child_class || die ref($self) . " does not allow children";
     my $childt = $childc->model_class->table;
-    $rec->create_related( $childt, $_ ) for @_;
+    map { $childc->new( $rec->create_related( $childt, $_ ) ) } @_;
+}
+
+sub add_child {
+    my $self   = shift;
+    my $rec    = $self->_rec;
+    my $childc = $self->child_class || die ref($self) . " does not allow children";
+    my $childt = $childc->model_class->table;
+    $childc->new( $rec->create_related( $childt, shift ) );
 }
 
 sub parent {
@@ -82,7 +90,11 @@ sub hash_new {
     }
     my $rec = CNTI::Validator::Schema->resultset( $self->model_class )->create($data);
     my $obj = $self->new($rec);
-    $obj->add_children(@$children);
+    my $childc = $self->child_class || die ref($self) . " does not allow children";
+    for my $ch ( @$children) {
+        $ch->{'pid'} = $obj->id;
+        $childc->hash_new( $ch );
+    }
     return $obj;
 }
 

@@ -8,9 +8,10 @@ my @data = CNTI::Validator::Schema->resultset('Jobs')->all;
 my $job = CNTI::Validator::Jobs->new_job(
     site => "http://www.mppef.gob.ve",
     sample => [
-        "/nosotros",
-        "/ellos",
-        "/vosotros",
+        "/inicio/notas-de-prensa",
+        "/inicio/publicaciones",
+        "/inicio/info.-estadistica",
+        "/inicio/concursos-abiertos",
         ],
     callback => "http://validador.gob.ve/mi-callback",
     data => { algo => 1, mas => 2 }
@@ -33,6 +34,6 @@ use YAML;
 print YAML::Dump $j->as_hash;
 print $j->as_json;
 
-CNTI::Validator::Jobs->cancel_job( $j->id );
-CNTI::Validator::Jobs->delete_job( $j->id );
+#CNTI::Validator::Jobs->cancel_job( $j->id );
+#CNTI::Validator::Jobs->delete_job( $j->id );
 print "done\n";
