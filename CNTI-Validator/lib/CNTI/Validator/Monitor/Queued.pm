@@ -11,7 +11,7 @@ sub set_state {
     my $self = shift;
     my $args = { state => shift };
     $args->{'proc'} = shift || $$;
-    $args->{'mtime'} = strftime( "%F %T", localtime time ) };
+    $args->{'mtime'} = strftime( "%F %T", localtime time );
     $self->_rec->update( $args );
     $self->refresh;
 }
