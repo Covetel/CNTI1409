@@ -26,3 +26,11 @@ cursor: pointer;
 td.tEliminar {
     width: 20px;
 }
+
+tr.even.row_selected td {
+    background-color: #9FAFD1;
+}
+
+tr.odd.row_selected td {
+    background-color: #9FAFD1;
+}

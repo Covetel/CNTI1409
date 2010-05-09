@@ -133,6 +133,7 @@ sub entidades_DELETE {
 sub auditorias : Local : ActionClass('REST') {}
 
 sub auditorias_GET {
+    use DateTime;
 	my ($self, $c) = @_;
 	my $rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
 	my %data;
@@ -140,11 +141,14 @@ sub auditorias_GET {
        map {
            [
                $_->id,        $_->idev->nombre,   $_->idinstitucion->nombre,
-               $_->portal,    $_->fechacreacion,  $_->fechaini,
-               $_->fechafin,
+               $_->portal,    $_->fechacreacion->dmy(),  $_->fechaini ? $_->fechaini->dmy() : "N/A",
+               $_->fechafin ? $_->fechafin-dmy() : "N/A",
            ]
          } $rs->all
     ];
+    use Data::Dumper;
+    my $dump = Dumper(%data);
+    $c->log->debug($dump);
 	$self->status_ok($c, entity => \%data);
 }
 

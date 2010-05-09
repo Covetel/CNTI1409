@@ -5,6 +5,7 @@
 // Variables globales
 var oTable;
 var oEntidades;
+var oAuditoria;
 var giRedraw = false;
 
 // Función que elimina una columna en la tabla
@@ -139,7 +140,7 @@ $(document).ready(function(){
      return value;
     }
 
-	// Maneja las propiedades de la tabla instituciones
+    // Maneja las propiedades de la tabla instituciones
 	oTable = $("#tabla_instituciones").dataTable({
 		"sAjaxSource": '/ajax/tabla/instituciones',
         "bAutoWidth": false,
@@ -234,6 +235,31 @@ $(document).ready(function(){
                     }
                 }); // Fin de click
 		},
+	});
+	
+    // Maneja las propiedades de la tabla auditorias
+	oAuditorias = $("#tabla_auditorias").dataTable({
+		"sAjaxSource": '/ajax/tabla/auditorias',
+        "bAutoWidth": false,
+		"bProcessing": false,
+		"bJQueryUI": true,
+		"aoColumns": [
+						{"bSearchable": false, "bVisible": false},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+                    ], 
+ 		"oLanguage": {
+            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+        },
+		"fnDrawCallback": function () {
+            $("#tabla_auditorias tbody").click(function(event){
+                $(event.target.parentNode).addClass('row_selected');
+            });
+        },
 	});
 
 });
