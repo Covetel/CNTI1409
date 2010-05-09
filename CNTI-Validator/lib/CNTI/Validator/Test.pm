@@ -255,11 +255,41 @@ sub run {
             }
         }
         unless ($lang_flag) {
-            $warnings++;
-            $self->event_log( warning => "No se especifica el lenguaje" );
+            $errors++;
+            $self->event_log( error => "No se especifica el lenguaje" );
         }
+    }
+    $self->ok( $errors == 0 );
+}
+
+package CNTI::Validator::Test::JS_inc;
+use Moose;
+use HTML::TreeBuilder;
+use File::MMagic;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    my $mm   = File::MMagic->new();
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $resp->content );
+    my @scripts  = $tree->find('script');
+    my $errors   = 0;
+    my $warnings = 0;
+    my $count    = 0;
+    $DB::single = 1;
+    for my $script (@scripts) {
+
         if ( $script->attr('src') ) {
             if ( $script->attr('src') =~ /\.js$/ ) {
+                $count++;
+            }
+            else {
                 $errors++;
                 $self->event_log( error => "El archivo externo no tiene extension .js" );
             }
@@ -268,6 +298,10 @@ sub run {
             $errors++;
             $self->event_log( error => "Script en línea" );
         }
+    }
+    unless ($count) {
+        $errors++;
+        $self->event_log( error => "No se usan archivos con extensión .js" );
     }
     $self->ok( $errors == 0 );
 }
