@@ -62,7 +62,11 @@ sub search_jobs {
     my $self = shift;
 
     my $rs = CNTI::Validator::Schema->resultset('Jobs')->search(@_);
-    return sub { CNTI::Validator::Monitor::Job->new( $rs->next ) };
+    return sub {
+        my $next = $rs->next;
+        return undef unless $next;
+        CNTI::Validator::Monitor::Job->new($next);
+    };
 }
 
 sub cancel_job {
