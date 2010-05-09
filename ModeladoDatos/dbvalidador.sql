@@ -33,7 +33,8 @@ CREATE TABLE auditoria (
     fechaini date,
     fechafin date,
     fechacreacion date NOT NULL,
-    url character varying(1000)[]
+    url character varying(1000)[],
+    estado character(1) DEFAULT 'p'::bpchar NOT NULL
 );
 
 
@@ -103,6 +104,13 @@ COMMENT ON COLUMN auditoria.url IS 'Almacena el listado de las url a auditar en 
 
 
 --
+-- Name: COLUMN auditoria.estado; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN auditoria.estado IS 'Campo que determina el estado de una auditoria, los posibles valores son: p (pendiente), a (abierto), c (cerrado)';
+
+
+--
 -- Name: auditoria_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -126,7 +134,7 @@ ALTER SEQUENCE auditoria_id_seq OWNED BY auditoria.id;
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoria_id_seq', 4, true);
+SELECT pg_catalog.setval('auditoria_id_seq', 7, true);
 
 
 --
@@ -522,7 +530,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 9, true);
+SELECT pg_catalog.setval('institucion_id_seq', 11, true);
 
 
 --
@@ -571,8 +579,11 @@ ALTER TABLE institucion ALTER COLUMN id SET DEFAULT nextval('institucion_id_seq'
 -- Data for Name: auditoria; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url) FROM stdin;
-4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}
+COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado) FROM stdin;
+4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
+5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
+6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
+7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
 \.
 
 
@@ -615,6 +626,7 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 8	Juan Technology	v-14951432	juan@covetel.com.ve	0412-9889285	Juan Mesa	Cordero Edo. Tachira	http://blogs.covetel.com.ve/overdrive	f
 9	Ministerio de Cosas	G-00000000	ministro@cosas.gob.ve	555-555.5555	El Ministro	Por estas calles	http://www.cosas.gob.ve	t
 5	Insitucion	G-432123	info@institucion.com	2292092	Walter	Por alli	www.notiene.com	f
+11	Ministerio del Ambiente	G-432455991	info@ambiente.gob.ve	0212-333.3333	Otro ministro	Caracas, Distrito Federal	http://www.ambiente.gob.ve	t
 \.
 
 
