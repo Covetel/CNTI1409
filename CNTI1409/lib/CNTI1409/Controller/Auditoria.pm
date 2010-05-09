@@ -2,6 +2,7 @@ package CNTI1409::Controller::Auditoria;
 use Moose;
 use namespace::autoclean;
 use DateTime;
+use utf8;
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -75,7 +76,7 @@ sub crear : Local : FormConfig {
     $c->stash->{template} = 'auditoria/crear.tt2';
 }
 
-=head2 listar
+=head2 reporte
 
 Carga la template con la tabla HTML preparada. 
 
@@ -86,9 +87,37 @@ sub reporte : Local {
 	$c->stash->{template} = 'auditoria/listar.tt2';	
 } 
 
+=head2 resumen
+
+Presenta una vista resumen de la auditoria. 
+En esta vista resumen, se pueden ver los datos: 
+- Estado de la auditoria: Pendiente, Abierta, Cerrada
+- Fechas 
+- Muestra
+- Institución.
+- Entidad Verificadora Responsable.
+
+=cut 
+
+sub resumen : Local {
+    my ( $self, $c, $id ) = @_;
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
+	my $muestra = join '<br />', @{$auditoria->url};
+	$c->stash->{id} = $id;
+	$c->stash->{titulo} = "Resumen de la Auditoria 000$id";
+	$c->stash->{labelfecha} = 'Fecha de Creación';
+	$c->stash->{fecha} = $auditoria->fechacreacion->dmy();
+	$c->stash->{institucion} = $auditoria->idinstitucion->nombre;
+	$c->stash->{entidad} = $auditoria->idev->nombre;
+	$c->stash->{muestra} = $muestra;
+	$c->stash->{template} = 'auditoria/resumen.tt2';	
+} 
+
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>
+Juan Manuel Mesa  <juan@covetel.com.ve>
 
 =head1 LICENSE
 
