@@ -31,7 +31,8 @@ elements:
             - type: Length
               min: 4
               max: 250
-          validator: 'CNTI1409::Existe::Institucion'
+#            - type: Callback
+ #             callback: 'CNTI1409::Existe::Institucion'
 
     - type: Fieldset
       name: seleccionar_entidad
