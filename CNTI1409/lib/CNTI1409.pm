@@ -18,6 +18,7 @@ use Catalyst qw/
     Static::Simple
 	Unicode::Encoding
 	StackTrace
+    Authentication
 /;
 
 extends 'Catalyst';
@@ -39,6 +40,30 @@ __PACKAGE__->config(
 	encoding => 'UTF-8',
 	# Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
+);
+
+__PACKAGE__->config( 'Plugin::Authentication' =>
+    {
+        default_realm => 'members',
+        realms => {
+            members => {
+                credential => {
+                    class => 'Password',
+                    password_field => 'password',
+                    password_type => 'clear'
+                },
+                store => {
+                    class => 'Minimal',
+                    users => {
+                        'auditor@dominio.com' => {
+                            password => "auditor",
+                            editor => 'yes',
+                        }
+                    }
+                }
+            }
+        }
+    }
 );
 
 # Start the application

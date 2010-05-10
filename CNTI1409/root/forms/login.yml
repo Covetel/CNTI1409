@@ -1,0 +1,71 @@
+action: /login
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: seleccionar_institucion
+      legend: Seleccionar Institución
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor ingrese su correo electrónico y contraseña para ingresar al sistema.'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: correo
+          label: Correo Electrónico
+          attributes:
+              title: 'Por favor ingrese el correo electrónico. Ejemplo: admin@cnti.gob.ve.'
+              class: input_text
+              id: correo
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+
+        - type: Password
+          name: password
+          label: Contraseña
+          attributes:
+              title:  'Por favor ingrese su contraseña' 
+              class: input_text
+              id: password
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 12
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Ingresar
+          attributes:
+              title: Presione este botón para crear la entidad auditoría.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape    

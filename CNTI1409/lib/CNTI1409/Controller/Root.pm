@@ -1,10 +1,11 @@
 package CNTI1409::Controller::Root;
 use Moose;
 use namespace::autoclean;
+use utf8;
 # Hola esto es un comentario
 # prueba2 bichito
 
-BEGIN { extends 'Catalyst::Controller' }
+BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -31,9 +32,7 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-	# Cargo la template.
-	# Esto es una prueba de git .
-	$c->stash->{template} = 'index.tt2';
+    $c->forward('login');
 }
 
 =head2 default
@@ -47,6 +46,46 @@ sub default :Path {
     $c->response->body( 'Page not found' );
     $c->response->status(404);
 }
+
+=head2 login
+
+Metodo utilizado para manejar el login
+
+=cut
+
+sub login : Local : FormConfig {
+    my ( $self, $c, $mensaje, $error ) = @_;
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
+    my $form = $c->stash->{form};
+    if ($form->submitted_and_valid) { 
+        if ( my $user = $form->param_value('correo') and my $password = $form->param_value('password') ) {
+            if ( $c->authenticate( { username => $user,
+                                     password => $password } ) ) {
+                $c->response->redirect($c->uri_for(
+                                            $c->controller('Auditoria')->action_for('reporte')));
+
+            } else {
+                $c->stash->{error} = 1;
+                $c->stash->{mensaje} = "Correo o Contraseña no válidos";
+            }
+        }
+	} elsif ($form->has_errors && $form->submitted) {
+        $c->stash->{error} = 1;
+        $c->stash->{mensaje} = "No ha ingresado todos los datos";
+    }
+	$c->stash->{template} = 'ingresar.tt2';
+}
+
+sub logout : Local {
+    my ($self, $c) = @_;
+
+    # Clear the user's state
+    $c->logout;
+
+    # Send the user to the starting point
+    $c->response->redirect($c->uri_for('/'));
+}
+
 
 =head2 end
 
