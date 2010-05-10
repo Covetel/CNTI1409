@@ -20,6 +20,14 @@ div#informacion_sesion ul,li {
  text-decoration: none;
 }
 
+div#loading img{
+ margin-bottom: -6px;
+}
+
+div#loading {
+ visibility: hidden;
+}
+
 div#is_enlaces {
 
 }

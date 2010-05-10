@@ -31,7 +31,12 @@ $("document").ready(function(){
 	// Monitoreo 
 	var intervalo;
 	function getDatos (){
-		$.getJSON('/ajax/monitor/auditoria/'+13,function(datos){
+		var id = $("table.resumen").attr('id');
+		if (id){
+			var fields = id.split('_');
+			id = fields[1];
+		}
+		$.getJSON('/ajax/monitor/auditoria/'+id,function(datos){
 			$("#total_done").html(datos.total_done);
 			$("#total_pendientes").html(datos.total_pendientes);
 			total_url = datos.total_url;

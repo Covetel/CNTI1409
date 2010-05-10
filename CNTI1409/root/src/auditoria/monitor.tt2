@@ -10,7 +10,7 @@
 	</div>
 	<div id="barra_progreso"> </div>
 	<div id="resumen_progreso"> 
-		<table class="resumen"> 
+		<table id="auditoria_[% id %]" class="resumen"> 
 			<tr> <td> Total URL </td> <td id="total_url">[% total_url %]</td> </tr>
 			<tr> <td> Total URL Pendientes  </td> <td id="total_pendientes">[% total_pendientes %]</td> </tr>
 			<tr> <td> Total URL Procesadas  </td> <td id="total_done">[% total_done %]</td> </tr>

@@ -8,6 +8,11 @@ var oEntidades;
 var oAuditoria;
 var giRedraw = false;
 
+
+
+
+
+
 // Función que elimina una columna en la tabla
 function delTr (tr, tabla) { 
     if (tabla == "institucion" ) {
@@ -24,6 +29,13 @@ function sugerencia (label, value){
 }
 
 $(document).ready(function(){
+$("#loading").ajaxStart(function(){
+   $(this).show();
+});
+
+$("#loading").ajaxStop(function(){
+   $(this).hide();
+});
 	$(".input_reset").click(function(){
 		$(".input_text").val('');
 		$("textarea").val('');

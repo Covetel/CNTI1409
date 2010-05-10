@@ -34,6 +34,9 @@
                 </div>
 
                 <div id="informacion_sesion">
+						<div id="loading"> 
+								<img src="/static/images/loading.gif" title="Cargando ..." />
+						</div>
                         <div id="is_usuario">
                                 <div id="is_usuario_uid">walter@covetel.com.ve</div>
                         </div>
