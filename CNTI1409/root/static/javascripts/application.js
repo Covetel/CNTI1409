@@ -25,6 +25,9 @@ function sugerencia (label, value){
 
 $(document).ready(function(){
 
+    // Mascaras de entrada
+    $("#phone").mask("(999) 999-9999");
+
 	// Autocomplete para el campo Institucion.
 	$("#idinstitucion").autocomplete({
 		source: '/ajax/autocompletar/instituciones',

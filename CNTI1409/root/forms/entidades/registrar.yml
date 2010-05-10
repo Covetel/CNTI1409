@@ -38,12 +38,14 @@ elements:
           attributes:
               title: 'Por favor indique correctamente el RIF de la entidad verificadora, Ejemplo: J-29532381-6'
               class: input_text
+              maxlength: 15
           constraints:
               - Required
 
         - type: Text
           name: telefono
           label: Teléfono
+          id: phone
           attributes:
               title: 'Por favor indique el número telefónico de la entidad verificadora, con su respectivo código de área'
               class: input_text

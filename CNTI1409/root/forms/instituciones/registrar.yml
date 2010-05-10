@@ -38,6 +38,7 @@ elements:
           attributes:
               title: 'Por favor indique correctamente el RIF de la institución, Ejemplo: G-00000008'
               class: input_text
+              maxlength: 15
           constraints:
             - Required
             - type: Length
@@ -48,6 +49,7 @@ elements:
         - type: Text
           name: telefono
           label: Teléfono
+          id: phone
           attributes:
               title: 'Por favor indique el número telefónico de la institución, con su respectivo código de área'
               class: input_text
