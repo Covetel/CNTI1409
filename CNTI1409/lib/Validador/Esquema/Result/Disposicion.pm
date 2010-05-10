@@ -23,7 +23,7 @@ __PACKAGE__->table("disposicion");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xa0da158)
+  default_value: SCALAR(0x9cff2a8)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -50,10 +50,19 @@ Descripcion de la disposicion
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0xa0ed448)
+  default_value: SCALAR(0x9d024e0)
   is_nullable: 0
 
 Campo booleano que representa si la disposicion esta habilitada o no, este campo es pensado en caracteristicas futuras de la aplicacion
+
+=head2 modulo
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 10
+
+Nombre del modulo que ejecuta el Job en el sistema
 
 =cut
 
@@ -81,6 +90,13 @@ __PACKAGE__->add_columns(
   },
   "habilitado",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
+  "modulo",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 1,
+    size => 10,
+  },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("idxnombredisp", ["nombre"]);
@@ -102,8 +118,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 00:53:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xjmlgoqwre29X6u/uBRaTA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 11:37:24
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:6Mhc55Jgdo8uperupB6VhQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
