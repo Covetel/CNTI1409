@@ -34,7 +34,7 @@ sub validate_value {
     return 1 if $idinstitucion;
 
     die HTML::FormFu::Exception::Validator->new({
-        message => 'La institución no existe, por favor verifique',
+        message => 'La Institución no está registrada, por favor dirigirse al menú "Instituciones → Registrar".',
     });
 }
 

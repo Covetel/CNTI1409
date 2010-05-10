@@ -34,7 +34,7 @@ sub validate_value {
     return 1 if $idev;
 
     die HTML::FormFu::Exception::Validator->new({
-        message => 'La entidad verificadora no existe, por favor verifique',
+        message => 'La Entidad Verificadora no está registrada, por favor dirigirse al menú "Entidades Verificadoras → Registrar"',
     });
 }
 

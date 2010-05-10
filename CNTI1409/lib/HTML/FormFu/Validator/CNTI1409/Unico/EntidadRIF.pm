@@ -34,7 +34,7 @@ sub validate_value {
     return 1 if !($idev);
 
     die HTML::FormFu::Exception::Validator->new({
-        message => ,'El RIF que esta tratando de ingresar ya existe'
+        message => 'El RIF que esta tratando de ingresar ya existe',
     });
 }
 
