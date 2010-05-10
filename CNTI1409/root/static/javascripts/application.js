@@ -29,6 +29,9 @@ $(document).ready(function(){
 		$("textarea").val('');
 	});
 
+    // Mascaras de entrada
+    $("#phone").mask("(999) 999-9999");
+
 	// Autocomplete para el campo Institucion.
 	$("#idinstitucion").autocomplete({
 		source: '/ajax/autocompletar/instituciones',
