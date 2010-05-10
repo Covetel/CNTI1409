@@ -47,7 +47,7 @@ sub instituciones_GET {
 	my ($self, $c) = @_;
     my $requ = lc($c->req->params->{term});
 	my $rs = $c->model('DB::Institucion')->search(
-                                                    { 'lower(nombre)' => { like => "$requ%" } },
+                                                    { 'lower(nombre)' => { like => "$requ%" }, habilitado => "true" },
                                                     { columns => [ qw / nombre / ] }
                                                 );
 	my @datos = map { { value => $_->nombre, label => $_->nombre } } $rs->all;
