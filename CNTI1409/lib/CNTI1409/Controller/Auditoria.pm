@@ -159,6 +159,9 @@ sub iniciar : Local {
 			my $protocolo 	= $1;
 			my $dominio 	= $2;
 			my $site 		= "$protocolo://$dominio";
+			map { $_ =~ s!(\w+)://([^/:]+)(:\d+)?/(.*)!/$4!;} @m;
+			use Data::Dumper;
+			$c->log->debug(Dumper(@m));
 			my $job = CNTI::Validator::Jobs->new_job(
 				site => $site, 
 				sample => \@m,	
@@ -236,6 +239,37 @@ sub monitor : Local {
 		$c->stash->{url_done} = \@url_done;
 	}
 }
+
+=head2 detalle 
+
+Detalle de auditoria 
+
+=cut 
+
+sub detalle : Local {
+	my ( $self, $c, $id, $disposicion ) = @_;
+	my $h;
+	my $hash;
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	if ($auditoria->id){
+		my $job_id = $auditoria->job;
+		my $job = CNTI::Validator::Jobs->find_job( $job_id );
+		$hash = $job->as_hash;
+		my $it = $job->children();
+		while ( my $u = $it->() ){
+			next if $u->path eq '/';
+			my $it2 = $u->children;
+           	while ( my $r = $it2->() ) {
+			 	next if $r->name ne $disposicion; 
+				push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass};
+           	}
+		}
+	}
+	use Data::Dumper;
+	$c->log->debug(Dumper($hash));
+	$c->stash->{template} = 'auditoria/detalle.tt2';
+}
+
 
 =head1 AUTHOR
 

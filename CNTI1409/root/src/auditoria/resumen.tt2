@@ -1,6 +1,6 @@
 <div id="resumen">
 	<h3> En la siguiente tabla, podrá ver el resumen de la auditoría 000[% id %] </h3>
-	<table class="resumen" id="resumen_auditoria_[% id %]">
+	<table class="resumen" id="auditoria_[% id %]">
 		<tr> <td> <label> Estado </label> </td> <td id="estado">[% estado %]</td> </tr> 
 		<tr> <td> <label> [% labelfecha %] </label> </td> <td> [% fecha %] </td> </tr> 
 		[% IF fechaini %]

@@ -17,3 +17,9 @@
 		</table>
 	</div> 
 </div>
+<div>
+	<button id="detalle_auditoria"> Detalle de la Auditoria </button>
+</div>
+<div>
+	<a href="/auditoria/resumen/[% id %]" title=""> Volver al resumen</a> 
+</div>

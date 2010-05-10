@@ -38,14 +38,12 @@
 								<img src="/static/images/loading.gif" title="Cargando ..." />
 						</div>
                         <div id="is_usuario">
-                                <div id="is_usuario_uid">walter@covetel.com.ve</div>
+                                <div id="is_usuario_uid"> auditor@dominio.com.ve </div>
                         </div>
                         <div id="is_enlaces">
                                 <ul>
-                                        <li><a href="http://www.cnti.gob.ve/">Configuraci&oacute;n de la Cuenta</a> | </li>
-                                        <li><a href="http://www.cnti.gob.ve/">Norma T&eacute;cnica</a> | </li>
+                                        <li><a href="http://www.minci.gob.ve/documentos/9/470822/?desc=nuevaimagengrafica.pdf">Manual Minci</a> | </li>
                                         <li><a href="http://www.w3.org/">W3C</a> | </li>
-                                        <li><a href="http://www.google.co.ve/">Ayuda</a> | </li>
                                         <li> <a href="/logout">Salir</a> </li>
                                 </ul>
                         </div>

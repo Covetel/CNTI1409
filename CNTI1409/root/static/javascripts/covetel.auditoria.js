@@ -14,7 +14,7 @@ $("document").ready(function(){
 		// Capturo el ID de la auditoria, que se encuentra en el atributo ID de la tabla. 
 		var id = $("table.resumen").attr('id');
 		var fields = id.split('_');
-		id = fields[2];
+		id = fields[1];
 		location.href = '/auditoria/monitor/'+id;
 	});
 
@@ -27,6 +27,17 @@ $("document").ready(function(){
 		$("button#detalle_auditoria").button({disabled: true});
 	}
 
+	// Click en el boton detalle_auditoria
+	$("button#detalle_auditoria").click(function(){
+		var id = $("table.resumen").attr('id');
+		if (id){
+			var fields = id.split('_');
+			id = fields[1];
+			location.href = '/auditoria/detalle/'+id;
+		}
+		
+	});
+	
 
 	// Monitoreo 
 	var intervalo;
