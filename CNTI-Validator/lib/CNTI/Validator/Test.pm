@@ -202,7 +202,6 @@ sub run {
     my @images   = $tree->find('img');
     my $errors   = 0;
     my $warnings = 0;
-    $DB::single = 1;
     for my $img (@images) {
         my $alt = $img->attr('alt');
         if ( defined $alt ) { $warnings++ unless $alt }
@@ -233,7 +232,6 @@ sub run {
     my $errors    = 0;
     my $warnings  = 0;
     my $lang_flag = 0;
-    $DB::single = 1;
     for my $script (@scripts) {
 
         if ( my $lang = $script->attr('language') ) {
@@ -282,7 +280,6 @@ sub run {
     my $errors   = 0;
     my $warnings = 0;
     my $count    = 0;
-    $DB::single = 1;
     for my $script (@scripts) {
 
         if ( $script->attr('src') ) {
@@ -304,6 +301,49 @@ sub run {
         $self->event_log( error => "No se usan archivos con extensión .js" );
     }
     $self->ok( $errors == 0 );
+}
+
+package CNTI::Validator::Test::HTML4;
+use Moose;
+use HTML::TreeBuilder;
+use File::MMagic;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->job->site . $self->url->path );
+    my $resp = $cache->response;
+
+    my $mm   = File::MMagic->new();
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $resp->content );
+    my $decl = $tree->{_decl}{text};    # TODO: fix this
+    $DB::single = 1;
+    my $type = '';
+    if ( $decl =~ s!DOCTYPE \s+ html!!x ) {
+        if ( $decl =~ s!^\s*PUBLIC!!x ) {
+            if ( $decl =~ s!^\s*"([^"]+)"!!x ) {
+                my $reg = $1;
+                $type = "HTML-4.01" if $reg =~ m!-//W3C//DTD \s+ HTML \s+ 4.01!x;
+                $type = "XHTML-1.0" if $reg =~ m!-//W3C//DTD \s+ XHTML \s+ 1.0!x;
+                $type = "XHTML-1.1" if $reg =~ m!-//W3C//DTD \s+ XHTML \s+ 1.1!x;
+            }
+            if ( $decl =~ s!^\s*"[^"]+"!! ) {
+            }
+        }
+        elsif ( $decl =~ m!^\s*$! ) {
+            $type = "HTML-5";
+        }
+    }
+    if ( $type eq "HTML-4.01" or $type eq "XHTML-1.0" ) {
+        $self->ok(1);
+    }
+    else {
+        $self->event_log( error => "El tipo de documento es: $type" ) if $type;
+        $self->ok(0);
+    }
 }
 
 1;
