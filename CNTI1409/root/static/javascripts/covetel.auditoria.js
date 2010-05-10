@@ -33,7 +33,8 @@ $("document").ready(function(){
 		if (id){
 			var fields = id.split('_');
 			id = fields[1];
-			location.href = '/auditoria/detalle/'+id;
+			//location.href = '/auditoria/detalle/'+id;
+			location.href = '/auditoria/detalle/'+id+'/Domain';
 		}
 		
 	});

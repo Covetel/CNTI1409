@@ -240,7 +240,8 @@ Detalle de auditoria
 sub detalle : Local {
 	my ( $self, $c, $id, $disposicion ) = @_;
 	my $h;
-	my $ndis;
+	my $ndis; #Nombre disposicion
+	my $ddis; #Descripcion disposicion
 	my $hash;
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
 	my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
@@ -253,8 +254,10 @@ sub detalle : Local {
 	
 	if ($d->id){
 		$ndis = $d->nombre;
+		$ddis = $d->descripcion;
 	}
 	$c->stash->{nombre} = $ndis;
+	$c->stash->{descripcion} = $ddis;
 	if ($auditoria->id){
 		my $job_id = $auditoria->job;
 		my $job = CNTI::Validator::Jobs->find_job( $job_id );
@@ -266,9 +269,11 @@ sub detalle : Local {
            	while ( my $r = $it2->() ) {
 			 	next if $r->name ne $disposicion; 
 				push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass};
+                $c->log->debug($r->name);
            	}
 		}
 	}
+	$c->stash->{urls} = \@{$h->{url}};
 	$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
 	$c->stash->{template} = 'auditoria/detalle.tt2';
 }

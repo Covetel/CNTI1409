@@ -2,7 +2,7 @@
 
 <form name="disposicion" id="disposicion">
 <fieldset> 
-<legend> Disposición: [% nombre %] </legend>
+<legend title=" [% descripcion %] "> Disposición: [% nombre %] </legend>
 <div class="informacion">
  En el siguiente campo, se muestran las URL que fallaron para esta disposición. 
 </div>
@@ -10,7 +10,7 @@
 		<div id="progreso"> 
 			<ul class="urls">
 				[% FOREACH url IN urls %]
-					<li class="url_done"> [% url %] </li>
+					<li class="url_done"> [% url.path %] </li>
 				[% END %]
 			</ul>
 		</div>
