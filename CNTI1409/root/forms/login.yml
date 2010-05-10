@@ -43,7 +43,7 @@ elements:
             - Required
             - type: Length
               min: 4
-              max: 12
+              max: 20
 
     # The Submit button
     - type: Multi

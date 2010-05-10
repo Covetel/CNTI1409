@@ -256,7 +256,7 @@ sub detalle : Local {
 	if ($d->id){
 		$ndis = $d->nombre;
 	}
-	$c->self->{nombre} = $ndis;
+	$c->stash->{nombre} = $ndis;
 	if ($auditoria->id){
 		my $job_id = $auditoria->job;
 		my $job = CNTI::Validator::Jobs->find_job( $job_id );
