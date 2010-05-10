@@ -16,6 +16,7 @@
                 <link href="/static/stylesheets/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" media="all" />
                 <link type="image/x-icon" rel="shortcut icon" href="/static/images/favicon.ico"/>
                 <script type="text/javascript" src="/static/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.auditoria.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>

@@ -3,6 +3,8 @@ use Moose;
 use namespace::autoclean;
 use DateTime;
 use utf8;
+use CNTI::Validator::Schema;
+use CNTI::Validator::Jobs;
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -105,18 +107,136 @@ En esta vista resumen, se pueden ver los datos:
 
 sub resumen : Local {
     my ( $self, $c, $id ) = @_;
-	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
-	my $muestra = join '<br />', @{$auditoria->url};
-	$c->stash->{id} = $id;
-	$c->stash->{titulo} = "Resumen de la Auditoria 000$id";
-	$c->stash->{labelfecha} = 'Fecha de Creación';
-	$c->stash->{fecha} = $auditoria->fechacreacion->dmy();
-	$c->stash->{institucion} = $auditoria->idinstitucion->nombre;
-	$c->stash->{entidad} = $auditoria->idev->nombre;
-	$c->stash->{muestra} = $muestra;
 	$c->stash->{template} = 'auditoria/resumen.tt2';	
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
+	if ($auditoria) {
+		# Muestra
+		my $muestra = join '<br />', @{$auditoria->url};
+		
+		# Variable estado 
+		my $estado;
+		$estado = 'Abierta' if $auditoria->estado eq 'a';
+		$estado = 'Cerrada' if $auditoria->estado eq 'c';
+		$estado = 'Pendiente' if $auditoria->estado eq 'p';
+
+		# Si esta abierta, tiene fecha de inicio 
+		$c->stash->{fechaini} = $auditoria->fechaini->dmy() if $auditoria->fechaini;
+		
+		# Si esta cerrada, tiene fecha de cierre. 
+		$c->stash->{fechafin} = $auditoria->fechafin->dmy() if $auditoria->fechafin;
+		
+		$c->stash->{id} = $id;
+		$c->stash->{titulo} = "Resumen de la Auditoria 000$id";
+		$c->stash->{labelfecha} = 'Fecha de Creación';
+		$c->stash->{fecha} = $auditoria->fechacreacion->dmy();
+		$c->stash->{institucion} = $auditoria->idinstitucion->nombre;
+		$c->stash->{entidad} = $auditoria->idev->nombre;
+		$c->stash->{muestra} = $muestra;
+		$c->stash->{estado} = $estado;
+	} else {
+		$c->stash->{titulo} = "Auditoría no encontrada: $id";
+	}
 } 
 
+=head2 iniciar 
+
+Inicia una auditoría, recibe el ID de la auditoría a iniciar. 
+
+=cut
+
+sub iniciar : Local {
+	my ( $self, $c, $id ) = @_;
+	$c->log->debug("Entro a iniciar");
+	$c->log->debug($id);
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	if ($auditoria->id){
+		# Verifico el estado de la auditoría. 
+		if ($auditoria->estado eq 'p'){
+			# Busco la muestra. 
+			my @m = @{$auditoria->url};
+			# Saco el dominio 
+			my $url = $m[0];
+			$url =~ m|(\w+)://([^/:]+)(:\d+)?/(.*)|;
+			my $protocolo 	= $1;
+			my $dominio 	= $2;
+			my $site 		= "$protocolo://$dominio";
+			my $job = CNTI::Validator::Jobs->new_job(
+				site => $site, 
+				sample => \@m,	
+			);	
+			$c->log->debug($job->id);
+			$c->log->debug($job->site);
+			$c->log->debug($job->state);
+
+			# Guardo el ID del job 
+			$auditoria->job($job->id);
+			
+			# Cambio el estado de la auditoria
+			$auditoria->estado('a');
+			
+			# Fecha de inicio 
+			$auditoria->fechaini(DateTime->now());
+			# Actualizo el registro auditoria.
+			$auditoria->update();
+		} 
+	}
+}
+
+=head2 monitor
+
+Monitor del job, recibe el ID de la auditoría, 
+devuelve:
+La lista de urls cuyo estado es done. 
+El número de urls pendientes.
+El número de urls procesadas. 
+El estado del job.
+
+=cut
+
+sub monitor : Local {
+	my ( $self, $c, $id ) = @_;
+	$c->log->debug("Entro en monitor");
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	#$c->forward('/auditoria/iniciar/',[$id]) if $auditoria->estado eq 'p';
+	my $estado = $auditoria->estado; 
+	if ($estado eq 'p'){
+		$c->log->debug("Va para iniciar");
+		$c->forward('/auditoria/iniciar',[$id]);
+	}
+	$auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	if ($auditoria->id){
+		$c->stash->{template} = 'auditoria/monitor.tt2';
+		
+		# Obtengo el id del job asociado con esta auditoria
+		my $job_id = $auditoria->job;
+		
+		# Busco el job.
+		my $job = CNTI::Validator::Jobs->find_job( $job_id );
+		
+		# Obtengo las url ya procesadas del Job. 
+		my @url_done;
+		my @url_run;
+		my @url_new;
+		my $it = $job->children();
+		my $url = 0;
+		while ( my $u = $it->() ){
+			next if $u->path eq '/';
+			push @url_done,$u->path if $u->state eq 'done';
+			push @url_new,$u->path if $u->state eq 'new';
+			push @url_run,$u->path if $u->state eq 'run';
+			$url++;
+		}
+		
+		my $u_done = $#url_done + 1;
+		my $u_pendientes = ($#url_new + 1) + ($#url_run + 1);
+
+		$c->stash->{id} = $id;
+		$c->stash->{total_url} = $url;
+		$c->stash->{total_done} = $u_done;
+		$c->stash->{total_pendientes} = $u_pendientes;
+		$c->stash->{url_done} = \@url_done;
+	}
+}
 
 =head1 AUTHOR
 

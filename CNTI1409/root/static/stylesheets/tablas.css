@@ -3,6 +3,31 @@ Archivo:        tablas.css
 Autor:          Walter Vargas <walter@covetel.com.ve>, Juan Mesa <juan@covetel.com.ve>
 Descripción:    Estilo para los controles tipo tablas.
 */
+
+div#progreso {
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+background-color: #FFFFCE;
+font-size: 0.7em;
+height: 100px;
+}
+
+div#barra_progreso {
+height: 1em;
+}
+
+ul.urls li {
+ display: block;
+ margin: 0px; 
+ padding: 1px;
+}
+
+ul.urls {
+ padding: 5px;
+ height: 70px;
+ overflow: auto;
+}
+
 table {
  width: 100%;
 }

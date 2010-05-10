@@ -24,6 +24,10 @@ function sugerencia (label, value){
 }
 
 $(document).ready(function(){
+	$(".input_reset").click(function(){
+		$(".input_text").val('');
+		$("textarea").val('');
+	});
 
     // Mascaras de entrada
     $("#phone").mask("(999) 999-9999");
