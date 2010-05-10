@@ -44,12 +44,16 @@ sub crear : Local : FormConfig {
         $upload->copy_to($archivo);
         open ARCHIVO, "<encoding(UTF-8)", $archivo;
         my @portales = <ARCHIVO>;
-        my $idinstitucion = $c->model('DB::Institucion')->search(
+        #my $idinstitucion = $c->model('DB::Institucion')->search(
+        #                                                        { "lower(me.nombre)" => lc($c->req->params->{idinstitucion}), habilitado => "true" },
+        #                                                        { columns => [ qw / id / ] }
+        #                                                      );
+        my $idinstitucion = $c->model('DB::Institucion')->find(
                                                                 { "lower(me.nombre)" => lc($c->req->params->{idinstitucion}), habilitado => "true" },
                                                                 { columns => [ qw / id / ] }
-                                                              );
+                                                               );
         my $idev = $c->model('DB::Entidadverificadora')->find(
-                                                                { "lower(me.nombre)" => lc($c->req->params->{idev})},
+                                                                { "lower(me.nombre)" => lc($c->req->params->{idev}), habilitado => "true" },
                                                                 { columns => [ qw / id / ] }
                                                             );
 
