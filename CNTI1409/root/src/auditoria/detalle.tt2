@@ -1,5 +1,30 @@
 [% titulo = 'Portal: ' %]
 
+<form name="disposicion" id="disposicion">
 <fieldset> 
+<legend> Disposición: [% nombre %] </legend>
+<div class="informacion">
+ En el siguiente campo, se muestran las URL que fallaron para esta disposición. 
+</div>
+<div class="text label">
+		<div id="progreso"> 
+			<ul class="urls">
+				[% FOREACH url IN urls %]
+					<li class="url_done"> [% url %] </li>
+				[% END %]
+			</ul>
+		</div>
+</div>
+<div class="text label">
+		<label for="comentarios"> Comentarios: </label>
+		<textarea id="comentarios" name="comentarios"> 
+		</textarea>
+</div>
+<div class="text label">
+		<label for="comentarios"> Resolutoria: </label>
+		<textarea id="resolutoria" name="resolutoria"> 
+		</textarea>
+</div>
 
 </fieldset>
+</form>

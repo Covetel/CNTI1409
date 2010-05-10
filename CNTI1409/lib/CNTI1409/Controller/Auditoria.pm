@@ -249,8 +249,14 @@ Detalle de auditoria
 sub detalle : Local {
 	my ( $self, $c, $id, $disposicion ) = @_;
 	my $h;
+	my $ndis;
 	my $hash;
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
+	if ($d->id){
+		$ndis = $d->nombre;
+	}
+	$c->self->{nombre} = $ndis;
 	if ($auditoria->id){
 		my $job_id = $auditoria->job;
 		my $job = CNTI::Validator::Jobs->find_job( $job_id );
