@@ -34,7 +34,8 @@ CREATE TABLE auditoria (
     fechafin date,
     fechacreacion date NOT NULL,
     url character varying(1000)[],
-    estado character(1) DEFAULT 'p'::bpchar NOT NULL
+    estado character(1) DEFAULT 'p'::bpchar NOT NULL,
+    job integer
 );
 
 
@@ -579,11 +580,11 @@ ALTER TABLE institucion ALTER COLUMN id SET DEFAULT nextval('institucion_id_seq'
 -- Data for Name: auditoria; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado) FROM stdin;
-4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
-5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
-6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
-7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p
+COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado, job) FROM stdin;
+4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
 \.
 
 
