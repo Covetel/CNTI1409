@@ -38,7 +38,7 @@
 								<img src="/static/images/loading.gif" title="Cargando ..." />
 						</div>
                         <div id="is_usuario">
-                                <div id="is_usuario_uid"> auditor@dominio.com.ve </div>
+                                <div id="is_usuario_uid"> administrador@dominio.com.ve </div>
                         </div>
                         <div id="is_enlaces">
                                 <ul>
