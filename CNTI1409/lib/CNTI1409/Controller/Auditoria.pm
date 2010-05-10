@@ -40,7 +40,6 @@ sub index :Path :Args(0) {
 
 sub crear : Local : FormConfig {
     my ( $self, $c, $mensaje, $error ) = @_;
-    if ( $c->user_exists() ) {
         $c->stash->{mensaje} = $c->req->params->{mensaje};
         my $form = $c->stash->{form};
         if ($form->submitted_and_valid) {
@@ -80,9 +79,6 @@ sub crear : Local : FormConfig {
             $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
         }
         $c->stash->{template} = 'auditoria/crear.tt2';
-    } else {
-        $c->response->redirect($c->uri_for('/login'));
-    }
 }
 
 =head2 reporte
