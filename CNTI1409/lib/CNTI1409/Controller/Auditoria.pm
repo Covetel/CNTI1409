@@ -145,8 +145,6 @@ Inicia una auditoría, recibe el ID de la auditoría a iniciar.
 
 sub iniciar : Local {
 	my ( $self, $c, $id ) = @_;
-	$c->log->debug("Entro a iniciar");
-	$c->log->debug($id);
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
 	if ($auditoria->id){
 		# Verifico el estado de la auditoría. 
@@ -160,15 +158,10 @@ sub iniciar : Local {
 			my $dominio 	= $2;
 			my $site 		= "$protocolo://$dominio";
 			map { $_ =~ s!(\w+)://([^/:]+)(:\d+)?/(.*)!/$4!;} @m;
-			use Data::Dumper;
-			$c->log->debug(Dumper(@m));
 			my $job = CNTI::Validator::Jobs->new_job(
 				site => $site, 
 				sample => \@m,	
 			);	
-			$c->log->debug($job->id);
-			$c->log->debug($job->site);
-			$c->log->debug($job->state);
 
 			# Guardo el ID del job 
 			$auditoria->job($job->id);
@@ -197,12 +190,10 @@ El estado del job.
 
 sub monitor : Local {
 	my ( $self, $c, $id ) = @_;
-	$c->log->debug("Entro en monitor");
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
 	#$c->forward('/auditoria/iniciar/',[$id]) if $auditoria->estado eq 'p';
 	my $estado = $auditoria->estado; 
 	if ($estado eq 'p'){
-		$c->log->debug("Va para iniciar");
 		$c->forward('/auditoria/iniciar',[$id]);
 	}
 	$auditoria = $c->model('DB::Auditoria')->find({ id => $id });
@@ -253,6 +244,13 @@ sub detalle : Local {
 	my $hash;
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
 	my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
+	my $disposiciones = $c->model('DB::Disposicion')->search();
+	my @disp = $disposiciones->all;
+	my $superh;
+	foreach my $d (@disp){
+		push @{$superh->{disposiciones}},{ nombre => $d->nombre, modulo => $d->modulo };
+	}
+	
 	if ($d->id){
 		$ndis = $d->nombre;
 	}
@@ -271,8 +269,7 @@ sub detalle : Local {
            	}
 		}
 	}
-	use Data::Dumper;
-	$c->log->debug(Dumper($hash));
+	$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
 	$c->stash->{template} = 'auditoria/detalle.tt2';
 }
 

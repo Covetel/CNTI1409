@@ -28,3 +28,12 @@
 
 </fieldset>
 </form>
+
+<div id="nav">
+	[% FOREACH disp IN disposiciones %]
+		<button id="[% disp.modulo %]">
+			[% disp.nombre %]
+		</button>	
+	[% END %]
+</div>
+

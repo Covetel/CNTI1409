@@ -78,4 +78,8 @@ $("document").ready(function(){
 		}
 	});
 	
+
+	//Detalle 
+	$("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });	
+
 });
