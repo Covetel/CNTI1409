@@ -39,7 +39,11 @@ elements:
               title: 'Por favor indique correctamente el RIF de la institución, Ejemplo: G-00000008'
               class: input_text
           constraints:
-              - Required
+            - Required
+            - type: Length
+              min: 4
+              max: 15
+              message: "El RIF debe contener menos de 15 caracteres"
 
         - type: Text
           name: telefono
@@ -79,6 +83,7 @@ elements:
         - type: Text
           name: web
           label: Página Web
+          default: "http://"
           attributes:
               title: 'Por favor indique la dirección electrónica (URL) de la página web de la institución.'
               class: input_text

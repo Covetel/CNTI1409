@@ -79,6 +79,7 @@ elements:
         - type: Text
           name: web
           label: Página Web
+          default: "http://"
           attributes:
               title: 'Por favor indique la dirección electrónica (URL) de la página web de la entidad, Ejemplo: http://www.covetel.com.ve.'
               class: input_text
