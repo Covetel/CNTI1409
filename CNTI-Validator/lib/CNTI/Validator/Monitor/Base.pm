@@ -53,6 +53,34 @@ sub parent {
     return $self->parent_class->new( $pid );
 }
 
+sub pretty {
+    my $self   = shift;
+    my $depth  = shift;
+    my $level  = shift || 0;
+    my %fields = $self->_rec->get_columns;
+    my @fields;
+    my $out = '';
+    my $len = length "children";
+    for ( sort keys %fields ) {
+        next unless exists $fields{$_} and defined $fields{$_};
+        push @fields, [ $_ => $fields{$_} ];
+        $len = length $_ if $len < length $_;
+    }
+    $len += $level * 4;
+    $out .= sprintf("%${len}s: %s\n", @$_) for @fields;
+    if ( !defined($depth) || $depth-- ) {
+        my $it = $self->children;
+        if ($it) {
+            my @children;
+            while ( my $ch = $it->() ) {
+                push @children, $ch->pretty( $depth, $level+1 );
+            }
+            $out .= sprintf("%${len}s:\n%s", "children", $_) for @children;
+        }
+    }
+    return $out;
+}
+
 sub as_hash {
     my $self   = shift;
     my $depth  = shift;
