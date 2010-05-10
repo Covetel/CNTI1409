@@ -55,7 +55,7 @@ __PACKAGE__->config( 'Plugin::Authentication' =>
                 store => {
                     class => 'Minimal',
                     users => {
-                        'administrador@dominio.com' => {
+                        'administrador@dominio.com.ve' => {
                             password => "administrador",
                             editor => 'yes',
                         }
