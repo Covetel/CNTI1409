@@ -31,6 +31,7 @@ elements:
               min: 4
               max: 250
               message: "El nombre debe contener al menos 4 caracteres"
+          validator: 'CNTI1409::Unico::EntidadNombre'
 
         - type: Text
           name: rif
@@ -41,6 +42,7 @@ elements:
               maxlength: 15
           constraints:
               - Required
+          validator: 'CNTI1409::Unico::EntidadRIF'
 
         - type: Text
           name: telefono
@@ -63,6 +65,7 @@ elements:
               title: 'Por favor indique los nombres y apellidos del representante legal de la entidad verificadora, Ejemplo: Walter Vargas'
               class: input_text
           constraints:
+            - Required
             - type: Length
               min: 4
               max: 250

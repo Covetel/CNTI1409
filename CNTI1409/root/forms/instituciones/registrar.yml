@@ -31,6 +31,7 @@ elements:
               min: 4
               max: 250
               message: "El nombre debe contener al menos 4 caracteres"
+          validator: 'CNTI1409::Unico::InstitucionNombre'
 
         - type: Text
           name: rif
@@ -45,6 +46,7 @@ elements:
               min: 4
               max: 15
               message: "El RIF debe contener menos de 15 caracteres"
+          validator: 'CNTI1409::Unico::InstitucionRIF'
 
         - type: Text
           name: telefono
@@ -67,6 +69,7 @@ elements:
               title: 'Por favor indique el nombre completo de la persona contacto en la institución.'
               class: input_text
           constraints:
+            - Required
             - type: Length
               min: 4
               max: 250
