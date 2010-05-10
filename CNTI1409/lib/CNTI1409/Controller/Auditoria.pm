@@ -101,16 +101,20 @@ En esta vista resumen, se pueden ver los datos:
 
 sub resumen : Local {
     my ( $self, $c, $id ) = @_;
-	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
-	my $muestra = join '<br />', @{$auditoria->url};
-	$c->stash->{id} = $id;
-	$c->stash->{titulo} = "Resumen de la Auditoria 000$id";
-	$c->stash->{labelfecha} = 'Fecha de Creación';
-	$c->stash->{fecha} = $auditoria->fechacreacion->dmy();
-	$c->stash->{institucion} = $auditoria->idinstitucion->nombre;
-	$c->stash->{entidad} = $auditoria->idev->nombre;
-	$c->stash->{muestra} = $muestra;
 	$c->stash->{template} = 'auditoria/resumen.tt2';	
+	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
+	if ($auditoria) {
+		my $muestra = join '<br />', @{$auditoria->url};
+		$c->stash->{id} = $id;
+		$c->stash->{titulo} = "Resumen de la Auditoria 000$id";
+		$c->stash->{labelfecha} = 'Fecha de Creación';
+		$c->stash->{fecha} = $auditoria->fechacreacion->dmy();
+		$c->stash->{institucion} = $auditoria->idinstitucion->nombre;
+		$c->stash->{entidad} = $auditoria->idev->nombre;
+		$c->stash->{muestra} = $muestra;
+	} else {
+		$c->stash->{titulo} = "Auditoría no encontrada: $id";
+	}
 } 
 
 
