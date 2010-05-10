@@ -1,7 +1,7 @@
 package CNTI::Validator::Test;
 use Moose;
 
-has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1 );
+has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1, handles => { uri => "uri" } );
 has task => (
     is       => 'ro',
     isa      => 'CNTI::Validator::Tests',
@@ -15,6 +15,28 @@ has events => (
     traits  => ['Array'],
     handles => { event_add => "push", event_list => 'elements', event_count => 'count' }
 );
+has response => (is => "ro", isa => "HTTP::Response", lazy => 1, builder => "_build_response");
+has content => (is => "ro", isa => "Str", lazy => 1, builder => "_build_content");
+has htmlt => (is => "ro", isa => "HTML::TreeBuilder", lazy => 1, builder => "_build_htmlt" );
+
+sub _build_response {
+    my $self = shift;
+    my $cache = $self->cache;
+    $cache->get( $self->uri );
+    return $cache->response;
+}
+
+sub _build_content {
+    my $self = shift;
+    $self->response->content;
+}
+
+sub _build_htmlt {
+    my $self = shift;
+    my $tree = HTML::TreeBuilder->new;
+    $tree->parse( $self->content );
+    return $tree;
+}
 
 sub ok {
     my $self = shift;
@@ -46,8 +68,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    my $uri  = URI->new( $self->job->site );
-    $self->ok( $uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
+    $self->ok( $self->uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
 }
 
 package CNTI::Validator::Test::Title;
@@ -59,12 +80,8 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
 
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $cache->response->content );
-    my $node = $tree->find('html');
+    my $node = $self->htmlt->find('html');
     unless ($node) {
         $self->event_log( 'error', 'No es HTML' );
         return $self->ok(0);
@@ -99,9 +116,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
-    my $resp = $cache->response;
+    my $resp = $self->response;
 
     my $ct_charset = $resp->content_type_charset;
     my $content;
@@ -121,9 +136,7 @@ sub run {
     }
     $content ||= $resp->content;
 
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse($content);
-    my $node = $tree->find('html');
+    my $node = $self->htmlt->find('html');
     unless ($node) {
         $self->event_log( 'error', 'No es HTML' );
         return $self->ok(0);
@@ -160,6 +173,24 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
+
+    my $mm   = File::MMagic->new();
+    my @images = $self->htmlt->find('img');
+    my $errors = 0;
+    for my $img (@images) {
+        my $src = $img->attr('src');
+        my $uri = URI->new_abs( $src, $self->uri );
+        $self->cache->get($uri);
+        my $type = $mm->checktype_contents( $self->cache->response->content );
+        unless ( $type eq 'image/png' ) {
+            $self->event_log( error => "Tipo de imagen ilegal $type" );
+            $errors++;
+        }
+    }
+    $self->ok( $errors == 0 );
+}
+sub run2 {
+    my $self  = shift;
     my $cache = $self->cache;
     $cache->get( $self->job->site . $self->url->path );
     my $resp = $cache->response;
@@ -185,24 +216,15 @@ sub run {
 
 package CNTI::Validator::Test::Alt;
 use Moose;
-use HTML::TreeBuilder;
-use File::MMagic;
 
 extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
-    my $resp = $cache->response;
 
-    my $mm   = File::MMagic->new();
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $resp->content );
-    my @images   = $tree->find('img');
+    my @images   = $self->htmlt->find('img');
     my $errors   = 0;
     my $warnings = 0;
-    $DB::single = 1;
     for my $img (@images) {
         my $alt = $img->attr('alt');
         if ( defined $alt ) { $warnings++ unless $alt }
@@ -215,25 +237,16 @@ sub run {
 
 package CNTI::Validator::Test::JS;
 use Moose;
-use HTML::TreeBuilder;
-use File::MMagic;
 
 extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
-    my $resp = $cache->response;
 
-    my $mm   = File::MMagic->new();
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $resp->content );
-    my @scripts   = $tree->find('script');
+    my @scripts   = $self->htmlt->find('script');
     my $errors    = 0;
     my $warnings  = 0;
     my $lang_flag = 0;
-    $DB::single = 1;
     for my $script (@scripts) {
 
         if ( my $lang = $script->attr('language') ) {
@@ -264,25 +277,16 @@ sub run {
 
 package CNTI::Validator::Test::JS_inc;
 use Moose;
-use HTML::TreeBuilder;
-use File::MMagic;
 
 extends 'CNTI::Validator::Test';
 
 sub run {
     my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
-    my $resp = $cache->response;
 
-    my $mm   = File::MMagic->new();
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $resp->content );
-    my @scripts  = $tree->find('script');
+    my @scripts  = $self->htmlt->find('script');
     my $errors   = 0;
     my $warnings = 0;
     my $count    = 0;
-    $DB::single = 1;
     for my $script (@scripts) {
 
         if ( $script->attr('src') ) {
@@ -304,6 +308,41 @@ sub run {
         $self->event_log( error => "No se usan archivos con extensión .js" );
     }
     $self->ok( $errors == 0 );
+}
+
+package CNTI::Validator::Test::HTML4;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+
+    my $decl = $self->htmlt->{_decl}{text};    # TODO: fix this
+    #$DB::single = 1;
+    my $type = '';
+    if ( $decl =~ s!DOCTYPE \s+ html!!x ) {
+        if ( $decl =~ s!^\s*PUBLIC!!x ) {
+            if ( $decl =~ s!^\s*"([^"]+)"!!x ) {
+                my $reg = $1;
+                $type = "HTML-4.01" if $reg =~ m!-//W3C//DTD \s+ HTML \s+ 4.01!x;
+                $type = "XHTML-1.0" if $reg =~ m!-//W3C//DTD \s+ XHTML \s+ 1.0!x;
+                $type = "XHTML-1.1" if $reg =~ m!-//W3C//DTD \s+ XHTML \s+ 1.1!x;
+            }
+            if ( $decl =~ s!^\s*"[^"]+"!! ) {
+            }
+        }
+        elsif ( $decl =~ m!^\s*$! ) {
+            $type = "HTML-5";
+        }
+    }
+    if ( $type eq "HTML-4.01" or $type eq "XHTML-1.0" ) {
+        $self->ok(1);
+    }
+    else {
+        $self->event_log( error => "El tipo de documento es: $type" ) if $type;
+        $self->ok(0);
+    }
 }
 
 1;

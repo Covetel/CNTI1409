@@ -11,11 +11,11 @@ has path  => ( is => "ro" );
 
 sub model_class  {'CNTI::ValidatorDB::Result::Urls'}
 sub child_class  {'CNTI::Validator::Monitor::Result'}
-sub parent_class {'CNTI::Validator::Monitor::Jobs'}
+sub parent_class {'CNTI::Validator::Monitor::Job'}
 
-sub url {
+sub uri {
     my $self = shift;
-    URI->new( $self->parent->site . $self->path );
+    return URI->new_abs( $self->path, $self->parent->site );
 }
 
 no Moose;
@@ -157,9 +157,9 @@ La clase para el objeto padre
 
 =head1 METODOS PÚBLICOS
 
-=head2 url
+=head2 uri
 
-Retorna el URL absoluto de este objeto.
+Retorna el un objeto URI con dirección absoluta del objeto.
 
 =head2 refresh
 
@@ -180,7 +180,7 @@ Obtiene un iterador que permite recorrer los hijos del trabajo,
 el iterador devuelto es un clausura que se invoca sin argumentos
 y retorna elementos de la clase CNTI::Validator::Monitor::URL.
 
-    printf "Los Reultados para el url %s\n", $obj->url
+    printf "Los Reultados para el url %s\n", $obj->uri
     my $it = $job->children;
     while ( my $r = $it->() ) {
         printf "Resultado: para %s: %s\n", $r->name, $r->pass;
