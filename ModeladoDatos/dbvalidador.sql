@@ -135,7 +135,7 @@ ALTER SEQUENCE auditoria_id_seq OWNED BY auditoria.id;
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoria_id_seq', 7, true);
+SELECT pg_catalog.setval('auditoria_id_seq', 10, true);
 
 
 --
@@ -275,7 +275,8 @@ CREATE TABLE disposicion (
     id integer NOT NULL,
     nombre character varying(25) NOT NULL,
     descripcion character varying(100) NOT NULL,
-    habilitado boolean DEFAULT true NOT NULL
+    habilitado boolean DEFAULT true NOT NULL,
+    modulo character varying(10)
 );
 
 
@@ -317,11 +318,17 @@ COMMENT ON COLUMN disposicion.habilitado IS 'Campo booleano que representa si la
 
 
 --
+-- Name: COLUMN disposicion.modulo; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN disposicion.modulo IS 'Nombre del modulo que ejecuta el Job en el sistema';
+
+
+--
 -- Name: disposicion_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
 CREATE SEQUENCE disposicion_id_seq
-    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -341,7 +348,7 @@ ALTER SEQUENCE disposicion_id_seq OWNED BY disposicion.id;
 -- Name: disposicion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('disposicion_id_seq', 1, false);
+SELECT pg_catalog.setval('disposicion_id_seq', 13, true);
 
 
 --
@@ -436,7 +443,7 @@ ALTER SEQUENCE entidadverificadora_id_seq OWNED BY entidadverificadora.id;
 -- Name: entidadverificadora_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('entidadverificadora_id_seq', 6, true);
+SELECT pg_catalog.setval('entidadverificadora_id_seq', 7, true);
 
 
 --
@@ -531,7 +538,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 11, true);
+SELECT pg_catalog.setval('institucion_id_seq', 16, true);
 
 
 --
@@ -585,6 +592,9 @@ COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreaci
 5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
 6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
 7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+8	2	11	Super Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+9	4	3	Otro Super Mega Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
+10	4	11	Otro Super Mega Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
 \.
 
 
@@ -600,7 +610,14 @@ COPY auditoriadetalle (id, idauditoria, iddisposicion, resultado, resdetalle, co
 -- Data for Name: disposicion; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY disposicion (id, nombre, descripcion, habilitado) FROM stdin;
+COPY disposicion (id, nombre, descripcion, habilitado, modulo) FROM stdin;
+1	Dominio	El dominio del portal debe terminar en .gob.ve	t	Domain
+3	Etiqueta Title	Verificar el uso de la meta etiqueta title	t	Title
+4	UTF8	La codificación del portal debe estar en UTF8	t	UTF8
+9	Imagenes PNG	Las imagenes del portal deben estar en formato png	t	Img
+11	Atributo alt	Se debe hacer uso del atributo alt para las imagenes	t	Alt
+12	Uso de Javascript	Los portales deben usar el lenguaje de script Javascript	t	JS
+13	Archivos js	Existencia de archivos .js	t	JS_inc
 \.
 
 
@@ -613,6 +630,7 @@ COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion
 4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org	t
 5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Distrito Federal	http://networkit.com.ve	f
 6	El Pollo Loco	J-432149595	pollo@enbrasa.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org	t
+7	B-52	J-12319181	b52@algo.com	555-555.5555	Alguien por alli	En la lata	http://www.google.com	t
 \.
 
 
@@ -628,6 +646,10 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 9	Ministerio de Cosas	G-00000000	ministro@cosas.gob.ve	555-555.5555	El Ministro	Por estas calles	http://www.cosas.gob.ve	t
 5	Insitucion	G-432123	info@institucion.com	2292092	Walter	Por alli	www.notiene.com	f
 11	Ministerio del Ambiente	G-432455991	info@ambiente.gob.ve	0212-333.3333	Otro ministro	Caracas, Distrito Federal	http://www.ambiente.gob.ve	t
+14	Servicio Autonomo de Transporte y Tránsito Terrestre	G-11	info@setra.gob.ve	0212-333.3333	El pana del SETRA	En Caracas	http://www.setra.gob.ve	t
+13	Casa de lili	J-333333333	lilibeth@covetel.com.ve	555-555.5555	skjhskfhsdfkhfdkhasdfkhasdfk	asdadadadasdadadada	http://www.portatillili.gov.ve	t
+15	Ministerio de Finanzas 2	G-12345678902	otro@otro.com	(333) 333-3333	Alguien por alli	adasd a;sakjn ai asljdal	http://www.ambiente.gob.ve	t
+16	COVETEL	J-321345111	info@covetel.com.ve	(222) 222-2222	Walter	paramillo	http://www.covetel.com.ve	t
 \.
 
 
