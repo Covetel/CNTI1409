@@ -60,14 +60,15 @@ sub pretty {
     my %fields = $self->_rec->get_columns;
     my @fields;
     my $out = '';
-    my $len = length "children";
+    my $len = 0;
     for ( sort keys %fields ) {
         next unless exists $fields{$_} and defined $fields{$_};
         push @fields, [ $_ => $fields{$_} ];
         $len = length $_ if $len < length $_;
     }
-    $len += $level * 4;
-    $out .= sprintf("%${len}s: %s\n", @$_) for @fields;
+    my $ind = "    " x $level;
+    $out .= sprintf("$ind%-${len}s: %s\n", @$_) for @fields;
+    my $pos = 0;
     if ( !defined($depth) || $depth-- ) {
         my $it = $self->children;
         if ($it) {
@@ -75,7 +76,7 @@ sub pretty {
             while ( my $ch = $it->() ) {
                 push @children, $ch->pretty( $depth, $level+1 );
             }
-            $out .= sprintf("%${len}s:\n%s", "children", $_) for @children;
+            $out .= sprintf("$ind%${len}s [%d]:\n%s", $self->child_class, $pos++, $_) for @children;
         }
     }
     return $out;
