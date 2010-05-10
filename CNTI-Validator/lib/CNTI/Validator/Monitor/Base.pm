@@ -48,10 +48,9 @@ sub add_child {
 
 sub parent {
     my $self = shift;
-    my $pid  = $self->pid;
+    my $pid  = $self->_rec->pid;
     return undef unless $pid;
-    my $rs = $self->_rec->search_related( $self->parent_class->table, { pid => $pid } );
-    return $self->parent_class->new( $rs->next );
+    return $self->parent_class->new( $pid );
 }
 
 sub as_hash {
