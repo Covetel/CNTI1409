@@ -1,7 +1,7 @@
 package CNTI::Validator::Test;
 use Moose;
 
-has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1 );
+has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1, handles => { uri => "uri" } );
 has task => (
     is       => 'ro',
     isa      => 'CNTI::Validator::Tests',
@@ -46,8 +46,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    my $uri  = URI->new( $self->job->site );
-    $self->ok( $uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
+    $self->ok( $self->uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
 }
 
 package CNTI::Validator::Test::Title;
