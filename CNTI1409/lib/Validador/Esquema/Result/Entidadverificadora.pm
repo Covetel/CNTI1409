@@ -23,7 +23,7 @@ __PACKAGE__->table("entidadverificadora");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x96feb20)
+  default_value: SCALAR(0xa0f3820)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -91,7 +91,7 @@ nombre de la persona contacto de la Entidad Verificadora
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0x96f63a0)
+  default_value: SCALAR(0xa0f0c80)
   is_nullable: 0
 
 =cut
@@ -176,8 +176,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-09 22:20:13
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:s/qSyjPkE/UlakKrHJYevA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 00:53:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pYHzu4vbu9oz83kQlX9iOQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

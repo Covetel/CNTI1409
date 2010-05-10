@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoriadetalle");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x96fa210)
+  default_value: SCALAR(0xa0dca70)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -45,7 +45,7 @@ Clave que relaciona los detalles de la auditoria con sus datos maestros
 =head2 iddisposicion
 
   data_type: bigint
-  default_value: SCALAR(0x96f5df0)
+  default_value: SCALAR(0xa0dc8f0)
   is_auto_increment: 1
   is_foreign_key: 1
   is_nullable: 0
@@ -55,7 +55,7 @@ Clave que relaciona los detalles de las auditorias con cada disposicion
 =head2 resultado
 
   data_type: boolean
-  default_value: SCALAR(0x96fa1b0)
+  default_value: SCALAR(0xa0ed478)
   is_nullable: 0
 
 Determina si una disposicion es valida o no
@@ -165,8 +165,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-09 22:20:13
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3xkgmIxtVm/4nbQJI1tsTA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 00:53:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZBTM8XfY/qSJNJIM9d2kgQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

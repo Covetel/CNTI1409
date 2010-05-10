@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x95d59b0)
+  default_value: SCALAR(0x9fcb910)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -98,6 +98,14 @@ Fecha de creacion de la audioria
   is_nullable: 0
   size: 1
 
+=head2 job
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+
+Almacena el listado de las url a auditar en un portal
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -144,6 +152,8 @@ __PACKAGE__->add_columns(
   },
   "estado",
   { data_type => "character", default_value => "p", is_nullable => 0, size => 1 },
+  "job",
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -194,8 +204,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-09 22:20:13
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wwsKeUtwA/MAy8rMmrlRqA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 00:53:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3QVCbL2KivJqpEHUhzIrRg
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
