@@ -33,7 +33,6 @@ $("document").ready(function(){
 		if (id){
 			var fields = id.split('_');
 			id = fields[1];
-			//location.href = '/auditoria/detalle/'+id;
 			location.href = '/auditoria/detalle/'+id+'/Domain';
 		}
 		
@@ -80,7 +79,16 @@ $("document").ready(function(){
 	});
 	
 
-	//Detalle 
-	$("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });	
-
+	// Botonera de disposiciones en la vista de detalle.
+    $("div#nav button").click(function(){
+        var id = $(this).attr("id");
+		if (id){
+			var fields = id.split('-');
+			location.href = '/auditoria/detalle/'+fields[1]+'/'+fields[0];
+		}
+	});
+    
+    $("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });	
+    
+    
 });

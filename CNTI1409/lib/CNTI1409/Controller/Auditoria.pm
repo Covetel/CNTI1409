@@ -218,6 +218,23 @@ sub monitor : Local {
 			push @url_new,$u->path if $u->state eq 'new';
 			push @url_run,$u->path if $u->state eq 'run';
 			$url++;
+            # Pruebas para ingresar los datos en BD
+            my $uchild = $u->children;
+            # $u este hash tengo los siguientes datos
+            # path = URL evaluada
+            # $uchild
+            # haciendo child de este hash obtengo
+            # pass = (pass|fail) paso o no la disposicion
+            # name = Nombre de la disposicion evaluada
+            # $failchild
+            # haciendo child de este
+            # Solo en caso de pass = fail se crea un hijo con la siguiente info
+            # message = Errores obtenidos en la disposicion.
+            #while ( my $temp = $uchild->() ) {
+                
+            #}
+
+
 		}
 		
 		my $u_done = $#url_done + 1;
@@ -228,6 +245,11 @@ sub monitor : Local {
 		$c->stash->{total_done} = $u_done;
 		$c->stash->{total_pendientes} = $u_pendientes;
 		$c->stash->{url_done} = \@url_done;
+
+        # Variables que tengo disponibles
+        # id - id de la auditoria
+        # job_id - ID del Job, sirve para consultar los datos necesarios al Job (disposicion, url fallidas, etc.).
+        # 
 	}
 }
 
@@ -255,10 +277,11 @@ sub detalle : Local {
 	if ($d->id){
 		$ndis = $d->nombre;
 		$ddis = $d->descripcion;
+	    $c->stash->{nombre} = $ndis;
+	    $c->stash->{descripcion} = $ddis;
 	}
-	$c->stash->{nombre} = $ndis;
-	$c->stash->{descripcion} = $ddis;
 	if ($auditoria->id){
+        $c->stash->{idAuditoria} = $auditoria->id;
 		my $job_id = $auditoria->job;
 		my $job = CNTI::Validator::Jobs->find_job( $job_id );
 		$hash = $job->as_hash;
@@ -268,8 +291,8 @@ sub detalle : Local {
 			my $it2 = $u->children;
            	while ( my $r = $it2->() ) {
 			 	next if $r->name ne $disposicion; 
-				push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass};
-                $c->log->debug($r->name);
+				push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass} if $r->pass ne 'pass';
+                $c->log->debug($r->pass) if $r->pass ne 'pass';
            	}
 		}
 	}

@@ -32,7 +32,7 @@
 
 <div id="nav">
 	[% FOREACH disp IN disposiciones %]
-		<button id="[% disp.modulo %]">
+		<button id="[% disp.modulo %]-[% idAuditoria %]">
 			[% disp.nombre %]
 		</button>	
 	[% END %]
