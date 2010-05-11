@@ -10,12 +10,13 @@ languages:
 
 elements:
     - type: Fieldset
-      name: seleccionar_institucion
-      legend: Seleccionar Institución
+      name: login
+      legend: Entrar al Sistema       
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese su correo electrónico y contraseña para ingresar al sistema.'
+          content: 'Por favor ingrese su correo electrónico y contraseña para ingresar al Sistema Automatizado del Protocolo de Pruebas de Portales de Internet
+'
           attributes:
               class: informacion
 
@@ -23,7 +24,7 @@ elements:
           name: correo
           label: Correo Electrónico
           attributes:
-              title: 'Por favor ingrese el correo electrónico. Ejemplo: admin@cnti.gob.ve.'
+              title: 'Por favor ingrese el correo electrónico. Ejemplo: admin@cnti.gob.ve'
               class: input_text
               id: correo
           constraints:

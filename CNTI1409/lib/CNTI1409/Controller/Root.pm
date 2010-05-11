@@ -71,7 +71,7 @@ sub login : Local : FormConfig {
         }
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
-        $c->stash->{mensaje} = "No ha ingresado todos los datos";
+        $c->stash->{mensaje} = "Correo o Contraseña no válidos";
     }
 	$c->stash->{template} = 'ingresar.tt2';
 }

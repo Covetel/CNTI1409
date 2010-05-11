@@ -29,6 +29,12 @@ function sugerencia (label, value){
 }
 
 $(document).ready(function(){
+
+$("#area_aplicacion_login").accordion({ collapsible: false ,active: 0 });
+$("#area_aplicacion_login form").css('margin-left','200px');
+$("#area_aplicacion_login div.mensaje").css('margin-left','200px');
+
+
 $("#loading").ajaxStart(function(){
    $(this).show();
 });

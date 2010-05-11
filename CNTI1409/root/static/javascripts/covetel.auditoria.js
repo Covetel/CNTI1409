@@ -84,11 +84,4 @@ $("document").ready(function(){
         var id = $(this).attr("id");
 		if (id){
 			var fields = id.split('-');
-			location.href = '/auditoria/detalle/'+fields[1]+'/'+fields[0];
-		}
-	});
-    
-    $("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });	
-    
-    
-});
+			location.href = 

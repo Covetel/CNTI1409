@@ -32,7 +32,7 @@
                         <div id="bicentenario"> &nbsp; </div>
                 </div>
                 
-                <div id="area_aplicacion">
+                <div id="area_aplicacion_login">
                         <h3><a href="#"> [% titulo %] </a> </h3>
                         <div>
 							[% content %]
