@@ -78,10 +78,33 @@ $("document").ready(function(){
 		}
 	});
 	
+	// Detalle
+	$("form#disposicion").attr("onsubmit","return false");
+	
+	$("form#disposicion div#progreso").css('text-align','left').height('85px');
+	$("form#disposicion div#progreso").css('font-size','0.9em');
+	$("form#disposicion textarea").width('100%').val('');
+	$("form#disposicion").css('font-size','0.9em');
+	$("form#disposicion div.text,div.label").css('text-align','left');
+	//$("form#disposicion div.multi").width('580px');
 
-	// Botonera de disposiciones en la vista de detalle.
+	// Botonera de disposiciones en la vista de detall
     $("div#nav button").click(function(){
         var id = $(this).attr("id");
 		if (id){
 			var fields = id.split('-');
-			location.href = 
+			location.href = '/auditoria/detalle/'+fields[1]+'/'+fields[0];
+		} 
+	});
+
+
+	$("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });
+	$("div#nav button").css('font-size','0.7em');	
+	$("button.activa").button({icons: {primary: 'ui-icon-folder-open'}});
+
+	$("button#guardar").button({icons: {primary:'ui-icon-disk'}});
+	$("button#guardar").click(function(){
+
+	});
+
+});

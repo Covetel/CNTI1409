@@ -143,3 +143,16 @@ border-right: 1px dashed #ff0000;*/
 span.error_message {
 float: left; 
 }
+
+span#icon {
+ float: right;
+ margin-top: -50px;
+}
+span.mensajito {
+ float: left;
+}
+
+div.clear {
+clear: both;
+height: 0px;
+}
