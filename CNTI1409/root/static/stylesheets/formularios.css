@@ -157,3 +157,12 @@ div.clear {
 clear: both;
 height: 0px;
 }
+
+div.error_disposicion, div.mensaje_disposicion {
+ display: none;
+ width: 450px;
+}
+
+div#nav {
+ margin-bottom: 10px;
+}

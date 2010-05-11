@@ -261,53 +261,67 @@ Detalle de auditoria
 
 sub detalle : Local {
 	my ( $self, $c, $id, $disposicion ) = @_;
-	my $h;
-	my $ndis; #Nombre disposicion
-	my $ddis; #Descripcion disposicion
-	my $pass = 'pass'; #Resultado general de la disposicion 
-	my $hash;
-	my $site;
-	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
-	my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
-	my $disposiciones = $c->model('DB::Disposicion')->search();
-	my @disp = $disposiciones->all;
-	my $superh;
-	foreach my $d (@disp){
-		my $activa = 1 if $d->modulo eq $disposicion; 
-		push @{$superh->{disposiciones}},{ nombre => $d->nombre, modulo => $d->modulo, activa => $activa };
+	if ($c->req->method eq 'POST'){
+		# TODO
+		# aqui se puede guardar el detalle de la auditoria. 
+		# Los campos son:
+		#  * disposicion 	(Alt)
+		#  * id 			(13)
+		#  * resultado 		(fallo)
+		#  * url 			(array [])
+		$c->res->body(1);
 	}
-	
-	if ($d->id){
-		$ndis = $d->nombre;
-		$ddis = $d->descripcion;
-	    $c->stash->{nombre} = $ndis;
-	    $c->stash->{descripcion} = $ddis;
-	}
-	if ($auditoria->id){
-        $c->stash->{idAuditoria} = $auditoria->id;
-		my $job_id = $auditoria->job;
-		my $job = CNTI::Validator::Jobs->find_job( $job_id );
-		$site = $job->site;
-		$hash = $job->as_hash;
-		my $it = $job->children();
-		while ( my $u = $it->() ){
-			next if $u->path eq '/';
-			my $it2 = $u->children;
-           	while ( my $r = $it2->() ) {
-			 	next if $r->name ne $disposicion; 
-				push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass} if $r->pass ne 'pass';
-				if ($r->pass ne 'pass'){
-                	$c->log->debug($r->pass);
-					$pass = 'fail';
-				} 
-           	}
+	if ($disposicion && $id) {
+		my $h;
+		my $ndis; #Nombre disposicion
+		my $ddis; #Descripcion disposicion
+		my $pass = 'pass'; #Resultado general de la disposicion 
+		my $hash;
+		my $site;
+		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+		my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
+		my $disposiciones = $c->model('DB::Disposicion')->search();
+		my @disp = $disposiciones->all;
+		my $superh;
+		foreach my $d (@disp){
+			my $activa = 1 if $d->modulo eq $disposicion; 
+			push @{$superh->{disposiciones}},{ nombre => $d->nombre, modulo => $d->modulo, activa => $activa, pass => 'pass' };
 		}
+		
+		if ($d->id){
+			$ndis = $d->nombre;
+			$ddis = $d->descripcion;
+		    $c->stash->{nombre} = $ndis;
+		    $c->stash->{descripcion} = $ddis;
+		}
+		if ($auditoria->id){
+	        $c->stash->{idAuditoria} = $auditoria->id;
+			my $job_id = $auditoria->job;
+			my $job = CNTI::Validator::Jobs->find_job( $job_id );
+			$site = $job->site;
+			$hash = $job->as_hash;
+			my $it = $job->children();
+			while ( my $u = $it->() ){
+				next if $u->path eq '/';
+				my $it2 = $u->children;
+	           	while ( my $r = $it2->() ) {
+				 	next if $r->name ne $disposicion; 
+					push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass} if $r->pass ne 'pass';
+					if ($r->pass ne 'pass'){
+	                	$c->log->debug($r->pass);
+						$pass = 'fail';
+						
+					} 
+	           	}
+			}
+		}
+	
+		$c->stash->{urls} = \@{$h->{url}};
+		$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
+		$c->stash->{fail} = 1 if $pass eq 'fail'; 
+		$c->stash->{portal} = $site; 
+		$c->stash->{template} = 'auditoria/detalle.tt2';
 	}
-	$c->stash->{urls} = \@{$h->{url}};
-	$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
-	$c->stash->{fail} = 1 if $pass eq 'fail'; 
-	$c->stash->{portal} = $site; 
-	$c->stash->{template} = 'auditoria/detalle.tt2';
 }
 
 

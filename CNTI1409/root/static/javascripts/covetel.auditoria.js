@@ -104,7 +104,46 @@ $("document").ready(function(){
 
 	$("button#guardar").button({icons: {primary:'ui-icon-disk'}});
 	$("button#guardar").click(function(){
-
+		
+		//Obtengo el valor del textarea acciones_correctivas. 
+		var acciones_correctivas = $("#acciones_correctivas").val();
+		if (acciones_correctivas != ''){
+			
+			//Array para guardar las url.
+			var urls = new Array();
+			
+			//Saco las urls de la lista ul.urls y lleno el array
+			$("ul.urls").children().each(function() {
+				urls.push($(this).html());	
+			});
+	
+			
+			//Obtengo el nombre de la disposición y el ID de la auditoría. 
+			var x 				= $("button.activa").attr('id');
+			var y 				= x.split('-');
+			var disposicion 	= y[0];
+			var id 				= y[1];
+	
+			//Obtengo el resultado de la disposición, que esta en el atributo title de la imagen 
+	 		//en el span con ID icon
+			var resultado 		= $("span#icon img").attr('title');
+			
+			//Creo un objeto llamado datos, para enviarlo al servidor.
+	        var datos = ({'disposicion': disposicion, 'id': id, 'resultado': resultado, 'urls': urls});
+			$.post('/auditoria/detalle/',datos,function(respuesta){
+				if (respuesta == 1){
+					$("div.error_disposicion").hide("slow");
+					$("div.mensaje_disposicion").show("slow");
+					$("button#guardar").button({disabled: true});
+					$("textarea").attr('disabled','disabled');
+				} else {
+					$("div.error_disposicion").show("slow");
+				}		
+			});
+		} else {
+			$("div.ui-state-error p").append("<div>Debe llenar el campo <strong> Acciones Correctivas </strong></div>");
+			$("div.error_disposicion").show("slow");
+		}	
 	});
 
 });
