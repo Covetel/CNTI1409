@@ -81,11 +81,11 @@ $("document").ready(function(){
 	// Detalle
 	$("form#disposicion").attr("onsubmit","return false");
 	
-	$("form#disposicion div#progreso").css('text-align','left').height('85px');
+	$("div#progreso").css('text-align','left').height('85px');
 	$("form#disposicion div#progreso").css('font-size','0.9em');
 	$("form#disposicion textarea").width('100%').val('');
 	$("form#disposicion").css('font-size','0.9em');
-	$("form#disposicion div.text,div.label").css('text-align','left');
+	$("form#disposicion").css('text-align','left');
 	//$("form#disposicion div.multi").width('580px');
 
 	// Botonera de disposiciones en la vista de detall
@@ -99,8 +99,8 @@ $("document").ready(function(){
 
 
 	$("div#nav button").button({icons: {primary:'ui-icon-circle-zoomin'} });
-	$("div#nav button").css('font-size','0.7em');	
-	$("button.activa").button({icons: {primary: 'ui-icon-folder-open'}});
+	$("div#nav button").css('font-size','0.7em').css('margin-top','5px');	
+	$("button.activa").button({icons: {primary: 'ui-icon-folder-open'}, disabled: true}).css('font-size','1em');
 
 	$("button#guardar").button({icons: {primary:'ui-icon-disk'}});
 	$("button#guardar").click(function(){

@@ -18,6 +18,11 @@
 			</ul>
 		</div>
 </div>
+<div class="text label">
+		<label for="comentarios"> Acciones Correctivas: </label>
+		<textarea id="acciones_correctivas" name="acciones_correctivas"> 
+		</textarea>
+</div>
 [% ELSE %]
 <div class="informacion">
  <span class="mensajito">Todas las direcciones pasaron las pruebas para la disposición actual. </span>
@@ -25,16 +30,6 @@
  <div class="clear"> &nbsp; </div>
 </div>
 [% END %]
-<div class="text label">
-		<label for="comentarios"> Comentarios: </label>
-		<textarea id="comentarios" name="comentarios"> 
-		</textarea>
-</div>
-<div class="text label">
-		<label for="comentarios"> Resolutoria: </label>
-		<textarea id="resolutoria" name="resolutoria"> 
-		</textarea>
-</div>
 
 </fieldset>
 <div class="multi">
