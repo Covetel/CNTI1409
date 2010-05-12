@@ -73,7 +73,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    $self->ok( $self->uri->authority =~ /\.gob\.ve$/ );
+    $self->ok( $self->uri->authority =~ /\.gob\.ve$/i );
 }
 
 package CNTI::Validator::Test::Title;
@@ -98,6 +98,7 @@ sub run {
     }
     $node = $node->find('title');
     unless ($node) {
+        $DB::single = 1;
         $self->event_log( 'error', 'No tiene TITLE' );
         return $self->ok(0);
     }
@@ -324,7 +325,6 @@ sub run {
     my $self  = shift;
 
     my $decl = $self->htmlt->{_decl}{text} || '';    # TODO: fix this
-    #$DB::single = 1;
     my $type = '';
     if ( $decl =~ s!DOCTYPE \s+ html!!x ) {
         if ( $decl =~ s!^\s*PUBLIC!!x ) {
