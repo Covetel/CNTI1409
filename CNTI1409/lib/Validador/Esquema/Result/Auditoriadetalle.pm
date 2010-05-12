@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoriadetalle");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0xb22e910)
+  default_value: SCALAR(0x9e9b900)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -45,37 +45,12 @@ Clave que relaciona los detalles de la auditoria con sus datos maestros
 =head2 iddisposicion
 
   data_type: bigint
-  default_value: SCALAR(0xb21aa20)
+  default_value: SCALAR(0x9ead3e0)
   is_auto_increment: 1
   is_foreign_key: 1
   is_nullable: 0
 
 Clave que relaciona los detalles de las auditorias con cada disposicion
-
-=head2 resultado
-
-  data_type: boolean
-  default_value: SCALAR(0xb21a410)
-  is_nullable: 0
-
-Determina si una disposicion es valida o no
-
-=head2 resdetalle
-
-  data_type: text
-  default_value: undef
-  is_nullable: 1
-
-Detalle del resultado de una disposicion si esta no es valida
-
-=head2 comentario
-
-  data_type: character varying
-  default_value: undef
-  is_nullable: 1
-  size: 200
-
-comentario del auditor por cada disposicion evaluada en algun portal
 
 =head2 resolutoria
 
@@ -83,8 +58,6 @@ comentario del auditor por cada disposicion evaluada en algun portal
   default_value: undef
   is_nullable: 1
   size: 200
-
-resolutoria del auditor por cada disposicion evaluada a un portal
 
 =cut
 
@@ -110,17 +83,6 @@ __PACKAGE__->add_columns(
     is_auto_increment => 1,
     is_foreign_key    => 1,
     is_nullable       => 0,
-  },
-  "resultado",
-  { data_type => "boolean", default_value => \"true", is_nullable => 0 },
-  "resdetalle",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
-  "comentario",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 200,
   },
   "resolutoria",
   {
@@ -165,8 +127,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-10 14:56:58
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WOuMhNQ93iyYNCQZo7LPNQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-12 17:54:38
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oeHeaOr5eJziPnzAK3Tf7g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

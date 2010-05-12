@@ -272,6 +272,12 @@ sub detalle : Local {
             my $modulo = $c->req->params->{disposicion};
             my $idAuditoria = $c->req->params->{id};
             my $resolutoria = $c->req->params->{acciones};
+            my $auditoria = $c->model('DB::Auditoria')->find({ id => $idAuditoria });
+            if ($auditoria->estado eq "c") { 
+                $c->stash->{cierra} = "true";
+            } else {
+                $c->stash->{cierra} = "false";
+            }
             if ( $idAuditoria && $modulo ) {
                 my $auDetalle = $c->model('DB::Auditoriadetalle');
                 my $idDisposicion = $c->model('DB::Disposicion')->find(
@@ -352,6 +358,13 @@ sub detalle : Local {
         if ($resolutoria) {
             $c->stash->{acciones} = $resolutoria->resolutoria;
         }
+        if ($auditoria->estado eq "c") { 
+            $c->stash->{cierra} = 1;
+        } else {
+            $c->stash->{cierra} = 0;
+        }
+        $c->log->debug("DEPURANDO");
+        $c->log->debug($c->stash->{cierra});
             
 		$c->stash->{urls} = \@{$h->{url}};
 		$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
