@@ -266,8 +266,8 @@ sub detalle : Local {
         if ($cerrar) {
             my $id = $c->req->params->{id};
             my $auditoria = $c->model('DB::Auditoria')->find($id);
-            $auditoria->update({ estado => 'c'});
-            $c->detach('/auditoria/reporte');
+            $auditoria->update({ estado => 'c', fechafin => DateTime->now });
+            $c->res->body(1);
         } else {
             my $modulo = $c->req->params->{disposicion};
             my $idAuditoria = $c->req->params->{id};
