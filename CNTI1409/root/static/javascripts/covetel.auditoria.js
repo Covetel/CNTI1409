@@ -111,7 +111,7 @@ $("document").ready(function(){
 	var acciones_correctivas = $("#acciones_correctivas").val();
     if (acciones_correctivas != ''){
         $("button#guardar").button({disabled: true});
-        $("textarea").attr('disabled','disabled');
+        $("textarea#acciones_correctivas").attr('disabled','disabled');
     }
     
     // click de las UL
