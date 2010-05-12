@@ -28,6 +28,11 @@ sub _build_response {
 
 sub _build_content {
     my $self = shift;
+    unless ( $self->response->code =~ /^2*/ ) {
+        $self->event_log( fatal => "HTTP Error: " . $self->response->code );
+        $self->ok(0);
+        die;
+    }
     $self->response->content;
 }
 
@@ -68,7 +73,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    $self->ok( $self->uri->authority =~ /\.gob\.ve$/, "Dominio incorrecto" );
+    $self->ok( $self->uri->authority =~ /\.gob\.ve$/ );
 }
 
 package CNTI::Validator::Test::Title;
@@ -318,7 +323,7 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self  = shift;
 
-    my $decl = $self->htmlt->{_decl}{text};    # TODO: fix this
+    my $decl = $self->htmlt->{_decl}{text} || '';    # TODO: fix this
     #$DB::single = 1;
     my $type = '';
     if ( $decl =~ s!DOCTYPE \s+ html!!x ) {

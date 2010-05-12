@@ -12,6 +12,7 @@ my @tests = qw(Domain Title UTF8 Img Alt JS JS_inc HTML4);
 around BUILDARGS => sub {
     my ( $orig, $class, $job ) = @_;
     my $cache = WWW::Mechanize::Cached->new;
+    $cache->env_proxy();
     $cache->agent_alias("Linux Mozilla");
     { job => $job, cache => $cache };
 };
@@ -32,7 +33,7 @@ sub run_test {
     my $self = shift;
     my ( $name, $url ) = @_;
     my $class = "CNTI::Validator::Test::$name";
-    $class->new( task => $self, url => $url )->run;
+    eval { $class->new( task => $self, url => $url )->run }
 }
 
 1;
