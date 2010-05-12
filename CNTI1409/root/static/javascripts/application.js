@@ -48,7 +48,7 @@ $("#loading").ajaxStop(function(){
 	});
 
     // Mascaras de entrada
-    $("#phone").mask("(999) 999-9999");
+    $("#phone").mask("(9999) 999-9999");
 
 	// Autocomplete para el campo Institucion.
 	$("#idinstitucion").autocomplete({

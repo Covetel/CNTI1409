@@ -44,15 +44,14 @@ agregar la acción correctiva que corresponda, en caso de que una o más URLs de
 		<div id="progreso"> 
 			<ul class="urls">
 				[% FOREACH url IN urls %]
-					<li class="url_done"> [% url.path %] </li>
+					<li class="url_done"><a href="[% url.path %]" target="_blank"> [% url.path %] </a></li>
 				[% END %]
 			</ul>
 		</div>
 </div>
 <div class="text label">
 		<label for="comentarios"> Acciones Correctivas: </label>
-		<textarea id="acciones_correctivas" name="acciones_correctivas"> 
-		</textarea>
+		<textarea id="acciones_correctivas" name="acciones_correctivas">[% acciones %]</textarea>
 </div>
 [% ELSE %]
 <div class="informacion">
@@ -68,6 +67,9 @@ agregar la acción correctiva que corresponda, en caso de que una o más URLs de
 	<button id="guardar"> Guardar </button>
 </div>
 [% END %]
+<div class="multi">
+	<button id="cerrar"> Cerrar Auditoría </button>
+</div>
 </form>
 
 

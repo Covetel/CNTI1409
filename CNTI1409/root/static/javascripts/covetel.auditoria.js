@@ -83,7 +83,8 @@ $("document").ready(function(){
 	
 	$("div#progreso").css('text-align','left').height('85px');
 	$("form#disposicion div#progreso").css('font-size','0.9em');
-	$("form#disposicion textarea").width('100%').val('');
+	//$("form#disposicion textarea").width('100%').val('');
+	$("form#disposicion textarea").width('100%');
 	$("form#disposicion").css('font-size','0.9em');
 	$("form#disposicion").css('text-align','left');
 	//$("form#disposicion div.multi").width('580px');
@@ -103,8 +104,17 @@ $("document").ready(function(){
 	$("button.activa").button({icons: {primary: 'ui-icon-folder-open'}, disabled: true}).css('font-size','1em');
 
 	$("button#guardar").button({icons: {primary:'ui-icon-disk'}});
-	$("button#guardar").click(function(){
-		
+	$("button#cerrar").button({icons: {primary:'ui-icon-disk'}});
+	
+
+	var acciones_correctivas = $("#acciones_correctivas").val();
+    if (acciones_correctivas != ''){
+        $("button#guardar").button({disabled: true});
+        $("textarea").attr('disabled','disabled');
+    }
+
+        
+    $("button#guardar").click(function(){
 		//Obtengo el valor del textarea acciones_correctivas. 
 		var acciones_correctivas = $("#acciones_correctivas").val();
 		if (acciones_correctivas != ''){
@@ -129,7 +139,7 @@ $("document").ready(function(){
 			var resultado 		= $("span#icon img").attr('title');
 			
 			//Creo un objeto llamado datos, para enviarlo al servidor.
-	        var datos = ({'disposicion': disposicion, 'id': id, 'resultado': resultado, 'urls': urls});
+	        var datos = ({'disposicion': disposicion, 'id': id, 'resultado': resultado, 'urls': urls, 'acciones': acciones_correctivas});
 			$.post('/auditoria/detalle/',datos,function(respuesta){
 				if (respuesta == 1){
 					$("div.error_disposicion").hide("slow");
@@ -145,5 +155,16 @@ $("document").ready(function(){
 			$("div.error_disposicion").show("slow");
 		}	
 	});
+    
+    $("button#cerrar").click(function(){
+        var x = $("button.activa").attr('id');
+        var y = x.split('-');
+        var id = y[1];
+        var datos = ({'id': id, 'cerrar': 1});
+        if (confirm("Esta seguro de cerrar esta auditoría?")) {
+            $.post('/auditoria/detalle/',datos);
+        }
+    });
+
 
 });

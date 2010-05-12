@@ -262,14 +262,35 @@ Detalle de auditoria
 sub detalle : Local {
 	my ( $self, $c, $id, $disposicion ) = @_;
 	if ($c->req->method eq 'POST'){
-		# TODO
-		# aqui se puede guardar el detalle de la auditoria. 
-		# Los campos son:
-		#  * disposicion 	(Alt)
-		#  * id 			(13)
-		#  * resultado 		(fallo)
-		#  * url 			(array [])
-		$c->res->body(1);
+        my $cerrar = $c->req->params->{cerrar};
+        if ($cerrar) {
+            my $id = $c->req->params->{id};
+            my $auditoria = $c->model('DB::Auditoria')->find($id);
+            $auditoria->update({ estado => 'c'});
+            $c->detach('/auditoria/reporte');
+        } else {
+            my $modulo = $c->req->params->{disposicion};
+            my $idAuditoria = $c->req->params->{id};
+            my $resolutoria = $c->req->params->{acciones};
+            if ( $idAuditoria && $modulo ) {
+                my $auDetalle = $c->model('DB::Auditoriadetalle');
+                my $idDisposicion = $c->model('DB::Disposicion')->find(
+                                                                            { modulo => "$modulo" },
+                                                                            { columns => [ qw / id / ] }
+                                                                      );
+                if ($idDisposicion) {
+                    my $data = $idDisposicion->id;
+                    $auDetalle->create({
+                            idauditoria => "$idAuditoria",
+                            iddisposicion => "$data",
+                            resolutoria => "$resolutoria"
+                    });
+                    $c->res->body(1);
+                }
+            } else {
+                $c->res->body(0);
+            }
+        }
 	}
 	if ($disposicion && $id) {
 		my $h;
@@ -299,23 +320,39 @@ sub detalle : Local {
 			my $job_id = $auditoria->job;
 			my $job = CNTI::Validator::Jobs->find_job( $job_id );
 			$site = $job->site;
-			$hash = $job->as_hash;
+            # $hash = $job->as_hash;
 			my $it = $job->children();
 			while ( my $u = $it->() ){
 				next if $u->path eq '/';
 				my $it2 = $u->children;
+                my $sitios;
 	           	while ( my $r = $it2->() ) {
 				 	next if $r->name ne $disposicion; 
-					push @{$h->{url}},{ disposicion => $r->name, path => $u->path, pass => $r->pass} if $r->pass ne 'pass';
-					if ($r->pass ne 'pass'){
-	                	$c->log->debug($r->pass);
-						$pass = 'fail';
-						
-					} 
+                    $sitios = $site . $u->path;
+					push @{$h->{url}},{ disposicion => $r->name, path => $sitios, pass => $r->pass} if $r->pass ne 'pass';
+                    $pass = 'fail' if ($r->pass ne 'pass');
+                    #if ($r->pass ne 'pass'){
+                    #	$pass = 'fail';
+                    #} 
 	           	}
 			}
 		}
-	
+        
+        # Verificamos si existe un comentario de acciones correctivas
+        # para esta disposicion
+        my $dispo = $c->model('DB::Disposicion')->find(
+                                                                    { modulo => "$disposicion" },
+                                                                    { columns => [ qw / id / ] }
+                                                              );
+        my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
+                { idauditoria => $id, iddisposicion => $dispo->id },
+                { columns => qw / resolutoria / }
+            );
+
+        if ($resolutoria) {
+            $c->stash->{acciones} = $resolutoria->resolutoria;
+        }
+            
 		$c->stash->{urls} = \@{$h->{url}};
 		$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
 		$c->stash->{fail} = 1 if $pass eq 'fail'; 
