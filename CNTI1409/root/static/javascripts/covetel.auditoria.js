@@ -113,7 +113,11 @@ $("document").ready(function(){
         $("button#guardar").button({disabled: true});
         $("textarea").attr('disabled','disabled');
     }
-
+    
+    // click de las UL
+    //$("ul.urls").children().each.click(function(){
+    //   alert("hola"); 
+    //});
         
     $("button#guardar").click(function(){
 		//Obtengo el valor del textarea acciones_correctivas. 
