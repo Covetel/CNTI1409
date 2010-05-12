@@ -323,7 +323,7 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self  = shift;
 
-    my $decl = $self->htmlt->{_decl}{text};    # TODO: fix this
+    my $decl = $self->htmlt->{_decl}{text} || '';    # TODO: fix this
     #$DB::single = 1;
     my $type = '';
     if ( $decl =~ s!DOCTYPE \s+ html!!x ) {
