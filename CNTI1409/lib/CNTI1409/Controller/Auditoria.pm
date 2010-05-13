@@ -300,6 +300,7 @@ sub detalle : Local {
 	}
 	if ($disposicion && $id) {
 		my $h;
+        my $errores; #variable donde intento meter los errores por URL
 		my $ndis; #Nombre disposicion
 		my $ddis; #Descripcion disposicion
 		my $pass = 'pass'; #Resultado general de la disposicion 
@@ -337,6 +338,14 @@ sub detalle : Local {
                     $sitios = $site . $u->path;
 					push @{$h->{url}},{ disposicion => $r->name, path => $sitios, pass => $r->pass} if $r->pass ne 'pass';
                     $pass = 'fail' if ($r->pass ne 'pass');
+                    if ($r->pass ne 'pass') {
+                        my $it3 = $r->children;
+                        while ( my $r2 = $it3->()) {
+                            # $c->log->debug($sitios);
+                            # $c->log->debug($r2->message);
+                            push @{$errores->{er}},{ sitio => $sitios, error => $r2->message };
+                        }
+                    }
                     #if ($r->pass ne 'pass'){
                     #	$pass = 'fail';
                     #} 
@@ -363,10 +372,9 @@ sub detalle : Local {
         } else {
             $c->stash->{cierra} = 0;
         }
-        $c->log->debug("DEPURANDO");
-        $c->log->debug($c->stash->{cierra});
             
 		$c->stash->{urls} = \@{$h->{url}};
+		$c->stash->{er} = \@{$errores->{er}};
 		$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
 		$c->stash->{fail} = 1 if $pass eq 'fail'; 
 		$c->stash->{portal} = $site; 
