@@ -73,6 +73,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
+    $DB::single = 1;
     $self->ok( $self->uri->authority =~ /\.gob\.ve$/i );
 }
 
@@ -129,7 +130,7 @@ sub run {
     my @errors;
     my @warnings;
     if ($ct_charset) {
-        if ( $ct_charset =~ /^UTF-?8$/ ) {
+        if ( $ct_charset =~ /^UTF-?8$/i ) {
             $content = eval { decode( "utf8", $resp->content, Encode::FB_CROAK ) };
             push @errors, $@ if $@;
         }
@@ -155,7 +156,7 @@ sub run {
     my @metas = $node->look_down( _tag => 'meta', 'http-equiv' => qr/^Content-Type$/i );
     for my $m (@metas) {
         my $c = $m->attr('content');
-        if ( $c =~ /^([^;]+)(?:;\s*charset=(\S+))?/ ) {
+        if ( $c =~ /^([^;]+)(?:;\s*charset=(\S+))?/i ) {
             push @errors, "HTTP charset '$ct_charset' does not match META charset '$2'"
                 if lc($ct_charset) ne lc($2);
         }
@@ -188,31 +189,7 @@ sub run {
         my $uri = URI->new_abs( $src, $self->uri );
         $self->cache->get($uri);
         my $type = $mm->checktype_contents( $self->cache->response->content );
-        unless ( $type eq 'image/png' ) {
-            $self->event_log( error => "Tipo de imagen ilegal $type" );
-            $errors++;
-        }
-    }
-    $self->ok( $errors == 0 );
-}
-sub run2 {
-    my $self  = shift;
-    my $cache = $self->cache;
-    $cache->get( $self->job->site . $self->url->path );
-    my $resp = $cache->response;
-
-    my $mm   = File::MMagic->new();
-    my $tree = HTML::TreeBuilder->new;
-    $tree->parse( $resp->content );
-    my @images = $tree->find('img');
-    my $errors = 0;
-    for my $img (@images) {
-        my $src = $img->attr('src');
-        my $uri = URI->new_abs( $src, $self->job->site . $self->url->path );
-        $cache->get($uri);
-        $resp = $cache->response;
-        my $type = $mm->checktype_contents( $resp->content );
-        unless ( $type eq 'image/png' ) {
+        unless ( lc($type) eq 'image/png' ) {
             $self->event_log( error => "Tipo de imagen ilegal $type" );
             $errors++;
         }
@@ -266,7 +243,7 @@ sub run {
         }
         if ( my $lang = $script->attr('type') ) {
             $lang_flag = 2;
-            if ( $lang =~ m!text/javascript(?:;(\S+))?! ) {
+            if ( $lang =~ m!text/javascript(?:;(\S+))?!i ) {
             }
             else {
                 $errors++;
