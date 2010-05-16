@@ -1,0 +1,14 @@
+[% titulo = 'Portal: ' _ portal _ ' | Auditoria: 000' _ idAuditoria %]
+<legend title=" [% descripcion %] "> Disposición: [% nombre %] </legend>
+[% USE Dumper %]
+[% Dumper.dump_html(urls) %]
+                    [% FOREACH url IN urls %]
+                            <li class="url_done"> [% url.path %] </li>
+                            <ul>
+                                [% FOREACH msjerror IN er %] 
+                                    [% IF msjerror.sitio == url.path %]
+                                        <li> [% msjerror.error %] </li>
+                                    [% END %]
+                                [% END %]
+                            </ul>
+                    [% END %]
