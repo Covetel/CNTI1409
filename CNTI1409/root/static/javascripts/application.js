@@ -302,7 +302,7 @@ $("#loading").ajaxStop(function(){
 	var re = /idinstitucion/gi;
 	if (re.test(idinstitucion)){
 		var institucion = idinstitucion.replace(re,'Nombre Institucion');
-		alert(institucion);
+		$("div.ui-state-error p").html(institucion);
 	}
 	
 	
