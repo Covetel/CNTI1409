@@ -276,6 +276,7 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
+						{"sClass": "estado"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
@@ -294,4 +295,16 @@ $("#loading").ajaxStop(function(){
         },
 	});
 
-});
+
+	// Cambio dinámicamente los nombres de los campos en los mensajes de error. 
+	// campo idinstitucion
+	var idinstitucion = $("div.ui-state-error p").html();
+	var re = /idinstitucion/gi;
+	if (re.test(idinstitucion)){
+		var institucion = idinstitucion.replace(re,'Nombre Institucion');
+		alert(institucion);
+	}
+	
+	
+
+}); // Cierra 

@@ -87,7 +87,7 @@ Carga la template con la tabla HTML preparada.
 
 =cut 
 
-sub reporte_old : Private {
+sub reporte : Local {
     my ( $self, $c ) = @_;
 	$c->stash->{template} = 'auditoria/listar.tt2';	
 } 
@@ -388,6 +388,7 @@ Reporte de la auditoria
 
 =cut
 
+=head2
 sub reporte : Local {
     my ( $self, $c, $id, $disposicion ) = @_;
 	if ($id) {
@@ -401,26 +402,27 @@ sub reporte : Local {
 			$site = $job->site;
 			my $it = $job->children();
 			while ( my $u = $it->() ){
-				next if $u->path eq '/';
+				#next if $u->path eq '/';
 				my $it2 = $u->children;
                 my $sitios;
 	           	while ( my $r = $it2->() ) {
                     $sitios = $site . $u->path;
                     # $h->{$r->name} = { "disposicion" => $r->name, "path" => $sitios, "pass" => $r->pass };
-                    push @{$h->{$r->name}}, { disposicion => $r->name, path => $sitios, pass => $->path };
+                    #push @{$h->{$r->name}}, { disposicion => $r->name, path => $sitios, pass => $->path };
 	           	}
 			}
 		}
         # Zona de depuracion
         use Data::Dumper;
         $c->log->debug('*** Inicio Depuracion ***');
-        $c->log->debug(Dumper(@($h->{Img})));
+        #$c->log->debug(Dumper(})));
         $c->log->debug('*** Fin Depuracion ***');
 
         $c->stash->{urls} = \%{$h};
         $c->stash->{template} = 'auditoria/reporte.tt2';
 	}
 }
+=cut 
 
 =head1 AUTHOR
 

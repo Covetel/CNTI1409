@@ -1,5 +1,5 @@
 <div id="resumen">
-	<h3> En la siguiente tabla, podrá ver el resumen de la auditoría 000[% id %] </h3>
+	<h3> En la siguiente tabla, podrá ver el detalle de la auditoría 000[% id %] </h3>
 	<table class="resumen" id="auditoria_[% id %]">
 		<tr> <td> <label> Estado </label> </td> <td id="estado">[% estado %]</td> </tr> 
 		<tr> <td> <label> [% labelfecha %] </label> </td> <td> [% fecha %] </td> </tr> 
@@ -14,7 +14,7 @@
 </div>
 <div> 
 	<button id="iniciar_auditoria"> Iniciar la Auditoria </button>
-	<button id="detalle_auditoria"> Detalle de la Auditoria </button>
+	<button id="detalle_auditoria"> Detalle de las Disposiciones </button>
 	<button id="reporte"> Ver Reporte 000[% id %] </button> 
 </div>
 

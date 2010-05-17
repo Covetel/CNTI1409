@@ -133,6 +133,12 @@ sub entidades_DELETE {
 sub auditorias : Local : ActionClass('REST') {}
 
 sub auditorias_GET {
+	sub estado {
+		my ($estado) = @_;
+		return 'Cerrada' if $estado eq 'c';
+		return 'Abierta' if $estado eq 'a';
+		return 'Pendiente' if $estado eq 'p';
+	}
     use DateTime;
 	my ($self, $c) = @_;
 	my $rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
@@ -142,7 +148,7 @@ sub auditorias_GET {
            [
                $_->id,        $_->idev->nombre,   $_->idinstitucion->nombre,
                $_->portal,    $_->fechacreacion->dmy(),  $_->fechaini ? $_->fechaini->dmy() : "N/A",
-               $_->fechafin ? $_->fechafin->dmy() : "N/A",
+               $_->fechafin ? $_->fechafin->dmy() : "N/A", &estado($_->estado) ,
            ]
          } $rs->all
     ];
