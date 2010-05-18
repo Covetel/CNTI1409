@@ -166,3 +166,7 @@ div.error_disposicion, div.mensaje_disposicion {
 div#nav {
  margin-bottom: 10px;
 }
+
+span.strong {
+ font-weight: bold;
+}

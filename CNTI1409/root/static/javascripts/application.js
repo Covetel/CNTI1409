@@ -298,12 +298,33 @@ $("#loading").ajaxStop(function(){
 
 	// Cambio dinámicamente los nombres de los campos en los mensajes de error. 
 	// campo idinstitucion
-	var idinstitucion = $("div.ui-state-error p").html();
-	var re = /idinstitucion/gi;
-	if (re.test(idinstitucion)){
-		var institucion = idinstitucion.replace(re,'Nombre Institucion');
-		$("div.ui-state-error p").html(institucion);
+	var error = $("div.ui-state-error p").html();
+	var re 	= /idinstitucion/gi;
+	var re2 = /idev/gi;
+	var re3 = /portal/gi;
+	var re4 = /Examinar/gi;
+	if (re.test(error)){
+		var error_new = error.replace(re,'<span class="strong">Nombre Instituci&oacute;n</span>');
+		$("div.ui-state-error p").html(error_new);
+	} 
+	
+	if (re2.test(error)){
+		var error_new = error.replace(re2,'<span class="strong">Nombre Entidad Verificadora</strong>');
+		$("div.ui-state-error p").html(error_new);
 	}
+	
+	if (re3.test(error)){
+		var error_new = error.replace(re3,'<span class="strong">Nombre del Portal</strong>');
+		$("div.ui-state-error p").html(error_new);
+	}
+	
+	if (re4.test(error)){
+		var error_new = error.replace(re4,'<span class="strong">Muestra</strong>');
+		$("div.ui-state-error p").html(error_new);
+	}
+
+		
+	
 	
 	
 
