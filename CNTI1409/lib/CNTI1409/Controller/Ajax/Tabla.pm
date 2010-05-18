@@ -95,9 +95,10 @@ sub entidades_GET {
     $data{aaData} = [
        map {
            [
-               $_->id,        $_->nombre,   $_->rif,
-               $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      "<div class='borrar' id='borrar_" . $_->id . "'></div>",
+               $_->id,        $_->registro,  $_->nombre,   
+               $_->rif,       $_->correo,    $_->telefono, 
+               $_->contacto,  $_->direccion, $_->web,      
+               "<div class='borrar' id='borrar_" . $_->id . "'></div>",
            ]
          } $rs->all
     ];

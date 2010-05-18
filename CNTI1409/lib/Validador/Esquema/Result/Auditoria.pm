@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x9d8cb70)
+  default_value: SCALAR(0x941d890)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -204,8 +204,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-12 17:54:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gIf39K4BeEAl0nXDE9R9kA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-18 22:34:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hrQJivZr0PwRK7gVrfIInw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

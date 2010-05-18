@@ -229,6 +229,7 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
 						{"bSearchable": false, "bSortable": false, "sClass": "tEliminar"},
                     ], 
  		"oLanguage": {

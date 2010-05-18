@@ -23,7 +23,7 @@ __PACKAGE__->table("jobs");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x9eadd40)
+  default_value: SCALAR(0x9542ab0)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -135,8 +135,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-12 17:54:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:v3uUfJhw7qmRm2XDSyeJgw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-18 22:34:00
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:jaB1bWuEJExtas7l9gGwYQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
