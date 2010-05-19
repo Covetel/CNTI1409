@@ -9,6 +9,17 @@ __PACKAGE__->config(
   'default'   => 'application/json',
 );
 
+sub auto :Private {
+    my ( $self, $c ) = @_;
+    if ($c->controller eq $c->controller('Root')->action_for('login')) {
+        return 1;
+    }
+    if (!$c->user_exists) {
+        $c->response->redirect($c->uri_for('/login'));
+        return 0;
+    }
+    return 1;
+}
 
 sub instituciones : Local : ActionClass('REST') {}
 

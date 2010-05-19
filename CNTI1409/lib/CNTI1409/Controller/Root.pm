@@ -32,7 +32,7 @@ The root page (/)
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-    $c->forward('login');
+    $c->forward('/login');
 }
 
 =head2 default
@@ -63,6 +63,7 @@ sub login : Local : FormConfig {
                                      password => $password } ) ) {
                 $c->response->redirect($c->uri_for(
                                             $c->controller('Auditoria')->action_for('reporte')));
+                return;
 
             } else {
                 $c->stash->{error} = 1;
