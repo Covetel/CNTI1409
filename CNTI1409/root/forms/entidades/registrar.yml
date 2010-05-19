@@ -20,6 +20,20 @@ elements:
               class: informacion
 
         - type: Text
+          name: registro
+          label: Número de Registro
+          attributes:
+              title: 'Por favor indique el número de registro asignado a la entidad verificadora'
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 2
+              max: 250
+              message: "El número de registro debe contener al menos 2 caracteres"
+          validator: 'CNTI1409::Unico::EntidadRegistro'
+
+        - type: Text
           name: nombre
           label: Nombre Entidad Verificadora
           attributes:

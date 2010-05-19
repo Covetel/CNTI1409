@@ -4,6 +4,7 @@
 	<thead> 
 	<tr>
 		<th id="id">ID </th>
+		<th id="registro">Num. Registro</th>
 		<th id="nombre">Nombre</th>
 		<th id="rif">R.I.F.</th>
 		<th id="correo">Correo Eletrónico</th>

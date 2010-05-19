@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0x9d8cb70)
+  default_value: SCALAR(0xaab3808)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -106,6 +106,28 @@ Fecha de creacion de la audioria
 
 Almacena el listado de las url a auditar en un portal
 
+=head2 resultado
+
+  data_type: boolean
+  default_value: undef
+  is_nullable: 1
+
+Campo que determina el estado de una auditoria, los posibles valores son: p (pendiente), a (abierto), c (cerrado)
+
+=head2 fallidas
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+
+=head2 validas
+
+  data_type: integer
+  default_value: undef
+  is_nullable: 1
+
+Resultado General de la Auditoria, de tipo boolean, TRUE para auditoria sin fallas, FALSE para auditoria fallidas
+
 =cut
 
 __PACKAGE__->add_columns(
@@ -153,6 +175,12 @@ __PACKAGE__->add_columns(
   "estado",
   { data_type => "character", default_value => "p", is_nullable => 0, size => 1 },
   "job",
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  "resultado",
+  { data_type => "boolean", default_value => undef, is_nullable => 1 },
+  "fallidas",
+  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  "validas",
   { data_type => "integer", default_value => undef, is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
@@ -204,8 +232,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-12 17:54:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gIf39K4BeEAl0nXDE9R9kA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OUP0MF9e2f8CyXrJw2/BSQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

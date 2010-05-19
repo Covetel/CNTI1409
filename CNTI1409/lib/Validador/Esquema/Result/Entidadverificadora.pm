@@ -23,7 +23,7 @@ __PACKAGE__->table("entidadverificadora");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0x9eb4e70)
+  default_value: SCALAR(0xabdb988)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -91,8 +91,15 @@ nombre de la persona contacto de la Entidad Verificadora
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0x9eb1d58)
+  default_value: SCALAR(0xabd8b20)
   is_nullable: 0
+
+=head2 registro
+
+  data_type: character varying
+  default_value: undef
+  is_nullable: 1
+  size: 30
 
 =cut
 
@@ -155,8 +162,16 @@ __PACKAGE__->add_columns(
   },
   "habilitado",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
+  "registro",
+  {
+    data_type => "character varying",
+    default_value => undef,
+    is_nullable => 1,
+    size => 30,
+  },
 );
 __PACKAGE__->set_primary_key("id");
+__PACKAGE__->add_unique_constraint("idxregistro", ["registro"]);
 __PACKAGE__->add_unique_constraint("idxrifev", ["rif"]);
 
 =head1 RELATIONS
@@ -176,8 +191,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-12 17:54:38
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5hFfnb57EU9PXbEpE0kPiw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sRc3BoPJbxEjs4j6OSDP/w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

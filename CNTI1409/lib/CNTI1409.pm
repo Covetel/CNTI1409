@@ -19,6 +19,9 @@ use Catalyst qw/
 	Unicode::Encoding
 	StackTrace
     Authentication
+    Session
+    Session::Store::FastMmap
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';
