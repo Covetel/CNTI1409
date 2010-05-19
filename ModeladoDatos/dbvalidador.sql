@@ -35,7 +35,10 @@ CREATE TABLE auditoria (
     fechacreacion date NOT NULL,
     url character varying(1000)[],
     estado character(1) DEFAULT 'p'::bpchar NOT NULL,
-    job integer
+    job integer,
+    resultado boolean,
+    fallidas integer,
+    validas integer
 );
 
 
@@ -112,6 +115,27 @@ COMMENT ON COLUMN auditoria.estado IS 'Campo que determina el estado de una audi
 
 
 --
+-- Name: COLUMN auditoria.resultado; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN auditoria.resultado IS 'Resultado General de la Auditoria, de tipo boolean, TRUE para auditoria sin fallas, FALSE para auditoria fallidas';
+
+
+--
+-- Name: COLUMN auditoria.fallidas; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN auditoria.fallidas IS 'Numero de disposiciones fallidas';
+
+
+--
+-- Name: COLUMN auditoria.validas; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN auditoria.validas IS 'Numero de disposiciones sin fallas';
+
+
+--
 -- Name: auditoria_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -135,7 +159,7 @@ ALTER SEQUENCE auditoria_id_seq OWNED BY auditoria.id;
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoria_id_seq', 13, true);
+SELECT pg_catalog.setval('auditoria_id_seq', 18, true);
 
 
 --
@@ -323,7 +347,7 @@ ALTER SEQUENCE disposicion_id_seq OWNED BY disposicion.id;
 -- Name: disposicion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('disposicion_id_seq', 13, true);
+SELECT pg_catalog.setval('disposicion_id_seq', 16, true);
 
 
 --
@@ -339,7 +363,8 @@ CREATE TABLE entidadverificadora (
     contacto character varying(250) NOT NULL,
     direccion character varying(500) DEFAULT 'N/A'::character varying,
     web character varying(250) DEFAULT 'N/A'::character varying,
-    habilitado boolean DEFAULT true NOT NULL
+    habilitado boolean DEFAULT true NOT NULL,
+    registro character varying(30)
 );
 
 
@@ -395,6 +420,13 @@ COMMENT ON COLUMN entidadverificadora.contacto IS 'nombre de la persona contacto
 
 
 --
+-- Name: COLUMN entidadverificadora.registro; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON COLUMN entidadverificadora.registro IS 'Numero de registro de la entidad verificadora';
+
+
+--
 -- Name: entidadverificadora_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -418,7 +450,7 @@ ALTER SEQUENCE entidadverificadora_id_seq OWNED BY entidadverificadora.id;
 -- Name: entidadverificadora_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('entidadverificadora_id_seq', 7, true);
+SELECT pg_catalog.setval('entidadverificadora_id_seq', 8, true);
 
 
 --
@@ -460,7 +492,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 -- Name: events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('events_id_seq', 160, true);
+SELECT pg_catalog.setval('events_id_seq', 509, true);
 
 
 --
@@ -555,7 +587,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 17, true);
+SELECT pg_catalog.setval('institucion_id_seq', 20, true);
 
 
 --
@@ -601,7 +633,7 @@ ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
 -- Name: jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('jobs_id_seq', 4, true);
+SELECT pg_catalog.setval('jobs_id_seq', 9, true);
 
 
 --
@@ -642,7 +674,7 @@ ALTER SEQUENCE results_id_seq OWNED BY results.id;
 -- Name: results_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('results_id_seq', 216, true);
+SELECT pg_catalog.setval('results_id_seq', 548, true);
 
 
 --
@@ -686,7 +718,7 @@ ALTER SEQUENCE urls_id_seq OWNED BY urls.id;
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('urls_id_seq', 27, true);
+SELECT pg_catalog.setval('urls_id_seq', 70, true);
 
 
 --
@@ -763,17 +795,22 @@ ALTER TABLE urls ALTER COLUMN id SET DEFAULT nextval('urls_id_seq'::regclass);
 -- Data for Name: auditoria; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado, job) FROM stdin;
-4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-8	2	11	Super Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-9	4	3	Otro Super Mega Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N
-11	2	2	Portal del Ministerio	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	2
-13	2	17	Luis Chacon	2010-05-11	\N	2010-05-11	{"http://www.luischacon.info/index.php?lang=es\n","http://www.luischacon.info/servicios.php\n","http://www.luischacon.info/contacto.php\n","http://www.luischacon.info/acerca-de-luis-chacon.php\n"}	a	4
-10	4	11	Otro Super Mega Portal	2010-05-10	2010-05-12	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	c	1
-12	4	3	Validador de portales	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	3
+COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado, job, resultado, fallidas, validas) FROM stdin;
+4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+8	2	11	Super Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+9	4	3	Otro Super Mega Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
+14	2	15	Uno por alli	2010-05-12	\N	2010-05-12	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	a	5	\N	\N	\N
+11	2	2	Portal del Ministerio	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	2	\N	\N	\N
+13	2	17	Luis Chacon	2010-05-11	\N	2010-05-11	{"http://www.luischacon.info/index.php?lang=es\n","http://www.luischacon.info/servicios.php\n","http://www.luischacon.info/contacto.php\n","http://www.luischacon.info/acerca-de-luis-chacon.php\n"}	a	4	\N	\N	\N
+10	4	11	Otro Super Mega Portal	2010-05-10	2010-05-12	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	c	1	\N	\N	\N
+12	4	3	Validador de portales	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	3	\N	\N	\N
+15	2	18	Portal de VENCERT	2010-05-12	\N	2010-05-12	{"https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=45&Itemid=34\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=46&Itemid=54\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=47&Itemid=55\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=48&Itemid=56\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=49&Itemid=60\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=77&Itemid=61\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=273&Itemid=83\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=34&Itemid=57\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=37&Itemid=58\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=35&Itemid=59\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=51&Itemid=50\n","https://www.vencert.gob.ve/index.php?option=com_incidentes&Itemid=73\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n"}	a	6	\N	\N	\N
+16	2	19	Seguro Social	2010-05-12	\N	2010-05-12	{"http://www.ivss.gov.ve/Ciudadano\n","http://www.ivss.gov.ve/Salud/Servicios-Institucionales\n"}	a	7	\N	\N	\N
+17	4	18	Joomla Vencert	2010-05-13	\N	2010-05-13	{"https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=45&Itemid=34\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=46&Itemid=54\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=47&Itemid=55\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=48&Itemid=56\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=49&Itemid=60\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=77&Itemid=61\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=273&Itemid=83\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=34&Itemid=57\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=37&Itemid=58\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=35&Itemid=59\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=51&Itemid=50\n","https://www.vencert.gob.ve/index.php?option=com_incidentes&Itemid=73\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n"}	a	8	\N	\N	\N
+18	2	20	Banco de Venezuela	2010-05-13	\N	2010-05-13	{"http://www.bancodevenezuela.com/?h=nuestro%20banco&i=qui%E9nes_somos&id=169\n","http://www.bancodevenezuela.com/?h=universitarios\n"}	a	9	\N	\N	\N
 \.
 
 
@@ -802,6 +839,7 @@ COPY disposicion (id, nombre, descripcion, habilitado, modulo) FROM stdin;
 11	Atributo alt	Se debe hacer uso del atributo alt para las imagenes	t	Alt
 12	Uso de Javascript	Los portales deben usar el lenguaje de script Javascript	t	JS
 13	Archivos js	Existencia de archivos .js	t	JS_inc
+15	HTML 4.01/XHTML 1.0	Verificar el uso de HTML 4.01 o XHTML 1.0	t	HTML4
 \.
 
 
@@ -809,12 +847,13 @@ COPY disposicion (id, nombre, descripcion, habilitado, modulo) FROM stdin;
 -- Data for Name: entidadverificadora; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion, web, habilitado) FROM stdin;
-2	COVETEL	J-992929	info@covetel.com.ve	0412-9889285	Juan Mesa	Cordero	www.covetel.com.ve	t
-4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org	t
-5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Distrito Federal	http://networkit.com.ve	f
-6	El Pollo Loco	J-432149595	pollo@enbrasa.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org	t
-7	B-52	J-12319181	b52@algo.com	555-555.5555	Alguien por alli	En la lata	http://www.google.com	t
+COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion, web, habilitado, registro) FROM stdin;
+2	COVETEL	J-992929	info@covetel.com.ve	0412-9889285	Juan Mesa	Cordero	www.covetel.com.ve	t	0001
+4	Cooperativa GNU	J-12312391	gnu@cooperativa.com	0414-9999999	Richard Stallman	Internet	http://www.gnu.org	t	0002
+5	Network IT	j-00000000	info@networkit.com.ve	0414-000.0000	Ninguno	Distrito Federal	http://networkit.com.ve	f	0003
+6	El Pollo Loco	J-432149595	pollo@enbrasa.com	0416-5555555	El Gallo Claudio	La granja	http://pollitodice.org	t	0004
+7	B-52	J-12319181	b52@algo.com	555-555.5555	Alguien por alli	En la lata	http://www.google.com	t	0005
+8	Tucupita Technology	J-44921193	info@tucupita.net.ve	(0416) 888-8888	El pana de Tucupita	Tucupita, calle principal	http://www.tucupita.net.ve	t	0006
 \.
 
 
@@ -983,6 +1022,355 @@ COPY events (id, pid, class, message, data) FROM stdin;
 158	215	error	Script en línea	\N
 159	215	error	Script en línea	\N
 160	215	error	Script en línea	\N
+161	220	error	Tipo de imagen ilegal image/gif	\N
+162	220	error	Tipo de imagen ilegal image/gif	\N
+163	220	error	Tipo de imagen ilegal text/plain	\N
+164	220	error	Tipo de imagen ilegal image/jpeg	\N
+165	220	error	Tipo de imagen ilegal image/gif	\N
+166	220	error	Tipo de imagen ilegal image/gif	\N
+167	220	error	Tipo de imagen ilegal text/plain	\N
+168	223	error	No se usan archivos con extensión .js	\N
+169	228	error	Tipo de imagen ilegal image/gif	\N
+170	228	error	Tipo de imagen ilegal image/gif	\N
+171	228	error	Tipo de imagen ilegal text/plain	\N
+172	228	error	Tipo de imagen ilegal image/gif	\N
+173	229	error	Hay 1 imagenes sin atributo ALT	\N
+174	231	error	Script en línea	\N
+175	232	error	El tipo de documento es: HTML-5	\N
+176	236	error	Tipo de imagen ilegal text/plain	\N
+177	236	error	Tipo de imagen ilegal image/gif	\N
+178	236	error	Tipo de imagen ilegal image/gif	\N
+179	236	error	Tipo de imagen ilegal text/plain	\N
+180	236	error	Tipo de imagen ilegal image/gif	\N
+181	237	error	Hay 1 imagenes sin atributo ALT	\N
+182	239	error	Script en línea	\N
+183	240	error	El tipo de documento es: HTML-5	\N
+184	244	error	Tipo de imagen ilegal image/gif	\N
+185	244	error	Tipo de imagen ilegal image/gif	\N
+186	244	error	Tipo de imagen ilegal text/plain	\N
+187	245	error	Hay 1 imagenes sin atributo ALT	\N
+188	247	error	Script en línea	\N
+189	248	error	El tipo de documento es: HTML-5	\N
+190	252	error	Tipo de imagen ilegal image/gif	\N
+191	252	error	Tipo de imagen ilegal image/gif	\N
+192	252	error	Tipo de imagen ilegal text/plain	\N
+193	253	error	Hay 1 imagenes sin atributo ALT	\N
+194	255	error	Script en línea	\N
+195	256	error	El tipo de documento es: HTML-5	\N
+196	260	error	Tipo de imagen ilegal image/gif	\N
+197	260	error	Tipo de imagen ilegal image/gif	\N
+198	260	error	Tipo de imagen ilegal text/plain	\N
+199	261	error	Hay 1 imagenes sin atributo ALT	\N
+200	263	error	Script en línea	\N
+201	264	error	El tipo de documento es: HTML-5	\N
+202	268	error	Tipo de imagen ilegal image/gif	\N
+203	268	error	Tipo de imagen ilegal image/gif	\N
+204	268	error	Tipo de imagen ilegal text/plain	\N
+205	269	error	Hay 1 imagenes sin atributo ALT	\N
+206	271	error	Script en línea	\N
+207	272	error	El tipo de documento es: HTML-5	\N
+208	276	error	Tipo de imagen ilegal image/gif	\N
+209	276	error	Tipo de imagen ilegal image/gif	\N
+210	276	error	Tipo de imagen ilegal text/plain	\N
+211	277	error	Hay 1 imagenes sin atributo ALT	\N
+212	279	error	Script en línea	\N
+213	280	error	El tipo de documento es: HTML-5	\N
+214	282	error	No tiene TITLE	\N
+215	283	warnings	No HTTP Charset	\N
+216	287	error	No se usan archivos con extensión .js	\N
+217	290	error	No tiene TITLE	\N
+218	291	warnings	No HTTP Charset	\N
+219	295	error	No se usan archivos con extensión .js	\N
+220	298	error	No tiene TITLE	\N
+221	299	warnings	No HTTP Charset	\N
+222	303	error	No se usan archivos con extensión .js	\N
+223	306	error	No tiene TITLE	\N
+224	307	warnings	No HTTP Charset	\N
+225	311	error	No se usan archivos con extensión .js	\N
+226	314	error	No tiene TITLE	\N
+227	315	warnings	No HTTP Charset	\N
+228	319	error	No se usan archivos con extensión .js	\N
+229	322	error	No tiene TITLE	\N
+230	323	warnings	No HTTP Charset	\N
+231	327	error	No se usan archivos con extensión .js	\N
+232	330	error	No tiene TITLE	\N
+233	331	warnings	No HTTP Charset	\N
+234	335	error	No se usan archivos con extensión .js	\N
+235	338	error	No tiene TITLE	\N
+236	339	warnings	No HTTP Charset	\N
+237	343	error	No se usan archivos con extensión .js	\N
+238	346	error	No tiene TITLE	\N
+239	347	warnings	No HTTP Charset	\N
+240	351	error	No se usan archivos con extensión .js	\N
+241	354	error	No tiene TITLE	\N
+242	355	warnings	No HTTP Charset	\N
+243	359	error	No se usan archivos con extensión .js	\N
+244	362	error	No tiene TITLE	\N
+245	363	warnings	No HTTP Charset	\N
+246	367	error	No se usan archivos con extensión .js	\N
+247	370	error	No tiene TITLE	\N
+248	371	warnings	No HTTP Charset	\N
+249	375	error	No se usan archivos con extensión .js	\N
+250	378	error	No tiene TITLE	\N
+251	379	warnings	No HTTP Charset	\N
+252	383	error	No se usan archivos con extensión .js	\N
+253	386	error	No tiene TITLE	\N
+254	387	warnings	No HTTP Charset	\N
+255	391	error	No se usan archivos con extensión .js	\N
+256	394	error	No tiene TITLE	\N
+257	395	warnings	No HTTP Charset	\N
+258	399	error	No se usan archivos con extensión .js	\N
+259	404	error	Tipo de imagen ilegal image/jpeg	\N
+260	404	error	Tipo de imagen ilegal image/jpeg	\N
+261	404	error	Tipo de imagen ilegal image/jpeg	\N
+262	404	error	Tipo de imagen ilegal image/jpeg	\N
+263	404	error	Tipo de imagen ilegal image/jpeg	\N
+264	404	error	Tipo de imagen ilegal image/jpeg	\N
+265	404	error	Tipo de imagen ilegal image/jpeg	\N
+266	404	error	Tipo de imagen ilegal text/plain	\N
+267	404	error	Tipo de imagen ilegal image/jpeg	\N
+268	404	error	Tipo de imagen ilegal image/jpeg	\N
+269	404	error	Tipo de imagen ilegal image/jpeg	\N
+270	404	error	Tipo de imagen ilegal image/jpeg	\N
+271	404	error	Tipo de imagen ilegal text/plain	\N
+272	404	error	Tipo de imagen ilegal image/jpeg	\N
+273	404	error	Tipo de imagen ilegal image/jpeg	\N
+274	404	error	Tipo de imagen ilegal image/jpeg	\N
+275	406	warning	Atributo obsoleto 'language'	\N
+276	406	warning	Atributo obsoleto 'language'	\N
+277	406	error	Lenguaje ilegal: JavaScript1.2	\N
+278	407	error	Script en línea	\N
+279	407	error	Script en línea	\N
+280	407	error	Script en línea	\N
+281	407	error	Script en línea	\N
+282	407	error	Script en línea	\N
+283	407	error	Script en línea	\N
+284	407	error	Script en línea	\N
+285	407	error	Script en línea	\N
+286	407	error	Script en línea	\N
+287	407	error	Script en línea	\N
+288	412	error	Tipo de imagen ilegal image/jpeg	\N
+289	412	error	Tipo de imagen ilegal image/jpeg	\N
+290	414	error	No tiene TITLE	\N
+291	415	warnings	No HTTP Charset	\N
+292	419	error	No se usan archivos con extensión .js	\N
+293	422	error	No tiene TITLE	\N
+294	423	warnings	No HTTP Charset	\N
+295	427	error	No se usan archivos con extensión .js	\N
+296	430	error	No tiene TITLE	\N
+297	431	warnings	No HTTP Charset	\N
+298	435	error	No se usan archivos con extensión .js	\N
+299	438	error	No tiene TITLE	\N
+300	439	warnings	No HTTP Charset	\N
+301	443	error	No se usan archivos con extensión .js	\N
+302	446	error	No tiene TITLE	\N
+303	447	warnings	No HTTP Charset	\N
+304	451	error	No se usan archivos con extensión .js	\N
+305	454	error	No tiene TITLE	\N
+306	455	warnings	No HTTP Charset	\N
+307	459	error	No se usan archivos con extensión .js	\N
+308	462	error	No tiene TITLE	\N
+309	463	warnings	No HTTP Charset	\N
+310	467	error	No se usan archivos con extensión .js	\N
+311	470	error	No tiene TITLE	\N
+312	471	warnings	No HTTP Charset	\N
+313	475	error	No se usan archivos con extensión .js	\N
+314	478	error	No tiene TITLE	\N
+315	479	warnings	No HTTP Charset	\N
+316	483	error	No se usan archivos con extensión .js	\N
+317	486	error	No tiene TITLE	\N
+318	487	warnings	No HTTP Charset	\N
+319	491	error	No se usan archivos con extensión .js	\N
+320	494	error	No tiene TITLE	\N
+321	495	warnings	No HTTP Charset	\N
+322	499	error	No se usan archivos con extensión .js	\N
+323	502	error	No tiene TITLE	\N
+324	503	warnings	No HTTP Charset	\N
+325	507	error	No se usan archivos con extensión .js	\N
+326	510	error	No tiene TITLE	\N
+327	511	warnings	No HTTP Charset	\N
+328	515	error	No se usan archivos con extensión .js	\N
+329	518	error	No tiene TITLE	\N
+330	519	warnings	No HTTP Charset	\N
+331	523	error	No se usan archivos con extensión .js	\N
+332	527	warnings	HTTP charset: ISO-8859-1	\N
+333	528	error	Tipo de imagen ilegal image/jpeg	\N
+334	528	error	Tipo de imagen ilegal image/jpeg	\N
+335	528	error	Tipo de imagen ilegal image/gif	\N
+336	528	error	Tipo de imagen ilegal image/jpeg	\N
+337	528	error	Tipo de imagen ilegal image/jpeg	\N
+338	528	error	Tipo de imagen ilegal image/jpeg	\N
+339	528	error	Tipo de imagen ilegal image/jpeg	\N
+340	528	error	Tipo de imagen ilegal image/jpeg	\N
+341	528	error	Tipo de imagen ilegal image/jpeg	\N
+342	528	error	Tipo de imagen ilegal image/jpeg	\N
+343	528	error	Tipo de imagen ilegal image/jpeg	\N
+344	528	error	Tipo de imagen ilegal image/jpeg	\N
+345	528	error	Tipo de imagen ilegal image/jpeg	\N
+346	528	error	Tipo de imagen ilegal image/jpeg	\N
+347	528	error	Tipo de imagen ilegal image/jpeg	\N
+348	528	error	Tipo de imagen ilegal image/jpeg	\N
+349	528	error	Tipo de imagen ilegal image/jpeg	\N
+350	528	error	Tipo de imagen ilegal image/jpeg	\N
+351	528	error	Tipo de imagen ilegal image/jpeg	\N
+352	528	error	Tipo de imagen ilegal image/gif	\N
+353	528	error	Tipo de imagen ilegal image/gif	\N
+354	528	error	Tipo de imagen ilegal image/jpeg	\N
+355	528	error	Tipo de imagen ilegal image/jpeg	\N
+356	528	error	Tipo de imagen ilegal image/jpeg	\N
+357	528	error	Tipo de imagen ilegal image/jpeg	\N
+358	528	error	Tipo de imagen ilegal image/jpeg	\N
+359	528	error	Tipo de imagen ilegal image/jpeg	\N
+360	528	error	Tipo de imagen ilegal image/gif	\N
+361	528	error	Tipo de imagen ilegal image/gif	\N
+362	528	error	Tipo de imagen ilegal image/gif	\N
+363	528	error	Tipo de imagen ilegal image/gif	\N
+364	528	error	Tipo de imagen ilegal image/gif	\N
+365	528	error	Tipo de imagen ilegal image/gif	\N
+366	528	error	Tipo de imagen ilegal image/gif	\N
+367	528	error	Tipo de imagen ilegal image/gif	\N
+368	528	error	Tipo de imagen ilegal image/jpeg	\N
+369	528	error	Tipo de imagen ilegal image/jpeg	\N
+370	528	error	Tipo de imagen ilegal image/jpeg	\N
+371	528	error	Tipo de imagen ilegal image/jpeg	\N
+372	528	error	Tipo de imagen ilegal image/jpeg	\N
+373	528	error	Tipo de imagen ilegal image/jpeg	\N
+374	528	error	Tipo de imagen ilegal image/jpeg	\N
+375	529	error	Hay 28 imagenes sin atributo ALT	\N
+376	529	warning	Hay 16 imagenes con atributo ALT vacío	\N
+377	530	warning	Atributo obsoleto 'language'	\N
+378	530	warning	Atributo obsoleto 'language'	\N
+379	530	warning	Atributo obsoleto 'language'	\N
+380	530	warning	Atributo obsoleto 'language'	\N
+381	530	error	Lenguaje ilegal: text/JavaScript	\N
+382	530	warning	Atributo obsoleto 'language'	\N
+383	530	warning	Atributo obsoleto 'language'	\N
+384	531	error	Script en línea	\N
+385	531	error	Script en línea	\N
+386	531	error	Script en línea	\N
+387	531	error	Script en línea	\N
+388	531	error	Script en línea	\N
+389	531	error	Script en línea	\N
+390	531	error	Script en línea	\N
+391	531	error	Script en línea	\N
+392	535	warnings	HTTP charset: ISO-8859-1	\N
+393	536	error	Tipo de imagen ilegal image/jpeg	\N
+394	536	error	Tipo de imagen ilegal image/jpeg	\N
+395	536	error	Tipo de imagen ilegal image/gif	\N
+396	536	error	Tipo de imagen ilegal image/gif	\N
+397	536	error	Tipo de imagen ilegal image/gif	\N
+398	536	error	Tipo de imagen ilegal image/gif	\N
+399	536	error	Tipo de imagen ilegal image/gif	\N
+400	536	error	Tipo de imagen ilegal image/gif	\N
+401	536	error	Tipo de imagen ilegal image/gif	\N
+402	536	error	Tipo de imagen ilegal image/gif	\N
+403	536	error	Tipo de imagen ilegal image/gif	\N
+404	536	error	Tipo de imagen ilegal image/gif	\N
+405	536	error	Tipo de imagen ilegal image/gif	\N
+406	536	error	Tipo de imagen ilegal image/gif	\N
+407	536	error	Tipo de imagen ilegal image/gif	\N
+408	536	error	Tipo de imagen ilegal image/gif	\N
+409	536	error	Tipo de imagen ilegal image/jpeg	\N
+410	536	error	Tipo de imagen ilegal image/jpeg	\N
+411	536	error	Tipo de imagen ilegal image/jpeg	\N
+412	536	error	Tipo de imagen ilegal image/jpeg	\N
+413	536	error	Tipo de imagen ilegal image/jpeg	\N
+414	536	error	Tipo de imagen ilegal image/jpeg	\N
+415	536	error	Tipo de imagen ilegal image/jpeg	\N
+416	536	error	Tipo de imagen ilegal image/jpeg	\N
+417	536	error	Tipo de imagen ilegal image/jpeg	\N
+418	536	error	Tipo de imagen ilegal image/jpeg	\N
+419	536	error	Tipo de imagen ilegal image/jpeg	\N
+420	536	error	Tipo de imagen ilegal image/jpeg	\N
+421	536	error	Tipo de imagen ilegal image/jpeg	\N
+422	536	error	Tipo de imagen ilegal image/jpeg	\N
+423	536	error	Tipo de imagen ilegal image/jpeg	\N
+424	536	error	Tipo de imagen ilegal image/jpeg	\N
+425	536	error	Tipo de imagen ilegal image/gif	\N
+426	536	error	Tipo de imagen ilegal image/gif	\N
+427	536	error	Tipo de imagen ilegal image/gif	\N
+428	536	error	Tipo de imagen ilegal image/gif	\N
+429	536	error	Tipo de imagen ilegal image/gif	\N
+430	536	error	Tipo de imagen ilegal image/gif	\N
+431	536	error	Tipo de imagen ilegal image/gif	\N
+432	536	error	Tipo de imagen ilegal image/gif	\N
+433	536	error	Tipo de imagen ilegal image/gif	\N
+434	536	error	Tipo de imagen ilegal image/gif	\N
+435	536	error	Tipo de imagen ilegal image/gif	\N
+436	536	error	Tipo de imagen ilegal image/gif	\N
+437	536	error	Tipo de imagen ilegal image/gif	\N
+438	536	error	Tipo de imagen ilegal image/gif	\N
+439	537	error	Hay 32 imagenes sin atributo ALT	\N
+440	537	warning	Hay 14 imagenes con atributo ALT vacío	\N
+441	538	warning	Atributo obsoleto 'language'	\N
+442	538	error	Lenguaje ilegal: text/JavaScript	\N
+443	538	warning	Atributo obsoleto 'language'	\N
+444	539	error	Script en línea	\N
+445	539	error	Script en línea	\N
+446	539	error	Script en línea	\N
+447	539	error	Script en línea	\N
+448	539	error	Script en línea	\N
+449	539	error	Script en línea	\N
+450	543	warnings	HTTP charset: ISO-8859-1	\N
+451	544	error	Tipo de imagen ilegal image/jpeg	\N
+452	544	error	Tipo de imagen ilegal image/jpeg	\N
+453	544	error	Tipo de imagen ilegal image/gif	\N
+454	544	error	Tipo de imagen ilegal image/jpeg	\N
+455	544	error	Tipo de imagen ilegal image/jpeg	\N
+456	544	error	Tipo de imagen ilegal image/jpeg	\N
+457	544	error	Tipo de imagen ilegal image/jpeg	\N
+458	544	error	Tipo de imagen ilegal image/jpeg	\N
+459	544	error	Tipo de imagen ilegal image/jpeg	\N
+460	544	error	Tipo de imagen ilegal image/jpeg	\N
+461	544	error	Tipo de imagen ilegal image/jpeg	\N
+462	544	error	Tipo de imagen ilegal image/jpeg	\N
+463	544	error	Tipo de imagen ilegal image/jpeg	\N
+464	544	error	Tipo de imagen ilegal image/jpeg	\N
+465	544	error	Tipo de imagen ilegal image/jpeg	\N
+466	544	error	Tipo de imagen ilegal image/jpeg	\N
+467	544	error	Tipo de imagen ilegal image/jpeg	\N
+468	544	error	Tipo de imagen ilegal image/jpeg	\N
+469	544	error	Tipo de imagen ilegal image/jpeg	\N
+470	544	error	Tipo de imagen ilegal image/gif	\N
+471	544	error	Tipo de imagen ilegal image/gif	\N
+472	544	error	Tipo de imagen ilegal image/jpeg	\N
+473	544	error	Tipo de imagen ilegal image/jpeg	\N
+474	544	error	Tipo de imagen ilegal image/jpeg	\N
+475	544	error	Tipo de imagen ilegal image/jpeg	\N
+476	544	error	Tipo de imagen ilegal image/jpeg	\N
+477	544	error	Tipo de imagen ilegal image/jpeg	\N
+478	544	error	Tipo de imagen ilegal image/gif	\N
+479	544	error	Tipo de imagen ilegal image/gif	\N
+480	544	error	Tipo de imagen ilegal image/gif	\N
+481	544	error	Tipo de imagen ilegal image/gif	\N
+482	544	error	Tipo de imagen ilegal image/gif	\N
+483	544	error	Tipo de imagen ilegal image/gif	\N
+484	544	error	Tipo de imagen ilegal image/gif	\N
+485	544	error	Tipo de imagen ilegal image/gif	\N
+486	544	error	Tipo de imagen ilegal image/jpeg	\N
+487	544	error	Tipo de imagen ilegal image/jpeg	\N
+488	544	error	Tipo de imagen ilegal image/jpeg	\N
+489	544	error	Tipo de imagen ilegal image/jpeg	\N
+490	544	error	Tipo de imagen ilegal image/jpeg	\N
+491	544	error	Tipo de imagen ilegal image/jpeg	\N
+492	544	error	Tipo de imagen ilegal image/jpeg	\N
+493	545	error	Hay 28 imagenes sin atributo ALT	\N
+494	545	warning	Hay 16 imagenes con atributo ALT vacío	\N
+495	546	warning	Atributo obsoleto 'language'	\N
+496	546	warning	Atributo obsoleto 'language'	\N
+497	546	warning	Atributo obsoleto 'language'	\N
+498	546	warning	Atributo obsoleto 'language'	\N
+499	546	error	Lenguaje ilegal: text/JavaScript	\N
+500	546	warning	Atributo obsoleto 'language'	\N
+501	546	warning	Atributo obsoleto 'language'	\N
+502	547	error	Script en línea	\N
+503	547	error	Script en línea	\N
+504	547	error	Script en línea	\N
+505	547	error	Script en línea	\N
+506	547	error	Script en línea	\N
+507	547	error	Script en línea	\N
+508	547	error	Script en línea	\N
+509	547	error	Script en línea	\N
 \.
 
 
@@ -1003,6 +1391,9 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 15	Ministerio de Finanzas 2	G-12345678902	otro@otro.com	(333) 333-3333	Alguien por alli	adasd a;sakjn ai asljdal	http://www.ambiente.gob.ve	t
 16	COVETEL	J-321345111	info@covetel.com.ve	(222) 222-2222	Walter	paramillo	http://www.covetel.com.ve	t
 17	Luis Chacon	j-2131231331111	info@luischacon.info	(041) 444-4444	Luis Chacon	San Cristobal	http://www.luischacon.info	t
+18	Vencert	G-4493292	info@vencert.gob.ve	(0212) 222-2222	Omar Alvarado	\N	http://www.vencert.gob.ve	t
+19	Seguro Social	G-4492221	info@ivss.gov.ve	(0212) 999-9999	Angel Vargas	Donde trabaja angel	http://www.ivss.gov.ve	t
+20	Banco de Venezuela	j-231231	info@bancodevenezuela.com	(0212) 999-9999	Juan Fuentes	Por la hoyada	http://www.bancodevenezuela.com	t
 \.
 
 
@@ -1015,6 +1406,11 @@ COPY jobs (id, site, callback, data, state, proc, ctime, mtime, pid) FROM stdin;
 2	http://www.mppef.gob.ve	\N	\N	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:38	\N
 3	http://www.mppef.gob.ve	\N	\N	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:13	\N
 4	http://www.luischacon.info	\N	\N	done	14514	2010-05-11 22:13:46	2010-05-11 22:16:03	\N
+5	http://www.mppef.gob.ve	\N	\N	done	17871	2010-05-12 18:28:22	2010-05-12 18:56:52	\N
+6	https://www.vencert.gob.ve	\N	\N	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42	\N
+7	http://www.ivss.gov.ve	\N	\N	run	23069	2010-05-12 19:17:30	2010-05-12 19:17:30	\N
+8	https://www.vencert.gob.ve	\N	\N	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06	\N
+9	http://www.bancodevenezuela.com	\N	\N	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:14	\N
 \.
 
 
@@ -1239,6 +1635,338 @@ COPY results (id, pid, pass, name) FROM stdin;
 214	27	pass	JS
 215	27	fail	JS_inc
 216	27	pass	HTML4
+217	28	pass	Domain
+218	28	pass	Title
+219	28	pass	UTF8
+220	28	fail	Img
+221	28	pass	Alt
+222	28	pass	JS
+223	28	fail	JS_inc
+224	28	fail	HTML4
+225	29	pass	Domain
+226	29	pass	Title
+227	29	pass	UTF8
+228	29	fail	Img
+229	29	fail	Alt
+230	29	pass	JS
+231	29	fail	JS_inc
+232	29	fail	HTML4
+233	30	pass	Domain
+234	30	pass	Title
+235	30	pass	UTF8
+236	30	fail	Img
+237	30	fail	Alt
+238	30	pass	JS
+239	30	fail	JS_inc
+240	30	fail	HTML4
+241	31	pass	Domain
+242	31	pass	Title
+243	31	pass	UTF8
+244	31	fail	Img
+245	31	fail	Alt
+246	31	pass	JS
+247	31	fail	JS_inc
+248	31	fail	HTML4
+249	32	pass	Domain
+250	32	pass	Title
+251	32	pass	UTF8
+252	32	fail	Img
+253	32	fail	Alt
+254	32	pass	JS
+255	32	fail	JS_inc
+256	32	fail	HTML4
+257	33	pass	Domain
+258	33	pass	Title
+259	33	pass	UTF8
+260	33	fail	Img
+261	33	fail	Alt
+262	33	pass	JS
+263	33	fail	JS_inc
+264	33	fail	HTML4
+265	34	pass	Domain
+266	34	pass	Title
+267	34	pass	UTF8
+268	34	fail	Img
+269	34	fail	Alt
+270	34	pass	JS
+271	34	fail	JS_inc
+272	34	fail	HTML4
+273	35	pass	Domain
+274	35	pass	Title
+275	35	pass	UTF8
+276	35	fail	Img
+277	35	fail	Alt
+278	35	pass	JS
+279	35	fail	JS_inc
+280	35	fail	HTML4
+281	36	pass	Domain
+282	36	fail	Title
+283	36	pass	UTF8
+284	36	pass	Img
+285	36	pass	Alt
+286	36	pass	JS
+287	36	fail	JS_inc
+288	36	fail	HTML4
+289	37	pass	Domain
+290	37	fail	Title
+291	37	pass	UTF8
+292	37	pass	Img
+293	37	pass	Alt
+294	37	pass	JS
+295	37	fail	JS_inc
+296	37	fail	HTML4
+297	38	pass	Domain
+298	38	fail	Title
+299	38	pass	UTF8
+300	38	pass	Img
+301	38	pass	Alt
+302	38	pass	JS
+303	38	fail	JS_inc
+304	38	fail	HTML4
+305	39	pass	Domain
+306	39	fail	Title
+307	39	pass	UTF8
+308	39	pass	Img
+309	39	pass	Alt
+310	39	pass	JS
+311	39	fail	JS_inc
+312	39	fail	HTML4
+313	40	pass	Domain
+314	40	fail	Title
+315	40	pass	UTF8
+316	40	pass	Img
+317	40	pass	Alt
+318	40	pass	JS
+319	40	fail	JS_inc
+320	40	fail	HTML4
+321	41	pass	Domain
+322	41	fail	Title
+323	41	pass	UTF8
+324	41	pass	Img
+325	41	pass	Alt
+326	41	pass	JS
+327	41	fail	JS_inc
+328	41	fail	HTML4
+329	42	pass	Domain
+330	42	fail	Title
+331	42	pass	UTF8
+332	42	pass	Img
+333	42	pass	Alt
+334	42	pass	JS
+335	42	fail	JS_inc
+336	42	fail	HTML4
+337	43	pass	Domain
+338	43	fail	Title
+339	43	pass	UTF8
+340	43	pass	Img
+341	43	pass	Alt
+342	43	pass	JS
+343	43	fail	JS_inc
+344	43	fail	HTML4
+345	44	pass	Domain
+346	44	fail	Title
+347	44	pass	UTF8
+348	44	pass	Img
+349	44	pass	Alt
+350	44	pass	JS
+351	44	fail	JS_inc
+352	44	fail	HTML4
+353	45	pass	Domain
+354	45	fail	Title
+355	45	pass	UTF8
+356	45	pass	Img
+357	45	pass	Alt
+358	45	pass	JS
+359	45	fail	JS_inc
+360	45	fail	HTML4
+361	46	pass	Domain
+362	46	fail	Title
+363	46	pass	UTF8
+364	46	pass	Img
+365	46	pass	Alt
+366	46	pass	JS
+367	46	fail	JS_inc
+368	46	fail	HTML4
+369	47	pass	Domain
+370	47	fail	Title
+371	47	pass	UTF8
+372	47	pass	Img
+373	47	pass	Alt
+374	47	pass	JS
+375	47	fail	JS_inc
+376	47	fail	HTML4
+377	48	pass	Domain
+378	48	fail	Title
+379	48	pass	UTF8
+380	48	pass	Img
+381	48	pass	Alt
+382	48	pass	JS
+383	48	fail	JS_inc
+384	48	fail	HTML4
+385	49	pass	Domain
+386	49	fail	Title
+387	49	pass	UTF8
+388	49	pass	Img
+389	49	pass	Alt
+390	49	pass	JS
+391	49	fail	JS_inc
+392	49	fail	HTML4
+393	50	pass	Domain
+394	50	fail	Title
+395	50	pass	UTF8
+396	50	pass	Img
+397	50	pass	Alt
+398	50	pass	JS
+399	50	fail	JS_inc
+400	50	fail	HTML4
+401	51	fail	Domain
+402	51	pass	Title
+403	51	pass	UTF8
+404	51	fail	Img
+405	51	pass	Alt
+406	51	fail	JS
+407	51	fail	JS_inc
+408	51	pass	HTML4
+409	52	fail	Domain
+410	52	pass	Title
+411	52	pass	UTF8
+412	52	fail	Img
+413	54	pass	Domain
+414	54	fail	Title
+415	54	pass	UTF8
+416	54	pass	Img
+417	54	pass	Alt
+418	54	pass	JS
+419	54	fail	JS_inc
+420	54	fail	HTML4
+421	55	pass	Domain
+422	55	fail	Title
+423	55	pass	UTF8
+424	55	pass	Img
+425	55	pass	Alt
+426	55	pass	JS
+427	55	fail	JS_inc
+428	55	fail	HTML4
+429	56	pass	Domain
+430	56	fail	Title
+431	56	pass	UTF8
+432	56	pass	Img
+433	56	pass	Alt
+434	56	pass	JS
+435	56	fail	JS_inc
+436	56	fail	HTML4
+437	57	pass	Domain
+438	57	fail	Title
+439	57	pass	UTF8
+440	57	pass	Img
+441	57	pass	Alt
+442	57	pass	JS
+443	57	fail	JS_inc
+444	57	fail	HTML4
+445	58	pass	Domain
+446	58	fail	Title
+447	58	pass	UTF8
+448	58	pass	Img
+449	58	pass	Alt
+450	58	pass	JS
+451	58	fail	JS_inc
+452	58	fail	HTML4
+453	59	pass	Domain
+454	59	fail	Title
+455	59	pass	UTF8
+456	59	pass	Img
+457	59	pass	Alt
+458	59	pass	JS
+459	59	fail	JS_inc
+460	59	fail	HTML4
+461	60	pass	Domain
+462	60	fail	Title
+463	60	pass	UTF8
+464	60	pass	Img
+465	60	pass	Alt
+466	60	pass	JS
+467	60	fail	JS_inc
+468	60	fail	HTML4
+469	61	pass	Domain
+470	61	fail	Title
+471	61	pass	UTF8
+472	61	pass	Img
+473	61	pass	Alt
+474	61	pass	JS
+475	61	fail	JS_inc
+476	61	fail	HTML4
+477	62	pass	Domain
+478	62	fail	Title
+479	62	pass	UTF8
+480	62	pass	Img
+481	62	pass	Alt
+482	62	pass	JS
+483	62	fail	JS_inc
+484	62	fail	HTML4
+485	63	pass	Domain
+486	63	fail	Title
+487	63	pass	UTF8
+488	63	pass	Img
+489	63	pass	Alt
+490	63	pass	JS
+491	63	fail	JS_inc
+492	63	fail	HTML4
+493	64	pass	Domain
+494	64	fail	Title
+495	64	pass	UTF8
+496	64	pass	Img
+497	64	pass	Alt
+498	64	pass	JS
+499	64	fail	JS_inc
+500	64	fail	HTML4
+501	65	pass	Domain
+502	65	fail	Title
+503	65	pass	UTF8
+504	65	pass	Img
+505	65	pass	Alt
+506	65	pass	JS
+507	65	fail	JS_inc
+508	65	fail	HTML4
+509	66	pass	Domain
+510	66	fail	Title
+511	66	pass	UTF8
+512	66	pass	Img
+513	66	pass	Alt
+514	66	pass	JS
+515	66	fail	JS_inc
+516	66	fail	HTML4
+517	67	pass	Domain
+518	67	fail	Title
+519	67	pass	UTF8
+520	67	pass	Img
+521	67	pass	Alt
+522	67	pass	JS
+523	67	fail	JS_inc
+524	67	fail	HTML4
+525	68	fail	Domain
+526	68	pass	Title
+527	68	pass	UTF8
+528	68	fail	Img
+529	68	fail	Alt
+530	68	fail	JS
+531	68	fail	JS_inc
+532	68	pass	HTML4
+533	69	fail	Domain
+534	69	pass	Title
+535	69	pass	UTF8
+536	69	fail	Img
+537	69	fail	Alt
+538	69	fail	JS
+539	69	fail	JS_inc
+540	69	pass	HTML4
+541	70	fail	Domain
+542	70	pass	Title
+543	70	pass	UTF8
+544	70	fail	Img
+545	70	fail	Alt
+546	70	fail	JS
+547	70	fail	JS_inc
+548	70	pass	HTML4
 \.
 
 
@@ -1274,6 +2002,49 @@ COPY urls (id, pid, path, state, proc, ctime, mtime) FROM stdin;
 25	4	/contacto.php\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:15:01
 26	4	/index.php?lang=es\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:15:38
 27	4	/servicios.php\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:16:03
+28	5	/	done	17871	2010-05-12 18:28:22	2010-05-12 18:43:43
+29	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:44:59
+30	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:48:50
+31	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:49:40
+32	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:50:36
+33	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:51:35
+34	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:52:13
+35	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:53:42
+36	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:56:52
+37	6	/	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+38	6	/index.php?option=com_content&view=article&id=273&Itemid=83\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+39	6	/index.php?option=com_content&view=article&id=45&Itemid=34\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+40	6	/index.php?option=com_content&view=article&id=46&Itemid=54\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+41	6	/index.php?option=com_content&view=article&id=47&Itemid=55\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+42	6	/index.php?option=com_content&view=article&id=48&Itemid=56\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+43	6	/index.php?option=com_content&view=article&id=49&Itemid=60\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+44	6	/index.php?option=com_content&view=article&id=51&Itemid=50\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+45	6	/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+46	6	/index.php?option=com_content&view=article&id=77&Itemid=61\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
+47	6	/index.php?option=com_content&view=category&id=34&Itemid=57\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
+48	6	/index.php?option=com_content&view=category&id=35&Itemid=59\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
+49	6	/index.php?option=com_content&view=category&id=37&Itemid=58\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
+50	6	/index.php?option=com_incidentes&Itemid=73\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
+53	7	/Salud/Servicios-Institucionales\n	new	\N	2010-05-12 19:17:30	2010-05-12 19:17:30
+51	7	/	done	23069	2010-05-12 19:17:30	2010-05-12 19:23:28
+52	7	/Ciudadano\n	run	23069	2010-05-12 19:17:30	2010-05-12 19:23:28
+68	9	/	done	13762	2010-05-13 06:30:40	2010-05-13 06:31:41
+69	9	/?h=nuestro%20banco&i=qui%E9nes_somos&id=169\n	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:00
+70	9	/?h=universitarios\n	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:14
+54	8	/	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
+55	8	/index.php?option=com_content&view=article&id=273&Itemid=83\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
+56	8	/index.php?option=com_content&view=article&id=45&Itemid=34\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
+57	8	/index.php?option=com_content&view=article&id=46&Itemid=54\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+58	8	/index.php?option=com_content&view=article&id=47&Itemid=55\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+59	8	/index.php?option=com_content&view=article&id=48&Itemid=56\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+60	8	/index.php?option=com_content&view=article&id=49&Itemid=60\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+61	8	/index.php?option=com_content&view=article&id=51&Itemid=50\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+62	8	/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+63	8	/index.php?option=com_content&view=article&id=77&Itemid=61\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+64	8	/index.php?option=com_content&view=category&id=34&Itemid=57\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+65	8	/index.php?option=com_content&view=category&id=35&Itemid=59\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
+66	8	/index.php?option=com_content&view=category&id=37&Itemid=58\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06
+67	8	/index.php?option=com_incidentes&Itemid=73\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06
 \.
 
 
@@ -1417,6 +2188,13 @@ CREATE INDEX idxnominst ON institucion USING btree (nombre);
 --
 
 CREATE INDEX idxportal ON auditoria USING btree (portal);
+
+
+--
+-- Name: idxregistro; Type: INDEX; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE UNIQUE INDEX idxregistro ON entidadverificadora USING btree (registro);
 
 
 --
