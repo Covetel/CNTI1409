@@ -1,0 +1,68 @@
+<div id="reporte_tabs">
+<ul>
+	<li> <a href="#reporte_producto">Información del Producto</a> </li>
+	<li> <a href="#reporte_entidad">Información de la Entidad Verificadora</a> </li>
+	<li> <a href="#reporte_resultado">Resultado de la Prueba</a> </li>
+	<li> <a href="#reporte_disposiciones">Disposiciones</a> </li>
+</ul>
+
+<div id="reporte_producto">
+	<div> 
+		<span class="strong"> Producto a Certificar: </span>
+	 	<span class="reporte_producto_nombre"> [% producto.nombre %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Fecha de Ejecución: </span>
+	 	<span class="reporte_producto_fechas"> Desde [% producto.fechaini %] Hasta [% producto.fechafin %].</span>
+	</div>
+	<div> 
+		<span class="strong"> Institución Solicitante: </span>
+	 	<span class="reporte_producto_solicitante"> [% producto.solicitante %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Dirección de la Institución: </span>
+	 	<span class="reporte_producto_direccion"> [% producto.direccion %] </span>
+	</div>	
+	<div> 
+		<span class="strong"> Teléfono Contacto: </span>
+	 	<span class="reporte_producto_telefono"> [% producto.telefono %] </span>
+	</div>	
+	<div> 
+		<span class="strong"> Correo Contacto: </span>
+	 	<span class="reporte_producto_correo"> [% producto.correo %] </span>
+	</div>	
+</div>
+<div id="reporte_entidad">
+	<div> 
+		<span class="strong"> Número de Acreditación: </span>
+	 	<span class="reporte_entidad_nacreditacion"> [% entidad.nacreditacion %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Nombre: </span>
+	 	<span class="reporte_entidad_nombre"> [% entidad.nombre %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Dirección: </span>
+	 	<span class="reporte_entidad_direccion"> [% entidad.direccion %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Teléfono: </span>
+	 	<span class="reporte_entidad_telefono"> [% entidad.telefono %] </span>
+	</div>
+</div>
+<div id="reporte_resultado">
+	<div> 
+		<span class="strong"> Resultado General: </span>
+	 	<span class="reporte_resultado_general"> [% resultados.general %] </span>
+		<span class="icono"> <img src="/static/images/[% resultados.general %].png" </span>
+	</div>
+</div>
+<div id="reporte_disposiciones">
+	<div> 
+		<span class="strong"> Número de Acreditación: </span>
+	 	<span class="reporte_producto_nombre"> [% entidad.nacreditacion %] </span>
+	</div>
+</div>
+
+
+</div>

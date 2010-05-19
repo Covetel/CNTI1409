@@ -382,48 +382,6 @@ sub detalle : Local {
 	}
 }
 
-=head2 reporte
-
-Reporte de la auditoria
-
-=cut
-
-=head2
-sub reporte : Local {
-    my ( $self, $c, $id, $disposicion ) = @_;
-	if ($id) {
-		my $h;
-		my $site;
-		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
-        if ($auditoria->id){
-	        $c->stash->{idAuditoria} = $auditoria->id;
-			my $job_id = $auditoria->job;
-			my $job = CNTI::Validator::Jobs->find_job( $job_id );
-			$site = $job->site;
-			my $it = $job->children();
-			while ( my $u = $it->() ){
-				#next if $u->path eq '/';
-				my $it2 = $u->children;
-                my $sitios;
-	           	while ( my $r = $it2->() ) {
-                    $sitios = $site . $u->path;
-                    # $h->{$r->name} = { "disposicion" => $r->name, "path" => $sitios, "pass" => $r->pass };
-                    #push @{$h->{$r->name}}, { disposicion => $r->name, path => $sitios, pass => $->path };
-	           	}
-			}
-		}
-        # Zona de depuracion
-        use Data::Dumper;
-        $c->log->debug('*** Inicio Depuracion ***');
-        #$c->log->debug(Dumper(})));
-        $c->log->debug('*** Fin Depuracion ***');
-
-        $c->stash->{urls} = \%{$h};
-        $c->stash->{template} = 'auditoria/reporte.tt2';
-	}
-}
-=cut 
-
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>

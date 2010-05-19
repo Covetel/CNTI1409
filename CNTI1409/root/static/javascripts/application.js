@@ -303,6 +303,8 @@ $("#loading").ajaxStop(function(){
 	var re2 = /idev/gi;
 	var re3 = /portal/gi;
 	var re4 = /Examinar/gi;
+	var re5 = /nombre/gi;
+
 	if (re.test(error)){
 		var error_new = error.replace(re,'<span class="strong">Nombre Instituci&oacute;n</span>');
 		$("div.ui-state-error p").html(error_new);
@@ -322,10 +324,13 @@ $("#loading").ajaxStop(function(){
 		var error_new = error.replace(re4,'<span class="strong">Muestra</strong>');
 		$("div.ui-state-error p").html(error_new);
 	}
+	
+	if (re5.test(error)){
+		var error_new = error.replace(re4,'<span class="strong">Muestra</strong>');
+		$("div.ui-state-error p").html(error_new);
+	}
 
-		
-	
-	
-	
+	// Tabs en los reportes
+	$("div#reporte_tabs").tabs({selected: 0});
 
 }); // Cierra 
