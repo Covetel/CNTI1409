@@ -264,6 +264,31 @@ sub monitor : Local {
 	}
 }
 
+=head2 disposiciones($job_id, $estado)
+
+Devuelve un hash que contiene las disposiciones y su estado. 
+
+=cut 
+
+sub disposiciones {
+    my ( $job_id, $estado ) = @_; 
+    my $j = CNTI::Validator::Jobs->find_job($job_id);
+    my $it = $j->children;
+    my $disp = {}; 
+    while ( my $u = $it->() ) { 
+        my $it2 = $u->children;
+        while (my $r = $it2->()){
+            $disp->{$r->name} = $r->pass if $r->pass eq $estado;
+        }   
+    }
+	my @dispp = keys %{$disp};
+	my $total = 0;
+	if (@dispp) {
+		$total = $#dispp + 1 if $#dispp >= 0; 
+	}
+    return ($disp, $total);
+}
+
 =head2 detalle 
 
 Detalle de auditoria 
@@ -275,13 +300,26 @@ sub detalle : Local {
 	if ($c->req->method eq 'POST'){
         my $cerrar = $c->req->params->{cerrar};
         if ($cerrar) {
+			my $resultado_general = 1;
             my $id = $c->req->params->{id};
             my $auditoria = $c->model('DB::Auditoria')->find($id);
-            $auditoria->update({ estado => 'c', fechafin => DateTime->now });
 			# Busco el job asociado a la auditoria.
 			my $job_id = $auditoria->job;
-			my $job = CNTI::Validator::Jobs->find_job( $job_id );
-			# 	
+			my ($disp_fail, $total_fail) = disposiciones $job_id, 'fail';
+			my ($disp_pass, $total_pass) = disposiciones $job_id, 'pass';
+			
+			if ($disp_fail > 0){
+				$resultado_general = 0;
+			}
+            $auditoria->update(
+                {
+                    estado    => 'c',
+                    fechafin  => DateTime->now,
+                    resultado => $resultado_general,
+                    fallidas  => $total_fail,
+                    validas   => $total_pass,
+                }
+            );
             $c->res->body(1);
         } else {
             my $modulo = $c->req->params->{disposicion};
