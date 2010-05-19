@@ -53,9 +53,30 @@
 <div id="reporte_resultado">
 	<div> 
 		<span class="strong"> Resultado General: </span>
-	 	<span class="reporte_resultado_general"> [% resultados.general %] </span>
-		<span class="icono"> <img src="/static/images/[% resultados.general %].png" </span>
+	 	<span class="reporte_resultado_general"> 
+			[% IF resultados.general == 'paso' %] 
+				Todas las URLs de la muestra, han pasado las pruebas con éxito, el resultado general de la auditoría es 100% positivo. 
+			[% ELSE %]
+				El resultado general de la auditoría es negativo.
+			[% END %] 
+		</span>
+		<span class="icono"> <img src="/static/images/[% resultados.general %].png" alt="[%resultados.general%]" title="[%resultados.general%]"> </span>
 	</div>
+	[% IF resultados.general == 'fallo' %]
+		<div> 
+			<span class="strong"> Número de Disposiciones que cumple: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.dpass %] </span>
+		</div>
+		<div> 
+			<span class="strong"> Número de Disposiciones que NO cumple: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.dfail %] </span>
+		</div>
+		
+	[% END %]
+		<div> 
+			<span class="strong"> Indice de Cumplimento: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.indice %]% </span>
+		</div>
 </div>
 <div id="reporte_disposiciones">
 	<div> 

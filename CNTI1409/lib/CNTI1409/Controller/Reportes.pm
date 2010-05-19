@@ -59,10 +59,13 @@ sub auditoria : Local {
                 $entidad->{direccion} = $auditoria->idev->direccion;
 				
                 my $resultados = {};
-                $resultados->{general} = 'fallo';
-                $resultados->{dfail}   = 0;
-                $resultados->{dpass}   = 10;
-				
+                $resultados->{general} = 'fallo' if !$auditoria->resultado;
+                $resultados->{general} = 'paso' if $auditoria->resultado;
+                $resultados->{dfail}   = $auditoria->fallidas;
+                $resultados->{dpass}   = $auditoria->validas;
+				my $indice = ($resultados->{dpass} / ($resultados->{dfail} + $resultados->{dpass})) * 100 ;
+                $resultados->{indice}   = $indice;
+
                 $c->stash->{producto}   = $producto;
                 $c->stash->{entidad}    = $entidad;
                 $c->stash->{resultados} = $resultados;
