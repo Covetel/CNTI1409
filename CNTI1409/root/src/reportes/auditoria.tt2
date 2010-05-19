@@ -79,10 +79,30 @@
 		</div>
 </div>
 <div id="reporte_disposiciones">
-	<div> 
-		<span class="strong"> Número de Acreditación: </span>
-	 	<span class="reporte_producto_nombre"> [% entidad.nacreditacion %] </span>
-	</div>
+	[% FOREACH disp IN disposiciones %]
+		<h3><a href="#[% disp.name %]">[% disp.value.name %] </a> </h3>
+		<div>
+			<ol class="disposiciones">
+				<li> <span class="strong"> Resultado General: </span> [% disp.value.result %] </li>
+				[% IF disp.value.resolutoria %]
+					<li> <span class="strong"> Acciones Correctivas: </span> [% disp.value.resolutoria %] </li>
+				[% END %]
+				<li> <span class="strong"> Urls: </span> 
+				<ol>
+				[% FOREACH url IN disp.value.urls %]
+					<li> <span class="strong"> + [% url.key %]</span> </li>
+						<ol>
+							<li> <span class="strong"> Resultado:  </span> [% url.value.result %] </li>
+							[% IF url.value.mensajes %]
+							<li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes %] </li>
+							[% END %]
+						</ol>
+				[% END %]
+		 		</ol>
+				</li>
+			</ol>
+		</div>
+	[% END %]
 </div>
 
 

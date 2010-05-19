@@ -189,4 +189,6 @@ $("document").ready(function(){
 
 
 	});
+
+	$("#reporte_disposiciones").accordion();
 });

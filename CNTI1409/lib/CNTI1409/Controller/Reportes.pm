@@ -28,6 +28,37 @@ sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 }
 
+=head2 disposiciones($job_id)
+
+Devuelve un hash con las disposiciones de un job.
+
+=cut
+
+sub disposiciones {
+    my ( $job_id ) = @_; 
+    my $j = CNTI::Validator::Jobs->find_job($job_id);
+	my $site = $j->site;
+    my $it = $j->children;
+    my $disp = {}; 
+    while ( my $u = $it->() ) { 
+        my $it2 = $u->children;
+        while (my $r = $it2->()){
+            $disp->{$r->name}->{result} = 'pass';
+            $disp->{$r->name}->{name} = $r->name;
+            my $url = $site . $u->path; 
+            $url =~ s/\s//gi;
+            $url =~ s/\r//gi;
+            $disp->{$r->name}->{urls}->{$url} = { result => $r->pass};
+            $disp->{$r->name}->{result} = $r->pass if $r->pass eq 'fail';
+            my $it3 = $r->children;
+            while (my $m = $it3->()){
+                $disp->{$r->name}->{urls}->{$url}->{mensajes} = $m->message;
+            }   
+        }   
+    }   
+    return $disp;
+}
+
 =head2 auditoria($id)
 
 Genera el reporte de una auditoría.
@@ -42,9 +73,24 @@ sub auditoria : Local {
 	if ($id) {
 		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
 			if ($auditoria && $auditoria->estado eq 'c') {	
+				my $disposiciones = disposiciones $auditoria->job;
+				foreach (keys %{$disposiciones}){
+					my $name = $disposiciones->{$_}->{name};
+        			my $dispo = $c->model('DB::Disposicion')->find(
+                                { modulo => "$name" },
+                                { columns => [ qw / id / ] }
+                	);
+					my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
+						{ idauditoria => $id, iddisposicion => $dispo->id },
+                		{ columns => qw / resolutoria / }
+	            	);
+					$disposiciones->{$_}->{resolutoria} = $resolutoria->resolutoria if $resolutoria;
+				}
+
+
 				# Creo un hash para guardar los datos del producto. 
                 my $producto = {};
-                $producto->{nombre}      = $auditoria->portal;
+				$producto->{nombre}      = $auditoria->portal;
                 $producto->{solicitante} = $auditoria->idinstitucion->nombre;
                 $producto->{direccion}   = $auditoria->idinstitucion->direccion;
                 $producto->{fechaini}    = $auditoria->fechaini->dmy();
@@ -69,8 +115,11 @@ sub auditoria : Local {
                 $c->stash->{producto}   = $producto;
                 $c->stash->{entidad}    = $entidad;
                 $c->stash->{resultados} = $resultados;
+                $c->stash->{disposiciones} = $disposiciones;
                 $c->stash->{id}         = $auditoria->id;
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
+				use Data::Dumper;
+				$c->log->debug(Dumper($disposiciones));
 			}
 	}
 }

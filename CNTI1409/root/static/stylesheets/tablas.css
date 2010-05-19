@@ -28,6 +28,14 @@ ul.urls {
  overflow: auto;
 }
 
+ol.disposiciones {
+ list-style-type: upper-roman;
+}
+
+ol.disposiciones li {
+ display: block;
+}
+
 table {
  width: 100%;
 }
