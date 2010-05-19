@@ -9,7 +9,7 @@ $("document").ready(function(){
 	$("button#iniciar_auditoria").button({ icons: {primary:'ui-icon-gear'} });
 	$("button#detalle_auditoria").button({ icons: {primary:'ui-icon-circle-zoomin'} });
 	$("button#reporte").button({ icons: {primary:'ui-icon-note'} });
-	$("#reporte").button({ disabled: true });
+	$("button#reporte").button({ disabled: true });
 	$("button#iniciar_auditoria").click(function(){
 		// Capturo el ID de la auditoria, que se encuentra en el atributo ID de la tabla. 
 		var id = $("table.resumen").attr('id');
@@ -22,6 +22,8 @@ $("document").ready(function(){
 	var estado = $("#estado").html();
 	if (estado == 'Abierta' || estado == 'Cerrada'){
 		$("button#iniciar_auditoria").button({disabled: true});
+	}
+	if (estado == 'Cerrada'){
 		$("button#reporte").button({disabled: false});
 	}
 	if (estado == 'Pendiente'){
@@ -176,4 +178,15 @@ $("document").ready(function(){
     });
 
 
+	$("button#reporte").click(function(){
+		// obtengo el ID del atributo id de la tabla con clase resumen 
+		var attr_id = $("table.resumen").attr('id');
+		var attr 	= attr_id.split('_');
+		var id 		= attr[1];
+		if (id > 0) {
+			 window.location = "/reportes/auditoria/"+id;
+		}		
+
+
+	});
 });
