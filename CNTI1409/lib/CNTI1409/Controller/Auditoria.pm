@@ -278,6 +278,10 @@ sub detalle : Local {
             my $id = $c->req->params->{id};
             my $auditoria = $c->model('DB::Auditoria')->find($id);
             $auditoria->update({ estado => 'c', fechafin => DateTime->now });
+			# Busco el job asociado a la auditoria.
+			my $job_id = $auditoria->job;
+			my $job = CNTI::Validator::Jobs->find_job( $job_id );
+			# 	
             $c->res->body(1);
         } else {
             my $modulo = $c->req->params->{disposicion};
@@ -352,14 +356,9 @@ sub detalle : Local {
                     if ($r->pass ne 'pass') {
                         my $it3 = $r->children;
                         while ( my $r2 = $it3->()) {
-                            # $c->log->debug($sitios);
-                            # $c->log->debug($r2->message);
                             push @{$errores->{er}},{ sitio => $sitios, error => $r2->message };
                         }
                     }
-                    #if ($r->pass ne 'pass'){
-                    #	$pass = 'fail';
-                    #} 
 	           	}
 			}
 		}

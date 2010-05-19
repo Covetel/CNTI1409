@@ -164,9 +164,6 @@ sub auditorias_GET {
            ]
          } $rs->all
     ];
-    use Data::Dumper;
-    my $dump = Dumper(%data);
-    $c->log->debug($dump);
 	$self->status_ok($c, entity => \%data);
 }
 

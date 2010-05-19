@@ -169,7 +169,7 @@ $("document").ready(function(){
         if (confirm("Esta seguro de cerrar esta auditoría?")) {
             $.post('/auditoria/detalle/',datos, function(respuesta){
                     if (respuesta == 1) {
-                        window.location = "/auditoria/reporte";
+                        window.location = "/reportes/auditoria/"+id;
                     }
                 });
         }

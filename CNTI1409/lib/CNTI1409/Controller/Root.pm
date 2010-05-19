@@ -35,6 +35,21 @@ sub index :Path :Args(0) {
     $c->forward('/login');
 }
 
+=head2 inicio
+
+Inicio de la aplicación.
+
+=cut
+
+sub inicio : Local {
+	my ( $self, $c ) = @_;
+    if (!$c->user_exists) {
+        $c->response->redirect($c->uri_for('/login'));
+        return 0;
+    }
+	$c->stash->{template} = 'inicio.tt2';
+}
+
 =head2 default
 
 Standard 404 error page
@@ -55,14 +70,17 @@ Metodo utilizado para manejar el login
 
 sub login : Local : FormConfig {
     my ( $self, $c, $mensaje, $error ) = @_;
+    if ($c->user_exists) {
+        $c->response->redirect($c->uri_for('/inicio'));
+        return 1;
+    }
     $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
         if ( my $user = $form->param_value('correo') and my $password = $form->param_value('password') ) {
             if ( $c->authenticate( { username => $user,
                                      password => $password } ) ) {
-                $c->response->redirect($c->uri_for(
-                                            $c->controller('Auditoria')->action_for('reporte')));
+                $c->response->redirect($c->uri_for($c->controller('Root')->action_for('inicio')));
                 return;
 
             } else {
