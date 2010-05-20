@@ -35,12 +35,14 @@ $("#area_aplicacion_login form").css('margin-left','200px');
 $("#area_aplicacion_login div.mensaje").css('margin-left','200px');
 
 
+$("#loading").hide();
 $("#loading").ajaxStart(function(){
-   $(this).show();
+   $(this).fadeIn();
 });
 
+
 $("#loading").ajaxStop(function(){
-   $(this).hide();
+   $(this).fadeOut();
 });
 	$(".input_reset").click(function(){
 		$(".input_text").val('');

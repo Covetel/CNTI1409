@@ -25,7 +25,7 @@ div#loading img{
 }
 
 div#loading {
- visibility: hidden;
+ /*visibility: hidden;*/
 }
 
 div#is_enlaces {
