@@ -20,6 +20,7 @@ requires 'HTML::FormFu::Model::DBIC';
 requires 'DBD::Pg';# Este módulo requiere del paquete de Debian libpq-dev, aptitude install libpq-dev
 requires 'DateTime::Format::Pg';
 requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Unicode::Encoding';
 requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Session::State::Cookie';
