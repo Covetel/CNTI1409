@@ -22,7 +22,7 @@ elements:
 
         - type: Text
           name: correo
-          label: Correo Electrónico
+          label: Correo Electr&oacute;nico
           attributes:
               title: 'Por favor ingrese el correo electrónico. Ejemplo: admin@cnti.gob.ve'
               class: input_text
