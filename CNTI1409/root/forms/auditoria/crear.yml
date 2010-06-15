@@ -71,7 +71,7 @@ elements:
           name: portal
           label: Nombre del Portal
           attributes:
-              title: 'Por favor ingrese el nombre de la Institución. Ejemplo: Centro Nacional de Tecnologías de Información.' 
+              title: 'Por favor ingrese el nombre del Portal a ser auditado. Ejemplo: Portal CNTI.' 
               class: input_text
           constraints:
             - Required
