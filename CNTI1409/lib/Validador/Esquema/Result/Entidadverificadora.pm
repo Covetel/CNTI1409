@@ -54,7 +54,7 @@ Numero fiscal de la Entidad Verificadora
   is_nullable: 0
   size: 100
 
-correo electronico de la entidad verificadora
+correo electronico de la Entidad Verificadora
 
 =head2 telefono
 

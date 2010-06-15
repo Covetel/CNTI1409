@@ -1,6 +1,7 @@
 package CNTI1409::Controller::Entidades;
 use Moose;
 use namespace::autoclean;
+use utf8;
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -51,7 +52,7 @@ sub registrar : Local : FormConfig {
     if ($form->submitted_and_valid) { 
         my $entidad = $c->model('DB::Entidadverificadora')->new_result({});
         $form->model->update($entidad);
-        $mensaje = "La entidad " . $form->param_value('nombre') . " se ha registrado con exito";
+        $mensaje = "La Entidad " . $form->param_value('nombre') . " se ha registrado con éxito";
         $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;

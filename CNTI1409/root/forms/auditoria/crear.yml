@@ -39,7 +39,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese el nombre de entidad verificadora correctamente.'
+          content: 'Por favor ingrese el nombre de Entidad Verificadora correctamente.'
           attributes:
               class: informacion
         

@@ -46,7 +46,7 @@ sub registrar : Local : FormConfig {
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
         $form->model->update($instituciones);
-        $mensaje = "La institución " . $form->param_value('nombre') . " se ha registrado con exito";
+        $mensaje = "La Institución " . $form->param_value('nombre') . " se ha registrado con éxito";
         $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;

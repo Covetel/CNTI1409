@@ -34,7 +34,7 @@ sub validate_value {
     return 1 if !($idev);
 
     die HTML::FormFu::Exception::Validator->new({
-        message => 'El número de registro que esta tratando de ingresar ya existe', 
+        message => 'El número de registro que está intentando de ingresar ya existe', 
     });
 }
 

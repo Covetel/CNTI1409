@@ -82,7 +82,7 @@ sub crear : Local : FormConfig {
             } else {
                 $c->stash->{error} = 1;
                 my @err_fields = $form->has_errors;
-                $c->stash->{mensaje} = "Verifique la institucion o entidad verificadora, los datos no coinciden... ";
+                $c->stash->{mensaje} = "Verifique la Institución o Entidad Verificadora, los datos no coinciden... ";
             }
         } elsif ($form->has_errors && $form->submitted) {
             $c->stash->{error} = 1;

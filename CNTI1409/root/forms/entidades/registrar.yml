@@ -15,7 +15,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'A través de este formulario podrá registrar una entidad verificadora.'
+          content: 'A través de este formulario podrá registrar una Entidad Verificadora.'
           attributes:
               class: informacion
 
@@ -23,7 +23,7 @@ elements:
           name: registro
           label: Número de Registro
           attributes:
-              title: 'Por favor indique el número de registro asignado a la entidad verificadora'
+              title: 'Por favor indique el número de registro asignado a la Entidad Verificadora'
               class: input_text
           constraints:
             - Required
@@ -37,7 +37,7 @@ elements:
           name: nombre
           label: Nombre Entidad Verificadora
           attributes:
-              title: 'Por favor indique correctamente el nombre de la entidad verificadora, Ejemplo: Asoc. Cooperativa Venezolana de Tecnologías Libres R.S.' 
+              title: 'Por favor indique correctamente el nombre de la Entidad Verificadora, Ejemplo: Asoc. Cooperativa Venezolana de Tecnologías Libres R.S.' 
               class: input_text
           constraints:
             - Required
@@ -51,7 +51,7 @@ elements:
           name: rif
           label: R.I.F.
           attributes:
-              title: 'Por favor indique correctamente el RIF de la entidad verificadora, Ejemplo: J-29532381-6'
+              title: 'Por favor indique correctamente el RIF de la Entidad Verificadora, Ejemplo: J-29532381-6'
               class: input_text
               maxlength: 15
           constraints:
@@ -63,7 +63,7 @@ elements:
           label: Teléfono
           id: phone
           attributes:
-              title: 'Por favor indique el número telefónico de la entidad verificadora, con su respectivo código de área'
+              title: 'Por favor indique el número telefónico de la Entidad Verificadora, con su respectivo código de área'
               class: input_text
 
         - type: Textarea
@@ -76,7 +76,7 @@ elements:
           name: contacto
           label: Representante
           attributes:
-              title: 'Por favor indique los nombres y apellidos del representante legal de la entidad verificadora, Ejemplo: Walter Vargas'
+              title: 'Por favor indique los nombres y apellidos del representante legal de la Entidad Verificadora, Ejemplo: Walter Vargas'
               class: input_text
           constraints:
             - Required
@@ -116,7 +116,7 @@ elements:
           # The text to be displayed
           value: Registrar Entidad
           attributes:
-              title: Presione este botón para registrar la entidad verificadora.
+              title: Presione este botón para registrar la Entidad Verificadora.
               class: input_submit
         
         - type: Reset

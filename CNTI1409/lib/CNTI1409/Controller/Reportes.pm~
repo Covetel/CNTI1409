@@ -1,0 +1,74 @@
+package CNTI1409::Controller::Reportes;
+use Moose;
+use namespace::autoclean;
+use utf8;
+
+BEGIN {extends 'Catalyst::Controller'; }
+
+=head1 NAME
+
+CNTI1409::Controller::Reportes - Catalyst Controller
+
+=head1 DESCRIPTION
+
+Esta controladora es responsable de generar todos los reportes del sistema.
+
+=head1 METHODS
+
+=cut
+
+
+=head2 index
+
+En un futuro, el método index, va a construir un wizard para generar reportes.
+
+=cut
+
+sub index :Path :Args(0) {
+    my ( $self, $c ) = @_;
+}
+
+=head2 auditoria($id)
+
+Genera el reporte de una auditoría.
+
+El atributo $id debe ser un dato de tipo entero, que corresponda al ID de una auditoría.
+
+=cut
+
+sub auditoria : Local {
+	my ( $self, $c, $id ) = @_;
+	$c->stash->{template} = 'reportes/auditoria.tt2';
+	if ($id) {
+		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
+			if ($auditoria && $auditoria->estado eq 'c') {	
+				# Creo un hash para guardar los datos del producto. 
+				my $producto = {}; 
+				$producto->{nombre} 	= $auditoria->portal;		
+				$producto->{solicitante} 	= $auditoria->idinstitucion->nombre;
+				$producto->{direccion} 		= $auditoria->idinstitucion->direccion;
+				$producto->{fechaini} 	= $auditoria->fechaini->dmy(); 
+				$producto->{fechafin} 	= $auditoria->fechafin->dmy(); 
+				$producto->{telefono} 	= $auditoria->idinstitucion->telefono;
+				$producto->{correo} 	= $auditoria->idinstitucion->correo;
+				
+				$c->stash->{producto} = $producto;
+				$c->stash->{id} = $auditoria->id;
+				$c->stash->{titulo} = "Reporte de la auditoría 000 $auditoría->id";
+			}
+	}
+}
+
+=head1 AUTHOR
+
+Walter Vargas <walter@covetel.com.ve>
+
+=head1 LICENSE
+
+This library is free software. You can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut
+
+__PACKAGE__->meta->make_immutable;
+
