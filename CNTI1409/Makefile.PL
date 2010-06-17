@@ -24,6 +24,11 @@ requires 'Catalyst::Plugin::Unicode::Encoding';
 requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::Store::FastMmap';
 requires 'Catalyst::Plugin::Session::State::Cookie';
+requires 'Sub::Uplevel';
+requires 'WWW::Mechanize::Cached';
+requires 'XML::LibXML';
+requires 'Catalyst::Controller::REST';
+
 test_requires 'Test::More' => '0.88';
 catalyst;
 
