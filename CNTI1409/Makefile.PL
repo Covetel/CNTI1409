@@ -28,6 +28,7 @@ requires 'Sub::Uplevel';
 requires 'WWW::Mechanize::Cached';
 requires 'XML::LibXML';
 requires 'Catalyst::Controller::REST';
+requires 'Catalyst::Plugin::Breadcrumbs';
 
 test_requires 'Test::More' => '0.88';
 catalyst;

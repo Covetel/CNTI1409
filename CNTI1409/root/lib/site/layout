@@ -34,6 +34,22 @@
                 </div>
 
                 <div id="informacion_sesion">
+						<div id="breadcrumb">
+						<span class="strong"> Usted se encuentra en: </span>
+						 <ul>
+							[% FOREACH item IN c.breadcrumbs %]
+							<li>
+								[% IF loop.last %]
+									[% item.label %]
+								[% ELSE %]
+									<!--<a href="[% c.uri_for(item.path) %]">[% item.label %]</a> -->
+									[% item.label %]
+									<span> -> </span>
+								[% END %]
+							</li>
+							[% END %]
+						 </ul>
+						</div>
 						<div id="loading"> 
 								<img src="/static/images/loading.gif" title="Cargando ..." />
 						</div>
@@ -42,6 +58,7 @@
                         </div>
                         <div id="is_enlaces">
                                 <ul>
+                                        <li><a href="/">Inicio</a> | </li>
                                         <li><a href="http://www.minci.gob.ve/documentos/9/470822/?desc=nuevaimagengrafica.pdf">Manual Minci</a> | </li>
                                         <li><a href="http://validator.w3.org/">Validador W3C</a> | </li>
                                         <li> <a href="/logout">Salir</a> </li>

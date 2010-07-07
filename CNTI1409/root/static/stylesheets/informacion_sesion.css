@@ -39,3 +39,9 @@ div#is_usuario {
 div#is_usuario_uid {
  font-weight: bold;
 }
+
+#breadcrumb {
+ padding: 0px;
+ float: left;
+}
+

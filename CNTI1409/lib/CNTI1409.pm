@@ -1,5 +1,6 @@
 package CNTI1409;
 use Moose;
+use utf8;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
@@ -22,6 +23,7 @@ use Catalyst qw/
     Session
     Session::Store::FastMmap
     Session::State::Cookie
+	Breadcrumbs
 /;
 
 extends 'Catalyst';
@@ -43,6 +45,22 @@ __PACKAGE__->config(
 	encoding => 'UTF-8',
 	# Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
+	breadcrumbs => {
+            hide_index => 1,
+            hide_home  => 1,
+            labels     => {
+                '/inicio'       => 'Inicio',
+                '/auditoria' => 'Auditoría',
+				'/auditoria/reporte' => 'Lista de Auditorías',
+				'/auditoria/crear' => 'Crear Auditoría',
+				'/auditoria/detalle' => 'Detalle de la Auditoría',
+				'/instituciones/registrar' => 'Registrar Institución',
+				'/instituciones/listar' => 'Lista de Instituciones',
+				'/entidades' => 'Entidades Verificadoras',
+				
+            },
+	},
+
 );
 
 __PACKAGE__->config( 'Plugin::Authentication' =>
