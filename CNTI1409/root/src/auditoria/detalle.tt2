@@ -80,4 +80,6 @@ agregar la acción correctiva que corresponda, en caso de que una o más URLs de
 </div>
 </form>
 
-
+<div> 
+ <a href="/auditoria/resumen/[% idAuditoria %]"> Volver al resumen  </a>
+</div>
