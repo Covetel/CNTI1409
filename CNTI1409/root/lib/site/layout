@@ -43,7 +43,7 @@
                         <div id="is_enlaces">
                                 <ul>
                                         <li><a href="http://www.minci.gob.ve/documentos/9/470822/?desc=nuevaimagengrafica.pdf">Manual Minci</a> | </li>
-                                        <li><a href="http://www.w3.org/">W3C</a> | </li>
+                                        <li><a href="http://validator.w3.org/">Validador W3C</a> | </li>
                                         <li> <a href="/logout">Salir</a> </li>
                                 </ul>
                         </div>
