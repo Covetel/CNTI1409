@@ -63,7 +63,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese el los datos del portal a ser auditado.'
+          content: 'Por favor ingrese el nombre del portal a ser auditado.'
           attributes:
               class: informacion
 

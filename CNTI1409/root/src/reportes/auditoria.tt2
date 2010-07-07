@@ -107,3 +107,7 @@
 
 
 </div>
+
+<p>
+<a href="/auditoria/detalle/[% id %]/Domain"> Volver al detalle de la auditoría </a>
+</p>
