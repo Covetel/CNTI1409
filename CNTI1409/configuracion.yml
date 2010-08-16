@@ -2,6 +2,15 @@ name: CNTI1409
 encoding: UTF-8
 disable_component_resolution_regex_fallback: 1
 
+# Configuración de la base de datos.
+Model::DB:
+  schema_class: Validador::Esquema
+  connect_info:
+    user: admin
+    password: 123321...
+    dsn: dbi:Pg:dbname=validador;host=localhost
+    pg_enable_utf8: 1
+
 # Configuración de las migajitas de pan.
 breadcrumbs:
   hide_home: 1
@@ -32,11 +41,3 @@ Plugin::Authentication:
             editor: yes
             password: administrador
 
-# Configuración de la base de datos.
-Model::DB:
-  schema_class: Validador::Esquema
-  connect_info:
-    dsn: dbi:Pg:dbname=validador;host=localhost
-    password: 123321...
-    pg_enable_utf8: 1
-    user: admin

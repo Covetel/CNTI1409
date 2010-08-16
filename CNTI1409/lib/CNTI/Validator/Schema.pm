@@ -1,6 +1,6 @@
 package CNTI::Validator::Schema;
 use Moose;
-
+use CNTI1409;
 use CNTI::ValidatorDB;
 
 my $schema = CNTI::ValidatorDB->connect( 'dbi:Pg:host=localhost;dbname=validador;port=5432', 'admin', '123321...',{pg_enable_utf8 => 1} );
