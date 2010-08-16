@@ -182,14 +182,14 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tEliminar"},
+						{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
 					], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
-			$("div.borrar").html("<button class='borrar'> Eliminar </button>");
+			$("div.borrar").html("<button class='borrar'> Desactivar </button>");
 			$("button.borrar").click(function (){
  				var tr = oTable.fnGetPosition(this.parentNode.parentNode.parentNode); 
 				var c = confirm("Esta seguro de eliminar este registro ?");
@@ -232,14 +232,14 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tEliminar"},
+						{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
 			$("#tabla_entidades tbody td.tEdit").editable(submitEditEntidad);
-            $("div.borrar").html("<button class='borrar'> Eliminar </button>");
+            $("div.borrar").html("<button class='borrar'> Desactivar </button>");
             $("button.borrar").click(function(){
                     var tr = oEntidades.fnGetPosition(this.parentNode.parentNode.parentNode);
                     var c = confirm("Está seguro de eliminar este registro ?");
