@@ -79,3 +79,9 @@ tr.even.row_selected td {
 tr.odd.row_selected td {
     background-color: #9FAFD1;
 }
+
+.field_disabled {
+	background-color: #FFCACA;
+	color: #4D4D4D;
+	font-size: 0.8em;
+}

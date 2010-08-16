@@ -173,6 +173,9 @@ $("#loading").ajaxStop(function(){
         "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
+		"aaSorting": [[ 8, "desc" ]],
+		"iDisplayStart": 50, // Se muestran 50 registros.
+		"iDisplayLength": 50,
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
@@ -182,14 +185,29 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
+						//{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
+						{"bSearchable": false, "bSortable": true},
 					], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			
+			//Evaluo todas las filas, para verificar cuales estan deshabilitadas.
+			$("#tabla_instituciones tbody tr td > div").each(function(){
+				var estado = $(this).children().html();	// Obtengo el estado del boton Activar/Desactivar. 
+				// Si esta en Activar entonces esa fila esta desactivada, no podra editarse, tendrá otro color.
+				if (estado == 'Activar'){	
+					$(this).parent().parent().removeClass('odd');
+					$(this).parent().parent().removeClass('even');
+					$(this).parent().parent().addClass('field_disabled');
+					$(this).parent().parent().children().removeClass('tEdit');
+				}
+			});
+
+			
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
-			$("div.borrar").html("<button class='borrar'> Desactivar </button>");
+			//$("div.borrar").html("<button class='borrar'> Desactivar </button>");
 			$("button.borrar").click(function (){
  				var tr = oTable.fnGetPosition(this.parentNode.parentNode.parentNode); 
 				var c = confirm("Esta seguro de eliminar este registro ?");

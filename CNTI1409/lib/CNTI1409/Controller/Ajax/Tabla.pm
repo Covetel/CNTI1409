@@ -51,15 +51,25 @@ Procesa la petición de datos por GET
 =cut
 
 sub instituciones_GET {
+	sub field_habilitado {
+		my ($habilitado, $id,$self,$c) = @_;
+		$c->log->debug($habilitado);
+		if ($habilitado == 1) {
+			return "<div class='button'><button class='active_".$id."'>Desactivar</button></div>";
+		} 
+		if ($habilitado != 1) {
+			return "<div class='button'><button class='active_".$id."'>Activar</button></div>";
+		}
+	}
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Institucion')->search({ habilitado => "true" });
+	my $rs = $c->model('DB::Institucion')->search({},{order_by => 'habilitado'});
 	my %data;
     $data{aaData} = [
        map {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      "<div class='borrar' id='borrar_" . $_->id . "'></div>",
+               $_->direccion, $_->web,      &field_habilitado($_->habilitado,$_->id,$self,$c),
            ]
          } $rs->all
     ];
