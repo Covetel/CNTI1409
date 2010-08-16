@@ -1,0 +1,11 @@
+*.swp
+
+# Archivos intermedios de LaTeX
+*.aux
+*.log
+*.out
+*.ps
+*.toc
+*.nav
+*.snm
+*.dvi
