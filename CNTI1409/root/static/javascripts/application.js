@@ -20,7 +20,6 @@ function delTr (tr, tabla) {
     } else if (tabla = "entidad" ) {
         oEntidades.fnDeleteRow(tr);
     }
-    
 }
 
 function sugerencia (label, value){
@@ -28,22 +27,41 @@ function sugerencia (label, value){
 	this.value = value;
 }
 
+// Esta fución ejecuta las siguientes tareas: 
+// * Agrega background rojo a la fila que esta desactivada. 
+// * Remueve a los td hijos la posibilidad de ser editados. 
+function fila_desactivar(tabla) {
+	$("#"+tabla+" tbody tr td > div").each(function(){
+		var estado = $(this).children().html();	// Obtengo el estado del boton Activar/Desactivar. 
+		// Si esta en Activar entonces esa fila esta desactivada, no podra editarse, tendrá otro color.
+		if (estado == 'Activar'){	
+			$(this).parent().parent().removeClass('odd');
+			$(this).parent().parent().removeClass('even');
+			$(this).parent().parent().addClass('field_disabled');
+			$(this).parent().parent().children().removeClass('tEdit');
+		}
+	});
+}
+
 $(document).ready(function(){
 
+// Utilizado por la ventana de login. 
 $("#area_aplicacion_login").accordion({ collapsible: false ,active: 0 });
 $("#area_aplicacion_login form").css('margin-left','200px');
 $("#area_aplicacion_login div.mensaje").css('margin-left','200px');
 
 
+// Configuro el comportamiento del icono para ajax.
 $("#loading").hide();
 $("#loading").ajaxStart(function(){
    $(this).fadeIn();
 });
 
-
 $("#loading").ajaxStop(function(){
    $(this).fadeOut();
 });
+
+
 	$(".input_reset").click(function(){
 		$(".input_text").val('');
 		$("textarea").val('');
@@ -58,6 +76,7 @@ $("#loading").ajaxStop(function(){
 		minLength: 3,
 	})
 	
+	// Autocomplete para el campo Entidades.
 	$("#idev").autocomplete({
 		source: '/ajax/autocompletar/entidades',
 		minLength: 3,
@@ -85,12 +104,7 @@ $("#loading").ajaxStop(function(){
     // Menú de la aplicación
 	$("#menu_vertical").accordion({ collapsible: true ,active: 20 });
 	$("#area_aplicacion").accordion({ collapsible: false ,active: 0 });
-
-	// Calendario 
-	$("#calendario").datepicker();
-	
-	// Pestañas
-	$("#tabs").tabs();
+	$("#area_aplicacion div.ui-accordion-content").height('600px');
 
 	// Formularios. 
 	// Borde de color en el foco al input
@@ -174,8 +188,6 @@ $("#loading").ajaxStop(function(){
 		"bProcessing": false,
 		"bJQueryUI": true,
 		"aaSorting": [[ 8, "desc" ]],
-		"iDisplayStart": 50, // Se muestran 50 registros.
-		"iDisplayLength": 50,
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
@@ -193,8 +205,10 @@ $("#loading").ajaxStop(function(){
         },
 		"fnDrawCallback": function () {
 			
+			//Aplicar aspecto a las filas inhabilitadas.	
+			fila_desactivar('tabla_instituciones');
 			//Evaluo todas las filas, para verificar cuales estan deshabilitadas.
-			$("#tabla_instituciones tbody tr td > div").each(function(){
+			/*$("#tabla_instituciones tbody tr td > div").each(function(){
 				var estado = $(this).children().html();	// Obtengo el estado del boton Activar/Desactivar. 
 				// Si esta en Activar entonces esa fila esta desactivada, no podra editarse, tendrá otro color.
 				if (estado == 'Activar'){	
@@ -203,7 +217,8 @@ $("#loading").ajaxStop(function(){
 					$(this).parent().parent().addClass('field_disabled');
 					$(this).parent().parent().children().removeClass('tEdit');
 				}
-			});
+			});*/
+			
 
 			
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
@@ -232,7 +247,7 @@ $("#loading").ajaxStop(function(){
 			
 			}); // Fin de click 
 		},
-	});
+	}); // Fin de DataTables.
 
 	// Maneja las propiedades de la tabla entidades
 	oEntidades = $("#tabla_entidades").dataTable({
@@ -256,6 +271,7 @@ $("#loading").ajaxStop(function(){
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			fila_desactivar('tabla_entidades');
 			$("#tabla_entidades tbody td.tEdit").editable(submitEditEntidad);
             $("div.borrar").html("<button class='borrar'> Desactivar </button>");
             $("button.borrar").click(function(){

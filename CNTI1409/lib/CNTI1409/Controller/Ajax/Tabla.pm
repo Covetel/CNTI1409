@@ -50,16 +50,17 @@ Procesa la petición de datos por GET
 
 =cut
 
-sub instituciones_GET {
-	sub field_habilitado {
-		my ($habilitado, $id,$self,$c) = @_;
-		if ($habilitado == 1) {
-			return "<div class='button'><button class='active_".$id."'>Desactivar</button></div>";
-		} 
-		if ($habilitado != 1) {
-			return "<div class='button'><button class='active_".$id."'>Activar</button></div>";
-		}
+sub field_habilitado {
+	my ($habilitado, $id, $tabla) = @_;
+	if ($habilitado == 1) {
+		return "<div class='button'><button id='".$tabla."_desactivar_".$id."' class='desactivar'>Desactivar</button></div>";
+	} 
+	if ($habilitado != 1) {
+		return "<div class='button'><button id='".$tabla."_activar_".$id."' class='activar'>Activar</button></div>";
 	}
+}
+
+sub instituciones_GET {
 	my ($self, $c) = @_;
 	my $rs = $c->model('DB::Institucion')->search({},{order_by => 'habilitado'});
 	my %data;
@@ -68,7 +69,7 @@ sub instituciones_GET {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      &field_habilitado($_->habilitado,$_->id,$self,$c),
+               $_->direccion, $_->web,      &field_habilitado($_->habilitado,$_->id,"instituciones"),
            ]
          } $rs->all
     ];
@@ -110,7 +111,7 @@ sub entidades : Local : ActionClass('REST') {}
 
 sub entidades_GET {
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Entidadverificadora')->search({ habilitado => "true" });
+	my $rs = $c->model('DB::Entidadverificadora')->search({});
 	my %data;
     $data{aaData} = [
        map {
@@ -118,7 +119,8 @@ sub entidades_GET {
                $_->id,        $_->registro,  $_->nombre,   
                $_->rif,       $_->correo,    $_->telefono, 
                $_->contacto,  $_->direccion, $_->web,      
-               "<div class='borrar' id='borrar_" . $_->id . "'></div>",
+			   &field_habilitado($_->habilitado,$_->id,"entidades"),
+
            ]
          } $rs->all
     ];
