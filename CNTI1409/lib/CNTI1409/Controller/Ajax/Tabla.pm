@@ -53,7 +53,6 @@ Procesa la petición de datos por GET
 sub instituciones_GET {
 	sub field_habilitado {
 		my ($habilitado, $id,$self,$c) = @_;
-		$c->log->debug($habilitado);
 		if ($habilitado == 1) {
 			return "<div class='button'><button class='active_".$id."'>Desactivar</button></div>";
 		} 
