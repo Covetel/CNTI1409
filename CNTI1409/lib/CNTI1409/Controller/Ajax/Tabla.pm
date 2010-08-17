@@ -97,6 +97,7 @@ sub instituciones_DELETE {
 	my $id = $c->req->data->{codigo};
     my $rs = $c->model('DB::Institucion')->find($id);
     $rs->habilitado("false");
+	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
     $rs->update;
     $self->status_ok($c, entity => { valor => 1,});
 }
@@ -148,6 +149,7 @@ sub entidades_DELETE {
 	my $id = $c->req->data->{codigo};
     my $rs = $c->model('DB::Entidadverificadora')->find($id);
     $rs->habilitado("false");
+	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
     $rs->update;
     $self->status_ok($c, entity => { valor => 1,});
 }
