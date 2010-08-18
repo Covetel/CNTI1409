@@ -1,4 +1,5 @@
 *.swp
+*.swo
 
 # Archivos intermedios de LaTeX
 *.aux

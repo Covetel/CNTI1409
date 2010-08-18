@@ -94,7 +94,6 @@ sub instituciones_POST {
 
 sub instituciones_DELETE {
 	my ($self, $c) = @_;
-$DB::single=1;
 	my $id = $c->req->data->{codigo};
 	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
     my $rs = $c->model('DB::Institucion')->find($id);

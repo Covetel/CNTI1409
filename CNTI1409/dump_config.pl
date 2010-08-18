@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use CNTI1409;
+use CNTI1409::Model::DB;
 use YAML;
 use Data::Dumper;
 
