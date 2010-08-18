@@ -50,9 +50,45 @@ function boton_desactivar_activar(){
 		var registro = datos[2];
 		var codigo = ({ 'codigo': registro});
 		var tr;
+		var oDataTables;
+		if (tabla == 'instituciones') {
+			oDataTables = oTable;
+		} else if (tabla == 'entidades'){
+			oDataTables = oEntidades;
+		}
 		
 		if (accion == 'activar'){
-			
+			var c = confirm("Esta usted seguro de lo que esta haciendo ?");
+			if (c) {
+				var jsoon = $.JSON.encode(codigo);
+				$.ajax({
+					url: "/ajax/tabla/"+tabla, 
+					type: "PUT",
+					data: jsoon,
+					processData: false,
+					contentType: 'application/json',
+					complete: function (data) {
+						var datos = $.parseJSON(data.responseText);
+						if (datos.valor == 1){
+							tr.removeClass('field_disabled');
+							// Aplico el estilo dependiendo de la fila sea par o impar.
+							var pos = oDataTables.fnGetPosition(tr.get(0));
+							if (pos%2 == 0){
+								tr.addClass('even');
+							} else {
+								tr.addClass('odd');
+							}
+							tr.children().addClass('tEdit');
+							//tr.children(".tEdit").editable(submitEdit);
+							boton.attr('id',tabla+'_'+'desactivar'+'_'+registro);
+							boton.html('Desactivar');
+						} else if (datos.valor == 403){
+							alert("No es posible activar el registro, ocurrio un error grave !");
+						}
+					},
+				}); // Fin de ajax
+
+			}
 		} else if (accion == 'desactivar'){
 			var c = confirm("Esta usted seguro de lo que esta haciendo ?");
 			if (c){

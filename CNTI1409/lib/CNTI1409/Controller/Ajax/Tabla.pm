@@ -107,6 +107,15 @@ sub instituciones_DELETE {
 	}
 }
 
+sub instituciones_PUT : Local {
+	my ( $self, $c ) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Institucion')->find($id);
+    $rs->habilitado("true");
+    $rs->update;
+    $self->status_ok($c, entity => { valor => 1,});
+}
+
 =head2 Entidades
 
 Seccion REST para procesar las entidades verificadoras
@@ -161,6 +170,15 @@ sub entidades_DELETE {
 	} else {
     	$self->status_ok($c, entity => { valor => 403, auditoria => $auditorias_rs->first->portal});
 	}
+}
+
+sub entidades_PUT : Local {
+	my ( $self, $c ) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Entidadverificadora')->find($id);
+    $rs->habilitado("true");
+    $rs->update;
+    $self->status_ok($c, entity => { valor => 1,});
 }
 
 
