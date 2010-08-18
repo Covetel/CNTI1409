@@ -69,6 +69,8 @@ function boton_desactivar_activar(){
 					processData: false,
 					contentType: 'application/json',
 					complete: function (data) {
+						var datos = $.parseJSON(data.responseText);
+						console.log(datos.valor);
 						//delTr(tr, "institucion");
 						tr.addClass('field_disabled');	
 						tr.removeClass('odd');
