@@ -154,10 +154,14 @@ sub entidades_DELETE {
 	my ($self, $c) = @_;
 	my $id = $c->req->data->{codigo};
     my $rs = $c->model('DB::Entidadverificadora')->find($id);
-    $rs->habilitado("false");
-	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
-    $rs->update;
-    $self->status_ok($c, entity => { valor => 1,});
+	my $auditorias_rs = $rs->search_related('auditorias',{-or => [estado => 'a', estado => 'p']});
+	if ($auditorias_rs == 0){
+    	$rs->habilitado("false");
+    	$rs->update;
+    	$self->status_ok($c, entity => { valor => 1,});
+	} else {
+    	$self->status_ok($c, entity => { valor => 403, auditoria => $auditorias_rs->first->portal});
+	}
 }
 
 

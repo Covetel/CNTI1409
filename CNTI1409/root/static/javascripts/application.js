@@ -8,11 +8,6 @@ var oEntidades;
 var oAuditoria;
 var giRedraw = false;
 
-
-
-
-
-
 // Función que elimina una columna en la tabla
 function delTr (tr, tabla) { 
     if (tabla == "institucion" ) {
@@ -70,44 +65,24 @@ function boton_desactivar_activar(){
 					contentType: 'application/json',
 					complete: function (data) {
 						var datos = $.parseJSON(data.responseText);
-						console.log(datos.valor);
-						//delTr(tr, "institucion");
-						tr.addClass('field_disabled');	
-						tr.removeClass('odd');
-						tr.removeClass('even');
-						tr.addClass('field_disabled');
-						tr.children().removeClass('tEdit');
-						boton.attr('id',tabla+'_'+'activar'+'_'+registro);
-						boton.html('Activar');
+						//console.log(datos.valor);
+						if (datos.valor == 1){
+							tr.addClass('field_disabled');	
+							tr.removeClass('odd');
+							tr.removeClass('even');
+							tr.addClass('field_disabled');
+							tr.children().removeClass('tEdit');
+							boton.attr('id',tabla+'_'+'activar'+'_'+registro);
+							boton.html('Activar');
+						} else if (datos.valor == 403){
+							alert("No es posible desactivar, el registro esta siendo usado en la auditoría correspondiente al portal: "+datos.auditoria);
+						}
 					},
 				}); // Fin de ajax
 				
 			}	
 		}
 	});
-
-	/*$("button.borrar").click(function (){
-		var tr = oTable.fnGetPosition(this.parentNode.parentNode.parentNode); 
-		if (c) {	
-			var id 		= $(this).parent().attr('id');
-			var codigo 	= id.split('_'); 
-			codigo 		= ({ 'codigo': codigo[1]});
-			var jsoon 	= $.JSON.encode(codigo);
-			$.ajax({
-				url: "/ajax/tabla/instituciones", 
-				type: "DELETE",
-				data: jsoon,
-				processData: false,
-				contentType: 'application/json',
-				complete: function (data) {
-						delTr(tr, "institucion");
-				},
-			}); // Fin de ajax
-		} else {
-			return false;	
-		} 
-	}); // Fin de click 
-	*/
 }
 
 $(document).ready(function(){
@@ -308,6 +283,7 @@ $("#loading").ajaxStop(function(){
         "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
+		"aaSorting": [[ 9, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
@@ -318,7 +294,7 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
+						{"bSearchable": false, "sClass": "tDesactivar"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
