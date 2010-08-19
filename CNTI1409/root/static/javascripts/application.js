@@ -8,11 +8,6 @@ var oEntidades;
 var oAuditoria;
 var giRedraw = false;
 
-
-
-
-
-
 // Función que elimina una columna en la tabla
 function delTr (tr, tabla) { 
     if (tabla == "institucion" ) {
@@ -20,7 +15,6 @@ function delTr (tr, tabla) {
     } else if (tabla = "entidad" ) {
         oEntidades.fnDeleteRow(tr);
     }
-    
 }
 
 function sugerencia (label, value){
@@ -28,22 +22,124 @@ function sugerencia (label, value){
 	this.value = value;
 }
 
+// Esta fución ejecuta las siguientes tareas: 
+// * Agrega background rojo a la fila que esta desactivada. 
+// * Remueve a los td hijos la posibilidad de ser editados. 
+function fila_desactivar(tabla) {
+	$("#"+tabla+" tbody tr td > div").each(function(){
+		var estado = $(this).children().html();	// Obtengo el estado del boton Activar/Desactivar. 
+		// Si esta en Activar entonces esa fila esta desactivada, no podra editarse, tendrá otro color.
+		if (estado == 'Activar'){	
+			$(this).parent().parent().removeClass('odd');
+			$(this).parent().parent().removeClass('even');
+			$(this).parent().parent().addClass('field_disabled');
+			$(this).parent().parent().children().removeClass('tEdit');
+		}
+	});
+}
+
+// El boton desactivar de las tablas. 
+function boton_desactivar_activar(){
+	$("button.desactivar,button.activar").click(function(){
+		var boton = $(this);
+		var tr = $(this).parent().parent().parent();
+		var id = $(this).attr('id');
+		var datos = id.split('_');
+		var tabla = datos[0];
+		var accion = datos[1];
+		var registro = datos[2];
+		var codigo = ({ 'codigo': registro});
+		var tr;
+		var oDataTables;
+		if (tabla == 'instituciones') {
+			oDataTables = oTable;
+		} else if (tabla == 'entidades'){
+			oDataTables = oEntidades;
+		}
+		
+		if (accion == 'activar'){
+			var c = confirm("Esta usted seguro de lo que esta haciendo ?");
+			if (c) {
+				var jsoon = $.JSON.encode(codigo);
+				$.ajax({
+					url: "/ajax/tabla/"+tabla, 
+					type: "PUT",
+					data: jsoon,
+					processData: false,
+					contentType: 'application/json',
+					complete: function (data) {
+						var datos = $.parseJSON(data.responseText);
+						if (datos.valor == 1){
+							tr.removeClass('field_disabled');
+							// Aplico el estilo dependiendo de la fila sea par o impar.
+							var pos = oDataTables.fnGetPosition(tr.get(0));
+							if (pos%2 == 0){
+								tr.addClass('even');
+							} else {
+								tr.addClass('odd');
+							}
+							tr.children().addClass('tEdit');
+							//tr.children(".tEdit").editable(submitEdit);
+							boton.attr('id',tabla+'_'+'desactivar'+'_'+registro);
+							boton.html('Desactivar');
+						} else if (datos.valor == 403){
+							alert("No es posible activar el registro, ocurrio un error grave !");
+						}
+					},
+				}); // Fin de ajax
+
+			}
+		} else if (accion == 'desactivar'){
+			var c = confirm("Esta usted seguro de lo que esta haciendo ?");
+			if (c){
+				var jsoon = $.JSON.encode(codigo);
+				$.ajax({
+					url: "/ajax/tabla/"+tabla, 
+					type: "DELETE",
+					data: jsoon,
+					processData: false,
+					contentType: 'application/json',
+					complete: function (data) {
+						var datos = $.parseJSON(data.responseText);
+						//console.log(datos.valor);
+						if (datos.valor == 1){
+							tr.addClass('field_disabled');	
+							tr.removeClass('odd');
+							tr.removeClass('even');
+							tr.addClass('field_disabled');
+							tr.children().removeClass('tEdit');
+							boton.attr('id',tabla+'_'+'activar'+'_'+registro);
+							boton.html('Activar');
+						} else if (datos.valor == 403){
+							alert("No es posible desactivar, el registro esta siendo usado en la auditoría correspondiente al portal: "+datos.auditoria);
+						}
+					},
+				}); // Fin de ajax
+				
+			}	
+		}
+	});
+}
+
 $(document).ready(function(){
 
+// Utilizado por la ventana de login. 
 $("#area_aplicacion_login").accordion({ collapsible: false ,active: 0 });
 $("#area_aplicacion_login form").css('margin-left','200px');
 $("#area_aplicacion_login div.mensaje").css('margin-left','200px');
 
 
+// Configuro el comportamiento del icono para ajax.
 $("#loading").hide();
 $("#loading").ajaxStart(function(){
    $(this).fadeIn();
 });
 
-
 $("#loading").ajaxStop(function(){
    $(this).fadeOut();
 });
+
+
 	$(".input_reset").click(function(){
 		$(".input_text").val('');
 		$("textarea").val('');
@@ -58,6 +154,7 @@ $("#loading").ajaxStop(function(){
 		minLength: 3,
 	})
 	
+	// Autocomplete para el campo Entidades.
 	$("#idev").autocomplete({
 		source: '/ajax/autocompletar/entidades',
 		minLength: 3,
@@ -85,12 +182,7 @@ $("#loading").ajaxStop(function(){
     // Menú de la aplicación
 	$("#menu_vertical").accordion({ collapsible: true ,active: 20 });
 	$("#area_aplicacion").accordion({ collapsible: false ,active: 0 });
-
-	// Calendario 
-	$("#calendario").datepicker();
-	
-	// Pestañas
-	$("#tabs").tabs();
+	$("#area_aplicacion div.ui-accordion-content").height('600px');
 
 	// Formularios. 
 	// Borde de color en el foco al input
@@ -173,6 +265,7 @@ $("#loading").ajaxStop(function(){
         "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
+		"aaSorting": [[ 8, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
@@ -182,17 +275,21 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tEliminar"},
+						//{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
+						{"bSearchable": false, "bSortable": true},
 					], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			//Aplicar aspecto a las filas inhabilitadas.	
+			fila_desactivar('tabla_instituciones');
 			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
-			$("div.borrar").html("<button class='borrar'> Eliminar </button>");
+			//$("div.borrar").html("<button class='borrar'> Desactivar </button>");
+			boton_desactivar_activar();
 			$("button.borrar").click(function (){
  				var tr = oTable.fnGetPosition(this.parentNode.parentNode.parentNode); 
-				var c = confirm("Esta seguro de eliminar este registro ?");
+				var c = confirm("¿ Esta seguro de lo que esta haciendo ?");
 				if (c) {	
 	 				var id 		= $(this).parent().attr('id');
 	 				var codigo 	= id.split('_'); 
@@ -214,7 +311,7 @@ $("#loading").ajaxStop(function(){
 			
 			}); // Fin de click 
 		},
-	});
+	}); // Fin de DataTables.
 
 	// Maneja las propiedades de la tabla entidades
 	oEntidades = $("#tabla_entidades").dataTable({
@@ -222,6 +319,7 @@ $("#loading").ajaxStop(function(){
         "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
+		"aaSorting": [[ 9, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
@@ -232,14 +330,16 @@ $("#loading").ajaxStop(function(){
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"bSearchable": false, "bSortable": false, "sClass": "tEliminar"},
+						{"bSearchable": false, "sClass": "tDesactivar"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			fila_desactivar('tabla_entidades');
 			$("#tabla_entidades tbody td.tEdit").editable(submitEditEntidad);
-            $("div.borrar").html("<button class='borrar'> Eliminar </button>");
+            $("div.borrar").html("<button class='borrar'> Desactivar </button>");
+			boton_desactivar_activar();
             $("button.borrar").click(function(){
                     var tr = oEntidades.fnGetPosition(this.parentNode.parentNode.parentNode);
                     var c = confirm("Está seguro de eliminar este registro ?");

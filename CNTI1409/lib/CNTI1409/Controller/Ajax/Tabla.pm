@@ -50,16 +50,26 @@ Procesa la petición de datos por GET
 
 =cut
 
+sub field_habilitado {
+	my ($habilitado, $id, $tabla) = @_;
+	if ($habilitado == 1) {
+		return "<div class='button'><button id='".$tabla."_desactivar_".$id."' class='desactivar'>Desactivar</button></div>";
+	} 
+	if ($habilitado != 1) {
+		return "<div class='button'><button id='".$tabla."_activar_".$id."' class='activar'>Activar</button></div>";
+	}
+}
+
 sub instituciones_GET {
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Institucion')->search({ habilitado => "true" });
+	my $rs = $c->model('DB::Institucion')->search({},{order_by => 'habilitado'});
 	my %data;
     $data{aaData} = [
        map {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      "<div class='borrar' id='borrar_" . $_->id . "'></div>",
+               $_->direccion, $_->web,      &field_habilitado($_->habilitado,$_->id,"instituciones"),
            ]
          } $rs->all
     ];
@@ -85,8 +95,23 @@ sub instituciones_POST {
 sub instituciones_DELETE {
 	my ($self, $c) = @_;
 	my $id = $c->req->data->{codigo};
+	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
     my $rs = $c->model('DB::Institucion')->find($id);
-    $rs->habilitado("false");
+	my $auditorias_rs = $rs->search_related('auditorias',{-or => [estado => 'a', estado => 'p']});
+	if ($auditorias_rs == 0){
+    	$rs->habilitado("false");
+    	$rs->update;
+    	$self->status_ok($c, entity => { valor => 1,});
+	} else {
+    	$self->status_ok($c, entity => { valor => 403, auditoria => $auditorias_rs->first->portal});
+	}
+}
+
+sub instituciones_PUT : Local {
+	my ( $self, $c ) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Institucion')->find($id);
+    $rs->habilitado("true");
     $rs->update;
     $self->status_ok($c, entity => { valor => 1,});
 }
@@ -101,7 +126,7 @@ sub entidades : Local : ActionClass('REST') {}
 
 sub entidades_GET {
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Entidadverificadora')->search({ habilitado => "true" });
+	my $rs = $c->model('DB::Entidadverificadora')->search({});
 	my %data;
     $data{aaData} = [
        map {
@@ -109,7 +134,8 @@ sub entidades_GET {
                $_->id,        $_->registro,  $_->nombre,   
                $_->rif,       $_->correo,    $_->telefono, 
                $_->contacto,  $_->direccion, $_->web,      
-               "<div class='borrar' id='borrar_" . $_->id . "'></div>",
+			   &field_habilitado($_->habilitado,$_->id,"entidades"),
+
            ]
          } $rs->all
     ];
@@ -136,7 +162,21 @@ sub entidades_DELETE {
 	my ($self, $c) = @_;
 	my $id = $c->req->data->{codigo};
     my $rs = $c->model('DB::Entidadverificadora')->find($id);
-    $rs->habilitado("false");
+	my $auditorias_rs = $rs->search_related('auditorias',{-or => [estado => 'a', estado => 'p']});
+	if ($auditorias_rs == 0){
+    	$rs->habilitado("false");
+    	$rs->update;
+    	$self->status_ok($c, entity => { valor => 1,});
+	} else {
+    	$self->status_ok($c, entity => { valor => 403, auditoria => $auditorias_rs->first->portal});
+	}
+}
+
+sub entidades_PUT : Local {
+	my ( $self, $c ) = @_;
+	my $id = $c->req->data->{codigo};
+    my $rs = $c->model('DB::Entidadverificadora')->find($id);
+    $rs->habilitado("true");
     $rs->update;
     $self->status_ok($c, entity => { valor => 1,});
 }

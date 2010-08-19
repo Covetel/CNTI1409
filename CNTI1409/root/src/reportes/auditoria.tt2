@@ -83,7 +83,13 @@
 		<h3><a href="#[% disp.name %]">[% disp.value.name %] </a> </h3>
 		<div>
 			<ol class="disposiciones">
-				<li> <span class="strong"> Resultado General: </span> [% disp.value.result %] </li>
+				<li> <span class="strong"> Resultado General: </span> 
+                    [% IF disp.value.result == "fail" %]
+                        Falló
+                    [% ELSE %]
+                        Pasó
+                    [% END %]
+                </li>
 				[% IF disp.value.resolutoria %]
 					<li> <span class="strong"> Acciones Correctivas: </span> [% disp.value.resolutoria %] </li>
 				[% END %]
@@ -92,9 +98,15 @@
 				[% FOREACH url IN disp.value.urls %]
 					<li> <span class="strong"> + [% url.key %]</span> </li>
 						<ol>
-							<li> <span class="strong"> Resultado:  </span> [% url.value.result %] </li>
+							<li> <span class="strong"> Resultado:  </span> 
+                                [% IF url.value.result == "pass" %]
+                                    Pasó
+                                [% ELSE %]
+                                    Falló
+                                [% END %]
+                            </li>
 							[% IF url.value.mensajes %]
-							<li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes %] </li>
+							    <li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes %] </li>
 							[% END %]
 						</ol>
 				[% END %]

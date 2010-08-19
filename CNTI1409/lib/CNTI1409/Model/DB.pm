@@ -3,17 +3,6 @@ package CNTI1409::Model::DB;
 use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
-__PACKAGE__->config(
-    schema_class => 'Validador::Esquema',
-    
-    connect_info => {
-        dsn => 'dbi:Pg:dbname=validador;host=localhost',
-        user => 'admin',
-        password => '123321...',
-		pg_enable_utf8 => 1,
-    }
-);
-
 =head1 NAME
 
 CNTI1409::Model::DB - Catalyst DBIC Schema Model

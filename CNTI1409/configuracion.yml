@@ -1,0 +1,43 @@
+name: CNTI1409
+encoding: UTF-8
+disable_component_resolution_regex_fallback: 1
+
+# Configuración de la base de datos.
+Model::DB:
+  schema_class: Validador::Esquema
+  connect_info:
+    user: admin
+    password: 123321...
+    dsn: dbi:Pg:dbname=validador;host=localhost
+    pg_enable_utf8: 1
+
+# Configuración de las migajitas de pan.
+breadcrumbs:
+  hide_home: 1
+  hide_index: 1
+  labels:
+    /auditoria: Auditoría
+    /auditoria/crear: Crear Auditoría
+    /auditoria/detalle: Detalle de la Auditoría
+    /auditoria/reporte: Lista de Auditorías
+    /entidades: Entidades Verificadoras
+    /inicio: Inicio
+    /instituciones/listar: Lista de Instituciones
+    /instituciones/registrar: Registrar Institución
+
+# Configuración de el módulo básico de autenticación.
+Plugin::Authentication:
+  default_realm: members
+  realms:
+    members:
+      credential:
+        class: Password
+        password_field: password
+        password_type: clear
+      store:
+        class: Minimal
+        users:
+          administrador@dominio.com.ve:
+            editor: yes
+            password: administrador
+

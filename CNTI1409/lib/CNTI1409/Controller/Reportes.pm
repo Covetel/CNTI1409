@@ -43,13 +43,14 @@ sub disposiciones {
     while ( my $u = $it->() ) { 
         my $it2 = $u->children;
         while (my $r = $it2->()){
-            $disp->{$r->name}->{result} = 'pass';
+            # $disp->{$r->name}->{result} = 'pass';
             $disp->{$r->name}->{name} = $r->name;
             my $url = $site . $u->path; 
             $url =~ s/\s//gi;
             $url =~ s/\r//gi;
             $disp->{$r->name}->{urls}->{$url} = { result => $r->pass};
             $disp->{$r->name}->{result} = $r->pass if $r->pass eq 'fail';
+
             my $it3 = $r->children;
             while (my $m = $it3->()){
                 $disp->{$r->name}->{urls}->{$url}->{mensajes} = $m->message;
