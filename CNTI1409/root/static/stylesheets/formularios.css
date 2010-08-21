@@ -170,3 +170,14 @@ div#nav {
 span.strong {
  font-weight: bold;
 }
+
+select.input_select {
+ width: 250px;
+ text-align: left;
+ height: 30px;
+ border: 2px solid #a6a6a6;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ padding: 5px;
+ background-color: #fff;
+}
