@@ -38,6 +38,8 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 sub wizard : Local : FormConfig {
 	my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
+	$c->stash->{titulo}     = "Generador de Reportes";
+	$c->stash->{template} 	= 'reportes/wizard.tt2';
 	if ($form->submitted_and_valid) {
 		my $desde = $c->req->params->{'desde'};	
 		my $hasta = $c->req->params->{'hasta'};	
@@ -60,16 +62,29 @@ sub wizard : Local : FormConfig {
 		my $idpatron = $row->id;
 		$c->log->debug($idpatron);
 		my @datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		my @auditorias;
 		foreach my $dato (@datos){
-			$c->log->debug($dato->portal);
+			my $auditoria = {};
+			$auditoria->{id} = $dato->id;
+			$auditoria->{institucion} = $dato->idinstitucion->nombre;
+			$auditoria->{portal} = $dato->portal;
+			$auditoria->{estado} = $dato->estado;
+			$auditoria->{fecha} = $dato->fechacreacion->dmy();
+			$auditoria->{entidad} = $dato->idev->nombre;
+			$auditoria->{fail} = $dato->fallidas;
+			$auditoria->{pass} = $dato->validas;
+			my $indice = ($dato->validas / ($dato->fallidas + $dato->validas)) * 100 ;
+			$indice = sprintf("%.2f",$indice);
+			$auditoria->{indice} = $indice;
+			push @auditorias, $auditoria;
 		}
+		$c->stash->{auditorias} = \@auditorias;
+		$c->stash->{template} = 'reportes/wizard-reporte.tt2';
 	} elsif ( $form->has_errors && $form->submitted ){
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
         $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
 	}
-	$c->stash->{titulo}     = "Generador de Reportes";
-	$c->stash->{template} 	= 'reportes/wizard.tt2';
 }
 
 =head2 disposiciones($job_id)

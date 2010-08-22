@@ -1,0 +1,32 @@
+/* 
+Archivo:        impresion.css
+Autor:          Walter Vargas <walter@covetel.com.ve>
+Descripción:    Estilo para las vistas de impresion.
+*/
+
+#cintillo_institucional, #informacion_sesion, #menu_vertical {
+	display: none;
+}
+
+html {
+font-family: FreeSans,sans-serif; 
+font-size: 0.8em ;
+}
+
+table.reporte_auditorias {
+	font-size: 0.8em;
+	text-align: center;
+	border: 1px solid #eee;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #d8dcdf; background: #eeeeee url(images/ui-bg_highlight-hard_100_eeeeee_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #9b1812; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #9b1812; text-decoration: none; }
+.ui-state-default .ui-icon { background-image: url(images/ui-icons_cc0000_256x240.png); }
+
+tr.odd {
+	background-color: #D6E9FF;
+}
+
+tr.even {
+	background-color: white;
+}
