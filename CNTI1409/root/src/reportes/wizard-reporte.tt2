@@ -30,7 +30,15 @@
 </table>
 
 </div>
+<div>
 <p>
 <button id="print"> Vista de Impresión </button>
 <button id="printOut"> Salir de la vista de impresión </button>
 </p>
+</div>
+
+<div>
+<p>
+<a href="/reportes"> Regresar </a>
+</p>
+</div>
