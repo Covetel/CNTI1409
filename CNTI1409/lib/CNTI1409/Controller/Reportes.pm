@@ -3,7 +3,7 @@ use Moose;
 use namespace::autoclean;
 use utf8;
 
-BEGIN {extends 'Catalyst::Controller'; }
+BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
 =head1 NAME
 
@@ -20,12 +20,56 @@ Esta controladora es responsable de generar todos los reportes del sistema.
 
 =head2 index
 
-En un futuro, el método index, va a construir un wizard para generar reportes.
 
 =cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+	$c->detach('wizard');
+	
+}
+
+=head2 wizard
+
+Este método, genera un wizard html que permite la creación de reportes custom. 
+
+=cut
+
+sub wizard : Local : FormConfig {
+	my ( $self, $c ) = @_;
+    my $form = $c->stash->{form};
+	if ($form->submitted_and_valid) {
+		my $desde = $c->req->params->{'desde'};	
+		my $hasta = $c->req->params->{'hasta'};	
+		my $filtro = $c->req->params->{'filtro'};
+		my $patron = $c->req->params->{'patron'};
+		my $tabla;
+
+		$tabla 	= 'Institucion' if 	$filtro eq 'idinstitucion';
+		$tabla 	= 'Entidadverificadora' if $filtro eq 'idev';
+		
+        my $row = $c->model("DB::$tabla")->find( 
+			{
+				"lower(me.nombre)" => lc($patron), 
+				habilitado => "true" 
+			},
+			{
+				columns => [ qw / id / ] 
+			}
+        );
+		my $idpatron = $row->id;
+		$c->log->debug($idpatron);
+		my @datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		foreach my $dato (@datos){
+			$c->log->debug($dato->portal);
+		}
+	} elsif ( $form->has_errors && $form->submitted ){
+        $c->stash->{error} = 1;
+        my @err_fields = $form->has_errors;
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+	}
+	$c->stash->{titulo}     = "Generador de Reportes";
+	$c->stash->{template} 	= 'reportes/wizard.tt2';
 }
 
 =head2 disposiciones($job_id)
@@ -101,6 +145,7 @@ sub auditoria : Local {
 
 				# Creo un hash para guardar los datos de la entidad. 
                 my $entidad = {};
+                $entidad->{nacreditacion}    = $auditoria->idev->registro;
                 $entidad->{nombre}    = $auditoria->idev->nombre;
                 $entidad->{telefono}  = $auditoria->idev->telefono;
                 $entidad->{direccion} = $auditoria->idev->direccion;
@@ -111,6 +156,8 @@ sub auditoria : Local {
                 $resultados->{dfail}   = $auditoria->fallidas;
                 $resultados->{dpass}   = $auditoria->validas;
 				my $indice = ($resultados->{dpass} / ($resultados->{dfail} + $resultados->{dpass})) * 100 ;
+				# Redondeo el número.
+				$indice = sprintf("%.2f",$indice);
                 $resultados->{indice}   = $indice;
 
                 $c->stash->{producto}   = $producto;
@@ -119,8 +166,6 @@ sub auditoria : Local {
                 $c->stash->{disposiciones} = $disposiciones;
                 $c->stash->{id}         = $auditoria->id;
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
-				use Data::Dumper;
-				$c->log->debug(Dumper($disposiciones));
 			}
 	}
 }

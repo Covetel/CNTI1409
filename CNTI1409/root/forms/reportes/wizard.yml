@@ -1,0 +1,103 @@
+action: /reportes/wizard/
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: fechas
+      legend: Fechas
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor escoja el rango de fechas. (Desde - Hasta)'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: desde
+          label: Desde
+          attributes:
+              title: 'Hacer click para ver el calendario' 
+              class: input_text
+              id: desde
+          constraints:
+            - Required
+
+        - type: Text
+          name: hasta
+          label: Hasta
+          attributes:
+              title: 'Hacer click para ver el calendario' 
+              class: input_text
+              id: hasta
+          constraints:
+            - Required
+
+    - type: Fieldset
+      name: filtro
+      legend: Filtro de búsqueda
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor seleccione su filtro de búsqueda'
+          attributes:
+              class: informacion
+        
+        - type: Select
+          name: filtro
+          label: Buscar Por
+          options: 
+              - ['-', ' ']
+              - ['idev', 'Entidad Verificadora']
+              - ['idinstitucion', 'Institución']
+          attributes:
+              title:  'Por favor seleccione el filtro de búsqueda' 
+              class: input_select
+              id: filtro
+          constraints:
+            - Required
+
+        - type: Text
+          name: patron
+          label: Patrón
+          attributes:
+              title: 'Por favor ingrese el patrón de búsqueda' 
+              id: patron
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+ 
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Generar Reporte
+          attributes:
+              title: Presione este botón para generar el reporte.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape    
