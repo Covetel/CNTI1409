@@ -1,0 +1,4 @@
+<div id="wizard"> 
+[% INCLUDE mensajes.tt2 %]
+[% form %]
+</div>
