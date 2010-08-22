@@ -1,0 +1,87 @@
+/* 
+Archivo:        tablas.css
+Autor:          Walter Vargas <walter@covetel.com.ve>, Juan Mesa <juan@covetel.com.ve>
+Descripción:    Estilo para los controles tipo tablas.
+*/
+
+div#progreso {
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+background-color: #FFFFCE;
+font-size: 0.7em;
+height: 100px;
+}
+
+div#barra_progreso {
+height: 1em;
+}
+
+ul.urls li {
+ display: block;
+ margin: 0px; 
+ padding: 1px;
+}
+
+ul.urls {
+ padding: 5px;
+ height: 70px;
+ overflow: auto;
+}
+
+ol.disposiciones {
+ list-style-type: upper-roman;
+}
+
+ol.disposiciones li {
+ display: block;
+}
+
+table {
+ width: 100%;
+}
+
+pre { margin: 0; padding: 0;}
+
+label {vertical-align: middle;}
+
+table td {
+ padding: 2px;
+ margin: 2px;
+}
+
+table.dataTable {
+
+}
+
+div.tabla {
+height: 500px;
+margin: -20px;
+margin-bottom: -5px;
+}
+
+th {
+font-size: 0.8em;
+padding: 5px;
+}
+
+table.dataTable th {
+cursor: pointer;
+}
+
+td.tEliminar {
+    width: 20px;
+}
+
+tr.even.row_selected td {
+    background-color: #9FAFD1;
+}
+
+tr.odd.row_selected td {
+    background-color: #9FAFD1;
+}
+
+.field_disabled {
+	background-color: #FFCACA;
+	color: #4D4D4D;
+	font-size: 0.8em;
+}

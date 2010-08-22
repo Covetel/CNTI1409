@@ -20,6 +20,14 @@ div#informacion_sesion ul,li {
  text-decoration: none;
 }
 
+div#loading img{
+ margin-bottom: -6px;
+}
+
+div#loading {
+ /*visibility: hidden;*/
+}
+
 div#is_enlaces {
 
 }
@@ -31,3 +39,9 @@ div#is_usuario {
 div#is_usuario_uid {
  font-weight: bold;
 }
+
+#breadcrumb {
+ padding: 0px;
+ float: left;
+}
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+        <head>
+                <title>[% site.title %]</title>
+                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+                <meta http-equiv="Content-Language" content="es" />
+                <meta name="ROBOTS" content="ALL" />
+                <meta http-equiv="imagetoolbar" content="no" />
+                <meta name="MSSmartTagsPreventParsing" content="true" />
+                <meta name="Copyright" content="(c) 2010 Copyright content:  Copyright design: Cooperativa Venezolana de Tecnologias Libres R.S. (COVETEL R.S.)" />
+                <meta name="Keywords" content="__KEYWORDS__" />
+                <meta name="Description" content="__DESCRIPTION__" />
+                <link href="/static/stylesheets/master.css" rel="stylesheet" type="text/css" media="all" />
+                <link href="/static/stylesheets/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" media="all" />
+                <link type="image/x-icon" rel="shortcut icon" href="/static/images/favicon.ico"/>
+                <script type="text/javascript" src="/static/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.auditoria.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.dataTables.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.jeditable.mini.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.maskedinput-1.2.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/json.js"></script>
+                <script type="text/javascript" src="/static/javascripts/application.js"></script>
+        </head>
+        <body>
+                <div id="cintillo_institucional">
+                        <div id="gbv"> &nbsp; </div>
+                        <div id="bicentenario"> &nbsp; </div>
+                </div>
+                
+                <div id="area_aplicacion_login">
+                        <h3><a href="#"> [% titulo %] </a> </h3>
+                        <div>
+							[% content %]
+                        </div>
+                </div>
+
+                <div class="clear">
+                        &nbsp;
+                </div>
+        </body>
+</html>

@@ -1,2 +1,21 @@
 Código del Proyecto: CNTI-14-09
 Descripción: Desarrollo del Portal de Pruebas. 
+
+Dependencias:
+ Debian: 
+ $ aptitude install perl build-essential unzip libpq-dev git-core postgresql libxml2-dev locales vim 
+
+ CPAN: 
+ Configure el siguiente mirror en su CPANPLUS. 
+	http://www.covetel.com.ve/CPAN/
+
+ Luego entre al directorio CNTI1409/ y ejecute el siguiente comando
+ 	perl Makefile.PL 
+
+ Si tiene algún problema con la instalación de algún módulo, pruebe con la opción notest. 
+
+Luego de instalar las dependencias, puede ejecutar la aplicación usando el siguiente comando
+ 	script/cnti1409_server.pl 
+
+
+

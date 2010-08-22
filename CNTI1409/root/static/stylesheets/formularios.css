@@ -1,0 +1,172 @@
+/* 
+Archivo:        formularios.css
+Autor:          Walter Vargas <walter@covetel.com.ve>
+Descripción:    Controla los elementos involucrados en los formularios
+*/
+
+form {
+margin: 0;
+padding: 0;
+width: 600px;
+}
+
+label {
+font-weight: bold;
+width:5em; /* Set a width so the inputs line up */
+vertical-align: middle;
+font-size: 0.8em;
+}
+
+fieldset {
+border:1px solid #dedede; /* Default fieldset borders vary cross browser, so make them the same */
+width: 430px;
+background-color: #eaeaea;
+border-top: 40px solid #eaeaea;
+margin-bottom: 10px;
+padding: 10px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+}
+
+legend {
+position: relative; 
+left: -7px;
+top: -0.75em;
+font-size: 1.4em;
+font-weight: bold;
+}
+
+div.text, div.label  {
+text-align: right;
+border-bottom: 1px solid #d4d4d4;
+padding-bottom: 7px;
+padding-top: 6px;
+}
+
+textarea {
+height: 50px;
+width: 250px;
+border: 2px solid #a6a6a6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+textarea.textarea_focus {
+height: 50px;
+width: 250px;
+border: 2px solid #88c1f0;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+input.input_text {
+width: 250px;
+text-align: left;
+height: 25px;
+border: 2px solid #a6a6a6;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+input.input_text_focus {
+width: 250px;
+text-align: left;
+height: 25px;
+border: 2px solid #88c1f0;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+div.informacion {
+margin-top: -25px;
+padding-bottom: 5px;
+border-bottom: 1px solid #d4d4d4;
+padding-left: 2px;
+}
+
+label, input, textarea {
+vertical-align: middle;
+}
+
+div.submit, div.multi {
+width: 450px;
+text-align: right;
+}
+
+input.input_submit {
+background-color: #666666;
+border: 1px solid #666666;
+padding: 5px;
+padding-right: 10px;
+padding-left: 10px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+color: #fff;
+font-weight: bold;
+cursor: pointer;
+margin-left: 5px;
+}
+
+input.input_reset {
+background-color: #aaa;
+border: 1px solid #aaa;
+padding: 4px;
+padding-right: 5px;
+padding-left: 5px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+color: #fff;
+font-weight: bold;
+cursor: pointer;
+margin-left: 5px;
+}
+
+div.mensaje {
+width: 445px; 
+}
+
+span.ui-icon,span.ui-icon-info {
+float: left;
+margin-right: .3em;
+}
+
+div.error {
+background-color: #F3D8D8;
+background-image: url("images/ui-bg_diagonals-medium_20_f3d8d8_40x40.png");
+background-attachment: scroll;
+background-position:50% 50%;
+background-repeat:repeat;
+/*border-left: 1px dashed #ff0000;
+border-right: 1px dashed #ff0000;*/
+}
+
+span.error_message {
+float: left; 
+}
+
+span#icon {
+ float: right;
+ margin-top: -40px;
+ margin-left: 5px;
+}
+span.mensajito {
+ float: left;
+}
+
+div.clear {
+clear: both;
+height: 0px;
+}
+
+div.error_disposicion, div.mensaje_disposicion {
+ display: none;
+ width: 450px;
+}
+
+div#nav {
+ margin-bottom: 10px;
+}
+
+span.strong {
+ font-weight: bold;
+}

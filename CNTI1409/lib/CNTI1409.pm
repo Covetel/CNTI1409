@@ -1,5 +1,6 @@
 package CNTI1409;
 use Moose;
+use utf8;
 use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
@@ -13,9 +14,16 @@ use Catalyst::Runtime 5.80;
 #                 directory
 
 use Catalyst qw/
-    -Debug
+	-Debug
     ConfigLoader
     Static::Simple
+	Unicode::Encoding
+	StackTrace
+    Authentication
+    Session
+    Session::Store::FastMmap
+    Session::State::Cookie
+	Breadcrumbs
 /;
 
 extends 'Catalyst';
@@ -33,9 +41,7 @@ $VERSION = eval $VERSION;
 # local deployment.
 
 __PACKAGE__->config(
-    name => 'CNTI1409',
-    # Disable deprecated behavior needed by old applications
-    disable_component_resolution_regex_fallback => 1,
+	'Plugin::ConfigLoader' => { file => 'configuracion.yml' },
 );
 
 # Start the application

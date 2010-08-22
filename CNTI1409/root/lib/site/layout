@@ -13,9 +13,18 @@
                 <meta name="Keywords" content="__KEYWORDS__" />
                 <meta name="Description" content="__DESCRIPTION__" />
                 <link href="/static/stylesheets/master.css" rel="stylesheet" type="text/css" media="all" />
-                <link href="/static/stylesheets/cnti1409/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css" media="all" />
-                <script type="text/javascript" src="/static/javascripts/jquery-1.3.2.min.js"></script>
-                <script type="text/javascript" src="/static/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+                <link href="/static/stylesheets/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" media="all" />
+                <link type="image/x-icon" rel="shortcut icon" href="/static/images/favicon.ico"/>
+                <script type="text/javascript" src="/static/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.auditoria.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.dataTables.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.jeditable.mini.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.maskedinput-1.2.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/json.js"></script>
                 <script type="text/javascript" src="/static/javascripts/application.js"></script>
         </head>
         <body>
@@ -25,42 +34,60 @@
                 </div>
 
                 <div id="informacion_sesion">
+						<div id="breadcrumb">
+						<span class="strong"> Usted se encuentra en: </span>
+						 <ul>
+							[% FOREACH item IN c.breadcrumbs %]
+							<li>
+								[% IF loop.last %]
+									[% item.label %]
+								[% ELSE %]
+									<!--<a href="[% c.uri_for(item.path) %]">[% item.label %]</a> -->
+									[% item.label %]
+									<span> -> </span>
+								[% END %]
+							</li>
+							[% END %]
+						 </ul>
+						</div>
+						<div id="loading"> 
+								<img src="/static/images/loading.gif" title="Cargando ..." />
+						</div>
                         <div id="is_usuario">
-                                <div id="is_usuario_uid">walter@covetel.com.ve</div>
+                                <div id="is_usuario_uid"> administrador@dominio.com.ve </div>
                         </div>
                         <div id="is_enlaces">
                                 <ul>
-                                        <li><a href="http://www.cnti.gob.ve/">Configuración de la Cuenta</a> | </li>
-                                        <li><a href="http://www.cnti.gob.ve/">Norma Técnica</a> | </li>
-                                        <li><a href="http://www.w3.org/">W3C</a> | </li>
-                                        <li><a href="http://www.google.co.ve/">Ayuda</a> | </li>
-                                        <li> <a href="#">Salir</a> </li>
+                                        <li><a href="/">Inicio</a> | </li>
+                                        <li><a href="http://www.minci.gob.ve/documentos/9/470822/?desc=nuevaimagengrafica.pdf">Manual Minci</a> | </li>
+                                        <li><a href="http://validator.w3.org/">Validador W3C</a> | </li>
+                                        <li> <a href="/logout">Salir</a> </li>
                                 </ul>
                         </div>
                 </div>
 
                 <div id="menu_vertical">
-                        <h3><a href="#"> Modulo 1 </a></h3>
+                        <h3><a href="#"> Auditor&iacute;a </a></h3>
                         <div>
-                                <a href="#"> Opcion 1 </a> <br />
-                                <a href="#"> Opcion 2 </a> <br />
-                                <a href="#"> Opcion 3 </a> <br />
+                                <a href="/auditoria/crear"> Crear </a> <br />
+                                <a href="/auditoria/reporte"> Listar </a> <br />
                         </div>
-                        <h3><a href="#"> Modulo 2 </a></h3>
+                        <h3><a href="#"> Instituciones </a></h3>
                         <div>
-                                <a href="#"> Opcion 1 </a> <br />
-                                <a href="#"> Opcion 2 </a> <br />
-                                <a href="#"> Opcion 3 </a> <br />
+                                <a href="/instituciones/registrar"> Registrar</a> <br />
+                                <a href="/instituciones/listar"> Listar </a> <br />
+                        </div>
+                        <h3><a href="#"> Entidades <br /> Verificadoras </a></h3>
+                        <div>
+                                <a href="/entidades/registrar"> Registrar </a> <br />
+                                <a href="/entidades/listar"> Listar </a> <br />
                         </div>
                 </div>
 
                 <div id="area_aplicacion">
-                        <h3><a href="#"> Area de Aplicación </a> </h3>
+                        <h3><a href="#"> [% titulo %] </a> </h3>
                         <div>
-				<!-- en esta variable se sustituye por los archivos .tt2 con informaci�n
-                                     sobre el contenido del sitio
-                                --!>
-				[% content %]
+							[% content %]
                         </div>
                 </div>
 

@@ -1,0 +1,23 @@
+<div id="resumen">
+	<h3> En la siguiente tabla podrá ver el detalle de la auditoría 000[% id %] </h3>
+	<table class="resumen" id="auditoria_[% id %]">
+		<tr> <td> <label> Estado </label> </td> <td id="estado">[% estado %]</td> </tr> 
+		<tr> <td> <label> [% labelfecha %] </label> </td> <td> [% fecha %] </td> </tr> 
+		[% IF fechaini %]
+		<tr> <td><label>Fecha de Inicio</label></td><td>[% fechaini %]</td> </tr>
+		[% END %]
+		<tr> <td> <label> Institución </label> </td> <td> [% institucion %] </td> </tr> 
+		<tr> <td> <label> Entidad Verificadora </label> </td> <td> [% entidad %] </td> </tr> 
+		<tr> <td> <label> Muestra </label> </td> <td> [% muestra %]</td> </tr> 
+	</table>
+	
+</div>
+<div> 
+	<button id="iniciar_auditoria"> Iniciar la Auditoria </button>
+	<button id="detalle_auditoria"> Detalle de las Disposiciones </button>
+	<button id="reporte"> Ver Reporte 000[% id %] </button> 
+</div>
+
+<div> 
+	<a href="/auditoria/reporte/" title=""> Volver al reporte de auditorías </a> 
+</div>

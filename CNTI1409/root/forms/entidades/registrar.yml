@@ -1,0 +1,132 @@
+action: /entidades/registrar
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: datos_entidad_verificadora
+      legend: Datos de la Entidad Verificadora
+      elements:
+        - type: Block
+          tag: div
+          content: 'A través de este formulario podrá registrar una Entidad Verificadora.'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: registro
+          label: Número de Registro
+          attributes:
+              title: 'Por favor indique el número de registro asignado a la Entidad Verificadora'
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 2
+              max: 250
+              message: "El número de registro debe contener al menos 2 caracteres"
+          validator: 'CNTI1409::Unico::EntidadRegistro'
+
+        - type: Text
+          name: nombre
+          label: Nombre Entidad Verificadora
+          attributes:
+              title: 'Por favor indique correctamente el nombre de la Entidad Verificadora, Ejemplo: Asoc. Cooperativa Venezolana de Tecnologías Libres R.S.' 
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+              message: "El nombre debe contener al menos 4 caracteres"
+          validator: 'CNTI1409::Unico::EntidadNombre'
+
+        - type: Text
+          name: rif
+          label: R.I.F.
+          attributes:
+              title: 'Por favor indique correctamente el RIF de la Entidad Verificadora, Ejemplo: J-29532381-6'
+              class: input_text
+              maxlength: 15
+          constraints:
+              - Required
+          validator: 'CNTI1409::Unico::EntidadRIF'
+
+        - type: Text
+          name: telefono
+          label: Teléfono
+          id: phone
+          attributes:
+              title: 'Por favor indique el número telefónico de la Entidad Verificadora, con su respectivo código de área'
+              class: input_text
+
+        - type: Textarea
+          name: direccion
+          label: Dirección
+          attributes:
+              title: 'Por favor indique la dirección, Calle, AV, Ciudad, Estado'
+
+        - type: Text
+          name: contacto
+          label: Representante
+          attributes:
+              title: 'Por favor indique los nombres y apellidos del representante legal de la Entidad Verificadora, Ejemplo: Walter Vargas'
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+              message: "El nombre debe contener al menos 4 caracteres"
+
+        - type: Text
+          name: correo
+          label: Correo Electrónico
+          attributes:
+              title: 'Por favor indique el correo electrónico, que a su vez servira como identificador para autenticarse en el sistema, Ejemplo: info@covetel.com.ve.'
+              class: input_text
+          constraints:
+            - Required
+            - type: Email
+
+        - type: Text
+          name: web
+          label: Página Web
+          default: "http://"
+          attributes:
+              title: 'Por favor indique la dirección electrónica (URL) de la página web de la entidad, Ejemplo: http://www.covetel.com.ve.'
+              class: input_text
+          constraints:
+            - type: Regex
+              common: [ URI, HTTP, { '-scheme': 'ftp|https?' } ]
+
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Registrar Entidad
+          attributes:
+              title: Presione este botón para registrar la Entidad Verificadora.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    - TrimEdges
+    - HTMLEscape 

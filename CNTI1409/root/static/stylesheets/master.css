@@ -7,3 +7,8 @@ Descripción:  	Hoja de estilo principal, desde aqui importo otras hojas de esti
 @import "layout.css";
 @import "cintillo.css";
 @import "informacion_sesion.css";
+@import "formularios.css";
+@import "tablas.css";
+@import "dataTable/dt_page.css";
+@import "dataTable/dt_table.css";
+@import "dataTable/dt_table_jui.css";

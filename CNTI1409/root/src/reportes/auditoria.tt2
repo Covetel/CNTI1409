@@ -1,0 +1,125 @@
+<div id="reporte_tabs">
+<ul>
+	<li> <a href="#reporte_producto">Información del Producto</a> </li>
+	<li> <a href="#reporte_entidad">Información de la Entidad Verificadora</a> </li>
+	<li> <a href="#reporte_resultado">Resultado de la Prueba</a> </li>
+	<li> <a href="#reporte_disposiciones">Disposiciones</a> </li>
+</ul>
+
+<div id="reporte_producto">
+	<div> 
+		<span class="strong"> Producto a Certificar: </span>
+	 	<span class="reporte_producto_nombre"> [% producto.nombre %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Fecha de Ejecución: </span>
+	 	<span class="reporte_producto_fechas"> Desde [% producto.fechaini %] Hasta [% producto.fechafin %].</span>
+	</div>
+	<div> 
+		<span class="strong"> Institución Solicitante: </span>
+	 	<span class="reporte_producto_solicitante"> [% producto.solicitante %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Dirección de la Institución: </span>
+	 	<span class="reporte_producto_direccion"> [% producto.direccion %] </span>
+	</div>	
+	<div> 
+		<span class="strong"> Teléfono Contacto: </span>
+	 	<span class="reporte_producto_telefono"> [% producto.telefono %] </span>
+	</div>	
+	<div> 
+		<span class="strong"> Correo Contacto: </span>
+	 	<span class="reporte_producto_correo"> [% producto.correo %] </span>
+	</div>	
+</div>
+<div id="reporte_entidad">
+	<div> 
+		<span class="strong"> Número de Acreditación: </span>
+	 	<span class="reporte_entidad_nacreditacion"> [% entidad.nacreditacion %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Nombre: </span>
+	 	<span class="reporte_entidad_nombre"> [% entidad.nombre %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Dirección: </span>
+	 	<span class="reporte_entidad_direccion"> [% entidad.direccion %] </span>
+	</div>
+	<div> 
+		<span class="strong"> Teléfono: </span>
+	 	<span class="reporte_entidad_telefono"> [% entidad.telefono %] </span>
+	</div>
+</div>
+<div id="reporte_resultado">
+	<div> 
+		<span class="strong"> Resultado General: </span>
+	 	<span class="reporte_resultado_general"> 
+			[% IF resultados.general == 'paso' %] 
+				Todas las URLs de la muestra, han pasado las pruebas con éxito, el resultado general de la auditoría es 100% positivo. 
+			[% ELSE %]
+				El resultado general de la auditoría es negativo.
+			[% END %] 
+		</span>
+		<span class="icono"> <img src="/static/images/[% resultados.general %].png" alt="[%resultados.general%]" title="[%resultados.general%]"> </span>
+	</div>
+	[% IF resultados.general == 'fallo' %]
+		<div> 
+			<span class="strong"> Número de Disposiciones que cumple: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.dpass %] </span>
+		</div>
+		<div> 
+			<span class="strong"> Número de Disposiciones que NO cumple: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.dfail %] </span>
+		</div>
+		
+	[% END %]
+		<div> 
+			<span class="strong"> Indice de Cumplimento: </span>
+	 		<span class="reporte_resultado_paso"> [% resultados.indice %]% </span>
+		</div>
+</div>
+<div id="reporte_disposiciones">
+	[% FOREACH disp IN disposiciones %]
+		<h3><a href="#[% disp.name %]">[% disp.value.name %] </a> </h3>
+		<div>
+			<ol class="disposiciones">
+				<li> <span class="strong"> Resultado General: </span> 
+                    [% IF disp.value.result == "fail" %]
+                        Falló
+                    [% ELSE %]
+                        Pasó
+                    [% END %]
+                </li>
+				[% IF disp.value.resolutoria %]
+					<li> <span class="strong"> Acciones Correctivas: </span> [% disp.value.resolutoria %] </li>
+				[% END %]
+				<li> <span class="strong"> Urls: </span> 
+				<ol>
+				[% FOREACH url IN disp.value.urls %]
+					<li> <span class="strong"> + [% url.key %]</span> </li>
+						<ol>
+							<li> <span class="strong"> Resultado:  </span> 
+                                [% IF url.value.result == "pass" %]
+                                    Pasó
+                                [% ELSE %]
+                                    Falló
+                                [% END %]
+                            </li>
+							[% IF url.value.mensajes %]
+							    <li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes %] </li>
+							[% END %]
+						</ol>
+				[% END %]
+		 		</ol>
+				</li>
+			</ol>
+		</div>
+	[% END %]
+</div>
+
+
+</div>
+
+<p>
+<a href="/auditoria/detalle/[% id %]/Domain"> Volver al detalle de la auditoría </a>
+</p>
