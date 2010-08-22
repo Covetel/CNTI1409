@@ -47,14 +47,14 @@ sub new_job {
 
     my $job = CNTI::Validator::Monitor::Job->hash_new( \%record );
     if ( my $pid = fork ) {
-        # Nothing
+        # El padre recibe el número de job
+        return $job;
     }
     else {
-        # Child process
-        $self->validate;
+        # El hijo ejecuta la validación para el job
+        $self->validate( $job );
         exit 0;
     }
-    return $job;
 }
 
 sub find_job {
@@ -121,8 +121,9 @@ use CNTI::Validator::Tests;
 
 sub validate {
     my $self = shift;
+    my $job = shift;
 
-    my $job = $self->get_next_new_job;
+    $job ||= $self->get_next_new_job;
     return unless $job;
     
     $job->set_state('run');

@@ -1,4 +1,4 @@
-
+use lib 'lib';
 use CNTI::Validator::Schema;
 use CNTI::Validator::Jobs;
 use common::sense;
@@ -8,10 +8,10 @@ my @data = CNTI::Validator::Schema->resultset('Jobs')->all;
 my $job = CNTI::Validator::Jobs->new_job(
     site => "http://www.mppef.gob.ve",
     sample => [
-        "/inicio/notas-de-prensa",
-        "/inicio/publicaciones",
-        "/inicio/info.-estadistica",
-        "/inicio/concursos-abiertos",
+        "/index.php?option=com_content&view=article&id=220&Itemid=395",
+        "/index.php?option=com_content&view=section&layout=blog&id=1&Itemid=401",
+        "/index.php?option=com_content&view=article&id=235&Itemid=248",
+        "/index.php?option=com_facileforms&Itemid=37",
         ],
     callback => "http://validador.gob.ve/mi-callback",
     data => { algo => 1, mas => 2 }

@@ -3,7 +3,7 @@ use Moose;
 
 use CNTI::ValidatorDB;
 
-my $schema = CNTI::ValidatorDB->connect( 'dbi:Pg:dbname=validador;port=5433', 'opr', '', );
+my $schema = CNTI::ValidatorDB->connect( 'dbi:Pg:dbname=validador', 'jrey', '', );
 
 sub schema { $schema }
 sub resultset { $schema->resultset($_[1]) }
