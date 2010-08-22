@@ -293,6 +293,28 @@ sub run {
     $self->ok( $errors == 0 );
 }
 
+package CNTI::Validator::Test::Plugins;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self  = shift;
+
+    my @plugins = $self->htmlt->find('object');
+    my $errors = 0;
+    for my $plugin (@plugins) {
+        if ( $plugin->attr('classid') ) {
+            if ( $plugin->attr('classid') =~ /clsid:/ ) {
+                $errors++;
+            }
+        }
+    }
+    $self->event_log( error => "Hay $errors controles ActiveX" ) if ($errors);
+    $self->ok( $errors == 0 );
+}
+
+
 package CNTI::Validator::Test::HTML4;
 use Moose;
 
