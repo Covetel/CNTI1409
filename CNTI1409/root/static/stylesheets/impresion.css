@@ -4,7 +4,7 @@ Autor:          Walter Vargas <walter@covetel.com.ve>
 Descripción:    Estilo para las vistas de impresion.
 */
 
-#cintillo_institucional, #informacion_sesion, #menu_vertical {
+button#print, button#printOut, #cintillo_institucional, #informacion_sesion, #menu_vertical {
 	display: none;
 }
 
