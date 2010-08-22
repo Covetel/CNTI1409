@@ -85,3 +85,13 @@ tr.odd.row_selected td {
 	color: #4D4D4D;
 	font-size: 0.8em;
 }
+
+table.reporte_auditorias {
+	font-size: 0.9em;
+	text-align: center;
+	border: 1px solid #eee;
+}
+
+button#printOut{
+ display: none;
+}
