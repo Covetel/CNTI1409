@@ -15,7 +15,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese el nombre de la institución correctamente.'
+          content: 'Por favor ingrese el nombre de la Institución correctamente.'
           attributes:
               class: informacion
 
