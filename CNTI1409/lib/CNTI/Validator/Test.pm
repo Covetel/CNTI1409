@@ -302,16 +302,24 @@ sub run {
     my $self  = shift;
 
     my @plugins = $self->htmlt->find('object');
-    my $errors = 0;
+    my $activex = 0;
+    my $flashhtml5 = 0;
     for my $plugin (@plugins) {
-        if ( $plugin->attr('classid') ) {
-            if ( $plugin->attr('classid') =~ /clsid:/ ) {
-                $errors++;
-            }
+        if ( $plugin->attr('classid') =~ /clsid:/ ) {
+            $activex++;
         }
     }
-    $self->event_log( error => "Hay $errors controles ActiveX" ) if ($errors);
-    $self->ok( $errors == 0 );
+    my @embed = $self->htmlt->find('embed');
+    for my $flash (@embed) {
+        if ( $flash->attr('src') =~ /swf/ ) {
+            $flashhtml5++;
+        }
+    }
+
+    $self->event_log( error => "Hay $activex controles ActiveX" ) if ($activex);
+    $self->event_log( error => "Hay $flashhtml5 controles Flash declarados con HTML5" ) if ($flashhtml5);
+
+    $self->ok( $activex == 0  and $flashhtml5 == 0);
 }
 
 
