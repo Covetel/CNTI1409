@@ -159,7 +159,7 @@ ALTER SEQUENCE auditoria_id_seq OWNED BY auditoria.id;
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoria_id_seq', 18, true);
+SELECT pg_catalog.setval('auditoria_id_seq', 25, true);
 
 
 --
@@ -235,7 +235,7 @@ ALTER SEQUENCE auditoriadetalle_id_seq OWNED BY auditoriadetalle.id;
 -- Name: auditoriadetalle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('auditoriadetalle_id_seq', 5, true);
+SELECT pg_catalog.setval('auditoriadetalle_id_seq', 19, true);
 
 
 --
@@ -347,7 +347,7 @@ ALTER SEQUENCE disposicion_id_seq OWNED BY disposicion.id;
 -- Name: disposicion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('disposicion_id_seq', 16, true);
+SELECT pg_catalog.setval('disposicion_id_seq', 22, true);
 
 
 --
@@ -492,7 +492,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 -- Name: events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('events_id_seq', 509, true);
+SELECT pg_catalog.setval('events_id_seq', 2295, true);
 
 
 --
@@ -587,7 +587,7 @@ ALTER SEQUENCE institucion_id_seq OWNED BY institucion.id;
 -- Name: institucion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('institucion_id_seq', 20, true);
+SELECT pg_catalog.setval('institucion_id_seq', 23, true);
 
 
 --
@@ -633,7 +633,47 @@ ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
 -- Name: jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('jobs_id_seq', 9, true);
+SELECT pg_catalog.setval('jobs_id_seq', 15, true);
+
+
+--
+-- Name: params_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
+--
+
+CREATE SEQUENCE params_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.params_id_seq OWNER TO admin;
+
+--
+-- Name: params_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
+--
+
+SELECT pg_catalog.setval('params_id_seq', 5988, true);
+
+
+--
+-- Name: params; Type: TABLE; Schema: public; Owner: admin; Tablespace: 
+--
+
+CREATE TABLE params (
+    id bigint DEFAULT nextval('params_id_seq'::regclass) NOT NULL,
+    disposicion character varying NOT NULL,
+    parametro character varying NOT NULL
+);
+
+
+ALTER TABLE public.params OWNER TO admin;
+
+--
+-- Name: TABLE params; Type: COMMENT; Schema: public; Owner: admin
+--
+
+COMMENT ON TABLE params IS 'Parametros de las disposiciones';
 
 
 --
@@ -674,7 +714,7 @@ ALTER SEQUENCE results_id_seq OWNED BY results.id;
 -- Name: results_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('results_id_seq', 548, true);
+SELECT pg_catalog.setval('results_id_seq', 1525, true);
 
 
 --
@@ -718,7 +758,7 @@ ALTER SEQUENCE urls_id_seq OWNED BY urls.id;
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: admin
 --
 
-SELECT pg_catalog.setval('urls_id_seq', 70, true);
+SELECT pg_catalog.setval('urls_id_seq', 257, true);
 
 
 --
@@ -796,21 +836,9 @@ ALTER TABLE urls ALTER COLUMN id SET DEFAULT nextval('urls_id_seq'::regclass);
 --
 
 COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreacion, url, estado, job, resultado, fallidas, validas) FROM stdin;
-4	2	2	Portal de Covetel	\N	\N	2010-05-08	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-5	6	4	Movilnet	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-6	2	2	Algun portal de la institucion	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-7	6	4	El portal de las pruebas	\N	\N	2010-05-09	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-8	2	11	Super Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-9	4	3	Otro Super Mega Portal	\N	\N	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	p	\N	\N	\N	\N
-14	2	15	Uno por alli	2010-05-12	\N	2010-05-12	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	a	5	\N	\N	\N
-11	2	2	Portal del Ministerio	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	2	\N	\N	\N
-13	2	17	Luis Chacon	2010-05-11	\N	2010-05-11	{"http://www.luischacon.info/index.php?lang=es\n","http://www.luischacon.info/servicios.php\n","http://www.luischacon.info/contacto.php\n","http://www.luischacon.info/acerca-de-luis-chacon.php\n"}	a	4	\N	\N	\N
-10	4	11	Otro Super Mega Portal	2010-05-10	2010-05-12	2010-05-10	{"www.cnti.gob.ve\n","www.suscerte.gob.ve\n","www.covetel.com.ve\n"}	c	1	\N	\N	\N
-12	4	3	Validador de portales	2010-05-10	2010-05-12	2010-05-10	{"http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n","http://www.mppef.gob.ve/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n"}	c	3	\N	\N	\N
-15	2	18	Portal de VENCERT	2010-05-12	\N	2010-05-12	{"https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=45&Itemid=34\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=46&Itemid=54\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=47&Itemid=55\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=48&Itemid=56\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=49&Itemid=60\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=77&Itemid=61\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=273&Itemid=83\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=34&Itemid=57\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=37&Itemid=58\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=35&Itemid=59\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=51&Itemid=50\n","https://www.vencert.gob.ve/index.php?option=com_incidentes&Itemid=73\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n"}	a	6	\N	\N	\N
-16	2	19	Seguro Social	2010-05-12	\N	2010-05-12	{"http://www.ivss.gov.ve/Ciudadano\n","http://www.ivss.gov.ve/Salud/Servicios-Institucionales\n"}	a	7	\N	\N	\N
-17	4	18	Joomla Vencert	2010-05-13	\N	2010-05-13	{"https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=45&Itemid=34\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=46&Itemid=54\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=47&Itemid=55\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=48&Itemid=56\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=49&Itemid=60\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=77&Itemid=61\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=273&Itemid=83\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=34&Itemid=57\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=37&Itemid=58\n","https://www.vencert.gob.ve/index.php?option=com_content&view=category&id=35&Itemid=59\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=51&Itemid=50\n","https://www.vencert.gob.ve/index.php?option=com_incidentes&Itemid=73\n","https://www.vencert.gob.ve/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n"}	a	8	\N	\N	\N
-18	2	20	Banco de Venezuela	2010-05-13	\N	2010-05-13	{"http://www.bancodevenezuela.com/?h=nuestro%20banco&i=qui%E9nes_somos&id=169\n","http://www.bancodevenezuela.com/?h=universitarios\n"}	a	9	\N	\N	\N
+24	2	22	VTV Portal	2010-08-23	\N	2010-08-23	{"http://www.vtv.gob.ve/contacto\n","http://www.vtv.gob.ve/contenido/19388\n","http://www.vtv.gob.ve/el-canal\n","http://www.vtv.gob.ve/\n","http://www.vtv.gob.ve/noticias-nacionales\n","http://www.vtv.gob.ve/noticias-internacionales\n","http://www.vtv.gob.ve/noticias-econ%C3%B3micas\n","http://www.vtv.gob.ve/noticias-culturales\n","http://www.vtv.gob.ve/noticias-deportivas\n","http://www.vtv.gob.ve/noticias-ciencia-y-salud\n","http://www.vtv.gob.ve/art%C3%ADculos/\n","http://www.vtv.gob.ve/videos-destacadas\n","http://www.vtv.gob.ve/files/converted_videos/42422_Resultado_del_Simulacro_Electoral_.flv\n","http://www.vtv.gob.ve/noticias-nacionales/42419\n","http://www.vtv.gob.ve/noticias-nacionales/42424\n","http://www.vtv.gob.ve/noticias-nacionales/42430\n","http://www.vtv.gob.ve/noticias-internacionales/42440\n","http://www.vtv.gob.ve/noticias-nacionales/42377\n","http://www.vtv.gob.ve/noticias-nacionales/42432\n","http://www.vtv.gob.ve/noticias-nacionales/42415\n","http://www.vtv.gob.ve/noticias-deportivas/42433\n","http://www.vtv.gob.ve/noticias-internacionales/42409\n","http://www.vtv.gob.ve/noticias-nacionales/42405\n","http://www.vtv.gob.ve/art%C3%ADculos/opini%C3%B3n/42385\n","http://www.vtv.gob.ve/art%C3%ADculos/opini%C3%B3n/42317\n","http://www.vtv.gob.ve/art%C3%ADculos\n","http://www.vtv.gob.ve/videos-especiales-vtv/42380\n","http://www.vtv.gob.ve/noticias-nacionales/42439\n","http://www.vtv.gob.ve/noticias-nacionales/42437\n","http://www.vtv.gob.ve/noticias-nacionales/42431\n","http://www.vtv.gob.ve/noticias-nacionales/42428\n","http://www.vtv.gob.ve/noticias-econ%C3%B3micas/42326\n","http://www.vtv.gob.ve/noticias-econ%C3%B3micas/42316\n","http://www.vtv.gob.ve/noticias-econ%C3%B3micas/42318\n","http://www.vtv.gob.ve/noticias-econ%C3%B3micas/42312\n","http://www.vtv.gob.ve/noticias-culturales/42362\n","http://www.vtv.gob.ve/noticias-culturales/42283\n","http://www.vtv.gob.ve/noticias-culturales/42272\n","http://www.vtv.gob.ve/noticias-culturales/42255\n","http://www.vtv.gob.ve/noticias-internacionales/42438\n","http://www.vtv.gob.ve/noticias-internacionales/42429\n","http://www.vtv.gob.ve/noticias-internacionales/42427\n","http://www.vtv.gob.ve/noticias-internacionales/42425\n","http://www.vtv.gob.ve/noticias-deportivas/42408\n","http://www.vtv.gob.ve/noticias-deportivas/42401\n","http://www.vtv.gob.ve/noticias-deportivas/42384\n","http://www.vtv.gob.ve/noticias-deportivas/42378\n","http://www.vtv.gob.ve/noticias-ciencia-y-salud/42387\n","http://www.vtv.gob.ve/noticias-ciencia-y-salud/42367\n","http://www.vtv.gob.ve/noticias-ciencia-y-salud/42345\n","http://www.vtv.gob.ve/noticias-ciencia-y-salud/42344\n","http://www.vtv.gob.ve/noticias-nacionales/41814\n","http://www.vtv.gob.ve/noticias-nacionales/40327\n","http://www.vtv.gob.ve/noticias-nacionales/41717\n","http://www.vtv.gob.ve/noticias-nacionales/40351\n","http://www.vtv.gob.ve/noticias-nacionales/41884\n","http://www.vtv.gob.ve/noticias-internacionales/41369\n","http://www.vtv.gob.ve/noticias-internacionales/41575\n","http://www.vtv.gob.ve/noticias-nacionales/41831\n","http://www.vtv.gob.ve/noticias-nacionales/40935\n","http://www.vtv.gob.ve/noticias-nacionales/41084\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/41834\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/40718\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/40725\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/41228\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/41215\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/40636\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/40475\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/40813\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/41595\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/41990\n","http://www.vtv.gob.ve/videos-destacadas-en-video/42434\n","http://www.vtv.gob.ve/actualidad/Manuelita-S%C3%A1enz-vuelve-con-Bol%C3%ADvar\n","http://www.vtv.gob.ve/actualidad/las-l%C3%ADneas-de-ch%C3%A1vez\n","http://www.vtv.gob.ve/actualidad/Mundial-de-Beisbol-Femenino-2010\n","http://www.vtv.gob.ve/actualidad/documentales\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/42436\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/42392\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/42349\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/42336\n","http://www.vtv.gob.ve/videos-emisiones-anteriores/42303\n","http://www.vtv.gob.ve/videos-emisiones\n","http://www.vtv.gob.ve/actualidad/dossier\n","http://www.vtv.gob.ve/programas-videos/dossier\n","http://www.vtv.gob.ve/actualidad/la-hojilla\n","http://www.vtv.gob.ve/actualidad/bicentenario\n","http://www.vtv.gob.ve/actualidad/sud%C3%A1frica-2010\n","http://www.vtv.gob.ve/programas-videos/la-hojilla\n","http://www.vtv.gob.ve/actualidad/enmienda-constitucional\n","http://www.vtv.gob.ve/actualidad/pacto-de-puerto-rico\n","http://www.vtv.gob.ve/actualidad/informe-semanal\n","http://www.vtv.gob.ve/contenido/116\n"}	a	14	\N	\N	\N
+23	2	21	Portal de la Presidencia	2010-08-22	2010-08-22	2010-08-22	{"http://www.presidencia.gob.ve/\n","http://www.presidencia.gob.ve/action/noticia/filteror\n","http://www.presidencia.gob.ve/contacto.html\n","http://www.presidencia.gob.ve/index_enviar_caso.htm\n","http://www.presidencia.gob.ve/efemerides.html\n","http://www.presidencia.gob.ve/personaje_del_mes.html\n","http://www.presidencia.gob.ve/memoria_revolucionaria.html\n","http://www.presidencia.gob.ve/logros_g_b.html\n","http://www.presidencia.gob.ve/comision_contrataciones.html\n"}	c	13	f	7	5
+25	2	23	Asamblea Web	2010-08-23	2010-08-23	2010-08-23	{"http://www.antv.gob.ve/m8/portal.asp\n","http://www.antv.gob.ve/m8/contenido.asp?id=1\n","http://www.antv.gob.ve/m8/programa.asp?id=2\n"}	c	15	f	6	7
 \.
 
 
@@ -819,11 +847,15 @@ COPY auditoria (id, idev, idinstitucion, portal, fechaini, fechafin, fechacreaci
 --
 
 COPY auditoriadetalle (id, idauditoria, iddisposicion, resolutoria) FROM stdin;
-1	13	9	noaoasas
-2	13	13	Debe agregar los widgets de twitter en un archivo .js y no usar el codigo empotrado
-3	12	9	Cambiar todas las imagenes a PNG
-4	12	11	Poner los atributos ALT como debe ser
-5	12	13	Meter el codigo  javascript en archivos .js
+11	23	18	Se deben quitar todos los archivos Flash del portal
+12	23	15	Acomodar la declaración de HTML de esta página
+13	23	13	Colocar todos los javascripts en archivos externos
+14	23	12	actualizar los scripts
+15	23	11	Todas las imagenes deben tener atributo ALT
+16	23	9	Se deben cambiar el formato de las imagenes
+17	23	4	Problema UTF8
+18	25	4	pasar a utf8
+19	24	18	aaa
 \.
 
 
@@ -840,6 +872,8 @@ COPY disposicion (id, nombre, descripcion, habilitado, modulo) FROM stdin;
 12	Uso de Javascript	Los portales deben usar el lenguaje de script Javascript	t	JS
 13	Archivos js	Existencia de archivos .js	t	JS_inc
 15	HTML 4.01/XHTML 1.0	Verificar el uso de HTML 4.01 o XHTML 1.0	t	HTML4
+18	Controles Añadibles	Existencia de controles añadibles de tipo ActiveX	t	Plugins
+22	Fuentes Libres	Verificar el uso de Fuentes Libres	t	Fonts
 \.
 
 
@@ -862,515 +896,1302 @@ COPY entidadverificadora (id, nombre, rif, correo, telefono, contacto, direccion
 --
 
 COPY events (id, pid, class, message, data) FROM stdin;
-1	2	error	No tiene TITLE	\N
-2	3	warnings	No HTTP Charset	\N
-3	7	error	No se usan archivos con extensión .js	\N
-4	10	error	No tiene TITLE	\N
-5	11	warnings	No HTTP Charset	\N
-6	15	error	No se usan archivos con extensión .js	\N
-7	18	error	No tiene TITLE	\N
-8	19	warnings	No HTTP Charset	\N
-9	23	error	No se usan archivos con extensión .js	\N
-10	26	error	No tiene TITLE	\N
-11	27	warnings	No HTTP Charset	\N
-12	31	error	No se usan archivos con extensión .js	\N
-13	36	error	Tipo de imagen ilegal image/gif	\N
-14	36	error	Tipo de imagen ilegal image/gif	\N
-15	36	error	Tipo de imagen ilegal image/jpeg	\N
-16	36	error	Tipo de imagen ilegal image/jpeg	\N
-17	36	error	Tipo de imagen ilegal image/gif	\N
-18	36	error	Tipo de imagen ilegal image/gif	\N
-19	37	error	Hay 1 imagenes sin atributo ALT	\N
-20	39	error	Script en línea	\N
-21	39	error	No se usan archivos con extensión .js	\N
-22	40	error	El tipo de documento es: HTML-5	\N
-23	44	error	Tipo de imagen ilegal image/gif	\N
-24	44	error	Tipo de imagen ilegal image/gif	\N
-25	44	error	Tipo de imagen ilegal image/jpeg	\N
-26	44	error	Tipo de imagen ilegal image/gif	\N
-27	45	error	Hay 1 imagenes sin atributo ALT	\N
-28	47	error	Script en línea	\N
-29	48	error	El tipo de documento es: HTML-5	\N
-30	52	error	Tipo de imagen ilegal image/gif	\N
-31	52	error	Tipo de imagen ilegal image/gif	\N
-32	52	error	Tipo de imagen ilegal image/jpeg	\N
-33	52	error	Tipo de imagen ilegal image/gif	\N
-34	53	error	Hay 1 imagenes sin atributo ALT	\N
-35	55	error	Script en línea	\N
-36	56	error	El tipo de documento es: HTML-5	\N
-37	60	error	Tipo de imagen ilegal image/gif	\N
-38	60	error	Tipo de imagen ilegal image/gif	\N
-39	60	error	Tipo de imagen ilegal image/jpeg	\N
-40	61	error	Hay 1 imagenes sin atributo ALT	\N
-41	63	error	Script en línea	\N
-42	64	error	El tipo de documento es: HTML-5	\N
-43	68	error	Tipo de imagen ilegal image/gif	\N
-44	68	error	Tipo de imagen ilegal image/gif	\N
-45	68	error	Tipo de imagen ilegal image/jpeg	\N
-46	69	error	Hay 1 imagenes sin atributo ALT	\N
-47	71	error	Script en línea	\N
-48	72	error	El tipo de documento es: HTML-5	\N
-49	76	error	Tipo de imagen ilegal image/gif	\N
-50	76	error	Tipo de imagen ilegal image/gif	\N
-51	76	error	Tipo de imagen ilegal image/jpeg	\N
-52	77	error	Hay 1 imagenes sin atributo ALT	\N
-53	79	error	Script en línea	\N
-54	80	error	El tipo de documento es: HTML-5	\N
-55	84	error	Tipo de imagen ilegal image/gif	\N
-56	84	error	Tipo de imagen ilegal image/gif	\N
-57	84	error	Tipo de imagen ilegal image/jpeg	\N
-58	85	error	Hay 1 imagenes sin atributo ALT	\N
-59	87	error	Script en línea	\N
-60	88	error	El tipo de documento es: HTML-5	\N
-61	92	error	Tipo de imagen ilegal image/gif	\N
-62	92	error	Tipo de imagen ilegal image/gif	\N
-63	92	error	Tipo de imagen ilegal image/jpeg	\N
-64	93	error	Hay 1 imagenes sin atributo ALT	\N
-65	95	error	Script en línea	\N
-66	96	error	El tipo de documento es: HTML-5	\N
-67	100	error	Tipo de imagen ilegal image/gif	\N
-68	100	error	Tipo de imagen ilegal image/gif	\N
-69	100	error	Tipo de imagen ilegal image/jpeg	\N
-70	101	error	Hay 1 imagenes sin atributo ALT	\N
-71	103	error	Script en línea	\N
-72	104	error	El tipo de documento es: HTML-5	\N
-73	108	error	Tipo de imagen ilegal image/gif	\N
-74	108	error	Tipo de imagen ilegal image/gif	\N
-75	108	error	Tipo de imagen ilegal image/jpeg	\N
-76	108	error	Tipo de imagen ilegal image/jpeg	\N
-77	108	error	Tipo de imagen ilegal image/gif	\N
-78	108	error	Tipo de imagen ilegal image/gif	\N
-79	109	error	Hay 1 imagenes sin atributo ALT	\N
-80	111	error	Script en línea	\N
-81	111	error	No se usan archivos con extensión .js	\N
-82	112	error	El tipo de documento es: HTML-5	\N
-83	116	error	Tipo de imagen ilegal image/gif	\N
-84	116	error	Tipo de imagen ilegal image/gif	\N
-85	116	error	Tipo de imagen ilegal image/jpeg	\N
-86	116	error	Tipo de imagen ilegal image/gif	\N
-87	117	error	Hay 1 imagenes sin atributo ALT	\N
-88	119	error	Script en línea	\N
-89	120	error	El tipo de documento es: HTML-5	\N
-90	124	error	Tipo de imagen ilegal image/gif	\N
-91	124	error	Tipo de imagen ilegal image/gif	\N
-92	124	error	Tipo de imagen ilegal image/jpeg	\N
-93	124	error	Tipo de imagen ilegal image/gif	\N
-94	125	error	Hay 1 imagenes sin atributo ALT	\N
-95	127	error	Script en línea	\N
-96	128	error	El tipo de documento es: HTML-5	\N
-97	132	error	Tipo de imagen ilegal image/gif	\N
-98	132	error	Tipo de imagen ilegal image/gif	\N
-99	132	error	Tipo de imagen ilegal image/jpeg	\N
-100	133	error	Hay 1 imagenes sin atributo ALT	\N
-101	135	error	Script en línea	\N
-102	136	error	El tipo de documento es: HTML-5	\N
-103	140	error	Tipo de imagen ilegal image/gif	\N
-104	140	error	Tipo de imagen ilegal image/gif	\N
-105	140	error	Tipo de imagen ilegal image/jpeg	\N
-106	141	error	Hay 1 imagenes sin atributo ALT	\N
-107	143	error	Script en línea	\N
-108	144	error	El tipo de documento es: HTML-5	\N
-109	148	error	Tipo de imagen ilegal image/gif	\N
-110	148	error	Tipo de imagen ilegal image/gif	\N
-111	148	error	Tipo de imagen ilegal image/jpeg	\N
-112	149	error	Hay 1 imagenes sin atributo ALT	\N
-113	151	error	Script en línea	\N
-114	152	error	El tipo de documento es: HTML-5	\N
-115	156	error	Tipo de imagen ilegal image/gif	\N
-116	156	error	Tipo de imagen ilegal image/gif	\N
-117	156	error	Tipo de imagen ilegal image/jpeg	\N
-118	157	error	Hay 1 imagenes sin atributo ALT	\N
-119	159	error	Script en línea	\N
-120	160	error	El tipo de documento es: HTML-5	\N
-121	164	error	Tipo de imagen ilegal image/gif	\N
-122	164	error	Tipo de imagen ilegal image/gif	\N
-123	164	error	Tipo de imagen ilegal image/jpeg	\N
-124	165	error	Hay 1 imagenes sin atributo ALT	\N
-125	167	error	Script en línea	\N
-126	168	error	El tipo de documento es: HTML-5	\N
-127	172	error	Tipo de imagen ilegal image/gif	\N
-128	172	error	Tipo de imagen ilegal image/gif	\N
-129	172	error	Tipo de imagen ilegal image/jpeg	\N
-130	173	error	Hay 1 imagenes sin atributo ALT	\N
-131	175	error	Script en línea	\N
-132	176	error	El tipo de documento es: HTML-5	\N
-133	179	warnings	No HTTP Charset	\N
-134	179	error	HTTP charset '' does not match META charset 'UTF-8'	\N
-135	180	error	Tipo de imagen ilegal image/jpeg	\N
-136	183	error	Script en línea	\N
-137	183	error	Script en línea	\N
-138	183	error	Script en línea	\N
-139	187	warnings	No HTTP Charset	\N
-140	187	error	HTTP charset '' does not match META charset 'UTF-8'	\N
-141	191	error	Script en línea	\N
-142	191	error	Script en línea	\N
-143	191	error	Script en línea	\N
-144	195	warnings	No HTTP Charset	\N
-145	195	error	HTTP charset '' does not match META charset 'UTF-8'	\N
-146	199	error	Script en línea	\N
-147	199	error	Script en línea	\N
-148	199	error	Script en línea	\N
-149	199	error	Script en línea	\N
-150	203	warnings	No HTTP Charset	\N
-151	203	error	HTTP charset '' does not match META charset 'UTF-8'	\N
-152	204	error	Tipo de imagen ilegal image/jpeg	\N
-153	207	error	Script en línea	\N
-154	207	error	Script en línea	\N
-155	207	error	Script en línea	\N
-156	211	warnings	No HTTP Charset	\N
-157	211	error	HTTP charset '' does not match META charset 'UTF-8'	\N
-158	215	error	Script en línea	\N
-159	215	error	Script en línea	\N
-160	215	error	Script en línea	\N
-161	220	error	Tipo de imagen ilegal image/gif	\N
-162	220	error	Tipo de imagen ilegal image/gif	\N
-163	220	error	Tipo de imagen ilegal text/plain	\N
-164	220	error	Tipo de imagen ilegal image/jpeg	\N
-165	220	error	Tipo de imagen ilegal image/gif	\N
-166	220	error	Tipo de imagen ilegal image/gif	\N
-167	220	error	Tipo de imagen ilegal text/plain	\N
-168	223	error	No se usan archivos con extensión .js	\N
-169	228	error	Tipo de imagen ilegal image/gif	\N
-170	228	error	Tipo de imagen ilegal image/gif	\N
-171	228	error	Tipo de imagen ilegal text/plain	\N
-172	228	error	Tipo de imagen ilegal image/gif	\N
-173	229	error	Hay 1 imagenes sin atributo ALT	\N
-174	231	error	Script en línea	\N
-175	232	error	El tipo de documento es: HTML-5	\N
-176	236	error	Tipo de imagen ilegal text/plain	\N
-177	236	error	Tipo de imagen ilegal image/gif	\N
-178	236	error	Tipo de imagen ilegal image/gif	\N
-179	236	error	Tipo de imagen ilegal text/plain	\N
-180	236	error	Tipo de imagen ilegal image/gif	\N
-181	237	error	Hay 1 imagenes sin atributo ALT	\N
-182	239	error	Script en línea	\N
-183	240	error	El tipo de documento es: HTML-5	\N
-184	244	error	Tipo de imagen ilegal image/gif	\N
-185	244	error	Tipo de imagen ilegal image/gif	\N
-186	244	error	Tipo de imagen ilegal text/plain	\N
-187	245	error	Hay 1 imagenes sin atributo ALT	\N
-188	247	error	Script en línea	\N
-189	248	error	El tipo de documento es: HTML-5	\N
-190	252	error	Tipo de imagen ilegal image/gif	\N
-191	252	error	Tipo de imagen ilegal image/gif	\N
-192	252	error	Tipo de imagen ilegal text/plain	\N
-193	253	error	Hay 1 imagenes sin atributo ALT	\N
-194	255	error	Script en línea	\N
-195	256	error	El tipo de documento es: HTML-5	\N
-196	260	error	Tipo de imagen ilegal image/gif	\N
-197	260	error	Tipo de imagen ilegal image/gif	\N
-198	260	error	Tipo de imagen ilegal text/plain	\N
-199	261	error	Hay 1 imagenes sin atributo ALT	\N
-200	263	error	Script en línea	\N
-201	264	error	El tipo de documento es: HTML-5	\N
-202	268	error	Tipo de imagen ilegal image/gif	\N
-203	268	error	Tipo de imagen ilegal image/gif	\N
-204	268	error	Tipo de imagen ilegal text/plain	\N
-205	269	error	Hay 1 imagenes sin atributo ALT	\N
-206	271	error	Script en línea	\N
-207	272	error	El tipo de documento es: HTML-5	\N
-208	276	error	Tipo de imagen ilegal image/gif	\N
-209	276	error	Tipo de imagen ilegal image/gif	\N
-210	276	error	Tipo de imagen ilegal text/plain	\N
-211	277	error	Hay 1 imagenes sin atributo ALT	\N
-212	279	error	Script en línea	\N
-213	280	error	El tipo de documento es: HTML-5	\N
-214	282	error	No tiene TITLE	\N
-215	283	warnings	No HTTP Charset	\N
-216	287	error	No se usan archivos con extensión .js	\N
-217	290	error	No tiene TITLE	\N
-218	291	warnings	No HTTP Charset	\N
-219	295	error	No se usan archivos con extensión .js	\N
-220	298	error	No tiene TITLE	\N
-221	299	warnings	No HTTP Charset	\N
-222	303	error	No se usan archivos con extensión .js	\N
-223	306	error	No tiene TITLE	\N
-224	307	warnings	No HTTP Charset	\N
-225	311	error	No se usan archivos con extensión .js	\N
-226	314	error	No tiene TITLE	\N
-227	315	warnings	No HTTP Charset	\N
-228	319	error	No se usan archivos con extensión .js	\N
-229	322	error	No tiene TITLE	\N
-230	323	warnings	No HTTP Charset	\N
-231	327	error	No se usan archivos con extensión .js	\N
-232	330	error	No tiene TITLE	\N
-233	331	warnings	No HTTP Charset	\N
-234	335	error	No se usan archivos con extensión .js	\N
-235	338	error	No tiene TITLE	\N
-236	339	warnings	No HTTP Charset	\N
-237	343	error	No se usan archivos con extensión .js	\N
-238	346	error	No tiene TITLE	\N
-239	347	warnings	No HTTP Charset	\N
-240	351	error	No se usan archivos con extensión .js	\N
-241	354	error	No tiene TITLE	\N
-242	355	warnings	No HTTP Charset	\N
-243	359	error	No se usan archivos con extensión .js	\N
-244	362	error	No tiene TITLE	\N
-245	363	warnings	No HTTP Charset	\N
-246	367	error	No se usan archivos con extensión .js	\N
-247	370	error	No tiene TITLE	\N
-248	371	warnings	No HTTP Charset	\N
-249	375	error	No se usan archivos con extensión .js	\N
-250	378	error	No tiene TITLE	\N
-251	379	warnings	No HTTP Charset	\N
-252	383	error	No se usan archivos con extensión .js	\N
-253	386	error	No tiene TITLE	\N
-254	387	warnings	No HTTP Charset	\N
-255	391	error	No se usan archivos con extensión .js	\N
-256	394	error	No tiene TITLE	\N
-257	395	warnings	No HTTP Charset	\N
-258	399	error	No se usan archivos con extensión .js	\N
-259	404	error	Tipo de imagen ilegal image/jpeg	\N
-260	404	error	Tipo de imagen ilegal image/jpeg	\N
-261	404	error	Tipo de imagen ilegal image/jpeg	\N
-262	404	error	Tipo de imagen ilegal image/jpeg	\N
-263	404	error	Tipo de imagen ilegal image/jpeg	\N
-264	404	error	Tipo de imagen ilegal image/jpeg	\N
-265	404	error	Tipo de imagen ilegal image/jpeg	\N
-266	404	error	Tipo de imagen ilegal text/plain	\N
-267	404	error	Tipo de imagen ilegal image/jpeg	\N
-268	404	error	Tipo de imagen ilegal image/jpeg	\N
-269	404	error	Tipo de imagen ilegal image/jpeg	\N
-270	404	error	Tipo de imagen ilegal image/jpeg	\N
-271	404	error	Tipo de imagen ilegal text/plain	\N
-272	404	error	Tipo de imagen ilegal image/jpeg	\N
-273	404	error	Tipo de imagen ilegal image/jpeg	\N
-274	404	error	Tipo de imagen ilegal image/jpeg	\N
-275	406	warning	Atributo obsoleto 'language'	\N
-276	406	warning	Atributo obsoleto 'language'	\N
-277	406	error	Lenguaje ilegal: JavaScript1.2	\N
-278	407	error	Script en línea	\N
-279	407	error	Script en línea	\N
-280	407	error	Script en línea	\N
-281	407	error	Script en línea	\N
-282	407	error	Script en línea	\N
-283	407	error	Script en línea	\N
-284	407	error	Script en línea	\N
-285	407	error	Script en línea	\N
-286	407	error	Script en línea	\N
-287	407	error	Script en línea	\N
-288	412	error	Tipo de imagen ilegal image/jpeg	\N
-289	412	error	Tipo de imagen ilegal image/jpeg	\N
-290	414	error	No tiene TITLE	\N
-291	415	warnings	No HTTP Charset	\N
-292	419	error	No se usan archivos con extensión .js	\N
-293	422	error	No tiene TITLE	\N
-294	423	warnings	No HTTP Charset	\N
-295	427	error	No se usan archivos con extensión .js	\N
-296	430	error	No tiene TITLE	\N
-297	431	warnings	No HTTP Charset	\N
-298	435	error	No se usan archivos con extensión .js	\N
-299	438	error	No tiene TITLE	\N
-300	439	warnings	No HTTP Charset	\N
-301	443	error	No se usan archivos con extensión .js	\N
-302	446	error	No tiene TITLE	\N
-303	447	warnings	No HTTP Charset	\N
-304	451	error	No se usan archivos con extensión .js	\N
-305	454	error	No tiene TITLE	\N
-306	455	warnings	No HTTP Charset	\N
-307	459	error	No se usan archivos con extensión .js	\N
-308	462	error	No tiene TITLE	\N
-309	463	warnings	No HTTP Charset	\N
-310	467	error	No se usan archivos con extensión .js	\N
-311	470	error	No tiene TITLE	\N
-312	471	warnings	No HTTP Charset	\N
-313	475	error	No se usan archivos con extensión .js	\N
-314	478	error	No tiene TITLE	\N
-315	479	warnings	No HTTP Charset	\N
-316	483	error	No se usan archivos con extensión .js	\N
-317	486	error	No tiene TITLE	\N
-318	487	warnings	No HTTP Charset	\N
-319	491	error	No se usan archivos con extensión .js	\N
-320	494	error	No tiene TITLE	\N
-321	495	warnings	No HTTP Charset	\N
-322	499	error	No se usan archivos con extensión .js	\N
-323	502	error	No tiene TITLE	\N
-324	503	warnings	No HTTP Charset	\N
-325	507	error	No se usan archivos con extensión .js	\N
-326	510	error	No tiene TITLE	\N
-327	511	warnings	No HTTP Charset	\N
-328	515	error	No se usan archivos con extensión .js	\N
-329	518	error	No tiene TITLE	\N
-330	519	warnings	No HTTP Charset	\N
-331	523	error	No se usan archivos con extensión .js	\N
-332	527	warnings	HTTP charset: ISO-8859-1	\N
-333	528	error	Tipo de imagen ilegal image/jpeg	\N
-334	528	error	Tipo de imagen ilegal image/jpeg	\N
-335	528	error	Tipo de imagen ilegal image/gif	\N
-336	528	error	Tipo de imagen ilegal image/jpeg	\N
-337	528	error	Tipo de imagen ilegal image/jpeg	\N
-338	528	error	Tipo de imagen ilegal image/jpeg	\N
-339	528	error	Tipo de imagen ilegal image/jpeg	\N
-340	528	error	Tipo de imagen ilegal image/jpeg	\N
-341	528	error	Tipo de imagen ilegal image/jpeg	\N
-342	528	error	Tipo de imagen ilegal image/jpeg	\N
-343	528	error	Tipo de imagen ilegal image/jpeg	\N
-344	528	error	Tipo de imagen ilegal image/jpeg	\N
-345	528	error	Tipo de imagen ilegal image/jpeg	\N
-346	528	error	Tipo de imagen ilegal image/jpeg	\N
-347	528	error	Tipo de imagen ilegal image/jpeg	\N
-348	528	error	Tipo de imagen ilegal image/jpeg	\N
-349	528	error	Tipo de imagen ilegal image/jpeg	\N
-350	528	error	Tipo de imagen ilegal image/jpeg	\N
-351	528	error	Tipo de imagen ilegal image/jpeg	\N
-352	528	error	Tipo de imagen ilegal image/gif	\N
-353	528	error	Tipo de imagen ilegal image/gif	\N
-354	528	error	Tipo de imagen ilegal image/jpeg	\N
-355	528	error	Tipo de imagen ilegal image/jpeg	\N
-356	528	error	Tipo de imagen ilegal image/jpeg	\N
-357	528	error	Tipo de imagen ilegal image/jpeg	\N
-358	528	error	Tipo de imagen ilegal image/jpeg	\N
-359	528	error	Tipo de imagen ilegal image/jpeg	\N
-360	528	error	Tipo de imagen ilegal image/gif	\N
-361	528	error	Tipo de imagen ilegal image/gif	\N
-362	528	error	Tipo de imagen ilegal image/gif	\N
-363	528	error	Tipo de imagen ilegal image/gif	\N
-364	528	error	Tipo de imagen ilegal image/gif	\N
-365	528	error	Tipo de imagen ilegal image/gif	\N
-366	528	error	Tipo de imagen ilegal image/gif	\N
-367	528	error	Tipo de imagen ilegal image/gif	\N
-368	528	error	Tipo de imagen ilegal image/jpeg	\N
-369	528	error	Tipo de imagen ilegal image/jpeg	\N
-370	528	error	Tipo de imagen ilegal image/jpeg	\N
-371	528	error	Tipo de imagen ilegal image/jpeg	\N
-372	528	error	Tipo de imagen ilegal image/jpeg	\N
-373	528	error	Tipo de imagen ilegal image/jpeg	\N
-374	528	error	Tipo de imagen ilegal image/jpeg	\N
-375	529	error	Hay 28 imagenes sin atributo ALT	\N
-376	529	warning	Hay 16 imagenes con atributo ALT vacío	\N
-377	530	warning	Atributo obsoleto 'language'	\N
-378	530	warning	Atributo obsoleto 'language'	\N
-379	530	warning	Atributo obsoleto 'language'	\N
-380	530	warning	Atributo obsoleto 'language'	\N
-381	530	error	Lenguaje ilegal: text/JavaScript	\N
-382	530	warning	Atributo obsoleto 'language'	\N
-383	530	warning	Atributo obsoleto 'language'	\N
-384	531	error	Script en línea	\N
-385	531	error	Script en línea	\N
-386	531	error	Script en línea	\N
-387	531	error	Script en línea	\N
-388	531	error	Script en línea	\N
-389	531	error	Script en línea	\N
-390	531	error	Script en línea	\N
-391	531	error	Script en línea	\N
-392	535	warnings	HTTP charset: ISO-8859-1	\N
-393	536	error	Tipo de imagen ilegal image/jpeg	\N
-394	536	error	Tipo de imagen ilegal image/jpeg	\N
-395	536	error	Tipo de imagen ilegal image/gif	\N
-396	536	error	Tipo de imagen ilegal image/gif	\N
-397	536	error	Tipo de imagen ilegal image/gif	\N
-398	536	error	Tipo de imagen ilegal image/gif	\N
-399	536	error	Tipo de imagen ilegal image/gif	\N
-400	536	error	Tipo de imagen ilegal image/gif	\N
-401	536	error	Tipo de imagen ilegal image/gif	\N
-402	536	error	Tipo de imagen ilegal image/gif	\N
-403	536	error	Tipo de imagen ilegal image/gif	\N
-404	536	error	Tipo de imagen ilegal image/gif	\N
-405	536	error	Tipo de imagen ilegal image/gif	\N
-406	536	error	Tipo de imagen ilegal image/gif	\N
-407	536	error	Tipo de imagen ilegal image/gif	\N
-408	536	error	Tipo de imagen ilegal image/gif	\N
-409	536	error	Tipo de imagen ilegal image/jpeg	\N
-410	536	error	Tipo de imagen ilegal image/jpeg	\N
-411	536	error	Tipo de imagen ilegal image/jpeg	\N
-412	536	error	Tipo de imagen ilegal image/jpeg	\N
-413	536	error	Tipo de imagen ilegal image/jpeg	\N
-414	536	error	Tipo de imagen ilegal image/jpeg	\N
-415	536	error	Tipo de imagen ilegal image/jpeg	\N
-416	536	error	Tipo de imagen ilegal image/jpeg	\N
-417	536	error	Tipo de imagen ilegal image/jpeg	\N
-418	536	error	Tipo de imagen ilegal image/jpeg	\N
-419	536	error	Tipo de imagen ilegal image/jpeg	\N
-420	536	error	Tipo de imagen ilegal image/jpeg	\N
-421	536	error	Tipo de imagen ilegal image/jpeg	\N
-422	536	error	Tipo de imagen ilegal image/jpeg	\N
-423	536	error	Tipo de imagen ilegal image/jpeg	\N
-424	536	error	Tipo de imagen ilegal image/jpeg	\N
-425	536	error	Tipo de imagen ilegal image/gif	\N
-426	536	error	Tipo de imagen ilegal image/gif	\N
-427	536	error	Tipo de imagen ilegal image/gif	\N
-428	536	error	Tipo de imagen ilegal image/gif	\N
-429	536	error	Tipo de imagen ilegal image/gif	\N
-430	536	error	Tipo de imagen ilegal image/gif	\N
-431	536	error	Tipo de imagen ilegal image/gif	\N
-432	536	error	Tipo de imagen ilegal image/gif	\N
-433	536	error	Tipo de imagen ilegal image/gif	\N
-434	536	error	Tipo de imagen ilegal image/gif	\N
-435	536	error	Tipo de imagen ilegal image/gif	\N
-436	536	error	Tipo de imagen ilegal image/gif	\N
-437	536	error	Tipo de imagen ilegal image/gif	\N
-438	536	error	Tipo de imagen ilegal image/gif	\N
-439	537	error	Hay 32 imagenes sin atributo ALT	\N
-440	537	warning	Hay 14 imagenes con atributo ALT vacío	\N
-441	538	warning	Atributo obsoleto 'language'	\N
-442	538	error	Lenguaje ilegal: text/JavaScript	\N
-443	538	warning	Atributo obsoleto 'language'	\N
-444	539	error	Script en línea	\N
-445	539	error	Script en línea	\N
-446	539	error	Script en línea	\N
-447	539	error	Script en línea	\N
-448	539	error	Script en línea	\N
-449	539	error	Script en línea	\N
-450	543	warnings	HTTP charset: ISO-8859-1	\N
-451	544	error	Tipo de imagen ilegal image/jpeg	\N
-452	544	error	Tipo de imagen ilegal image/jpeg	\N
-453	544	error	Tipo de imagen ilegal image/gif	\N
-454	544	error	Tipo de imagen ilegal image/jpeg	\N
-455	544	error	Tipo de imagen ilegal image/jpeg	\N
-456	544	error	Tipo de imagen ilegal image/jpeg	\N
-457	544	error	Tipo de imagen ilegal image/jpeg	\N
-458	544	error	Tipo de imagen ilegal image/jpeg	\N
-459	544	error	Tipo de imagen ilegal image/jpeg	\N
-460	544	error	Tipo de imagen ilegal image/jpeg	\N
-461	544	error	Tipo de imagen ilegal image/jpeg	\N
-462	544	error	Tipo de imagen ilegal image/jpeg	\N
-463	544	error	Tipo de imagen ilegal image/jpeg	\N
-464	544	error	Tipo de imagen ilegal image/jpeg	\N
-465	544	error	Tipo de imagen ilegal image/jpeg	\N
-466	544	error	Tipo de imagen ilegal image/jpeg	\N
-467	544	error	Tipo de imagen ilegal image/jpeg	\N
-468	544	error	Tipo de imagen ilegal image/jpeg	\N
-469	544	error	Tipo de imagen ilegal image/jpeg	\N
-470	544	error	Tipo de imagen ilegal image/gif	\N
-471	544	error	Tipo de imagen ilegal image/gif	\N
-472	544	error	Tipo de imagen ilegal image/jpeg	\N
-473	544	error	Tipo de imagen ilegal image/jpeg	\N
-474	544	error	Tipo de imagen ilegal image/jpeg	\N
-475	544	error	Tipo de imagen ilegal image/jpeg	\N
-476	544	error	Tipo de imagen ilegal image/jpeg	\N
-477	544	error	Tipo de imagen ilegal image/jpeg	\N
-478	544	error	Tipo de imagen ilegal image/gif	\N
-479	544	error	Tipo de imagen ilegal image/gif	\N
-480	544	error	Tipo de imagen ilegal image/gif	\N
-481	544	error	Tipo de imagen ilegal image/gif	\N
-482	544	error	Tipo de imagen ilegal image/gif	\N
-483	544	error	Tipo de imagen ilegal image/gif	\N
-484	544	error	Tipo de imagen ilegal image/gif	\N
-485	544	error	Tipo de imagen ilegal image/gif	\N
-486	544	error	Tipo de imagen ilegal image/jpeg	\N
-487	544	error	Tipo de imagen ilegal image/jpeg	\N
-488	544	error	Tipo de imagen ilegal image/jpeg	\N
-489	544	error	Tipo de imagen ilegal image/jpeg	\N
-490	544	error	Tipo de imagen ilegal image/jpeg	\N
-491	544	error	Tipo de imagen ilegal image/jpeg	\N
-492	544	error	Tipo de imagen ilegal image/jpeg	\N
-493	545	error	Hay 28 imagenes sin atributo ALT	\N
-494	545	warning	Hay 16 imagenes con atributo ALT vacío	\N
-495	546	warning	Atributo obsoleto 'language'	\N
-496	546	warning	Atributo obsoleto 'language'	\N
-497	546	warning	Atributo obsoleto 'language'	\N
-498	546	warning	Atributo obsoleto 'language'	\N
-499	546	error	Lenguaje ilegal: text/JavaScript	\N
-500	546	warning	Atributo obsoleto 'language'	\N
-501	546	warning	Atributo obsoleto 'language'	\N
-502	547	error	Script en línea	\N
-503	547	error	Script en línea	\N
-504	547	error	Script en línea	\N
-505	547	error	Script en línea	\N
-506	547	error	Script en línea	\N
-507	547	error	Script en línea	\N
-508	547	error	Script en línea	\N
-509	547	error	Script en línea	\N
+1000	1212	warnings	No HTTP Charset	\N
+1001	1212	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1002	1213	error	Tipo de imagen ilegal image/gif	\N
+1003	1214	error	Hay 72 imagenes sin atributo ALT	\N
+1004	1215	warning	Atributo obsoleto 'language'	\N
+1005	1215	warning	Atributo obsoleto 'language'	\N
+1006	1215	warning	Atributo obsoleto 'language'	\N
+1007	1215	error	Lenguaje ilegal: JavaScript1.2	\N
+1008	1215	warning	Atributo obsoleto 'language'	\N
+1009	1216	error	Script en línea	\N
+1010	1216	error	Script en línea	\N
+1011	1218	error	Hay 2 controles ActiveX	\N
+1012	1221	warnings	No HTTP Charset	\N
+1013	1221	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1014	1222	error	Tipo de imagen ilegal image/gif	\N
+1015	1223	error	Hay 72 imagenes sin atributo ALT	\N
+1016	1224	warning	Atributo obsoleto 'language'	\N
+1017	1224	warning	Atributo obsoleto 'language'	\N
+1018	1224	warning	Atributo obsoleto 'language'	\N
+1019	1224	error	Lenguaje ilegal: JavaScript1.2	\N
+1020	1224	warning	Atributo obsoleto 'language'	\N
+1021	1225	error	Script en línea	\N
+1022	1225	error	Script en línea	\N
+1023	1227	error	Hay 2 controles ActiveX	\N
+1024	1230	warnings	No HTTP Charset	\N
+1025	1230	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1026	1231	error	Tipo de imagen ilegal image/gif	\N
+1027	1231	error	Tipo de imagen ilegal image/gif	\N
+1028	1231	error	Tipo de imagen ilegal image/gif	\N
+1029	1231	error	Tipo de imagen ilegal image/gif	\N
+1030	1231	error	Tipo de imagen ilegal image/gif	\N
+1031	1231	error	Tipo de imagen ilegal image/gif	\N
+1032	1231	error	Tipo de imagen ilegal image/gif	\N
+1033	1231	error	Tipo de imagen ilegal image/gif	\N
+1034	1231	error	Tipo de imagen ilegal image/gif	\N
+1035	1231	error	Tipo de imagen ilegal image/gif	\N
+1036	1231	error	Tipo de imagen ilegal image/gif	\N
+1037	1231	error	Tipo de imagen ilegal image/gif	\N
+1038	1231	error	Tipo de imagen ilegal image/gif	\N
+1039	1231	error	Tipo de imagen ilegal image/gif	\N
+1040	1231	error	Tipo de imagen ilegal image/gif	\N
+1041	1231	error	Tipo de imagen ilegal image/gif	\N
+1042	1231	error	Tipo de imagen ilegal image/gif	\N
+1043	1231	error	Tipo de imagen ilegal image/gif	\N
+1044	1231	error	Tipo de imagen ilegal image/gif	\N
+1045	1231	error	Tipo de imagen ilegal text/html	\N
+1046	1231	error	Tipo de imagen ilegal image/jpeg	\N
+1047	1231	error	Tipo de imagen ilegal image/gif	\N
+1048	1231	error	Tipo de imagen ilegal image/gif	\N
+1049	1231	error	Tipo de imagen ilegal image/gif	\N
+1050	1231	error	Tipo de imagen ilegal image/gif	\N
+1051	1231	error	Tipo de imagen ilegal image/gif	\N
+1052	1231	error	Tipo de imagen ilegal text/html	\N
+1053	1231	error	Tipo de imagen ilegal image/gif	\N
+1054	1231	error	Tipo de imagen ilegal image/gif	\N
+1055	1231	error	Tipo de imagen ilegal image/gif	\N
+1056	1232	error	Hay 27 imagenes sin atributo ALT	\N
+1057	1233	warning	Atributo obsoleto 'language'	\N
+1058	1233	warning	Atributo obsoleto 'language'	\N
+1059	1233	warning	Atributo obsoleto 'language'	\N
+1060	1233	error	Lenguaje ilegal: JavaScript1.2	\N
+1061	1234	error	El archivo externo no tiene extension .js	\N
+1062	1234	error	Script en línea	\N
+1063	1234	error	Script en línea	\N
+1064	1236	error	Hay 1 controles ActiveX	\N
+1065	1239	warnings	No HTTP Charset	\N
+1066	1239	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1067	1240	error	Tipo de imagen ilegal image/gif	\N
+1068	1240	error	Tipo de imagen ilegal image/gif	\N
+1069	1240	error	Tipo de imagen ilegal image/gif	\N
+1070	1240	error	Tipo de imagen ilegal image/gif	\N
+1071	1240	error	Tipo de imagen ilegal image/jpeg	\N
+1072	1240	error	Tipo de imagen ilegal image/gif	\N
+1073	1240	error	Tipo de imagen ilegal image/gif	\N
+1074	1240	error	Tipo de imagen ilegal image/gif	\N
+1075	1240	error	Tipo de imagen ilegal image/gif	\N
+1076	1240	error	Tipo de imagen ilegal image/gif	\N
+1077	1240	error	Tipo de imagen ilegal image/gif	\N
+1078	1240	error	Tipo de imagen ilegal image/gif	\N
+1079	1241	error	Hay 24 imagenes sin atributo ALT	\N
+1080	1242	warning	Atributo obsoleto 'language'	\N
+1081	1242	warning	Atributo obsoleto 'language'	\N
+1082	1242	warning	Atributo obsoleto 'language'	\N
+1083	1242	error	Lenguaje ilegal: JavaScript1.2	\N
+1084	1242	warning	Atributo obsoleto 'language'	\N
+1085	1243	error	Script en línea	\N
+1086	1243	error	Script en línea	\N
+1087	1248	warnings	No HTTP Charset	\N
+1088	1248	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1089	1249	error	Tipo de imagen ilegal image/gif	\N
+1090	1249	error	Tipo de imagen ilegal image/gif	\N
+1091	1249	error	Tipo de imagen ilegal image/gif	\N
+1092	1249	error	Tipo de imagen ilegal image/gif	\N
+1093	1249	error	Tipo de imagen ilegal image/jpeg	\N
+1094	1249	error	Tipo de imagen ilegal image/gif	\N
+1095	1249	error	Tipo de imagen ilegal image/gif	\N
+1096	1249	error	Tipo de imagen ilegal image/gif	\N
+1097	1249	error	Tipo de imagen ilegal image/gif	\N
+1098	1249	error	Tipo de imagen ilegal image/gif	\N
+1099	1249	error	Tipo de imagen ilegal image/gif	\N
+1100	1249	error	Tipo de imagen ilegal image/gif	\N
+1101	1250	error	Hay 24 imagenes sin atributo ALT	\N
+1102	1251	warning	Atributo obsoleto 'language'	\N
+1103	1251	warning	Atributo obsoleto 'language'	\N
+1104	1251	warning	Atributo obsoleto 'language'	\N
+1105	1251	error	Lenguaje ilegal: JavaScript1.2	\N
+1106	1251	warning	Atributo obsoleto 'language'	\N
+1107	1252	error	Script en línea	\N
+1108	1252	error	Script en línea	\N
+1109	1257	warnings	No HTTP Charset	\N
+1110	1257	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1111	1258	error	Tipo de imagen ilegal image/gif	\N
+1112	1258	error	Tipo de imagen ilegal image/gif	\N
+1113	1258	error	Tipo de imagen ilegal image/gif	\N
+1114	1258	error	Tipo de imagen ilegal image/gif	\N
+1115	1258	error	Tipo de imagen ilegal image/jpeg	\N
+1116	1258	error	Tipo de imagen ilegal image/gif	\N
+1117	1258	error	Tipo de imagen ilegal image/gif	\N
+1118	1258	error	Tipo de imagen ilegal image/gif	\N
+1119	1258	error	Tipo de imagen ilegal image/gif	\N
+1120	1258	error	Tipo de imagen ilegal image/gif	\N
+1121	1258	error	Tipo de imagen ilegal image/gif	\N
+1122	1258	error	Tipo de imagen ilegal image/gif	\N
+1123	1258	error	Tipo de imagen ilegal image/gif	\N
+1124	1258	error	Tipo de imagen ilegal image/gif	\N
+1125	1258	error	Tipo de imagen ilegal image/gif	\N
+1126	1258	error	Tipo de imagen ilegal image/gif	\N
+1127	1258	error	Tipo de imagen ilegal image/gif	\N
+1128	1258	error	Tipo de imagen ilegal image/gif	\N
+1129	1258	error	Tipo de imagen ilegal image/gif	\N
+1130	1258	error	Tipo de imagen ilegal image/gif	\N
+1131	1258	error	Tipo de imagen ilegal image/gif	\N
+1132	1258	error	Tipo de imagen ilegal image/gif	\N
+1133	1258	error	Tipo de imagen ilegal image/gif	\N
+1134	1258	error	Tipo de imagen ilegal image/gif	\N
+1135	1258	error	Tipo de imagen ilegal image/gif	\N
+1136	1258	error	Tipo de imagen ilegal image/gif	\N
+1137	1258	error	Tipo de imagen ilegal image/gif	\N
+1138	1258	error	Tipo de imagen ilegal image/gif	\N
+1139	1258	error	Tipo de imagen ilegal image/gif	\N
+1140	1258	error	Tipo de imagen ilegal image/gif	\N
+1141	1258	error	Tipo de imagen ilegal image/gif	\N
+1142	1258	error	Tipo de imagen ilegal image/gif	\N
+1143	1258	error	Tipo de imagen ilegal image/gif	\N
+1144	1258	error	Tipo de imagen ilegal image/gif	\N
+1145	1258	error	Tipo de imagen ilegal image/gif	\N
+1146	1258	error	Tipo de imagen ilegal image/gif	\N
+1147	1258	error	Tipo de imagen ilegal image/gif	\N
+1148	1258	error	Tipo de imagen ilegal image/gif	\N
+1149	1258	error	Tipo de imagen ilegal image/gif	\N
+1150	1258	error	Tipo de imagen ilegal image/jpeg	\N
+1151	1258	error	Tipo de imagen ilegal image/gif	\N
+1152	1258	error	Tipo de imagen ilegal image/gif	\N
+1153	1258	error	Tipo de imagen ilegal image/gif	\N
+1154	1258	error	Tipo de imagen ilegal image/gif	\N
+1155	1258	error	Tipo de imagen ilegal image/gif	\N
+1156	1258	error	Tipo de imagen ilegal image/gif	\N
+1157	1258	error	Tipo de imagen ilegal image/gif	\N
+1158	1258	error	Tipo de imagen ilegal image/gif	\N
+1159	1258	error	Tipo de imagen ilegal image/gif	\N
+1160	1258	error	Tipo de imagen ilegal image/gif	\N
+1161	1258	error	Tipo de imagen ilegal image/gif	\N
+1162	1258	error	Tipo de imagen ilegal image/gif	\N
+1163	1258	error	Tipo de imagen ilegal image/gif	\N
+1164	1258	error	Tipo de imagen ilegal image/gif	\N
+1165	1258	error	Tipo de imagen ilegal image/gif	\N
+1166	1258	error	Tipo de imagen ilegal image/gif	\N
+1167	1258	error	Tipo de imagen ilegal image/gif	\N
+1168	1258	error	Tipo de imagen ilegal image/gif	\N
+1169	1258	error	Tipo de imagen ilegal image/gif	\N
+1170	1258	error	Tipo de imagen ilegal image/gif	\N
+1171	1258	error	Tipo de imagen ilegal image/gif	\N
+1172	1258	error	Tipo de imagen ilegal image/gif	\N
+1173	1258	error	Tipo de imagen ilegal image/gif	\N
+1174	1258	error	Tipo de imagen ilegal image/gif	\N
+1175	1258	error	Tipo de imagen ilegal image/gif	\N
+1176	1258	error	Tipo de imagen ilegal image/gif	\N
+1177	1258	error	Tipo de imagen ilegal image/gif	\N
+1178	1258	error	Tipo de imagen ilegal image/gif	\N
+1179	1258	error	Tipo de imagen ilegal image/gif	\N
+1180	1258	error	Tipo de imagen ilegal image/gif	\N
+1181	1259	error	Hay 82 imagenes sin atributo ALT	\N
+1182	1260	warning	Atributo obsoleto 'language'	\N
+1183	1260	warning	Atributo obsoleto 'language'	\N
+1184	1260	warning	Atributo obsoleto 'language'	\N
+1185	1260	error	Lenguaje ilegal: JavaScript1.2	\N
+1186	1260	warning	Atributo obsoleto 'language'	\N
+1187	1261	error	Script en línea	\N
+1188	1261	error	Script en línea	\N
+1189	1266	warnings	No HTTP Charset	\N
+1190	1266	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1191	1268	error	Hay 12 imagenes sin atributo ALT	\N
+1192	1269	warning	Atributo obsoleto 'language'	\N
+1193	1269	warning	Atributo obsoleto 'language'	\N
+1194	1269	warning	Atributo obsoleto 'language'	\N
+1195	1269	error	Lenguaje ilegal: JavaScript1.2	\N
+1196	1269	warning	Atributo obsoleto 'language'	\N
+1197	1270	error	Script en línea	\N
+1198	1270	error	Script en línea	\N
+1199	1275	warnings	No HTTP Charset	\N
+1200	1275	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1201	1276	error	Tipo de imagen ilegal image/gif	\N
+1202	1276	error	Tipo de imagen ilegal image/gif	\N
+1203	1276	error	Tipo de imagen ilegal image/gif	\N
+1204	1276	error	Tipo de imagen ilegal image/gif	\N
+1205	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1206	1276	error	Tipo de imagen ilegal image/gif	\N
+1207	1276	error	Tipo de imagen ilegal image/gif	\N
+1208	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1209	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1210	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1211	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1212	1276	error	Tipo de imagen ilegal image/gif	\N
+1213	1276	error	Tipo de imagen ilegal image/gif	\N
+1214	1276	error	Tipo de imagen ilegal image/gif	\N
+1215	1276	error	Tipo de imagen ilegal image/gif	\N
+1216	1276	error	Tipo de imagen ilegal image/gif	\N
+1217	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1218	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1219	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1220	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1221	1276	error	Tipo de imagen ilegal image/gif	\N
+1222	1276	error	Tipo de imagen ilegal image/gif	\N
+1223	1276	error	Tipo de imagen ilegal image/gif	\N
+1224	1276	error	Tipo de imagen ilegal image/gif	\N
+1225	1276	error	Tipo de imagen ilegal image/gif	\N
+1226	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1227	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1228	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1229	1276	error	Tipo de imagen ilegal image/jpeg	\N
+1230	1276	error	Tipo de imagen ilegal image/gif	\N
+1231	1276	error	Tipo de imagen ilegal image/gif	\N
+1232	1276	error	Tipo de imagen ilegal image/gif	\N
+1233	1276	error	Tipo de imagen ilegal image/gif	\N
+1234	1276	error	Tipo de imagen ilegal image/gif	\N
+1235	1276	error	Tipo de imagen ilegal image/gif	\N
+1236	1276	error	Tipo de imagen ilegal image/gif	\N
+1237	1276	error	Tipo de imagen ilegal image/gif	\N
+1238	1276	error	Tipo de imagen ilegal image/gif	\N
+1239	1276	error	Tipo de imagen ilegal image/gif	\N
+1240	1277	error	Hay 51 imagenes sin atributo ALT	\N
+1241	1278	warning	Atributo obsoleto 'language'	\N
+1242	1278	warning	Atributo obsoleto 'language'	\N
+1243	1278	warning	Atributo obsoleto 'language'	\N
+1244	1278	error	Lenguaje ilegal: JavaScript1.2	\N
+1245	1278	warning	Atributo obsoleto 'language'	\N
+1246	1279	error	Script en línea	\N
+1247	1279	error	Script en línea	\N
+1248	1284	warnings	No HTTP Charset	\N
+1249	1284	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1250	1285	error	Tipo de imagen ilegal image/gif	\N
+1251	1285	error	Tipo de imagen ilegal image/gif	\N
+1252	1285	error	Tipo de imagen ilegal image/gif	\N
+1253	1285	error	Tipo de imagen ilegal image/gif	\N
+1254	1285	error	Tipo de imagen ilegal image/jpeg	\N
+1255	1285	error	Tipo de imagen ilegal image/gif	\N
+1256	1285	error	Tipo de imagen ilegal image/gif	\N
+1257	1285	error	Tipo de imagen ilegal image/gif	\N
+1258	1285	error	Tipo de imagen ilegal image/gif	\N
+1259	1285	error	Tipo de imagen ilegal image/gif	\N
+1260	1285	error	Tipo de imagen ilegal image/gif	\N
+1261	1285	error	Tipo de imagen ilegal image/gif	\N
+1262	1285	error	Tipo de imagen ilegal image/gif	\N
+1263	1285	error	Tipo de imagen ilegal image/gif	\N
+1264	1285	error	Tipo de imagen ilegal image/gif	\N
+1265	1285	error	Tipo de imagen ilegal image/gif	\N
+1266	1285	error	Tipo de imagen ilegal image/gif	\N
+1267	1285	error	Tipo de imagen ilegal image/gif	\N
+1268	1285	error	Tipo de imagen ilegal image/gif	\N
+1269	1285	error	Tipo de imagen ilegal image/gif	\N
+1270	1285	error	Tipo de imagen ilegal image/gif	\N
+1271	1285	error	Tipo de imagen ilegal image/gif	\N
+1272	1285	error	Tipo de imagen ilegal image/gif	\N
+1273	1285	error	Tipo de imagen ilegal image/gif	\N
+1274	1285	error	Tipo de imagen ilegal image/gif	\N
+1275	1285	error	Tipo de imagen ilegal image/gif	\N
+1276	1285	error	Tipo de imagen ilegal image/gif	\N
+1277	1285	error	Tipo de imagen ilegal image/gif	\N
+1278	1285	error	Tipo de imagen ilegal image/gif	\N
+1279	1285	error	Tipo de imagen ilegal image/gif	\N
+1280	1285	error	Tipo de imagen ilegal image/gif	\N
+1281	1285	error	Tipo de imagen ilegal image/gif	\N
+1282	1285	error	Tipo de imagen ilegal image/gif	\N
+1283	1285	error	Tipo de imagen ilegal image/gif	\N
+1284	1285	error	Tipo de imagen ilegal image/gif	\N
+1285	1285	error	Tipo de imagen ilegal image/gif	\N
+1286	1285	error	Tipo de imagen ilegal image/gif	\N
+1287	1285	error	Tipo de imagen ilegal image/gif	\N
+1288	1285	error	Tipo de imagen ilegal image/gif	\N
+1289	1285	error	Tipo de imagen ilegal image/gif	\N
+1290	1285	error	Tipo de imagen ilegal image/gif	\N
+1291	1285	error	Tipo de imagen ilegal image/gif	\N
+1292	1285	error	Tipo de imagen ilegal image/gif	\N
+1293	1285	error	Tipo de imagen ilegal image/gif	\N
+1294	1285	error	Tipo de imagen ilegal image/gif	\N
+1295	1285	error	Tipo de imagen ilegal image/gif	\N
+1296	1285	error	Tipo de imagen ilegal image/gif	\N
+1297	1285	error	Tipo de imagen ilegal image/gif	\N
+1298	1286	error	Hay 60 imagenes sin atributo ALT	\N
+1299	1287	warning	Atributo obsoleto 'language'	\N
+1300	1287	warning	Atributo obsoleto 'language'	\N
+1301	1287	warning	Atributo obsoleto 'language'	\N
+1302	1287	error	Lenguaje ilegal: JavaScript1.2	\N
+1303	1287	warning	Atributo obsoleto 'language'	\N
+1304	1288	error	Script en línea	\N
+1305	1288	error	Script en línea	\N
+1306	1293	warnings	No HTTP Charset	\N
+1307	1293	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+1308	1294	error	Tipo de imagen ilegal image/gif	\N
+1309	1294	error	Tipo de imagen ilegal image/gif	\N
+1310	1294	error	Tipo de imagen ilegal image/gif	\N
+1311	1294	error	Tipo de imagen ilegal image/gif	\N
+1312	1294	error	Tipo de imagen ilegal image/jpeg	\N
+1313	1294	error	Tipo de imagen ilegal image/gif	\N
+1314	1294	error	Tipo de imagen ilegal image/gif	\N
+1315	1294	error	Tipo de imagen ilegal image/jpeg	\N
+1316	1294	error	Tipo de imagen ilegal image/gif	\N
+1317	1294	error	Tipo de imagen ilegal image/gif	\N
+1318	1294	error	Tipo de imagen ilegal image/gif	\N
+1319	1294	error	Tipo de imagen ilegal image/gif	\N
+1320	1294	error	Tipo de imagen ilegal image/gif	\N
+1321	1295	error	Hay 25 imagenes sin atributo ALT	\N
+1322	1296	warning	Atributo obsoleto 'language'	\N
+1323	1296	warning	Atributo obsoleto 'language'	\N
+1324	1296	warning	Atributo obsoleto 'language'	\N
+1325	1296	error	Lenguaje ilegal: JavaScript1.2	\N
+1326	1296	warning	Atributo obsoleto 'language'	\N
+1327	1297	error	Script en línea	\N
+1328	1297	error	Script en línea	\N
+1329	1302	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1330	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1331	1303	error	Tipo de imagen ilegal image/gif	\N
+1332	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1333	1303	error	Tipo de imagen ilegal image/gif	\N
+1334	1303	error	Tipo de imagen ilegal image/gif	\N
+1335	1303	error	Tipo de imagen ilegal image/gif	\N
+1336	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1337	1303	error	Tipo de imagen ilegal image/gif	\N
+1338	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1339	1303	error	Tipo de imagen ilegal image/gif	\N
+1340	1303	error	Tipo de imagen ilegal image/gif	\N
+1341	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1342	1303	error	Tipo de imagen ilegal image/gif	\N
+1343	1303	error	Tipo de imagen ilegal image/gif	\N
+1344	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1345	1303	error	Tipo de imagen ilegal image/gif	\N
+1346	1303	error	Tipo de imagen ilegal image/gif	\N
+1347	1303	error	Tipo de imagen ilegal image/gif	\N
+1348	1303	error	Tipo de imagen ilegal image/gif	\N
+1349	1303	error	Tipo de imagen ilegal image/gif	\N
+1350	1303	error	Tipo de imagen ilegal image/gif	\N
+1351	1303	error	Tipo de imagen ilegal image/gif	\N
+1352	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1353	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1354	1303	error	Tipo de imagen ilegal image/gif	\N
+1355	1303	error	Tipo de imagen ilegal image/gif	\N
+1356	1303	error	Tipo de imagen ilegal image/gif	\N
+1357	1303	error	Tipo de imagen ilegal image/gif	\N
+1358	1303	error	Tipo de imagen ilegal image/gif	\N
+1359	1303	error	Tipo de imagen ilegal image/gif	\N
+1360	1303	error	Tipo de imagen ilegal image/gif	\N
+1361	1303	error	Tipo de imagen ilegal image/gif	\N
+1362	1303	error	Tipo de imagen ilegal image/gif	\N
+1363	1303	error	Tipo de imagen ilegal image/gif	\N
+1364	1303	error	Tipo de imagen ilegal image/gif	\N
+1365	1303	error	Tipo de imagen ilegal image/gif	\N
+1366	1303	error	Tipo de imagen ilegal image/gif	\N
+1367	1303	error	Tipo de imagen ilegal image/gif	\N
+1368	1303	error	Tipo de imagen ilegal image/gif	\N
+1369	1303	error	Tipo de imagen ilegal image/gif	\N
+1370	1303	error	Tipo de imagen ilegal image/gif	\N
+1371	1303	error	Tipo de imagen ilegal image/gif	\N
+1372	1303	error	Tipo de imagen ilegal image/gif	\N
+1373	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1374	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1375	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1376	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1377	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1378	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1379	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1380	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1381	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1382	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1383	1303	error	Tipo de imagen ilegal image/gif	\N
+1384	1303	error	Tipo de imagen ilegal image/gif	\N
+1385	1303	error	Tipo de imagen ilegal image/gif	\N
+1386	1303	error	Tipo de imagen ilegal image/gif	\N
+1387	1303	error	Tipo de imagen ilegal image/gif	\N
+1388	1303	error	Tipo de imagen ilegal image/jpeg	\N
+1389	1304	error	Hay 41 imagenes sin atributo ALT	\N
+1390	1304	warning	Hay 8 imagenes con atributo ALT vacío	\N
+1391	1306	error	Script en línea	\N
+1392	1306	error	Script en línea	\N
+1393	1306	error	Script en línea	\N
+1394	1306	error	Script en línea	\N
+1395	1306	error	Script en línea	\N
+1396	1306	error	Script en línea	\N
+1397	1306	error	Script en línea	\N
+1398	1306	error	Script en línea	\N
+1399	1306	error	Script en línea	\N
+1400	1306	error	Script en línea	\N
+1401	1306	error	Script en línea	\N
+1402	1306	error	Script en línea	\N
+1403	1306	error	Script en línea	\N
+1404	1306	error	Script en línea	\N
+1405	1308	error	Hay 2 controles Flash declarados con HTML5	\N
+1406	1311	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1407	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1408	1312	error	Tipo de imagen ilegal image/gif	\N
+1409	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1410	1312	error	Tipo de imagen ilegal image/gif	\N
+1411	1312	error	Tipo de imagen ilegal image/gif	\N
+1412	1312	error	Tipo de imagen ilegal image/gif	\N
+1413	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1414	1312	error	Tipo de imagen ilegal image/gif	\N
+1415	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1416	1312	error	Tipo de imagen ilegal image/gif	\N
+1417	1312	error	Tipo de imagen ilegal image/gif	\N
+1418	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1419	1312	error	Tipo de imagen ilegal image/gif	\N
+1420	1312	error	Tipo de imagen ilegal image/gif	\N
+1421	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1422	1312	error	Tipo de imagen ilegal image/gif	\N
+1423	1312	error	Tipo de imagen ilegal image/gif	\N
+1424	1312	error	Tipo de imagen ilegal image/gif	\N
+1425	1312	error	Tipo de imagen ilegal image/gif	\N
+1426	1312	error	Tipo de imagen ilegal image/gif	\N
+1427	1312	error	Tipo de imagen ilegal image/gif	\N
+1428	1312	error	Tipo de imagen ilegal image/gif	\N
+1429	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1430	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1431	1312	error	Tipo de imagen ilegal image/gif	\N
+1432	1312	error	Tipo de imagen ilegal image/gif	\N
+1433	1312	error	Tipo de imagen ilegal image/gif	\N
+1434	1312	error	Tipo de imagen ilegal image/gif	\N
+1435	1312	error	Tipo de imagen ilegal image/gif	\N
+1436	1312	error	Tipo de imagen ilegal image/gif	\N
+1437	1312	error	Tipo de imagen ilegal image/gif	\N
+1438	1312	error	Tipo de imagen ilegal image/gif	\N
+1439	1312	error	Tipo de imagen ilegal image/gif	\N
+1440	1312	error	Tipo de imagen ilegal image/gif	\N
+1441	1312	error	Tipo de imagen ilegal image/gif	\N
+1442	1312	error	Tipo de imagen ilegal image/gif	\N
+1443	1312	error	Tipo de imagen ilegal image/gif	\N
+1444	1312	error	Tipo de imagen ilegal image/gif	\N
+1445	1312	error	Tipo de imagen ilegal image/gif	\N
+1446	1312	error	Tipo de imagen ilegal image/gif	\N
+1447	1312	error	Tipo de imagen ilegal image/gif	\N
+1448	1312	error	Tipo de imagen ilegal image/gif	\N
+1449	1312	error	Tipo de imagen ilegal image/gif	\N
+1450	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1451	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1452	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1453	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1454	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1455	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1456	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1457	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1458	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1459	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1460	1312	error	Tipo de imagen ilegal image/gif	\N
+1461	1312	error	Tipo de imagen ilegal image/gif	\N
+1462	1312	error	Tipo de imagen ilegal image/gif	\N
+1463	1312	error	Tipo de imagen ilegal image/gif	\N
+1464	1312	error	Tipo de imagen ilegal image/gif	\N
+1465	1312	error	Tipo de imagen ilegal image/jpeg	\N
+1466	1313	error	Hay 41 imagenes sin atributo ALT	\N
+1467	1313	warning	Hay 8 imagenes con atributo ALT vacío	\N
+1468	1315	error	Script en línea	\N
+1469	1315	error	Script en línea	\N
+1470	1315	error	Script en línea	\N
+1471	1315	error	Script en línea	\N
+1472	1315	error	Script en línea	\N
+1473	1315	error	Script en línea	\N
+1474	1315	error	Script en línea	\N
+1475	1315	error	Script en línea	\N
+1476	1315	error	Script en línea	\N
+1477	1315	error	Script en línea	\N
+1478	1315	error	Script en línea	\N
+1479	1315	error	Script en línea	\N
+1480	1315	error	Script en línea	\N
+1481	1315	error	Script en línea	\N
+1482	1317	error	Hay 2 controles Flash declarados con HTML5	\N
+1483	1320	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1484	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1485	1321	error	Tipo de imagen ilegal image/gif	\N
+1486	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1487	1321	error	Tipo de imagen ilegal image/gif	\N
+1488	1321	error	Tipo de imagen ilegal image/gif	\N
+1489	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1490	1321	error	Tipo de imagen ilegal image/gif	\N
+1491	1321	error	Tipo de imagen ilegal image/gif	\N
+1492	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1493	1321	error	Tipo de imagen ilegal image/gif	\N
+1494	1321	error	Tipo de imagen ilegal image/gif	\N
+1495	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1496	1321	error	Tipo de imagen ilegal image/gif	\N
+1497	1321	error	Tipo de imagen ilegal image/gif	\N
+1498	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1499	1321	error	Tipo de imagen ilegal image/gif	\N
+1500	1321	error	Tipo de imagen ilegal image/gif	\N
+1501	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1502	1321	error	Tipo de imagen ilegal image/gif	\N
+1503	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1504	1321	error	Tipo de imagen ilegal image/gif	\N
+1505	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1506	1321	error	Tipo de imagen ilegal image/gif	\N
+1507	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1508	1321	error	Tipo de imagen ilegal image/gif	\N
+1509	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1510	1321	error	Tipo de imagen ilegal image/gif	\N
+1511	1321	error	Tipo de imagen ilegal image/jpeg	\N
+1512	1321	error	Tipo de imagen ilegal image/gif	\N
+1513	1321	error	Tipo de imagen ilegal image/gif	\N
+1514	1321	error	Tipo de imagen ilegal image/gif	\N
+1515	1321	error	Tipo de imagen ilegal image/gif	\N
+1516	1321	error	Tipo de imagen ilegal image/gif	\N
+1517	1321	error	Tipo de imagen ilegal image/gif	\N
+1518	1321	error	Tipo de imagen ilegal image/gif	\N
+1519	1321	error	Tipo de imagen ilegal image/gif	\N
+1520	1321	error	Tipo de imagen ilegal image/gif	\N
+1521	1322	error	Hay 24 imagenes sin atributo ALT	\N
+1522	1322	warning	Hay 10 imagenes con atributo ALT vacío	\N
+1523	1324	error	Script en línea	\N
+1524	1324	error	Script en línea	\N
+1525	1324	error	Script en línea	\N
+1526	1324	error	Script en línea	\N
+1527	1324	error	Script en línea	\N
+1528	1324	error	Script en línea	\N
+1529	1326	error	Hay 1 controles Flash declarados con HTML5	\N
+1530	1329	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1531	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1532	1330	error	Tipo de imagen ilegal image/gif	\N
+1533	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1534	1330	error	Tipo de imagen ilegal image/gif	\N
+1535	1330	error	Tipo de imagen ilegal image/gif	\N
+1536	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1537	1330	error	Tipo de imagen ilegal image/gif	\N
+1538	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1539	1330	error	Tipo de imagen ilegal image/gif	\N
+1540	1330	error	Tipo de imagen ilegal image/gif	\N
+1541	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1542	1330	error	Tipo de imagen ilegal image/gif	\N
+1543	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1544	1330	error	Tipo de imagen ilegal image/gif	\N
+1545	1330	error	Tipo de imagen ilegal image/gif	\N
+1546	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1547	1330	error	Tipo de imagen ilegal image/gif	\N
+1548	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1549	1330	error	Tipo de imagen ilegal image/gif	\N
+1550	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1551	1330	error	Tipo de imagen ilegal image/gif	\N
+1552	1330	error	Tipo de imagen ilegal image/gif	\N
+1553	1330	error	Tipo de imagen ilegal image/gif	\N
+1554	1330	error	Tipo de imagen ilegal image/gif	\N
+1555	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1556	1330	error	Tipo de imagen ilegal image/gif	\N
+1557	1330	error	Tipo de imagen ilegal image/gif	\N
+1558	1330	error	Tipo de imagen ilegal image/jpeg	\N
+1559	1330	error	Tipo de imagen ilegal image/gif	\N
+1560	1330	error	Tipo de imagen ilegal image/gif	\N
+1561	1330	error	Tipo de imagen ilegal image/gif	\N
+1562	1330	error	Tipo de imagen ilegal image/gif	\N
+1563	1330	error	Tipo de imagen ilegal image/gif	\N
+1564	1330	error	Tipo de imagen ilegal image/gif	\N
+1565	1330	error	Tipo de imagen ilegal image/gif	\N
+1566	1330	error	Tipo de imagen ilegal image/gif	\N
+1567	1330	error	Tipo de imagen ilegal image/gif	\N
+1568	1331	error	Hay 26 imagenes sin atributo ALT	\N
+1569	1331	warning	Hay 10 imagenes con atributo ALT vacío	\N
+1570	1333	error	Script en línea	\N
+1571	1333	error	Script en línea	\N
+1572	1333	error	Script en línea	\N
+1573	1333	error	Script en línea	\N
+1574	1333	error	Script en línea	\N
+1575	1333	error	Script en línea	\N
+1576	1335	error	Hay 1 controles Flash declarados con HTML5	\N
+1577	1338	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1578	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1579	1339	error	Tipo de imagen ilegal image/gif	\N
+1580	1339	error	Tipo de imagen ilegal image/gif	\N
+1581	1339	error	Tipo de imagen ilegal image/gif	\N
+1582	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1583	1339	error	Tipo de imagen ilegal image/gif	\N
+1584	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1585	1339	error	Tipo de imagen ilegal image/gif	\N
+1586	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1587	1339	error	Tipo de imagen ilegal image/gif	\N
+1588	1339	error	Tipo de imagen ilegal image/gif	\N
+1589	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1590	1339	error	Tipo de imagen ilegal image/gif	\N
+1591	1339	error	Tipo de imagen ilegal image/gif	\N
+1592	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1593	1339	error	Tipo de imagen ilegal image/gif	\N
+1594	1339	error	Tipo de imagen ilegal image/gif	\N
+1595	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1596	1339	error	Tipo de imagen ilegal image/gif	\N
+1597	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1598	1339	error	Tipo de imagen ilegal image/gif	\N
+1599	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1600	1339	error	Tipo de imagen ilegal image/gif	\N
+1601	1339	error	Tipo de imagen ilegal image/gif	\N
+1602	1339	error	Tipo de imagen ilegal image/jpeg	\N
+1603	1339	error	Tipo de imagen ilegal image/gif	\N
+1604	1339	error	Tipo de imagen ilegal image/gif	\N
+1605	1339	error	Tipo de imagen ilegal image/gif	\N
+1606	1339	error	Tipo de imagen ilegal image/gif	\N
+1607	1339	error	Tipo de imagen ilegal image/gif	\N
+1608	1339	error	Tipo de imagen ilegal image/gif	\N
+1609	1339	error	Tipo de imagen ilegal image/gif	\N
+1610	1339	error	Tipo de imagen ilegal image/gif	\N
+1611	1339	error	Tipo de imagen ilegal image/gif	\N
+1612	1340	error	Hay 23 imagenes sin atributo ALT	\N
+1613	1340	warning	Hay 7 imagenes con atributo ALT vacío	\N
+1614	1342	error	Script en línea	\N
+1615	1342	error	Script en línea	\N
+1616	1342	error	Script en línea	\N
+1617	1342	error	Script en línea	\N
+1618	1342	error	Script en línea	\N
+1619	1342	error	Script en línea	\N
+1620	1344	error	Hay 1 controles Flash declarados con HTML5	\N
+1621	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1622	1348	error	Tipo de imagen ilegal image/gif	\N
+1623	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1624	1348	error	Tipo de imagen ilegal image/gif	\N
+1625	1348	error	Tipo de imagen ilegal image/gif	\N
+1626	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1627	1348	error	Tipo de imagen ilegal image/gif	\N
+1628	1348	error	Tipo de imagen ilegal image/gif	\N
+1629	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1630	1348	error	Tipo de imagen ilegal image/gif	\N
+1631	1348	error	Tipo de imagen ilegal image/gif	\N
+1632	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1633	1348	error	Tipo de imagen ilegal image/gif	\N
+1634	1348	error	Tipo de imagen ilegal image/gif	\N
+1635	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1636	1348	error	Tipo de imagen ilegal image/gif	\N
+1637	1348	error	Tipo de imagen ilegal image/gif	\N
+1638	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1639	1348	error	Tipo de imagen ilegal image/gif	\N
+1640	1348	error	Tipo de imagen ilegal image/gif	\N
+1641	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1642	1348	error	Tipo de imagen ilegal image/gif	\N
+1643	1348	error	Tipo de imagen ilegal image/gif	\N
+1644	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1645	1348	error	Tipo de imagen ilegal image/gif	\N
+1646	1348	error	Tipo de imagen ilegal image/gif	\N
+1647	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1648	1348	error	Tipo de imagen ilegal image/gif	\N
+1649	1348	error	Tipo de imagen ilegal image/gif	\N
+1650	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1651	1348	error	Tipo de imagen ilegal image/gif	\N
+1652	1348	error	Tipo de imagen ilegal image/gif	\N
+1653	1348	error	Tipo de imagen ilegal image/jpeg	\N
+1654	1348	error	Tipo de imagen ilegal image/gif	\N
+1655	1348	error	Tipo de imagen ilegal image/gif	\N
+1656	1348	error	Tipo de imagen ilegal image/gif	\N
+1657	1348	error	Tipo de imagen ilegal image/gif	\N
+1658	1348	error	Tipo de imagen ilegal image/gif	\N
+1659	1348	error	Tipo de imagen ilegal image/gif	\N
+1660	1348	error	Tipo de imagen ilegal image/gif	\N
+1661	1348	error	Tipo de imagen ilegal image/gif	\N
+1662	1348	error	Tipo de imagen ilegal image/gif	\N
+1663	1349	error	Hay 21 imagenes sin atributo ALT	\N
+1664	1349	warning	Hay 2 imagenes con atributo ALT vacío	\N
+1665	1351	error	Script en línea	\N
+1666	1351	error	Script en línea	\N
+1667	1351	error	Script en línea	\N
+1668	1351	error	Script en línea	\N
+1669	1351	error	Script en línea	\N
+1670	1351	error	Script en línea	\N
+1671	1353	error	Hay 1 controles Flash declarados con HTML5	\N
+1672	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1673	1357	error	Tipo de imagen ilegal image/gif	\N
+1674	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1675	1357	error	Tipo de imagen ilegal image/gif	\N
+1676	1357	error	Tipo de imagen ilegal image/gif	\N
+1677	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1678	1357	error	Tipo de imagen ilegal image/gif	\N
+1679	1357	error	Tipo de imagen ilegal image/gif	\N
+1680	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1681	1357	error	Tipo de imagen ilegal image/gif	\N
+1682	1357	error	Tipo de imagen ilegal image/gif	\N
+1683	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1684	1357	error	Tipo de imagen ilegal image/gif	\N
+1685	1357	error	Tipo de imagen ilegal image/gif	\N
+1686	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1687	1357	error	Tipo de imagen ilegal image/gif	\N
+1688	1357	error	Tipo de imagen ilegal image/gif	\N
+1689	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1690	1357	error	Tipo de imagen ilegal image/gif	\N
+1691	1357	error	Tipo de imagen ilegal image/gif	\N
+1692	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1693	1357	error	Tipo de imagen ilegal image/gif	\N
+1694	1357	error	Tipo de imagen ilegal image/gif	\N
+1695	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1696	1357	error	Tipo de imagen ilegal image/gif	\N
+1697	1357	error	Tipo de imagen ilegal image/gif	\N
+1698	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1699	1357	error	Tipo de imagen ilegal image/gif	\N
+1700	1357	error	Tipo de imagen ilegal image/gif	\N
+1701	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1702	1357	error	Tipo de imagen ilegal image/gif	\N
+1703	1357	error	Tipo de imagen ilegal image/gif	\N
+1704	1357	error	Tipo de imagen ilegal image/jpeg	\N
+1705	1357	error	Tipo de imagen ilegal image/gif	\N
+1706	1357	error	Tipo de imagen ilegal image/gif	\N
+1707	1357	error	Tipo de imagen ilegal image/gif	\N
+1708	1357	error	Tipo de imagen ilegal image/gif	\N
+1709	1357	error	Tipo de imagen ilegal image/gif	\N
+1710	1357	error	Tipo de imagen ilegal image/gif	\N
+1711	1357	error	Tipo de imagen ilegal image/gif	\N
+1712	1357	error	Tipo de imagen ilegal image/gif	\N
+1713	1357	error	Tipo de imagen ilegal image/gif	\N
+1714	1358	error	Hay 21 imagenes sin atributo ALT	\N
+1715	1358	warning	Hay 2 imagenes con atributo ALT vacío	\N
+1716	1360	error	Script en línea	\N
+1717	1360	error	Script en línea	\N
+1718	1360	error	Script en línea	\N
+1719	1360	error	Script en línea	\N
+1720	1360	error	Script en línea	\N
+1721	1360	error	Script en línea	\N
+1722	1362	error	Hay 1 controles Flash declarados con HTML5	\N
+1723	1365	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1724	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1725	1366	error	Tipo de imagen ilegal image/gif	\N
+1726	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1727	1366	error	Tipo de imagen ilegal image/gif	\N
+1728	1366	error	Tipo de imagen ilegal image/gif	\N
+1729	1366	error	Tipo de imagen ilegal image/gif	\N
+1730	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1731	1366	error	Tipo de imagen ilegal image/gif	\N
+1732	1366	error	Tipo de imagen ilegal image/gif	\N
+1733	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1734	1366	error	Tipo de imagen ilegal image/gif	\N
+1735	1366	error	Tipo de imagen ilegal image/gif	\N
+1736	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1737	1366	error	Tipo de imagen ilegal image/gif	\N
+1738	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1739	1366	error	Tipo de imagen ilegal image/gif	\N
+1740	1366	error	Tipo de imagen ilegal image/gif	\N
+1741	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1742	1366	error	Tipo de imagen ilegal image/gif	\N
+1743	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1744	1366	error	Tipo de imagen ilegal image/gif	\N
+1745	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1746	1366	error	Tipo de imagen ilegal image/gif	\N
+1747	1366	error	Tipo de imagen ilegal image/gif	\N
+1748	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1749	1366	error	Tipo de imagen ilegal image/gif	\N
+1750	1366	error	Tipo de imagen ilegal image/jpeg	\N
+1751	1366	error	Tipo de imagen ilegal image/gif	\N
+1752	1366	error	Tipo de imagen ilegal image/gif	\N
+1753	1366	error	Tipo de imagen ilegal image/gif	\N
+1754	1366	error	Tipo de imagen ilegal image/gif	\N
+1755	1366	error	Tipo de imagen ilegal image/gif	\N
+1756	1366	error	Tipo de imagen ilegal image/gif	\N
+1757	1366	error	Tipo de imagen ilegal image/gif	\N
+1758	1366	error	Tipo de imagen ilegal image/gif	\N
+1759	1366	error	Tipo de imagen ilegal image/gif	\N
+1760	1367	error	Hay 26 imagenes sin atributo ALT	\N
+1761	1367	warning	Hay 8 imagenes con atributo ALT vacío	\N
+1762	1369	error	Script en línea	\N
+1763	1369	error	Script en línea	\N
+1764	1369	error	Script en línea	\N
+1765	1369	error	Script en línea	\N
+1766	1369	error	Script en línea	\N
+1767	1369	error	Script en línea	\N
+1768	1371	error	Hay 1 controles Flash declarados con HTML5	\N
+1769	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1770	1375	error	Tipo de imagen ilegal image/gif	\N
+1771	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1772	1375	error	Tipo de imagen ilegal image/gif	\N
+1773	1375	error	Tipo de imagen ilegal image/gif	\N
+1774	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1775	1375	error	Tipo de imagen ilegal image/gif	\N
+1776	1375	error	Tipo de imagen ilegal image/gif	\N
+1777	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1778	1375	error	Tipo de imagen ilegal image/gif	\N
+1779	1375	error	Tipo de imagen ilegal image/gif	\N
+1780	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1781	1375	error	Tipo de imagen ilegal image/gif	\N
+1782	1375	error	Tipo de imagen ilegal image/gif	\N
+1783	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1784	1375	error	Tipo de imagen ilegal image/gif	\N
+1785	1375	error	Tipo de imagen ilegal image/gif	\N
+1786	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1787	1375	error	Tipo de imagen ilegal image/gif	\N
+1788	1375	error	Tipo de imagen ilegal image/gif	\N
+1789	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1790	1375	error	Tipo de imagen ilegal image/gif	\N
+1791	1375	error	Tipo de imagen ilegal image/gif	\N
+1792	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1793	1375	error	Tipo de imagen ilegal image/gif	\N
+1794	1375	error	Tipo de imagen ilegal image/gif	\N
+1795	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1796	1375	error	Tipo de imagen ilegal image/gif	\N
+1797	1375	error	Tipo de imagen ilegal image/gif	\N
+1798	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1799	1375	error	Tipo de imagen ilegal image/gif	\N
+1800	1375	error	Tipo de imagen ilegal image/gif	\N
+1801	1375	error	Tipo de imagen ilegal image/jpeg	\N
+1802	1375	error	Tipo de imagen ilegal image/gif	\N
+1803	1375	error	Tipo de imagen ilegal image/gif	\N
+1804	1375	error	Tipo de imagen ilegal image/gif	\N
+1805	1375	error	Tipo de imagen ilegal image/gif	\N
+1806	1375	error	Tipo de imagen ilegal image/gif	\N
+1807	1375	error	Tipo de imagen ilegal image/gif	\N
+1808	1375	error	Tipo de imagen ilegal image/gif	\N
+1809	1375	error	Tipo de imagen ilegal image/gif	\N
+1810	1375	error	Tipo de imagen ilegal image/gif	\N
+1811	1376	error	Hay 21 imagenes sin atributo ALT	\N
+1812	1376	warning	Hay 2 imagenes con atributo ALT vacío	\N
+1813	1378	error	Script en línea	\N
+1814	1378	error	Script en línea	\N
+1815	1378	error	Script en línea	\N
+1816	1378	error	Script en línea	\N
+1817	1378	error	Script en línea	\N
+1818	1378	error	Script en línea	\N
+1819	1380	error	Hay 1 controles Flash declarados con HTML5	\N
+1820	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1821	1384	error	Tipo de imagen ilegal image/gif	\N
+1822	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1823	1384	error	Tipo de imagen ilegal image/gif	\N
+1824	1384	error	Tipo de imagen ilegal image/gif	\N
+1825	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1826	1384	error	Tipo de imagen ilegal image/gif	\N
+1827	1384	error	Tipo de imagen ilegal image/gif	\N
+1828	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1829	1384	error	Tipo de imagen ilegal image/gif	\N
+1830	1384	error	Tipo de imagen ilegal image/gif	\N
+1831	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1832	1384	error	Tipo de imagen ilegal image/gif	\N
+1833	1384	error	Tipo de imagen ilegal image/gif	\N
+1834	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1835	1384	error	Tipo de imagen ilegal image/gif	\N
+1836	1384	error	Tipo de imagen ilegal image/gif	\N
+1837	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1838	1384	error	Tipo de imagen ilegal image/gif	\N
+1839	1384	error	Tipo de imagen ilegal image/gif	\N
+1840	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1841	1384	error	Tipo de imagen ilegal image/gif	\N
+1842	1384	error	Tipo de imagen ilegal image/gif	\N
+1843	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1844	1384	error	Tipo de imagen ilegal image/gif	\N
+1845	1384	error	Tipo de imagen ilegal image/gif	\N
+1846	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1847	1384	error	Tipo de imagen ilegal image/gif	\N
+1848	1384	error	Tipo de imagen ilegal image/gif	\N
+1849	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1850	1384	error	Tipo de imagen ilegal image/gif	\N
+1851	1384	error	Tipo de imagen ilegal image/gif	\N
+1852	1384	error	Tipo de imagen ilegal image/jpeg	\N
+1853	1384	error	Tipo de imagen ilegal image/gif	\N
+1854	1384	error	Tipo de imagen ilegal image/gif	\N
+1855	1384	error	Tipo de imagen ilegal image/gif	\N
+1856	1384	error	Tipo de imagen ilegal image/gif	\N
+1857	1384	error	Tipo de imagen ilegal image/gif	\N
+1858	1384	error	Tipo de imagen ilegal image/gif	\N
+1859	1384	error	Tipo de imagen ilegal image/gif	\N
+1860	1384	error	Tipo de imagen ilegal image/gif	\N
+1861	1384	error	Tipo de imagen ilegal image/gif	\N
+1862	1385	error	Hay 21 imagenes sin atributo ALT	\N
+1863	1385	warning	Hay 2 imagenes con atributo ALT vacío	\N
+1864	1387	error	Script en línea	\N
+1865	1387	error	Script en línea	\N
+1866	1387	error	Script en línea	\N
+1867	1387	error	Script en línea	\N
+1868	1387	error	Script en línea	\N
+1869	1387	error	Script en línea	\N
+1870	1389	error	Hay 1 controles Flash declarados con HTML5	\N
+1871	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1872	1393	error	Tipo de imagen ilegal image/gif	\N
+1873	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1874	1393	error	Tipo de imagen ilegal image/gif	\N
+1875	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1876	1393	error	Tipo de imagen ilegal image/gif	\N
+1877	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1878	1393	error	Tipo de imagen ilegal image/gif	\N
+1879	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1880	1393	error	Tipo de imagen ilegal image/gif	\N
+1881	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1882	1393	error	Tipo de imagen ilegal image/gif	\N
+1883	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1884	1393	error	Tipo de imagen ilegal image/gif	\N
+1885	1393	error	Tipo de imagen ilegal image/gif	\N
+1886	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1887	1393	error	Tipo de imagen ilegal image/gif	\N
+1888	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1889	1393	error	Tipo de imagen ilegal image/gif	\N
+1890	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1891	1393	error	Tipo de imagen ilegal image/gif	\N
+1892	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1893	1393	error	Tipo de imagen ilegal image/gif	\N
+1894	1393	error	Tipo de imagen ilegal image/jpeg	\N
+1895	1393	error	Tipo de imagen ilegal image/gif	\N
+1896	1393	error	Tipo de imagen ilegal image/gif	\N
+1897	1393	error	Tipo de imagen ilegal image/gif	\N
+1898	1393	error	Tipo de imagen ilegal image/gif	\N
+1899	1393	error	Tipo de imagen ilegal image/gif	\N
+1900	1393	error	Tipo de imagen ilegal image/gif	\N
+1901	1393	error	Tipo de imagen ilegal image/gif	\N
+1902	1393	error	Tipo de imagen ilegal image/gif	\N
+1903	1393	error	Tipo de imagen ilegal image/gif	\N
+1904	1394	error	Hay 22 imagenes sin atributo ALT	\N
+1905	1394	warning	Hay 11 imagenes con atributo ALT vacío	\N
+1906	1396	error	Script en línea	\N
+1907	1396	error	Script en línea	\N
+1908	1396	error	Script en línea	\N
+1909	1396	error	Script en línea	\N
+1910	1396	error	Script en línea	\N
+1911	1396	error	Script en línea	\N
+1912	1398	error	Hay 1 controles Flash declarados con HTML5	\N
+1913	1401	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1914	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1915	1402	error	Tipo de imagen ilegal image/gif	\N
+1916	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1917	1402	error	Tipo de imagen ilegal image/gif	\N
+1918	1402	error	Tipo de imagen ilegal image/gif	\N
+1919	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1920	1402	error	Tipo de imagen ilegal image/gif	\N
+1921	1402	error	Tipo de imagen ilegal image/gif	\N
+1922	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1923	1402	error	Tipo de imagen ilegal image/gif	\N
+1924	1402	error	Tipo de imagen ilegal image/gif	\N
+1925	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1926	1402	error	Tipo de imagen ilegal image/gif	\N
+1927	1402	error	Tipo de imagen ilegal image/gif	\N
+1928	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1929	1402	error	Tipo de imagen ilegal image/gif	\N
+1930	1402	error	Tipo de imagen ilegal image/gif	\N
+1931	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1932	1402	error	Tipo de imagen ilegal image/gif	\N
+1933	1402	error	Tipo de imagen ilegal image/gif	\N
+1934	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1935	1402	error	Tipo de imagen ilegal image/gif	\N
+1936	1402	error	Tipo de imagen ilegal image/gif	\N
+1937	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1938	1402	error	Tipo de imagen ilegal image/gif	\N
+1939	1402	error	Tipo de imagen ilegal image/gif	\N
+1940	1402	error	Tipo de imagen ilegal image/gif	\N
+1941	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1942	1402	error	Tipo de imagen ilegal image/gif	\N
+1943	1402	error	Tipo de imagen ilegal image/gif	\N
+1944	1402	error	Tipo de imagen ilegal image/jpeg	\N
+1945	1402	error	Tipo de imagen ilegal image/gif	\N
+1946	1402	error	Tipo de imagen ilegal image/gif	\N
+1947	1402	error	Tipo de imagen ilegal image/gif	\N
+1948	1402	error	Tipo de imagen ilegal image/gif	\N
+1949	1402	error	Tipo de imagen ilegal image/gif	\N
+1950	1402	error	Tipo de imagen ilegal image/gif	\N
+1951	1402	error	Tipo de imagen ilegal image/gif	\N
+1952	1402	error	Tipo de imagen ilegal image/gif	\N
+1953	1402	error	Tipo de imagen ilegal image/gif	\N
+1954	1403	error	Hay 25 imagenes sin atributo ALT	\N
+1955	1403	warning	Hay 6 imagenes con atributo ALT vacío	\N
+1956	1405	error	Script en línea	\N
+1957	1405	error	Script en línea	\N
+1958	1405	error	Script en línea	\N
+1959	1405	error	Script en línea	\N
+1960	1405	error	Script en línea	\N
+1961	1405	error	Script en línea	\N
+1962	1407	error	Hay 1 controles Flash declarados con HTML5	\N
+1963	1410	error	utf8 "\\xF1" does not map to Unicode at /usr/lib/perl/5.10/Encode.pm line 162.\n	\N
+1964	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1965	1411	error	Tipo de imagen ilegal image/gif	\N
+1966	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1967	1411	error	Tipo de imagen ilegal image/gif	\N
+1968	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1969	1411	error	Tipo de imagen ilegal image/gif	\N
+1970	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1971	1411	error	Tipo de imagen ilegal image/gif	\N
+1972	1411	error	Tipo de imagen ilegal image/gif	\N
+1973	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1974	1411	error	Tipo de imagen ilegal image/gif	\N
+1975	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1976	1411	error	Tipo de imagen ilegal image/gif	\N
+1977	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1978	1411	error	Tipo de imagen ilegal image/gif	\N
+1979	1411	error	Tipo de imagen ilegal image/gif	\N
+1980	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1981	1411	error	Tipo de imagen ilegal image/gif	\N
+1982	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1983	1411	error	Tipo de imagen ilegal image/gif	\N
+1984	1411	error	Tipo de imagen ilegal image/gif	\N
+1985	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1986	1411	error	Tipo de imagen ilegal image/gif	\N
+1987	1411	error	Tipo de imagen ilegal image/gif	\N
+1988	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1989	1411	error	Tipo de imagen ilegal image/gif	\N
+1990	1411	error	Tipo de imagen ilegal image/gif	\N
+1991	1411	error	Tipo de imagen ilegal image/jpeg	\N
+1992	1411	error	Tipo de imagen ilegal image/gif	\N
+1993	1411	error	Tipo de imagen ilegal image/gif	\N
+1994	1411	error	Tipo de imagen ilegal image/gif	\N
+1995	1411	error	Tipo de imagen ilegal image/gif	\N
+1996	1411	error	Tipo de imagen ilegal image/gif	\N
+1997	1411	error	Tipo de imagen ilegal image/gif	\N
+1998	1411	error	Tipo de imagen ilegal image/gif	\N
+1999	1411	error	Tipo de imagen ilegal image/gif	\N
+2000	1411	error	Tipo de imagen ilegal image/gif	\N
+2001	1412	error	Hay 25 imagenes sin atributo ALT	\N
+2002	1412	warning	Hay 7 imagenes con atributo ALT vacío	\N
+2003	1414	error	Script en línea	\N
+2004	1414	error	Script en línea	\N
+2005	1414	error	Script en línea	\N
+2006	1414	error	Script en línea	\N
+2007	1414	error	Script en línea	\N
+2008	1414	error	Script en línea	\N
+2009	1416	error	Hay 1 controles Flash declarados con HTML5	\N
+2010	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2011	1420	error	Tipo de imagen ilegal image/gif	\N
+2012	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2013	1420	error	Tipo de imagen ilegal image/gif	\N
+2014	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2015	1420	error	Tipo de imagen ilegal image/gif	\N
+2016	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2017	1420	error	Tipo de imagen ilegal image/gif	\N
+2018	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2019	1420	error	Tipo de imagen ilegal image/gif	\N
+2020	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2021	1420	error	Tipo de imagen ilegal image/gif	\N
+2022	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2023	1420	error	Tipo de imagen ilegal image/gif	\N
+2024	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2025	1420	error	Tipo de imagen ilegal image/gif	\N
+2026	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2027	1420	error	Tipo de imagen ilegal image/gif	\N
+2028	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2029	1420	error	Tipo de imagen ilegal image/gif	\N
+2030	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2031	1420	error	Tipo de imagen ilegal image/gif	\N
+2032	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2033	1420	error	Tipo de imagen ilegal image/gif	\N
+2034	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2035	1420	error	Tipo de imagen ilegal image/gif	\N
+2036	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2037	1420	error	Tipo de imagen ilegal image/gif	\N
+2038	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2039	1420	error	Tipo de imagen ilegal image/gif	\N
+2040	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2041	1420	error	Tipo de imagen ilegal image/gif	\N
+2042	1420	error	Tipo de imagen ilegal image/jpeg	\N
+2043	1420	error	Tipo de imagen ilegal image/gif	\N
+2044	1420	error	Tipo de imagen ilegal image/gif	\N
+2045	1420	error	Tipo de imagen ilegal image/gif	\N
+2046	1420	error	Tipo de imagen ilegal image/gif	\N
+2047	1420	error	Tipo de imagen ilegal image/gif	\N
+2048	1420	error	Tipo de imagen ilegal image/gif	\N
+2049	1420	error	Tipo de imagen ilegal image/gif	\N
+2050	1420	error	Tipo de imagen ilegal image/gif	\N
+2051	1420	error	Tipo de imagen ilegal image/gif	\N
+2052	1421	error	Hay 26 imagenes sin atributo ALT	\N
+2053	1421	warning	Hay 16 imagenes con atributo ALT vacío	\N
+2054	1423	error	Script en línea	\N
+2055	1423	error	Script en línea	\N
+2056	1423	error	Script en línea	\N
+2057	1423	error	Script en línea	\N
+2058	1423	error	Script en línea	\N
+2059	1423	error	Script en línea	\N
+2060	1425	error	Hay 1 controles Flash declarados con HTML5	\N
+2061	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2062	1429	error	Tipo de imagen ilegal image/gif	\N
+2063	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2064	1429	error	Tipo de imagen ilegal image/gif	\N
+2065	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2066	1429	error	Tipo de imagen ilegal image/gif	\N
+2067	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2068	1429	error	Tipo de imagen ilegal image/gif	\N
+2069	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2070	1429	error	Tipo de imagen ilegal image/gif	\N
+2071	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2072	1429	error	Tipo de imagen ilegal image/gif	\N
+2073	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2074	1429	error	Tipo de imagen ilegal image/gif	\N
+2075	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2076	1429	error	Tipo de imagen ilegal image/gif	\N
+2077	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2078	1429	error	Tipo de imagen ilegal image/gif	\N
+2079	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2080	1429	error	Tipo de imagen ilegal image/gif	\N
+2081	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2082	1429	error	Tipo de imagen ilegal image/gif	\N
+2083	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2084	1429	error	Tipo de imagen ilegal image/gif	\N
+2085	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2086	1429	error	Tipo de imagen ilegal image/gif	\N
+2087	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2088	1429	error	Tipo de imagen ilegal image/gif	\N
+2089	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2090	1429	error	Tipo de imagen ilegal image/gif	\N
+2091	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2092	1429	error	Tipo de imagen ilegal image/gif	\N
+2093	1429	error	Tipo de imagen ilegal image/jpeg	\N
+2094	1429	error	Tipo de imagen ilegal image/gif	\N
+2095	1429	error	Tipo de imagen ilegal image/gif	\N
+2096	1429	error	Tipo de imagen ilegal image/gif	\N
+2097	1429	error	Tipo de imagen ilegal image/gif	\N
+2098	1429	error	Tipo de imagen ilegal image/gif	\N
+2099	1429	error	Tipo de imagen ilegal image/gif	\N
+2100	1429	error	Tipo de imagen ilegal image/gif	\N
+2101	1429	error	Tipo de imagen ilegal image/gif	\N
+2102	1429	error	Tipo de imagen ilegal image/gif	\N
+2103	1430	error	Hay 26 imagenes sin atributo ALT	\N
+2104	1430	warning	Hay 16 imagenes con atributo ALT vacío	\N
+2105	1432	error	Script en línea	\N
+2106	1432	error	Script en línea	\N
+2107	1432	error	Script en línea	\N
+2108	1432	error	Script en línea	\N
+2109	1432	error	Script en línea	\N
+2110	1432	error	Script en línea	\N
+2111	1434	error	Hay 1 controles Flash declarados con HTML5	\N
+2112	1438	error	Tipo de imagen ilegal image/jpeg	\N
+2113	1438	error	Tipo de imagen ilegal image/gif	\N
+2114	1438	error	Tipo de imagen ilegal image/jpeg	\N
+2115	1438	error	Tipo de imagen ilegal image/jpeg	\N
+2116	1438	error	Tipo de imagen ilegal image/jpeg	\N
+2117	1438	error	Tipo de imagen ilegal image/gif	\N
+2118	1438	error	Tipo de imagen ilegal image/gif	\N
+2119	1438	error	Tipo de imagen ilegal image/gif	\N
+2120	1438	error	Tipo de imagen ilegal image/gif	\N
+2121	1438	error	Tipo de imagen ilegal image/gif	\N
+2122	1438	error	Tipo de imagen ilegal image/gif	\N
+2123	1438	error	Tipo de imagen ilegal image/gif	\N
+2124	1438	error	Tipo de imagen ilegal image/gif	\N
+2125	1438	error	Tipo de imagen ilegal image/gif	\N
+2126	1439	error	Hay 11 imagenes sin atributo ALT	\N
+2127	1439	warning	Hay 3 imagenes con atributo ALT vacío	\N
+2128	1441	error	Script en línea	\N
+2129	1441	error	Script en línea	\N
+2130	1441	error	Script en línea	\N
+2131	1441	error	Script en línea	\N
+2132	1441	error	Script en línea	\N
+2133	1441	error	Script en línea	\N
+2134	1441	error	Script en línea	\N
+2135	1443	error	Hay 1 controles Flash declarados con HTML5	\N
+2136	1447	error	Tipo de imagen ilegal image/jpeg	\N
+2137	1447	error	Tipo de imagen ilegal image/gif	\N
+2138	1447	error	Tipo de imagen ilegal image/jpeg	\N
+2139	1447	error	Tipo de imagen ilegal image/jpeg	\N
+2140	1447	error	Tipo de imagen ilegal image/jpeg	\N
+2141	1447	error	Tipo de imagen ilegal image/gif	\N
+2142	1447	error	Tipo de imagen ilegal image/gif	\N
+2143	1447	error	Tipo de imagen ilegal image/gif	\N
+2144	1447	error	Tipo de imagen ilegal image/gif	\N
+2145	1447	error	Tipo de imagen ilegal image/gif	\N
+2146	1447	error	Tipo de imagen ilegal image/gif	\N
+2147	1447	error	Tipo de imagen ilegal image/gif	\N
+2148	1447	error	Tipo de imagen ilegal image/gif	\N
+2149	1447	error	Tipo de imagen ilegal image/gif	\N
+2150	1448	error	Hay 11 imagenes sin atributo ALT	\N
+2151	1448	warning	Hay 3 imagenes con atributo ALT vacío	\N
+2152	1450	error	Script en línea	\N
+2153	1450	error	Script en línea	\N
+2154	1450	error	Script en línea	\N
+2155	1450	error	Script en línea	\N
+2156	1450	error	Script en línea	\N
+2157	1450	error	Script en línea	\N
+2158	1450	error	Script en línea	\N
+2159	1452	error	Hay 1 controles Flash declarados con HTML5	\N
+2160	1456	error	Tipo de imagen ilegal image/jpeg	\N
+2161	1456	error	Tipo de imagen ilegal image/gif	\N
+2162	1456	error	Tipo de imagen ilegal image/jpeg	\N
+2163	1456	error	Tipo de imagen ilegal image/gif	\N
+2164	1456	error	Tipo de imagen ilegal image/gif	\N
+2165	1456	error	Tipo de imagen ilegal image/gif	\N
+2166	1456	error	Tipo de imagen ilegal image/gif	\N
+2167	1456	error	Tipo de imagen ilegal image/gif	\N
+2168	1456	error	Tipo de imagen ilegal image/gif	\N
+2169	1456	error	Tipo de imagen ilegal image/gif	\N
+2170	1456	error	Tipo de imagen ilegal image/gif	\N
+2171	1456	error	Tipo de imagen ilegal image/gif	\N
+2172	1457	error	Hay 11 imagenes sin atributo ALT	\N
+2173	1457	warning	Hay 2 imagenes con atributo ALT vacío	\N
+2174	1459	error	Script en línea	\N
+2175	1459	error	Script en línea	\N
+2176	1459	error	Script en línea	\N
+2177	1459	error	Script en línea	\N
+2178	1459	error	Script en línea	\N
+2179	1459	error	Script en línea	\N
+2180	1461	error	Hay 1 controles Flash declarados con HTML5	\N
+2181	1465	error	Tipo de imagen ilegal image/jpeg	\N
+2182	1465	error	Tipo de imagen ilegal image/gif	\N
+2183	1465	error	Tipo de imagen ilegal text/html	\N
+2184	1465	error	Tipo de imagen ilegal text/html	\N
+2185	1465	error	Tipo de imagen ilegal text/html	\N
+2186	1465	error	Tipo de imagen ilegal text/html	\N
+2187	1465	error	Tipo de imagen ilegal text/html	\N
+2188	1465	error	Tipo de imagen ilegal text/html	\N
+2189	1465	error	Tipo de imagen ilegal text/html	\N
+2190	1465	error	Tipo de imagen ilegal text/html	\N
+2191	1465	error	Tipo de imagen ilegal image/jpeg	\N
+2192	1465	error	Tipo de imagen ilegal image/gif	\N
+2193	1465	error	Tipo de imagen ilegal image/gif	\N
+2194	1465	error	Tipo de imagen ilegal image/gif	\N
+2195	1465	error	Tipo de imagen ilegal image/gif	\N
+2196	1465	error	Tipo de imagen ilegal image/gif	\N
+2197	1465	error	Tipo de imagen ilegal image/gif	\N
+2198	1465	error	Tipo de imagen ilegal image/gif	\N
+2199	1465	error	Tipo de imagen ilegal image/gif	\N
+2200	1465	error	Tipo de imagen ilegal image/gif	\N
+2201	1466	error	Hay 19 imagenes sin atributo ALT	\N
+2202	1466	warning	Hay 2 imagenes con atributo ALT vacío	\N
+2203	1468	error	Script en línea	\N
+2204	1468	error	Script en línea	\N
+2205	1468	error	Script en línea	\N
+2206	1468	error	Script en línea	\N
+2207	1468	error	Script en línea	\N
+2208	1468	error	Script en línea	\N
+2209	1470	error	Hay 1 controles Flash declarados con HTML5	\N
+2210	1474	error	Tipo de imagen ilegal image/jpeg	\N
+2211	1474	error	Tipo de imagen ilegal image/gif	\N
+2212	1474	error	Tipo de imagen ilegal image/jpeg	\N
+2213	1474	error	Tipo de imagen ilegal image/gif	\N
+2214	1474	error	Tipo de imagen ilegal image/gif	\N
+2215	1474	error	Tipo de imagen ilegal image/gif	\N
+2216	1474	error	Tipo de imagen ilegal image/gif	\N
+2217	1474	error	Tipo de imagen ilegal image/gif	\N
+2218	1474	error	Tipo de imagen ilegal image/gif	\N
+2219	1474	error	Tipo de imagen ilegal image/gif	\N
+2220	1474	error	Tipo de imagen ilegal image/gif	\N
+2221	1474	error	Tipo de imagen ilegal image/gif	\N
+2222	1475	error	Hay 11 imagenes sin atributo ALT	\N
+2223	1475	warning	Hay 2 imagenes con atributo ALT vacío	\N
+2224	1477	error	Script en línea	\N
+2225	1477	error	Script en línea	\N
+2226	1477	error	Script en línea	\N
+2227	1477	error	Script en línea	\N
+2228	1477	error	Script en línea	\N
+2229	1477	error	Script en línea	\N
+2230	1479	error	Hay 1 controles Flash declarados con HTML5	\N
+2231	1483	error	Tipo de imagen ilegal image/jpeg	\N
+2232	1483	error	Tipo de imagen ilegal image/gif	\N
+2233	1483	error	Tipo de imagen ilegal image/jpeg	\N
+2234	1483	error	Tipo de imagen ilegal image/gif	\N
+2235	1483	error	Tipo de imagen ilegal image/gif	\N
+2236	1483	error	Tipo de imagen ilegal image/gif	\N
+2237	1483	error	Tipo de imagen ilegal image/gif	\N
+2238	1483	error	Tipo de imagen ilegal image/gif	\N
+2239	1483	error	Tipo de imagen ilegal image/gif	\N
+2240	1483	error	Tipo de imagen ilegal image/gif	\N
+2241	1483	error	Tipo de imagen ilegal image/gif	\N
+2242	1483	error	Tipo de imagen ilegal image/gif	\N
+2243	1484	error	Hay 11 imagenes sin atributo ALT	\N
+2244	1484	warning	Hay 2 imagenes con atributo ALT vacío	\N
+2245	1486	error	Script en línea	\N
+2246	1486	error	Script en línea	\N
+2247	1486	error	Script en línea	\N
+2248	1486	error	Script en línea	\N
+2249	1486	error	Script en línea	\N
+2250	1486	error	Script en línea	\N
+2251	1488	error	Hay 1 controles Flash declarados con HTML5	\N
+2252	1492	warnings	No HTTP Charset	\N
+2253	1492	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+2254	1492	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+2255	1495	warning	Atributo obsoleto 'language'	\N
+2256	1496	error	Script en línea	\N
+2257	1496	error	No se usan archivos con extensión .js	\N
+2258	1501	warnings	No HTTP Charset	\N
+2259	1501	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+2260	1504	warning	Atributo obsoleto 'language'	\N
+2261	1505	error	Script en línea	\N
+2262	1505	error	Script en línea	\N
+2263	1505	error	Script en línea	\N
+2264	1505	error	Script en línea	\N
+2265	1505	error	Script en línea	\N
+2266	1507	error	Hay 1 controles ActiveX	\N
+2267	1507	error	Hay 1 controles Flash declarados con HTML5	\N
+2268	1510	warnings	No HTTP Charset	\N
+2269	1510	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+2270	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2271	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2272	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2273	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2274	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2275	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2276	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2277	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2278	1511	error	Tipo de imagen ilegal image/jpeg	\N
+2279	1511	error	Tipo de imagen ilegal image/gif	\N
+2280	1512	error	Hay 2 imagenes sin atributo ALT	\N
+2281	1513	warning	Atributo obsoleto 'language'	\N
+2282	1514	error	Script en línea	\N
+2283	1514	error	Script en línea	\N
+2284	1514	error	Script en línea	\N
+2285	1514	error	Script en línea	\N
+2286	1514	error	Script en línea	\N
+2287	1514	error	Script en línea	\N
+2288	1519	warnings	No HTTP Charset	\N
+2289	1519	error	HTTP charset '' does not match META charset 'iso-8859-1'	\N
+2290	1522	warning	Atributo obsoleto 'language'	\N
+2291	1523	error	Script en línea	\N
+2292	1523	error	Script en línea	\N
+2293	1523	error	Script en línea	\N
+2294	1523	error	Script en línea	\N
+2295	1523	error	Script en línea	\N
 \.
 
 
@@ -1386,7 +2207,6 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 9	Ministerio de Cosas	G-00000000	ministro@cosas.gob.ve	555-555.5555	El Ministro	Por estas calles	http://www.cosas.gob.ve	t
 5	Insitucion	G-432123	info@institucion.com	2292092	Walter	Por alli	www.notiene.com	f
 11	Ministerio del Ambiente	G-432455991	info@ambiente.gob.ve	0212-333.3333	Otro ministro	Caracas, Distrito Federal	http://www.ambiente.gob.ve	t
-14	Servicio Autonomo de Transporte y Tránsito Terrestre	G-11	info@setra.gob.ve	0212-333.3333	El pana del SETRA	En Caracas	http://www.setra.gob.ve	t
 13	Casa de lili	J-333333333	lilibeth@covetel.com.ve	555-555.5555	skjhskfhsdfkhfdkhasdfkhasdfk	asdadadadasdadadada	http://www.portatillili.gov.ve	t
 15	Ministerio de Finanzas 2	G-12345678902	otro@otro.com	(333) 333-3333	Alguien por alli	adasd a;sakjn ai asljdal	http://www.ambiente.gob.ve	t
 16	COVETEL	J-321345111	info@covetel.com.ve	(222) 222-2222	Walter	paramillo	http://www.covetel.com.ve	t
@@ -1394,6 +2214,10 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 18	Vencert	G-4493292	info@vencert.gob.ve	(0212) 222-2222	Omar Alvarado	\N	http://www.vencert.gob.ve	t
 19	Seguro Social	G-4492221	info@ivss.gov.ve	(0212) 999-9999	Angel Vargas	Donde trabaja angel	http://www.ivss.gov.ve	t
 20	Banco de Venezuela	j-231231	info@bancodevenezuela.com	(0212) 999-9999	Juan Fuentes	Por la hoyada	http://www.bancodevenezuela.com	t
+14	Servicio Autonomo de Transporte y Tránsito Terrestre	G-11	info@setra.gob.ve	0212-333.3333	El pana del SETRA	En Caracas	http://www.setra.gob.ve	f
+21	Presidencia de la República	G-0000011101	info@presidencia.gob.ve	(5555) 555-5555	Fulanito	Miraflores	http://www.presidencia.gob.ve/	t
+22	Venezolana de TV	G-1233213333	info@vtv.gob.ve	(0000) 000-0000	Fulano	En la television	http://www.vtv.gob.ve	t
+23	Asamblea TV	j-7777777777777	info@antv.gob.ve	(8888) 888-8888	Otro Fulano	En la TV tambien	http://www.antv.gob.ve	t
 \.
 
 
@@ -1402,15 +2226,1514 @@ COPY institucion (id, nombre, rif, correo, telefono, contacto, direccion, web, h
 --
 
 COPY jobs (id, site, callback, data, state, proc, ctime, mtime, pid) FROM stdin;
-1	://	\N	\N	done	29422	2010-05-10 14:47:35	2010-05-10 14:47:36	\N
-2	http://www.mppef.gob.ve	\N	\N	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:38	\N
-3	http://www.mppef.gob.ve	\N	\N	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:13	\N
-4	http://www.luischacon.info	\N	\N	done	14514	2010-05-11 22:13:46	2010-05-11 22:16:03	\N
-5	http://www.mppef.gob.ve	\N	\N	done	17871	2010-05-12 18:28:22	2010-05-12 18:56:52	\N
-6	https://www.vencert.gob.ve	\N	\N	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42	\N
-7	http://www.ivss.gov.ve	\N	\N	run	23069	2010-05-12 19:17:30	2010-05-12 19:17:30	\N
-8	https://www.vencert.gob.ve	\N	\N	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06	\N
-9	http://www.bancodevenezuela.com	\N	\N	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:14	\N
+13	http://www.presidencia.gob.ve	\N	\N	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:59	\N
+14	http://www.vtv.gob.ve	\N	\N	run	9755	2010-08-23 02:00:27	2010-08-23 02:00:29	\N
+15	http://www.antv.gob.ve	\N	\N	done	9865	2010-08-23 02:10:03	2010-08-23 02:10:38	\N
+\.
+
+
+--
+-- Data for Name: params; Type: TABLE DATA; Schema: public; Owner: admin
+--
+
+COPY params (id, disposicion, parametro) FROM stdin;
+4492	Fonts	1015sn
+4493	Fonts	1015snr
+4494	Fonts	18holes
+4495	Fonts	36daysag
+4496	Fonts	36daythk
+4497	Fonts	3dlet
+4498	Fonts	4shadow
+4499	Fonts	4shadowo
+4500	Fonts	8bitlim
+4501	Fonts	8bitlimo
+4502	Fonts	8bitlimr
+4503	Fonts	8blimro
+4504	Fonts	90stars
+4505	Fonts	BLEX
+4506	Fonts	BLSY
+4507	Fonts	MarVoSym
+4508	Fonts	RBLMI
+4509	Fonts	abecedario
+4510	Fonts	abecedarioguiada
+4511	Fonts	abecedarionegrita
+4512	Fonts	abecedariopautada
+4513	Fonts	abecedariopuntguiada
+4514	Fonts	abecedariopuntos
+4515	Fonts	abecedariopuntpautada
+4516	Fonts	abyssinica_sil
+4517	Fonts	acidrefl
+4518	Fonts	acknowtt
+4519	Fonts	ae_alarabiya
+4520	Fonts	ae_albattar
+4521	Fonts	ae_alhor
+4522	Fonts	ae_almanzomah
+4523	Fonts	ae_almateen-bold
+4524	Fonts	ae_almohanad
+4525	Fonts	ae_almothnna-bold
+4526	Fonts	ae_alyarmook
+4527	Fonts	ae_arab
+4528	Fonts	ae_cortoba
+4529	Fonts	ae_dimnah
+4530	Fonts	ae_electron
+4531	Fonts	ae_furat
+4532	Fonts	ae_granada
+4533	Fonts	ae_graph
+4534	Fonts	ae_hani
+4535	Fonts	ae_haramain
+4536	Fonts	ae_hor
+4537	Fonts	ae_japan
+4538	Fonts	ae_jet
+4539	Fonts	ae_kayrawan
+4540	Fonts	ae_khalid
+4541	Fonts	ae_mashq-bold
+4542	Fonts	ae_mashq
+4543	Fonts	ae_metal
+4544	Fonts	ae_nada
+4545	Fonts	ae_nagham
+4546	Fonts	ae_nice
+4547	Fonts	ae_ostorah
+4548	Fonts	ae_ouhod-bold
+4549	Fonts	ae_petra
+4550	Fonts	ae_rasheeq-bold
+4551	Fonts	ae_rehan
+4552	Fonts	ae_salem
+4553	Fonts	ae_shado
+4554	Fonts	ae_sharjah
+4555	Fonts	ae_sindbad
+4556	Fonts	ae_tarablus
+4557	Fonts	ae_tholoth
+4558	Fonts	aescrawl
+4559	Fonts	aesymatt
+4560	Fonts	aftermat
+4561	Fonts	aharoniclm-bold
+4562	Fonts	aharoniclm-boldoblique
+4563	Fonts	aharoniclm-book
+4564	Fonts	aharoniclm-bookoblique
+4565	Fonts	alba____
+4566	Fonts	albam___
+4567	Fonts	albas___
+4568	Fonts	alfa-beta
+4569	Fonts	alphbeta
+4570	Fonts	amalgama
+4571	Fonts	amalgamo
+4572	Fonts	amicilogo
+4573	Fonts	amicilogobold
+4574	Fonts	amicilogoboldoblique
+4575	Fonts	amicilogoboldreverseoblique
+4576	Fonts	amicilogooblique
+4577	Fonts	amicilogoreverseoblique
+4578	Fonts	amplitud
+4579	Fonts	andbasr
+4580	Fonts	antykwatorunska-bold
+4581	Fonts	antykwatorunska-bolditalic
+4582	Fonts	antykwatorunska-italic
+4583	Fonts	antykwatorunska-regular
+4584	Fonts	antykwatorunskacond-bold
+4585	Fonts	antykwatorunskacond-bolditalic
+4586	Fonts	antykwatorunskacond-italic
+4587	Fonts	antykwatorunskacond-regular
+4588	Fonts	antykwatorunskacondlight-italic
+4589	Fonts	antykwatorunskacondlight-regular
+4590	Fonts	antykwatorunskacondmed-italic
+4591	Fonts	antykwatorunskacondmed-regular
+4592	Fonts	antykwatorunskalight-italic
+4593	Fonts	antykwatorunskalight-regular
+4594	Fonts	antykwatorunskamed-italic
+4595	Fonts	antykwatorunskamed-regular
+4596	Fonts	apibold
+4597	Fonts	apibolit
+4598	Fonts	apiitali
+4599	Fonts	apiregul
+4600	Fonts	archaic-aramaic
+4601	Fonts	archaic-cypriot
+4602	Fonts	archaic-etruscan
+4603	Fonts	archaic-futharc
+4604	Fonts	archaic-greek-4th-century-bc
+4605	Fonts	archaic-greek-6th-century-bc
+4606	Fonts	archaic-linear-b
+4607	Fonts	archaic-nabatean
+4608	Fonts	archaic-oands-italic
+4609	Fonts	archaic-oands
+4610	Fonts	archaic-old-persian
+4611	Fonts	archaic-phoenician
+4612	Fonts	archaic-poor-mans-hieroglyphs
+4613	Fonts	archaic-protosemitic
+4614	Fonts	archaic-south-arabian
+4615	Fonts	archaic-ugaritic-cuneiform
+4616	Fonts	arevsans-bold
+4617	Fonts	arevsans-boldoblique
+4618	Fonts	arevsans-oblique
+4619	Fonts	arevsans-roman
+4620	Fonts	arthriti
+4621	Fonts	ascii
+4622	Fonts	aspartam
+4623	Fonts	atarismall
+4624	Fonts	atarismallbold
+4625	Fonts	atarismallcondensed
+4626	Fonts	atarismallitalic
+4627	Fonts	atarismalllight
+4628	Fonts	ataxia
+4629	Fonts	ataxiao
+4630	Fonts	augie
+4631	Fonts	aurelisadf-bold
+4632	Fonts	aurelisadf-bolditalic
+4633	Fonts	aurelisadf-italic
+4634	Fonts	aurelisadf-regular
+4635	Fonts	aurelisadfcd-bold
+4636	Fonts	aurelisadfcd-bolditalic
+4637	Fonts	aurelisadfcd-italic
+4638	Fonts	aurelisadfcd-regular
+4639	Fonts	aurelisadfdemi-bold
+4640	Fonts	aurelisadfdemi-bolditalic
+4641	Fonts	aurelisadfex-bold
+4642	Fonts	aurelisadfex-bolditalic
+4643	Fonts	aurelisadfex-italic
+4644	Fonts	aurelisadfex-regular
+4645	Fonts	aurelisadfexdemi-bold
+4646	Fonts	aurelisadfexdemi-bolditalic
+4647	Fonts	aurelisadflt-bold
+4648	Fonts	aurelisadflt-bolditalic
+4649	Fonts	aurelisadflt-italic
+4650	Fonts	aurelisadflt-regular
+4651	Fonts	aurelisadfscript-italic
+4652	Fonts	aurelisadfscriptno2-italic
+4653	Fonts	auriocuskalligraphicus
+4654	Fonts	auriocuskalligraphicusbold
+4655	Fonts	auriocuskalligraphicusboldoblique
+4656	Fonts	auriocuskalligraphicusboldreverseoblique
+4657	Fonts	auriocuskalligraphicusoblique
+4658	Fonts	auriocuskalligraphicusreverseoblique
+4659	Fonts	automati
+4660	Fonts	b2sq
+4661	Fonts	b2sqol1
+4662	Fonts	b2sqol2
+4663	Fonts	babeboit
+4664	Fonts	babebold
+4665	Fonts	babelita
+4666	Fonts	babelreg
+4667	Fonts	backlash
+4668	Fonts	bandless
+4669	Fonts	bandmess
+4670	Fonts	bandwdth
+4671	Fonts	bbm10
+4672	Fonts	bbm7
+4673	Fonts	bbmbx10
+4674	Fonts	bbmbx7
+4675	Fonts	bbmbxsl10
+4676	Fonts	bbmsl10
+4677	Fonts	bbmss10
+4678	Fonts	bbold10
+4679	Fonts	bbold7
+4680	Fonts	bendable
+4681	Fonts	berasans-bold
+4682	Fonts	berasans-boldoblique
+4683	Fonts	berasans-oblique
+4684	Fonts	berasans-roman
+4685	Fonts	berasansmono-bold
+4686	Fonts	berasansmono-boldob
+4687	Fonts	berasansmono-oblique
+4688	Fonts	berasansmono-roman
+4689	Fonts	beraserif-bold
+4690	Fonts	beraserif-roman
+4691	Fonts	betecknalowercase
+4692	Fonts	betecknalowercasebold
+4693	Fonts	betecknalowercaseboldcondensed
+4694	Fonts	betecknalowercaseitalic
+4695	Fonts	betecknalowercaseitaliccondensed
+4696	Fonts	bewilder
+4697	Fonts	bewildet
+4698	Fonts	bin01st
+4699	Fonts	binaryt
+4700	Fonts	binaryx
+4701	Fonts	binchrt
+4702	Fonts	binx01s
+4703	Fonts	binxchr
+4704	Fonts	biolinum_bd-0.4.1ro
+4705	Fonts	biolinum_re-0.4.1ro
+4706	Fonts	bitbttf
+4707	Fonts	bknuckss
+4708	Fonts	bknuckst
+4709	Fonts	blackoni
+4710	Fonts	bleakseg
+4711	Fonts	blex
+4712	Fonts	bloktilt
+4713	Fonts	blonibld
+4714	Fonts	blonirex
+4715	Fonts	blox2
+4716	Fonts	blsy
+4717	Fonts	bobcayge
+4718	Fonts	bobcaygr
+4719	Fonts	bocuma
+4720	Fonts	bocumaad
+4721	Fonts	bocumaba
+4722	Fonts	bocumade
+4723	Fonts	bocumang
+4724	Fonts	brassknu
+4725	Fonts	breipfont
+4726	Fonts	brigadom
+4727	Fonts	brigadow
+4728	Fonts	brushscriptx-italic
+4729	Fonts	bumped
+4730	Fonts	caladingsclm
+4731	Fonts	candystr
+4732	Fonts	ccaps
+4733	Fonts	ccapshad
+4734	Fonts	centuryschl-bold
+4735	Fonts	centuryschl-boldital
+4736	Fonts	centuryschl-ital
+4737	Fonts	centuryschl-roma
+4738	Fonts	charissilb
+4739	Fonts	charissilbi
+4740	Fonts	charissili
+4741	Fonts	charissilr
+4742	Fonts	charterbt-bold
+4743	Fonts	charterbt-bolditalic
+4744	Fonts	charterbt-italic
+4745	Fonts	charterbt-roman
+4746	Fonts	chemrea
+4747	Fonts	chemreb
+4748	Fonts	cherokee-bold
+4749	Fonts	cherokee
+4750	Fonts	chintzy
+4751	Fonts	chintzys
+4752	Fonts	chumbly
+4753	Fonts	circulat
+4754	Fonts	clasict1
+4755	Fonts	clasict2
+4756	Fonts	claw1
+4757	Fonts	claw2
+4758	Fonts	cleavttr
+4759	Fonts	cmroman-bold
+4760	Fonts	cmroman-bolditalic
+4761	Fonts	cmroman-bolditalicosf
+4762	Fonts	cmroman-boldsc
+4763	Fonts	cmroman-italic
+4764	Fonts	cmroman-italicosf
+4765	Fonts	cmroman-regular
+4766	Fonts	cmroman-regularsc
+4767	Fonts	cmromanasian-bold
+4768	Fonts	cmromanasian-bolditalic
+4769	Fonts	cmromanasian-bolditalicosf
+4770	Fonts	cmromanasian-boldsc
+4771	Fonts	cmromanasian-italic
+4772	Fonts	cmromanasian-italicosf
+4773	Fonts	cmromanasian-regular
+4774	Fonts	cmromanasian-regularsc
+4775	Fonts	cmromancyrillic-bold
+4776	Fonts	cmromancyrillic-bolditalic
+4777	Fonts	cmromancyrillic-bolditalicosf
+4778	Fonts	cmromancyrillic-boldsc
+4779	Fonts	cmromancyrillic-italic
+4780	Fonts	cmromancyrillic-italicosf
+4781	Fonts	cmromancyrillic-regular
+4782	Fonts	cmromancyrillic-regularsc
+4783	Fonts	cmromangreek-bold
+4784	Fonts	cmromangreek-bolditalic
+4785	Fonts	cmromangreek-bolditalicosf
+4786	Fonts	cmromangreek-boldsc
+4787	Fonts	cmromangreek-italic
+4788	Fonts	cmromangreek-italicosf
+4789	Fonts	cmromangreek-regular
+4790	Fonts	cmromangreek-regularsc
+4791	Fonts	cmsans-bold
+4792	Fonts	cmsans-boldslanted
+4793	Fonts	cmsans-regular
+4794	Fonts	cmsans-slanted
+4795	Fonts	cmsansasian-bold
+4796	Fonts	cmsansasian-boldslanted
+4797	Fonts	cmsansasian-regular
+4798	Fonts	cmsansasian-slanted
+4799	Fonts	cmsanscyrillic-bold
+4800	Fonts	cmsanscyrillic-boldslanted
+4801	Fonts	cmsanscyrillic-regular
+4802	Fonts	cmsanscyrillic-slanted
+4803	Fonts	cmsansgreek-bold
+4804	Fonts	cmsansgreek-boldslanted
+4805	Fonts	cmsansgreek-regular
+4806	Fonts	cmsansgreek-slanted
+4807	Fonts	cmtypewriter-italic
+4808	Fonts	cmtypewriter-italicosf
+4809	Fonts	cmtypewriter-regular
+4810	Fonts	cmtypewriter-regularsc
+4811	Fonts	cmtypewriterasian-italic
+4812	Fonts	cmtypewriterasian-italicosf
+4813	Fonts	cmtypewriterasian-regular
+4814	Fonts	cmtypewriterasian-regularsc
+4815	Fonts	cmtypewritercyrillic-italic
+4816	Fonts	cmtypewritercyrillic-italicosf
+4817	Fonts	cmtypewritercyrillic-regular
+4818	Fonts	cmtypewritercyrillic-regularsc
+4819	Fonts	cmtypewritergreek-italic
+4820	Fonts	cmtypewritergreek-italicosf
+4821	Fonts	cmtypewritergreek-regular
+4822	Fonts	cmtypewritergreek-regularsc
+4823	Fonts	codelife
+4824	Fonts	collecro
+4825	Fonts	collecrs
+4826	Fonts	collecto
+4827	Fonts	collects
+4828	Fonts	combusii
+4829	Fonts	combuspl
+4830	Fonts	combusti
+4831	Fonts	combustt
+4832	Fonts	combustw
+4833	Fonts	compc1o
+4834	Fonts	compc1s
+4835	Fonts	compc2o
+4836	Fonts	compc2s
+4837	Fonts	compc3o
+4838	Fonts	compc3s
+4839	Fonts	computermodern-sans-bold-oblique
+4840	Fonts	condui2i
+4841	Fonts	conduit
+4842	Fonts	conduit2
+4843	Fonts	courier-bold
+4844	Fonts	courier-bolditalic
+4845	Fonts	courier-italic
+4846	Fonts	courier
+4847	Fonts	crackdr2
+4848	Fonts	crkdownr
+4849	Fonts	crkdwno1
+4850	Fonts	crkdwno2
+4851	Fonts	darkside
+4852	Fonts	dashdot
+4853	Fonts	dastardl
+4854	Fonts	davidclm-bold
+4855	Fonts	davidclm-medium
+4856	Fonts	davidclm-mediumitalic
+4857	Fonts	dblayer1
+4858	Fonts	dblayer2
+4859	Fonts	dblayer3
+4860	Fonts	dblayer4
+4861	Fonts	dblbogey
+4862	Fonts	dbsilbb
+4863	Fonts	dbsilbc
+4864	Fonts	dbsilbo
+4865	Fonts	dbsilbr
+4866	Fonts	dbsillb
+4867	Fonts	dbsillc
+4868	Fonts	dbsillo
+4869	Fonts	dbsillr
+4870	Fonts	decrepit
+4871	Fonts	dejavusans-bold
+4872	Fonts	dejavusans-boldoblique
+4873	Fonts	dejavusans-extralight
+4874	Fonts	dejavusans-oblique
+4875	Fonts	dejavusans
+4876	Fonts	dejavusanscondensed-bold
+4877	Fonts	dejavusanscondensed-boldoblique
+4878	Fonts	dejavusanscondensed-oblique
+4879	Fonts	dejavusanscondensed
+4880	Fonts	dejavusansmono-bold
+4881	Fonts	dejavusansmono-boldoblique
+4882	Fonts	dejavusansmono-oblique
+4883	Fonts	dejavusansmono
+4884	Fonts	dejavuserif-bold
+4885	Fonts	dejavuserif-bolditalic
+4886	Fonts	dejavuserif-italic
+4887	Fonts	dejavuserif
+4888	Fonts	dejavuserifcondensed-bold
+4889	Fonts	dejavuserifcondensed-bolditalic
+4890	Fonts	dejavuserifcondensed-italic
+4891	Fonts	dejavuserifcondensed
+4892	Fonts	delphine
+4893	Fonts	dented
+4894	Fonts	dephun2
+4895	Fonts	detonate
+4896	Fonts	dictsym
+4897	Fonts	dingbats
+4898	Fonts	discorda
+4899	Fonts	dkg
+4900	Fonts	dkgbd
+4901	Fonts	dkgbi
+4902	Fonts	dkgit
+4903	Fonts	doulossilr
+4904	Fonts	draggle
+4905	Fonts	draggleo
+4906	Fonts	drugulinclm-bold
+4907	Fonts	drugulinclm-bolditalic
+4908	Fonts	dsrom10
+4909	Fonts	dsrom12
+4910	Fonts	dsrom8
+4911	Fonts	dsss10
+4912	Fonts	dsss12
+4913	Fonts	dsss8
+4914	Fonts	dynamic
+4915	Fonts	dyphusio
+4916	Fonts	dystorqu
+4917	Fonts	ecliptic
+4918	Fonts	editundo
+4919	Fonts	edundot
+4920	Fonts	edunline
+4921	Fonts	elegbold
+4922	Fonts	elegital
+4923	Fonts	elleboli
+4924	Fonts	ellenbold
+4925	Fonts	ellenike
+4926	Fonts	ellenita
+4927	Fonts	elliniaclm-bold
+4928	Fonts	elliniaclm-bolditalic
+4929	Fonts	elliniaclm-light
+4930	Fonts	elliniaclm-lightitalic
+4931	Fonts	elsewhe2
+4932	Fonts	elsewher
+4933	Fonts	embosst1
+4934	Fonts	embosst2
+4935	Fonts	embosst3
+4936	Fonts	emerita_latina
+4937	Fonts	encappln
+4938	Fonts	encapsul
+4939	Fonts	engadget
+4940	Fonts	entangle
+4941	Fonts	enthuse
+4942	Fonts	enthuses
+4943	Fonts	entlayra
+4944	Fonts	entlayrb
+4945	Fonts	entplain
+4946	Fonts	eocc10
+4947	Fonts	eorm10
+4948	Fonts	eosl10
+4949	Fonts	eoti10
+4950	Fonts	essays1743-bold
+4951	Fonts	essays1743-bolditalic
+4952	Fonts	essays1743-italic
+4953	Fonts	essays1743
+4954	Fonts	euphor3d
+4955	Fonts	euphoric
+4956	Fonts	europeancomputermodern-bold10pt
+4957	Fonts	europeancomputermodern-boldextended10pt
+4958	Fonts	europeancomputermodern-boldextended12pt
+4959	Fonts	europeancomputermodern-boldextended17pt
+4960	Fonts	europeancomputermodern-boldextended7pt
+4961	Fonts	europeancomputermodern-demibold10pt
+4962	Fonts	europeancomputermodern-italicbold10pt
+4963	Fonts	europeancomputermodern-italicregular10pt
+4964	Fonts	europeancomputermodern-italicregular12pt
+4965	Fonts	europeancomputermodern-italicregular7pt
+4966	Fonts	europeancomputermodern-obliqueregular10pt
+4967	Fonts	europeancomputermodern-obliqueregular12pt
+4968	Fonts	europeancomputermodern-obliqueregular7pt
+4969	Fonts	europeancomputermodern-regular10pt
+4970	Fonts	europeancomputermodern-regularcondensed10pt
+4971	Fonts	europeancomputermodern-regularextended10pt
+4972	Fonts	europeancomputermodern-regularextended12pt
+4973	Fonts	europeancomputermodern-regularextended17pt
+4974	Fonts	europeancomputermodern-romanbold10pt
+4975	Fonts	europeancomputermodern-romanregular10pt
+4976	Fonts	europeancomputermodern-romanregular12pt
+4977	Fonts	europeancomputermodern-romanregular17pt
+4978	Fonts	europeancomputermodern-romanregular5pt
+4979	Fonts	europeancomputermodern-romanregular7pt
+4980	Fonts	europeancomputermodern-smallcapsregular10pt
+4981	Fonts	europeancomputermodern-smallcapsregular12pt
+4982	Fonts	europeancomputermodern-smallcapsregular7pt
+4983	Fonts	europeancomputermodernsans-demiboldcondensed10pt
+4984	Fonts	europeancomputermodernsans-regular10pt
+4985	Fonts	europeancomputermodernsans-regular12pt
+4986	Fonts	europeancomputermodernsans-regular7pt
+4987	Fonts	europeancomputermoderntypewriter-regular10pt
+4988	Fonts	europeancomputermoderntypewriter-regular12pt
+4989	Fonts	europeancomputermoderntypewriter-regular7pt
+4990	Fonts	euxm10
+4991	Fonts	euxm7
+4992	Fonts	exagger8
+4993	Fonts	extracti
+4994	Fonts	f500
+4995	Fonts	falsepos
+4996	Fonts	falsposr
+4997	Fonts	fascii
+4998	Fonts	fasciicr
+4999	Fonts	fasciisc
+5000	Fonts	fasciism
+5001	Fonts	fasciitw
+5002	Fonts	fauxsnow
+5003	Fonts	fbsbltc
+5004	Fonts	fbsbltc2
+5005	Fonts	feta-alphabet11
+5006	Fonts	feta-alphabet13
+5007	Fonts	feta-alphabet14
+5008	Fonts	feta-alphabet16
+5009	Fonts	feta-alphabet18
+5010	Fonts	feta-alphabet20
+5011	Fonts	feta-alphabet23
+5012	Fonts	feta-alphabet26
+5013	Fonts	feta-braces-a
+5014	Fonts	feta-braces-b
+5015	Fonts	feta-braces-c
+5016	Fonts	feta-braces-d
+5017	Fonts	feta-braces-e
+5018	Fonts	feta-braces-f
+5019	Fonts	feta-braces-g
+5020	Fonts	feta-braces-h
+5021	Fonts	feta-braces-i
+5022	Fonts	feta11
+5023	Fonts	feta13
+5024	Fonts	feta14
+5025	Fonts	feta16
+5026	Fonts	feta18
+5027	Fonts	feta20
+5028	Fonts	feta23
+5029	Fonts	feta26
+5030	Fonts	fidgety
+5031	Fonts	flipside
+5032	Fonts	foekfont
+5033	Fonts	font
+5034	Fonts	forcible
+5035	Fonts	fourier-math-blackboard
+5036	Fonts	fourier-math-cal
+5037	Fonts	fourier-math-extension
+5038	Fonts	fourier-math-letters-bold-italic
+5039	Fonts	fourier-math-letters-bold
+5040	Fonts	fourier-math-letters-italic
+5041	Fonts	fourier-math-letters
+5042	Fonts	fourier-math-symbols
+5043	Fonts	fourier-orns
+5044	Fonts	frankruehlclm-bold
+5045	Fonts	frankruehlclm-boldoblique
+5046	Fonts	frankruehlclm-medium
+5047	Fonts	frankruehlclm-mediumoblique
+5048	Fonts	freaktur
+5049	Fonts	freeeuro
+5050	Fonts	freemono
+5051	Fonts	freemonobold
+5052	Fonts	freemonoboldoblique
+5053	Fonts	freemonooblique
+5054	Fonts	freesans
+5055	Fonts	freesansbold
+5056	Fonts	freesansboldoblique
+5057	Fonts	freesansoblique
+5058	Fonts	freeserif
+5059	Fonts	freeserifbold
+5060	Fonts	freeserifbolditalic
+5061	Fonts	freeserifitalic
+5062	Fonts	frizzed
+5063	Fonts	fullcomp
+5064	Fonts	galapogo
+5065	Fonts	galsilb
+5066	Fonts	galsilr
+5067	Fonts	galvaniz
+5068	Fonts	gaposiso
+5069	Fonts	gaposiss
+5070	Fonts	gasping
+5071	Fonts	gather
+5072	Fonts	gathrgap
+5073	Fonts	genai102
+5074	Fonts	genar102
+5075	Fonts	genbasb
+5076	Fonts	genbasbi
+5077	Fonts	genbasi
+5078	Fonts	genbasr
+5079	Fonts	genbkbasb
+5080	Fonts	genbkbasbi
+5081	Fonts	genbkbasi
+5082	Fonts	genbkbasr
+5083	Fonts	geni102
+5084	Fonts	genotyph
+5085	Fonts	genotyps
+5086	Fonts	genotyrh
+5087	Fonts	genotyrs
+5088	Fonts	genr102
+5089	Fonts	gesture
+5090	Fonts	gestures
+5091	Fonts	gesturet
+5092	Fonts	gesturts
+5093	Fonts	gilliusadf-bold
+5094	Fonts	gilliusadf-bolditalic
+5095	Fonts	gilliusadf-italic
+5096	Fonts	gilliusadf-regular
+5097	Fonts	gilliusadfcd-bold
+5098	Fonts	gilliusadfcd-bolditalic
+5099	Fonts	gilliusadfcd-italic
+5100	Fonts	gilliusadfcd-regular
+5101	Fonts	gilliusadfno2-bold
+5102	Fonts	gilliusadfno2-bolditalic
+5103	Fonts	gilliusadfno2-italic
+5104	Fonts	gilliusadfno2-regular
+5105	Fonts	gilliusadfno2cd-bold
+5106	Fonts	gilliusadfno2cd-bolditalic
+5107	Fonts	gilliusadfno2cd-italic
+5108	Fonts	gilliusadfno2cd-regular
+5109	Fonts	gosebmp2
+5110	Fonts	gosebmps
+5111	Fonts	goudybookletter1911
+5112	Fonts	goudybookletter1911bold
+5113	Fonts	goudybookletter1911boldcondensed
+5114	Fonts	goudybookletter1911condensed
+5115	Fonts	goudybookletter1911italic
+5116	Fonts	goudybookletter1911italiccondensed
+5117	Fonts	goudybookletter1911light
+5118	Fonts	goudybookletter1911lightcondensed
+5119	Fonts	gr8higts
+5120	Fonts	granular
+5121	Fonts	grapple
+5122	Fonts	graveyrd
+5123	Fonts	graviseg
+5124	Fonts	gravitat
+5125	Fonts	graze
+5126	Fonts	grmn10
+5127	Fonts	grotesq
+5128	Fonts	grudge
+5129	Fonts	grudge2
+5130	Fonts	grxn10
+5131	Fonts	gyneric
+5132	Fonts	gyneric3
+5133	Fonts	gyroresh
+5134	Fonts	gyrose
+5135	Fonts	gyrosesq
+5136	Fonts	hackslsh
+5137	Fonts	hairball
+5138	Fonts	handmedo
+5139	Fonts	handmeds
+5140	Fonts	hassle
+5141	Fonts	hbevel
+5142	Fonts	hdmaker
+5143	Fonts	hearts
+5144	Fonts	hfbr10
+5145	Fonts	hfbr17
+5146	Fonts	hfbr8
+5147	Fonts	hfbr9
+5148	Fonts	hfbras10
+5149	Fonts	hfbras8
+5150	Fonts	hfbras9
+5151	Fonts	hfbrbs10
+5152	Fonts	hfbrbs8
+5153	Fonts	hfbrbs9
+5154	Fonts	hfbrbx10
+5155	Fonts	hfbrmb10
+5156	Fonts	hfbrmi10
+5157	Fonts	hfbrmi8
+5158	Fonts	hfbrmi9
+5159	Fonts	hfbrsl10
+5160	Fonts	hfbrsl17
+5161	Fonts	hfbrsl8
+5162	Fonts	hfbrsl9
+5163	Fonts	hfbrsy10
+5164	Fonts	hfbrsy8
+5165	Fonts	hfbrsy9
+5166	Fonts	hfsltl10
+5167	Fonts	hftl10
+5168	Fonts	hillock
+5169	Fonts	homespun
+5170	Fonts	hyde
+5171	Fonts	hyperion
+5172	Fonts	ikariusadf-bold
+5173	Fonts	ikariusadf-bolditalic
+5174	Fonts	ikariusadf-italic
+5175	Fonts	ikariusadf-regular
+5176	Fonts	ikariusadfno2-bold
+5177	Fonts	ikariusadfno2-bolditalic
+5178	Fonts	ikariusadfno2-italic
+5179	Fonts	ikariusadfno2-regular
+5180	Fonts	ilits
+5181	Fonts	imposs
+5182	Fonts	inertia
+5183	Fonts	inevitab
+5184	Fonts	inkswipe
+5185	Fonts	inktank
+5186	Fonts	intersc
+5187	Fonts	intersec
+5188	Fonts	interso
+5189	Fonts	inuit-bold-oblique
+5190	Fonts	inuit-bold
+5191	Fonts	inuit-oblique
+5192	Fonts	inuit
+5193	Fonts	ipabold
+5194	Fonts	ipabolit
+5195	Fonts	ipaitali
+5196	Fonts	iparegul
+5197	Fonts	irritate
+5198	Fonts	isabella
+5199	Fonts	iwona-bold
+5200	Fonts	iwona-bolditalic
+5201	Fonts	iwona-italic
+5202	Fonts	iwona-regular
+5203	Fonts	iwonacond-bold
+5204	Fonts	iwonacond-bolditalic
+5205	Fonts	iwonacond-italic
+5206	Fonts	iwonacond-regular
+5207	Fonts	iwonacondheavy-italic
+5208	Fonts	iwonacondheavy-regular
+5209	Fonts	iwonacondlight-italic
+5210	Fonts	iwonacondlight-regular
+5211	Fonts	iwonacondmedium-italic
+5212	Fonts	iwonacondmedium-regular
+5213	Fonts	iwonaheavy-italic
+5214	Fonts	iwonaheavy-regular
+5215	Fonts	iwonalight-italic
+5216	Fonts	iwonalight-regular
+5217	Fonts	iwonamedium-italic
+5218	Fonts	iwonamedium-regular
+5219	Fonts	jagged
+5220	Fonts	janaskrivana
+5221	Fonts	janaskrivanabold
+5222	Fonts	janaskrivanaboldoblique
+5223	Fonts	janaskrivanaboldreverseoblique
+5224	Fonts	janaskrivanaoblique
+5225	Fonts	janaskrivanareverseoblique
+5226	Fonts	janken
+5227	Fonts	jara
+5228	Fonts	jara_bold-it
+5229	Fonts	jara_bold
+5230	Fonts	jara_it
+5231	Fonts	jargon
+5232	Fonts	jasper
+5233	Fonts	jaspers
+5234	Fonts	jawbhard
+5235	Fonts	jawbreak
+5236	Fonts	jawbrko1
+5237	Fonts	jawbrko2
+5238	Fonts	jekyll
+5239	Fonts	jeopardi
+5240	Fonts	jeopardt
+5241	Fonts	jmacscrl
+5242	Fonts	joltcaff
+5243	Fonts	junicode-bold
+5244	Fonts	junicode-boldcondensed
+5245	Fonts	junicode-bolditalic
+5246	Fonts	junicode-bolditaliccondensed
+5247	Fonts	junicode-italic
+5248	Fonts	junicode-italiccondensed
+5249	Fonts	junicode-regular
+5250	Fonts	junicode-regularcondensed
+5251	Fonts	jupiterc
+5252	Fonts	jurabook
+5253	Fonts	jurademibold
+5254	Fonts	juralight
+5255	Fonts	juramedium
+5256	Fonts	kacstart
+5257	Fonts	kacstbook
+5258	Fonts	kacstdecorative
+5259	Fonts	kacstdigital
+5260	Fonts	kacstfarsi
+5261	Fonts	kacstletter
+5262	Fonts	kacstnaskh
+5263	Fonts	kacstoffice
+5264	Fonts	kacstone
+5265	Fonts	kacstpen
+5266	Fonts	kacstposter
+5267	Fonts	kacstqurn
+5268	Fonts	kacstscreen
+5269	Fonts	kacsttitle
+5270	Fonts	kacsttitlel
+5271	Fonts	kaliberr
+5272	Fonts	kalibers
+5273	Fonts	kaliberx
+5274	Fonts	kataacti
+5275	Fonts	katainac
+5276	Fonts	keyrialt
+5277	Fonts	keyridge
+5278	Fonts	kickflip
+5279	Fonts	kinkaid
+5280	Fonts	kirbyss
+5281	Fonts	knot
+5282	Fonts	konatu
+5283	Fonts	konatutohaba
+5284	Fonts	konecto1
+5285	Fonts	konecto2
+5286	Fonts	konector
+5287	Fonts	koneerie
+5288	Fonts	kurvatur
+5289	Fonts	labi1000
+5290	Fonts	labl1000
+5291	Fonts	labx1000
+5292	Fonts	labx1700
+5293	Fonts	lacc1000
+5294	Fonts	ladh1000
+5295	Fonts	lakeshor
+5296	Fonts	lamebrai
+5297	Fonts	larkspur
+5298	Fonts	larm1000
+5299	Fonts	larm700
+5300	Fonts	lasi1000
+5301	Fonts	lasl1000
+5302	Fonts	laso1000
+5303	Fonts	lass1000
+5304	Fonts	last1000
+5305	Fonts	lasx1000
+5306	Fonts	lati1000
+5307	Fonts	latt1000
+5308	Fonts	laxc1000
+5309	Fonts	lethargi
+5310	Fonts	liberationmono-bold
+5311	Fonts	liberationmono-bolditalic
+5312	Fonts	liberationmono-italic
+5313	Fonts	liberationmono-regular
+5314	Fonts	liberationsans-bold
+5315	Fonts	liberationsans-bolditalic
+5316	Fonts	liberationsans-italic
+5317	Fonts	liberationsans-regular
+5318	Fonts	liberationserif-bold
+5319	Fonts	liberationserif-bolditalic
+5320	Fonts	liberationserif-italic
+5321	Fonts	liberationserif-regular
+5322	Fonts	licostrg
+5323	Fonts	lightout
+5324	Fonts	lineara
+5325	Fonts	linearacmplxsigns
+5326	Fonts	lineding
+5327	Fonts	linlibertine_bd
+5328	Fonts	linlibertine_bi
+5329	Fonts	linlibertine_it
+5330	Fonts	linlibertine_re
+5331	Fonts	linlibertinec_re
+5332	Fonts	lmmathextension10-regular
+5333	Fonts	lmmathitalic10-bolditalic
+5334	Fonts	lmmathitalic10-italic
+5335	Fonts	lmmathitalic12-italic
+5336	Fonts	lmmathitalic5-bolditalic
+5337	Fonts	lmmathitalic5-italic
+5338	Fonts	lmmathitalic6-italic
+5339	Fonts	lmmathitalic7-bolditalic
+5340	Fonts	lmmathitalic7-italic
+5341	Fonts	lmmathitalic8-italic
+5342	Fonts	lmmathitalic9-italic
+5343	Fonts	lmmathsymbols10-bolditalic
+5344	Fonts	lmmathsymbols10-italic
+5345	Fonts	lmmathsymbols5-bolditalic
+5346	Fonts	lmmathsymbols5-italic
+5347	Fonts	lmmathsymbols6-italic
+5348	Fonts	lmmathsymbols7-bolditalic
+5349	Fonts	lmmathsymbols7-italic
+5350	Fonts	lmmathsymbols8-italic
+5351	Fonts	lmmathsymbols9-italic
+5352	Fonts	lmroman10-bold
+5353	Fonts	lmroman10-bolditalic
+5354	Fonts	lmroman10-boldoblique
+5355	Fonts	lmroman10-capsoblique
+5356	Fonts	lmroman10-capsregular
+5357	Fonts	lmroman10-demi
+5358	Fonts	lmroman10-demioblique
+5359	Fonts	lmroman10-dunhill
+5360	Fonts	lmroman10-dunhilloblique
+5361	Fonts	lmroman10-italic
+5362	Fonts	lmroman10-oblique
+5363	Fonts	lmroman10-regular
+5364	Fonts	lmroman10-unslanted
+5365	Fonts	lmroman12-bold
+5366	Fonts	lmroman12-italic
+5367	Fonts	lmroman12-oblique
+5368	Fonts	lmroman12-regular
+5369	Fonts	lmroman17-oblique
+5370	Fonts	lmroman17-regular
+5371	Fonts	lmroman5-bold
+5372	Fonts	lmroman5-regular
+5373	Fonts	lmroman6-bold
+5374	Fonts	lmroman6-regular
+5375	Fonts	lmroman7-bold
+5376	Fonts	lmroman7-italic
+5377	Fonts	lmroman7-regular
+5378	Fonts	lmroman8-bold
+5379	Fonts	lmroman8-italic
+5380	Fonts	lmroman8-oblique
+5381	Fonts	lmroman8-regular
+5382	Fonts	lmroman9-bold
+5383	Fonts	lmroman9-italic
+5384	Fonts	lmroman9-oblique
+5385	Fonts	lmroman9-regular
+5386	Fonts	lmsans10-bold
+5387	Fonts	lmsans10-boldoblique
+5388	Fonts	lmsans10-demicondensed
+5389	Fonts	lmsans10-demicondensedoblique
+5390	Fonts	lmsans10-oblique
+5391	Fonts	lmsans10-regular
+5392	Fonts	lmsans12-oblique
+5393	Fonts	lmsans12-regular
+5394	Fonts	lmsans17-oblique
+5395	Fonts	lmsans17-regular
+5396	Fonts	lmsans8-oblique
+5397	Fonts	lmsans8-regular
+5398	Fonts	lmsans9-oblique
+5399	Fonts	lmsans9-regular
+5400	Fonts	lmsansquotation8-bold
+5401	Fonts	lmsansquotation8-boldoblique
+5402	Fonts	lmsansquotation8-oblique
+5403	Fonts	lmsansquotation8-regular
+5404	Fonts	lmtypewriter10-capsoblique
+5405	Fonts	lmtypewriter10-capsregular
+5406	Fonts	lmtypewriter10-dark
+5407	Fonts	lmtypewriter10-darkoblique
+5408	Fonts	lmtypewriter10-italic
+5409	Fonts	lmtypewriter10-light
+5410	Fonts	lmtypewriter10-lightcondensed
+5411	Fonts	lmtypewriter10-lightcondensedoblique
+5412	Fonts	lmtypewriter10-lightoblique
+5413	Fonts	lmtypewriter10-oblique
+5414	Fonts	lmtypewriter10-regular
+5415	Fonts	lmtypewriter12-regular
+5416	Fonts	lmtypewriter8-regular
+5417	Fonts	lmtypewriter9-regular
+5418	Fonts	lmtypewritervarwd10-dark
+5419	Fonts	lmtypewritervarwd10-darkoblique
+5420	Fonts	lmtypewritervarwd10-light
+5421	Fonts	lmtypewritervarwd10-lightoblique
+5422	Fonts	lmtypewritervarwd10-oblique
+5423	Fonts	lmtypewritervarwd10-regular
+5424	Fonts	loopy
+5425	Fonts	lowdown
+5426	Fonts	lucid
+5427	Fonts	lucid2
+5428	Fonts	lucid2o
+5429	Fonts	lucido
+5430	Fonts	lukassvatba
+5431	Fonts	lukassvatbabold
+5432	Fonts	lukassvatbaboldoblique
+5433	Fonts	lukassvatbaboldreverseoblique
+5434	Fonts	lukassvatbaoblique
+5435	Fonts	lukassvatbareverseoblique
+5436	Fonts	lyneous
+5437	Fonts	lyneousl
+5438	Fonts	lynx
+5439	Fonts	macropsi
+5440	Fonts	madscrwl
+5441	Fonts	marvosym
+5442	Fonts	mgopencanonicabold
+5443	Fonts	mgopencanonicabolditalic
+5444	Fonts	mgopencanonicaitalic
+5445	Fonts	mgopencanonicaregular
+5446	Fonts	mgopencosmeticabold
+5447	Fonts	mgopencosmeticaboldoblique
+5448	Fonts	mgopencosmeticaoblique
+5449	Fonts	mgopencosmeticaregular
+5450	Fonts	mgopenmodatabold
+5451	Fonts	mgopenmodataboldoblique
+5452	Fonts	mgopenmodataoblique
+5453	Fonts	mgopenmodataregular
+5454	Fonts	mgopenmodernabold
+5455	Fonts	mgopenmodernaboldoblique
+5456	Fonts	mgopenmodernaoblique
+5457	Fonts	mgopenmodernaregular
+5458	Fonts	mima4x4i
+5459	Fonts	mima4x4o
+5460	Fonts	mimaalt1
+5461	Fonts	mimaalt2
+5462	Fonts	mimafuse
+5463	Fonts	mincer
+5464	Fonts	minikott
+5465	Fonts	minikstt
+5466	Fonts	miriamclm-bold
+5467	Fonts	miriamclm-book
+5468	Fonts	miriammonoclm-bold
+5469	Fonts	miriammonoclm-boldoblique
+5470	Fonts	miriammonoclm-book
+5471	Fonts	miriammonoclm-bookoblique
+5472	Fonts	mishmash
+5473	Fonts	mobilize
+5474	Fonts	monkphon
+5475	Fonts	moronmis
+5476	Fonts	mplus-1c-black
+5477	Fonts	mplus-1c-bold
+5478	Fonts	mplus-1c-heavy
+5479	Fonts	mplus-1c-light
+5480	Fonts	mplus-1c-medium
+5481	Fonts	mplus-1c-regular
+5482	Fonts	mplus-1c-thin
+5483	Fonts	mplus-1m-bold
+5484	Fonts	mplus-1m-light
+5485	Fonts	mplus-1m-medium
+5486	Fonts	mplus-1m-regular
+5487	Fonts	mplus-1m-thin
+5488	Fonts	mplus-1mn-bold
+5489	Fonts	mplus-1mn-light
+5490	Fonts	mplus-1mn-medium
+5491	Fonts	mplus-1mn-regular
+5492	Fonts	mplus-1mn-thin
+5493	Fonts	mplus-1p-black
+5494	Fonts	mplus-1p-bold
+5495	Fonts	mplus-1p-heavy
+5496	Fonts	mplus-1p-light
+5497	Fonts	mplus-1p-medium
+5498	Fonts	mplus-1p-regular
+5499	Fonts	mplus-1p-thin
+5500	Fonts	mplus-2c-black
+5501	Fonts	mplus-2c-bold
+5502	Fonts	mplus-2c-heavy
+5503	Fonts	mplus-2c-light
+5504	Fonts	mplus-2c-medium
+5505	Fonts	mplus-2c-regular
+5506	Fonts	mplus-2c-thin
+5507	Fonts	mplus-2m-bold
+5508	Fonts	mplus-2m-light
+5509	Fonts	mplus-2m-medium
+5510	Fonts	mplus-2m-regular
+5511	Fonts	mplus-2m-thin
+5512	Fonts	mplus-2p-black
+5513	Fonts	mplus-2p-bold
+5514	Fonts	mplus-2p-heavy
+5515	Fonts	mplus-2p-light
+5516	Fonts	mplus-2p-medium
+5517	Fonts	mplus-2p-regular
+5518	Fonts	mplus-2p-thin
+5519	Fonts	mry_kacstqurn
+5520	Fonts	mysteron
+5521	Fonts	nachlieliclm-bold
+5522	Fonts	nachlieliclm-boldoblique
+5523	Fonts	nachlieliclm-light
+5524	Fonts	nachlieliclm-lightoblique
+5525	Fonts	nanosecw
+5526	Fonts	naughts
+5527	Fonts	neural
+5528	Fonts	neuralol
+5529	Fonts	nimbusmonl-bold
+5530	Fonts	nimbusmonl-boldobli
+5531	Fonts	nimbusmonl-regu
+5532	Fonts	nimbusmonl-reguobli
+5533	Fonts	nimbusromno9l-medi
+5534	Fonts	nimbusromno9l-mediital
+5535	Fonts	nimbusromno9l-regu
+5536	Fonts	nimbusromno9l-reguital
+5537	Fonts	nimbussanl-bold
+5538	Fonts	nimbussanl-boldcond
+5539	Fonts	nimbussanl-boldcondital
+5540	Fonts	nimbussanl-boldital
+5541	Fonts	nimbussanl-regu
+5542	Fonts	nimbussanl-regucond
+5543	Fonts	nimbussanl-regucondital
+5544	Fonts	nimbussanl-reguital
+5545	Fonts	nominal
+5546	Fonts	nostalgi
+5547	Fonts	notqr
+5548	Fonts	nsecthck
+5549	Fonts	nsecthin
+5550	Fonts	nucleus
+5551	Fonts	numskull
+5552	Fonts	nymonak
+5553	Fonts	obloquyo
+5554	Fonts	obloquys
+5555	Fonts	obstacle
+5556	Fonts	obstacll
+5557	Fonts	ocra
+5558	Fonts	ocrabold
+5559	Fonts	ocracondensed
+5560	Fonts	ocraitalic
+5561	Fonts	ocralight
+5562	Fonts	offkiltl
+5563	Fonts	offkiltr
+5564	Fonts	okolaks
+5565	Fonts	okolaksbold
+5566	Fonts	okolaksboldcondensed
+5567	Fonts	okolaksboldcondensedcondensed
+5568	Fonts	okolakscondensed
+5569	Fonts	okolakscondensedcondensed
+5570	Fonts	okolaksitalic
+5571	Fonts	okolaksitaliccondensed
+5572	Fonts	okolaksitaliccondensedcondensed
+5573	Fonts	omegadingbats
+5574	Fonts	omegasanstifinagh
+5575	Fonts	omegaserifarabicone-bold
+5576	Fonts	omegaserifarabicone
+5577	Fonts	omegaserifarabicthree-bold
+5578	Fonts	omegaserifarabicthree
+5579	Fonts	omegaserifarabictwo-bold
+5580	Fonts	omegaserifarabictwo
+5581	Fonts	omegaserifarmenian
+5582	Fonts	omegaserifcommon-bold
+5583	Fonts	omegaserifcommon-bolditalic
+5584	Fonts	omegaserifcommon-italic
+5585	Fonts	omegaserifcommon
+5586	Fonts	omegaserifcyrillic-bold
+5587	Fonts	omegaserifcyrillic-italic
+5588	Fonts	omegaserifcyrillic
+5589	Fonts	omegaserifcyrillicextended
+5590	Fonts	omegaserifgreek-bold
+5591	Fonts	omegaserifgreek-bolditalic
+5592	Fonts	omegaserifgreek-italic
+5593	Fonts	omegaserifgreek
+5594	Fonts	omegaserifhebrew
+5595	Fonts	omegaserifipa
+5596	Fonts	omegaseriflatin-bold
+5597	Fonts	omegaseriflatin-bolditalic
+5598	Fonts	omegaseriflatin-italic
+5599	Fonts	omegaseriflatin
+5600	Fonts	omegaseriftifinagh
+5601	Fonts	opendinschriftenengshrift
+5602	Fonts	opens___
+5603	Fonts	opiated
+5604	Fonts	orbicula
+5605	Fonts	outersid
+5606	Fonts	overhead
+5607	Fonts	padauk-bold
+5608	Fonts	padauk
+5609	Fonts	parmesan11
+5610	Fonts	parmesan13
+5611	Fonts	parmesan14
+5612	Fonts	parmesan16
+5613	Fonts	parmesan18
+5614	Fonts	parmesan20
+5615	Fonts	parmesan23
+5616	Fonts	parmesan26
+5617	Fonts	pazomath-bold
+5618	Fonts	pazomath-bolditalic
+5619	Fonts	pazomath-italic
+5620	Fonts	pazomath
+5621	Fonts	pazomathblackboardbold
+5622	Fonts	pdark
+5623	Fonts	persuasi
+5624	Fonts	phaistos
+5625	Fonts	phorfeir
+5626	Fonts	phorfeis
+5627	Fonts	pincers
+5628	Fonts	pindown
+5629	Fonts	pindownp
+5630	Fonts	pindwnx
+5631	Fonts	pindwnxp
+5632	Fonts	pixlkrud
+5633	Fonts	plasdrip
+5634	Fonts	plasdrpe
+5635	Fonts	pneumati
+5636	Fonts	pneutall
+5637	Fonts	pneuwide
+5638	Fonts	powdwrk5
+5639	Fonts	pseudo
+5640	Fonts	pxbex
+5641	Fonts	pxbexa
+5642	Fonts	pxbmia
+5643	Fonts	pxbsy
+5644	Fonts	pxbsya
+5645	Fonts	pxbsyb
+5646	Fonts	pxbsyc
+5647	Fonts	pxex
+5648	Fonts	pxexa
+5649	Fonts	pxmia
+5650	Fonts	pxsy
+5651	Fonts	pxsya
+5652	Fonts	pxsyb
+5653	Fonts	pxsyc
+5654	Fonts	qbicle1
+5655	Fonts	qbicle2
+5656	Fonts	qbicle3
+5657	Fonts	qbicle4
+5658	Fonts	qlumpy
+5659	Fonts	qlumpysh
+5660	Fonts	quacksal
+5661	Fonts	quadrcal
+5662	Fonts	quadrtic
+5663	Fonts	quandary
+5664	Fonts	quantfh
+5665	Fonts	quantflt
+5666	Fonts	quantrh
+5667	Fonts	quantrnd
+5668	Fonts	quanttap
+5669	Fonts	quaranti
+5670	Fonts	quarthck
+5671	Fonts	quarthin
+5672	Fonts	queasy
+5673	Fonts	queasyol
+5674	Fonts	quercus
+5675	Fonts	quercus_bold
+5676	Fonts	quercus_bold_it
+5677	Fonts	quercus_it
+5678	Fonts	quillexo
+5679	Fonts	quillexs
+5680	Fonts	radissans-medium
+5681	Fonts	rambling
+5682	Fonts	ravaged2
+5683	Fonts	ravcater
+5684	Fonts	raydiat2
+5685	Fonts	rblmi
+5686	Fonts	reason
+5687	Fonts	reasonsh
+5688	Fonts	redundan
+5689	Fonts	regenera
+5690	Fonts	registry
+5691	Fonts	rehearsc
+5692	Fonts	rehearso
+5693	Fonts	rehearsp
+5694	Fonts	relapse
+5695	Fonts	revert
+5696	Fonts	revertro
+5697	Fonts	rotund
+5698	Fonts	rotundo
+5699	Fonts	roughday
+5700	Fonts	rpcxb
+5701	Fonts	rpcxbi
+5702	Fonts	rpcxi
+5703	Fonts	rpcxr
+5704	Fonts	rpxb
+5705	Fonts	rpxbi
+5706	Fonts	rpxbmi
+5707	Fonts	rpxbsc
+5708	Fonts	rpxi
+5709	Fonts	rpxmi
+5710	Fonts	rpxr
+5711	Fonts	rpxsc
+5712	Fonts	rsfs10
+5713	Fonts	rsfs5
+5714	Fonts	rsfs7
+5715	Fonts	rtcxb
+5716	Fonts	rtcxbi
+5717	Fonts	rtcxbss
+5718	Fonts	rtcxi
+5719	Fonts	rtcxr
+5720	Fonts	rtcxss
+5721	Fonts	rtxb
+5722	Fonts	rtxbi
+5723	Fonts	rtxbmi
+5724	Fonts	rtxbsc
+5725	Fonts	rtxbss
+5726	Fonts	rtxbsssc
+5727	Fonts	rtxi
+5728	Fonts	rtxmi
+5729	Fonts	rtxr
+5730	Fonts	rtxsc
+5731	Fonts	rtxss
+5732	Fonts	rtxsssc
+5733	Fonts	rufscript010
+5734	Fonts	ryuker
+5735	Fonts	sarcasti
+5736	Fonts	saunder
+5737	Fonts	scalines
+5738	Fonts	scheherazaderegot
+5739	Fonts	sclnmaze
+5740	Fonts	sequence
+5741	Fonts	setbackt
+5742	Fonts	sideways
+5743	Fonts	sileot
+5744	Fonts	sileotsr
+5745	Fonts	silyi
+5746	Fonts	simplto2
+5747	Fonts	skullcap
+5748	Fonts	slender
+5749	Fonts	slenderw
+5750	Fonts	slenmini
+5751	Fonts	slenstub
+5752	Fonts	snailets
+5753	Fonts	snb
+5754	Fonts	snbi
+5755	Fonts	sni
+5756	Fonts	snr
+5757	Fonts	spaciouo
+5758	Fonts	spacious
+5759	Fonts	spastic2
+5760	Fonts	spheroid
+5761	Fonts	spheroix
+5762	Fonts	splatz2
+5763	Fonts	sqroute
+5764	Fonts	stagnati
+5765	Fonts	standardsyml
+5766	Fonts	stevehand
+5767	Fonts	strande2
+5768	Fonts	subgamefont
+5769	Fonts	supragc
+5770	Fonts	supragl
+5771	Fonts	swirled2
+5772	Fonts	switzeraadf-demibold
+5773	Fonts	switzeraadf-demibolditalic
+5774	Fonts	switzeraadf-italic
+5775	Fonts	switzeraadf-regular
+5776	Fonts	switzeraadfbold-italic
+5777	Fonts	switzeraadfbold
+5778	Fonts	switzeraadfcd-bold
+5779	Fonts	switzeraadfcd-bolditalic
+5780	Fonts	switzeraadfcd-italic
+5781	Fonts	switzeraadfcd-regular
+5782	Fonts	switzeraadfex-bold
+5783	Fonts	switzeraadfex-bolditalic
+5784	Fonts	switzeraadfex-italic
+5785	Fonts	switzeraadfex-regular
+5786	Fonts	switzeraadfextrabold-italic
+5787	Fonts	switzeraadfextrabold
+5788	Fonts	switzeraadflight-bold
+5789	Fonts	switzeraadflight-bolditalic
+5790	Fonts	switzeraadflight-italic
+5791	Fonts	switzeraadflight-regular
+5792	Fonts	switzeraadflightcd-bold
+5793	Fonts	switzeraadflightcd-bolditalic
+5794	Fonts	switzeraadflightcd-italic
+5795	Fonts	switzeraadflightcd-regular
+5796	Fonts	switzeraadfreverted-bold
+5797	Fonts	switzeraadfreverted-regular
+5798	Fonts	symmetry
+5799	Fonts	syndrome
+5800	Fonts	syntheti
+5801	Fonts	syracuse
+5802	Fonts	t1xbtt
+5803	Fonts	t1xbttsc
+5804	Fonts	t1xtt
+5805	Fonts	t1xttsc
+5806	Fonts	tapir
+5807	Fonts	tcbi10
+5808	Fonts	tcbx10
+5809	Fonts	tcrm10
+5810	Fonts	tcsl10
+5811	Fonts	tcss10
+5812	Fonts	tcsx10
+5813	Fonts	tctt10
+5814	Fonts	tcxbtt
+5815	Fonts	tcxtt
+5816	Fonts	tearful
+5817	Fonts	techniqo
+5818	Fonts	techniqu
+5819	Fonts	techover
+5820	Fonts	telephas
+5821	Fonts	tetri
+5822	Fonts	tex-feybl10
+5823	Fonts	tex-feybo10
+5824	Fonts	tex-feybr10
+5825	Fonts	tex-feyml10
+5826	Fonts	tex-feymo10
+5827	Fonts	tex-feymr10
+5828	Fonts	texpalladiol-bolditalicosf
+5829	Fonts	texpalladiol-boldosf
+5830	Fonts	texpalladiol-italicosf
+5831	Fonts	texpalladiol-sc
+5832	Fonts	thwart
+5833	Fonts	tirekv__
+5834	Fonts	tiresias_infofont
+5835	Fonts	tiresias_infofont_bold
+5836	Fonts	tiresias_infofont_italic
+5837	Fonts	tiresias_infofontz
+5838	Fonts	tiresias_infofontz_bold
+5839	Fonts	tiresias_infofontz_italic
+5840	Fonts	tiresias_lpfont
+5841	Fonts	tiresias_lpfont_bold
+5842	Fonts	tiresias_lpfont_italic
+5843	Fonts	tiresias_pcfont
+5844	Fonts	tiresias_pcfont_bold
+5845	Fonts	tiresias_pcfont_italic
+5846	Fonts	tiresias_pcfontz
+5847	Fonts	tiresias_pcfontz_bold
+5848	Fonts	tiresias_pcfontz_italic
+5849	Fonts	tiresias_signfont
+5850	Fonts	tiresias_signfont_bold
+5851	Fonts	tiresias_signfont_italic
+5852	Fonts	tiresias_signfontz
+5853	Fonts	tiresias_signfontz_bold
+5854	Fonts	tiresias_signfontz_italic
+5855	Fonts	tonik
+5856	Fonts	tragic2
+5857	Fonts	trajan-roman
+5858	Fonts	trajan-slanted
+5859	Fonts	tsextolo
+5860	Fonts	tsextols
+5861	Fonts	tuffy_bold
+5862	Fonts	tuffy_bold_italic
+5863	Fonts	tuffy_italic
+5864	Fonts	tuffy_regular
+5865	Fonts	turmoil
+5866	Fonts	txbex
+5867	Fonts	txbexa
+5868	Fonts	txbmia
+5869	Fonts	txbsy
+5870	Fonts	txbsya
+5871	Fonts	txbsyb
+5872	Fonts	txbsyc
+5873	Fonts	txbtt
+5874	Fonts	txbttsc
+5875	Fonts	txex
+5876	Fonts	txexa
+5877	Fonts	txmia
+5878	Fonts	txsy
+5879	Fonts	txsya
+5880	Fonts	txsyb
+5881	Fonts	txsyc
+5882	Fonts	txtt
+5883	Fonts	txttsc
+5884	Fonts	ubiquity
+5885	Fonts	unanimo
+5886	Fonts	unanimoi
+5887	Fonts	underscr
+5888	Fonts	underwhe
+5889	Fonts	underwho
+5890	Fonts	undrscr2
+5891	Fonts	united
+5892	Fonts	unlearn2
+5893	Fonts	unlearne
+5894	Fonts	unrespon
+5895	Fonts	unxgala
+5896	Fonts	unxgalaw
+5897	Fonts	unxgalo
+5898	Fonts	unxgalwo
+5899	Fonts	upheavtt
+5900	Fonts	upraise
+5901	Fonts	urcompi
+5902	Fonts	urcompo
+5903	Fonts	urwantiquat-regularcondensed
+5904	Fonts	urwbookmanl-demibold
+5905	Fonts	urwbookmanl-demiboldital
+5906	Fonts	urwbookmanl-ligh
+5907	Fonts	urwbookmanl-lighital
+5908	Fonts	urwchanceryl-mediital
+5909	Fonts	urwgothicl-book
+5910	Fonts	urwgothicl-bookobli
+5911	Fonts	urwgothicl-demi
+5912	Fonts	urwgothicl-demiobli
+5913	Fonts	urwgroteskt-bold
+5914	Fonts	urwpalladiol-bold
+5915	Fonts	urwpalladiol-boldital
+5916	Fonts	urwpalladiol-ital
+5917	Fonts	urwpalladiol-roma
+5918	Fonts	utopia-bold
+5919	Fonts	utopia-bolditalic
+5920	Fonts	utopia-italic
+5921	Fonts	utopia-regular
+5922	Fonts	vacantz
+5923	Fonts	vanished
+5924	Fonts	vantage
+5925	Fonts	variance
+5926	Fonts	vertigo
+5927	Fonts	vertigo2
+5928	Fonts	vertigup
+5929	Fonts	vertiup2
+5930	Fonts	vigilanc
+5931	Fonts	vindicti
+5932	Fonts	visitor1
+5933	Fonts	visitor2
+5934	Fonts	vl-gothic-regular
+5935	Fonts	vl-pgothic-regular
+5936	Fonts	volatil1
+5937	Fonts	volatil2
+5938	Fonts	wager
+5939	Fonts	wagerlos
+5940	Fonts	wagerwon
+5941	Fonts	wasy10
+5942	Fonts	wasy5
+5943	Fonts	wasy6
+5944	Fonts	wasy7
+5945	Fonts	wasy8
+5946	Fonts	wasy9
+5947	Fonts	wasyb10
+5948	Fonts	waver
+5949	Fonts	wayward
+5950	Fonts	waywards
+5951	Fonts	weatherd
+5952	Fonts	weathers
+5953	Fonts	weaver
+5954	Fonts	whatever
+5955	Fonts	whipsnap
+5956	Fonts	wigsquig
+5957	Fonts	wincing
+5958	Fonts	withstan
+5959	Fonts	wobbly
+5960	Fonts	wyvernwi
+5961	Fonts	wyvernww
+5962	Fonts	xeroxmal
+5963	Fonts	xhume
+5964	Fonts	xipital
+5965	Fonts	xmaslght
+5966	Fonts	xtrusion
+5967	Fonts	yearend
+5968	Fonts	yehudaclm-bold
+5969	Fonts	yehudaclm-light
+5970	Fonts	yesterda
+5971	Fonts	yfrak-regular
+5972	Fonts	ygoth-regular
+5973	Fonts	yielding
+5974	Fonts	yonder
+5975	Fonts	yoshisst
+5976	Fonts	yourcomp
+5977	Fonts	yswab-regular
+5978	Fonts	zeldadxt
+5979	Fonts	zenith
+5980	Fonts	zephyrea
+5981	Fonts	zephyreg
+5982	Fonts	zerovelo
+5983	Fonts	zirccube
+5984	Fonts	zirconia
+5985	Fonts	zoetrope
+5986	Fonts	zoidal
+5987	Fonts	zurklezo
+5988	Fonts	zurklezs
 \.
 
 
@@ -1419,554 +3742,322 @@ COPY jobs (id, site, callback, data, state, proc, ctime, mtime, pid) FROM stdin;
 --
 
 COPY results (id, pid, pass, name) FROM stdin;
-1	1	pass	Domain
-2	1	fail	Title
-3	1	pass	UTF8
-4	1	pass	Img
-5	1	pass	Alt
-6	1	pass	JS
-7	1	fail	JS_inc
-8	1	fail	HTML4
-9	2	pass	Domain
-10	2	fail	Title
-11	2	pass	UTF8
-12	2	pass	Img
-13	2	pass	Alt
-14	2	pass	JS
-15	2	fail	JS_inc
-16	2	fail	HTML4
-17	3	pass	Domain
-18	3	fail	Title
-19	3	pass	UTF8
-20	3	pass	Img
-21	3	pass	Alt
-22	3	pass	JS
-23	3	fail	JS_inc
-24	3	fail	HTML4
-25	4	pass	Domain
-26	4	fail	Title
-27	4	pass	UTF8
-28	4	pass	Img
-29	4	pass	Alt
-30	4	pass	JS
-31	4	fail	JS_inc
-32	4	fail	HTML4
-33	5	pass	Domain
-34	5	pass	Title
-35	5	pass	UTF8
-36	5	fail	Img
-37	5	fail	Alt
-38	5	pass	JS
-39	5	fail	JS_inc
-40	5	fail	HTML4
-41	6	pass	Domain
-42	6	pass	Title
-43	6	pass	UTF8
-44	6	fail	Img
-45	6	fail	Alt
-46	6	pass	JS
-47	6	fail	JS_inc
-48	6	fail	HTML4
-49	7	pass	Domain
-50	7	pass	Title
-51	7	pass	UTF8
-52	7	fail	Img
-53	7	fail	Alt
-54	7	pass	JS
-55	7	fail	JS_inc
-56	7	fail	HTML4
-57	8	pass	Domain
-58	8	pass	Title
-59	8	pass	UTF8
-60	8	fail	Img
-61	8	fail	Alt
-62	8	pass	JS
-63	8	fail	JS_inc
-64	8	fail	HTML4
-65	9	pass	Domain
-66	9	pass	Title
-67	9	pass	UTF8
-68	9	fail	Img
-69	9	fail	Alt
-70	9	pass	JS
-71	9	fail	JS_inc
-72	9	fail	HTML4
-73	10	pass	Domain
-74	10	pass	Title
-75	10	pass	UTF8
-76	10	fail	Img
-77	10	fail	Alt
-78	10	pass	JS
-79	10	fail	JS_inc
-80	10	fail	HTML4
-81	11	pass	Domain
-82	11	pass	Title
-83	11	pass	UTF8
-84	11	fail	Img
-85	11	fail	Alt
-86	11	pass	JS
-87	11	fail	JS_inc
-88	11	fail	HTML4
-89	12	pass	Domain
-90	12	pass	Title
-91	12	pass	UTF8
-92	12	fail	Img
-93	12	fail	Alt
-94	12	pass	JS
-95	12	fail	JS_inc
-96	12	fail	HTML4
-97	13	pass	Domain
-98	13	pass	Title
-99	13	pass	UTF8
-100	13	fail	Img
-101	13	fail	Alt
-102	13	pass	JS
-103	13	fail	JS_inc
-104	13	fail	HTML4
-105	14	pass	Domain
-106	14	pass	Title
-107	14	pass	UTF8
-108	14	fail	Img
-109	14	fail	Alt
-110	14	pass	JS
-111	14	fail	JS_inc
-112	14	fail	HTML4
-113	15	pass	Domain
-114	15	pass	Title
-115	15	pass	UTF8
-116	15	fail	Img
-117	15	fail	Alt
-118	15	pass	JS
-119	15	fail	JS_inc
-120	15	fail	HTML4
-121	16	pass	Domain
-122	16	pass	Title
-123	16	pass	UTF8
-124	16	fail	Img
-125	16	fail	Alt
-126	16	pass	JS
-127	16	fail	JS_inc
-128	16	fail	HTML4
-129	17	pass	Domain
-130	17	pass	Title
-131	17	pass	UTF8
-132	17	fail	Img
-133	17	fail	Alt
-134	17	pass	JS
-135	17	fail	JS_inc
-136	17	fail	HTML4
-137	18	pass	Domain
-138	18	pass	Title
-139	18	pass	UTF8
-140	18	fail	Img
-141	18	fail	Alt
-142	18	pass	JS
-143	18	fail	JS_inc
-144	18	fail	HTML4
-145	19	pass	Domain
-146	19	pass	Title
-147	19	pass	UTF8
-148	19	fail	Img
-149	19	fail	Alt
-150	19	pass	JS
-151	19	fail	JS_inc
-152	19	fail	HTML4
-153	20	pass	Domain
-154	20	pass	Title
-155	20	pass	UTF8
-156	20	fail	Img
-157	20	fail	Alt
-158	20	pass	JS
-159	20	fail	JS_inc
-160	20	fail	HTML4
-161	21	pass	Domain
-162	21	pass	Title
-163	21	pass	UTF8
-164	21	fail	Img
-165	21	fail	Alt
-166	21	pass	JS
-167	21	fail	JS_inc
-168	21	fail	HTML4
-169	22	pass	Domain
-170	22	pass	Title
-171	22	pass	UTF8
-172	22	fail	Img
-173	22	fail	Alt
-174	22	pass	JS
-175	22	fail	JS_inc
-176	22	fail	HTML4
-177	23	pass	Domain
-178	23	pass	Title
-179	23	fail	UTF8
-180	23	fail	Img
-181	23	pass	Alt
-182	23	pass	JS
-183	23	fail	JS_inc
-184	23	pass	HTML4
-185	24	pass	Domain
-186	24	pass	Title
-187	24	fail	UTF8
-188	24	pass	Img
-189	24	pass	Alt
-190	24	pass	JS
-191	24	fail	JS_inc
-192	24	pass	HTML4
-193	25	pass	Domain
-194	25	pass	Title
-195	25	fail	UTF8
-196	25	pass	Img
-197	25	pass	Alt
-198	25	pass	JS
-199	25	fail	JS_inc
-200	25	pass	HTML4
-201	26	pass	Domain
-202	26	pass	Title
-203	26	fail	UTF8
-204	26	fail	Img
-205	26	pass	Alt
-206	26	pass	JS
-207	26	fail	JS_inc
-208	26	pass	HTML4
-209	27	pass	Domain
-210	27	pass	Title
-211	27	fail	UTF8
-212	27	pass	Img
-213	27	pass	Alt
-214	27	pass	JS
-215	27	fail	JS_inc
-216	27	pass	HTML4
-217	28	pass	Domain
-218	28	pass	Title
-219	28	pass	UTF8
-220	28	fail	Img
-221	28	pass	Alt
-222	28	pass	JS
-223	28	fail	JS_inc
-224	28	fail	HTML4
-225	29	pass	Domain
-226	29	pass	Title
-227	29	pass	UTF8
-228	29	fail	Img
-229	29	fail	Alt
-230	29	pass	JS
-231	29	fail	JS_inc
-232	29	fail	HTML4
-233	30	pass	Domain
-234	30	pass	Title
-235	30	pass	UTF8
-236	30	fail	Img
-237	30	fail	Alt
-238	30	pass	JS
-239	30	fail	JS_inc
-240	30	fail	HTML4
-241	31	pass	Domain
-242	31	pass	Title
-243	31	pass	UTF8
-244	31	fail	Img
-245	31	fail	Alt
-246	31	pass	JS
-247	31	fail	JS_inc
-248	31	fail	HTML4
-249	32	pass	Domain
-250	32	pass	Title
-251	32	pass	UTF8
-252	32	fail	Img
-253	32	fail	Alt
-254	32	pass	JS
-255	32	fail	JS_inc
-256	32	fail	HTML4
-257	33	pass	Domain
-258	33	pass	Title
-259	33	pass	UTF8
-260	33	fail	Img
-261	33	fail	Alt
-262	33	pass	JS
-263	33	fail	JS_inc
-264	33	fail	HTML4
-265	34	pass	Domain
-266	34	pass	Title
-267	34	pass	UTF8
-268	34	fail	Img
-269	34	fail	Alt
-270	34	pass	JS
-271	34	fail	JS_inc
-272	34	fail	HTML4
-273	35	pass	Domain
-274	35	pass	Title
-275	35	pass	UTF8
-276	35	fail	Img
-277	35	fail	Alt
-278	35	pass	JS
-279	35	fail	JS_inc
-280	35	fail	HTML4
-281	36	pass	Domain
-282	36	fail	Title
-283	36	pass	UTF8
-284	36	pass	Img
-285	36	pass	Alt
-286	36	pass	JS
-287	36	fail	JS_inc
-288	36	fail	HTML4
-289	37	pass	Domain
-290	37	fail	Title
-291	37	pass	UTF8
-292	37	pass	Img
-293	37	pass	Alt
-294	37	pass	JS
-295	37	fail	JS_inc
-296	37	fail	HTML4
-297	38	pass	Domain
-298	38	fail	Title
-299	38	pass	UTF8
-300	38	pass	Img
-301	38	pass	Alt
-302	38	pass	JS
-303	38	fail	JS_inc
-304	38	fail	HTML4
-305	39	pass	Domain
-306	39	fail	Title
-307	39	pass	UTF8
-308	39	pass	Img
-309	39	pass	Alt
-310	39	pass	JS
-311	39	fail	JS_inc
-312	39	fail	HTML4
-313	40	pass	Domain
-314	40	fail	Title
-315	40	pass	UTF8
-316	40	pass	Img
-317	40	pass	Alt
-318	40	pass	JS
-319	40	fail	JS_inc
-320	40	fail	HTML4
-321	41	pass	Domain
-322	41	fail	Title
-323	41	pass	UTF8
-324	41	pass	Img
-325	41	pass	Alt
-326	41	pass	JS
-327	41	fail	JS_inc
-328	41	fail	HTML4
-329	42	pass	Domain
-330	42	fail	Title
-331	42	pass	UTF8
-332	42	pass	Img
-333	42	pass	Alt
-334	42	pass	JS
-335	42	fail	JS_inc
-336	42	fail	HTML4
-337	43	pass	Domain
-338	43	fail	Title
-339	43	pass	UTF8
-340	43	pass	Img
-341	43	pass	Alt
-342	43	pass	JS
-343	43	fail	JS_inc
-344	43	fail	HTML4
-345	44	pass	Domain
-346	44	fail	Title
-347	44	pass	UTF8
-348	44	pass	Img
-349	44	pass	Alt
-350	44	pass	JS
-351	44	fail	JS_inc
-352	44	fail	HTML4
-353	45	pass	Domain
-354	45	fail	Title
-355	45	pass	UTF8
-356	45	pass	Img
-357	45	pass	Alt
-358	45	pass	JS
-359	45	fail	JS_inc
-360	45	fail	HTML4
-361	46	pass	Domain
-362	46	fail	Title
-363	46	pass	UTF8
-364	46	pass	Img
-365	46	pass	Alt
-366	46	pass	JS
-367	46	fail	JS_inc
-368	46	fail	HTML4
-369	47	pass	Domain
-370	47	fail	Title
-371	47	pass	UTF8
-372	47	pass	Img
-373	47	pass	Alt
-374	47	pass	JS
-375	47	fail	JS_inc
-376	47	fail	HTML4
-377	48	pass	Domain
-378	48	fail	Title
-379	48	pass	UTF8
-380	48	pass	Img
-381	48	pass	Alt
-382	48	pass	JS
-383	48	fail	JS_inc
-384	48	fail	HTML4
-385	49	pass	Domain
-386	49	fail	Title
-387	49	pass	UTF8
-388	49	pass	Img
-389	49	pass	Alt
-390	49	pass	JS
-391	49	fail	JS_inc
-392	49	fail	HTML4
-393	50	pass	Domain
-394	50	fail	Title
-395	50	pass	UTF8
-396	50	pass	Img
-397	50	pass	Alt
-398	50	pass	JS
-399	50	fail	JS_inc
-400	50	fail	HTML4
-401	51	fail	Domain
-402	51	pass	Title
-403	51	pass	UTF8
-404	51	fail	Img
-405	51	pass	Alt
-406	51	fail	JS
-407	51	fail	JS_inc
-408	51	pass	HTML4
-409	52	fail	Domain
-410	52	pass	Title
-411	52	pass	UTF8
-412	52	fail	Img
-413	54	pass	Domain
-414	54	fail	Title
-415	54	pass	UTF8
-416	54	pass	Img
-417	54	pass	Alt
-418	54	pass	JS
-419	54	fail	JS_inc
-420	54	fail	HTML4
-421	55	pass	Domain
-422	55	fail	Title
-423	55	pass	UTF8
-424	55	pass	Img
-425	55	pass	Alt
-426	55	pass	JS
-427	55	fail	JS_inc
-428	55	fail	HTML4
-429	56	pass	Domain
-430	56	fail	Title
-431	56	pass	UTF8
-432	56	pass	Img
-433	56	pass	Alt
-434	56	pass	JS
-435	56	fail	JS_inc
-436	56	fail	HTML4
-437	57	pass	Domain
-438	57	fail	Title
-439	57	pass	UTF8
-440	57	pass	Img
-441	57	pass	Alt
-442	57	pass	JS
-443	57	fail	JS_inc
-444	57	fail	HTML4
-445	58	pass	Domain
-446	58	fail	Title
-447	58	pass	UTF8
-448	58	pass	Img
-449	58	pass	Alt
-450	58	pass	JS
-451	58	fail	JS_inc
-452	58	fail	HTML4
-453	59	pass	Domain
-454	59	fail	Title
-455	59	pass	UTF8
-456	59	pass	Img
-457	59	pass	Alt
-458	59	pass	JS
-459	59	fail	JS_inc
-460	59	fail	HTML4
-461	60	pass	Domain
-462	60	fail	Title
-463	60	pass	UTF8
-464	60	pass	Img
-465	60	pass	Alt
-466	60	pass	JS
-467	60	fail	JS_inc
-468	60	fail	HTML4
-469	61	pass	Domain
-470	61	fail	Title
-471	61	pass	UTF8
-472	61	pass	Img
-473	61	pass	Alt
-474	61	pass	JS
-475	61	fail	JS_inc
-476	61	fail	HTML4
-477	62	pass	Domain
-478	62	fail	Title
-479	62	pass	UTF8
-480	62	pass	Img
-481	62	pass	Alt
-482	62	pass	JS
-483	62	fail	JS_inc
-484	62	fail	HTML4
-485	63	pass	Domain
-486	63	fail	Title
-487	63	pass	UTF8
-488	63	pass	Img
-489	63	pass	Alt
-490	63	pass	JS
-491	63	fail	JS_inc
-492	63	fail	HTML4
-493	64	pass	Domain
-494	64	fail	Title
-495	64	pass	UTF8
-496	64	pass	Img
-497	64	pass	Alt
-498	64	pass	JS
-499	64	fail	JS_inc
-500	64	fail	HTML4
-501	65	pass	Domain
-502	65	fail	Title
-503	65	pass	UTF8
-504	65	pass	Img
-505	65	pass	Alt
-506	65	pass	JS
-507	65	fail	JS_inc
-508	65	fail	HTML4
-509	66	pass	Domain
-510	66	fail	Title
-511	66	pass	UTF8
-512	66	pass	Img
-513	66	pass	Alt
-514	66	pass	JS
-515	66	fail	JS_inc
-516	66	fail	HTML4
-517	67	pass	Domain
-518	67	fail	Title
-519	67	pass	UTF8
-520	67	pass	Img
-521	67	pass	Alt
-522	67	pass	JS
-523	67	fail	JS_inc
-524	67	fail	HTML4
-525	68	fail	Domain
-526	68	pass	Title
-527	68	pass	UTF8
-528	68	fail	Img
-529	68	fail	Alt
-530	68	fail	JS
-531	68	fail	JS_inc
-532	68	pass	HTML4
-533	69	fail	Domain
-534	69	pass	Title
-535	69	pass	UTF8
-536	69	fail	Img
-537	69	fail	Alt
-538	69	fail	JS
-539	69	fail	JS_inc
-540	69	pass	HTML4
-541	70	fail	Domain
-542	70	pass	Title
-543	70	pass	UTF8
-544	70	fail	Img
-545	70	fail	Alt
-546	70	fail	JS
-547	70	fail	JS_inc
-548	70	pass	HTML4
+1210	151	pass	Domain
+1211	151	pass	Title
+1212	151	fail	UTF8
+1213	151	fail	Img
+1214	151	fail	Alt
+1215	151	fail	JS
+1216	151	fail	JS_inc
+1217	151	pass	HTML4
+1218	151	fail	Plugins
+1219	152	pass	Domain
+1220	152	pass	Title
+1221	152	fail	UTF8
+1222	152	fail	Img
+1223	152	fail	Alt
+1224	152	fail	JS
+1225	152	fail	JS_inc
+1226	152	pass	HTML4
+1227	152	fail	Plugins
+1228	153	pass	Domain
+1229	153	pass	Title
+1230	153	fail	UTF8
+1231	153	fail	Img
+1232	153	fail	Alt
+1233	153	fail	JS
+1234	153	fail	JS_inc
+1235	153	fail	HTML4
+1236	153	fail	Plugins
+1237	154	pass	Domain
+1238	154	pass	Title
+1239	154	fail	UTF8
+1240	154	fail	Img
+1241	154	fail	Alt
+1242	154	fail	JS
+1243	154	fail	JS_inc
+1244	154	pass	HTML4
+1245	154	pass	Plugins
+1246	155	pass	Domain
+1247	155	pass	Title
+1248	155	fail	UTF8
+1249	155	fail	Img
+1250	155	fail	Alt
+1251	155	fail	JS
+1252	155	fail	JS_inc
+1253	155	pass	HTML4
+1254	155	pass	Plugins
+1255	156	pass	Domain
+1256	156	pass	Title
+1257	156	fail	UTF8
+1258	156	fail	Img
+1259	156	fail	Alt
+1260	156	fail	JS
+1261	156	fail	JS_inc
+1262	156	pass	HTML4
+1263	156	pass	Plugins
+1264	157	pass	Domain
+1265	157	pass	Title
+1266	157	fail	UTF8
+1267	157	pass	Img
+1268	157	fail	Alt
+1269	157	fail	JS
+1270	157	fail	JS_inc
+1271	157	pass	HTML4
+1272	157	pass	Plugins
+1273	158	pass	Domain
+1274	158	pass	Title
+1275	158	fail	UTF8
+1276	158	fail	Img
+1277	158	fail	Alt
+1278	158	fail	JS
+1279	158	fail	JS_inc
+1280	158	pass	HTML4
+1281	158	pass	Plugins
+1282	159	pass	Domain
+1283	159	pass	Title
+1284	159	fail	UTF8
+1285	159	fail	Img
+1286	159	fail	Alt
+1287	159	fail	JS
+1288	159	fail	JS_inc
+1289	159	pass	HTML4
+1290	159	pass	Plugins
+1291	160	pass	Domain
+1292	160	pass	Title
+1293	160	fail	UTF8
+1294	160	fail	Img
+1295	160	fail	Alt
+1296	160	fail	JS
+1297	160	fail	JS_inc
+1298	160	pass	HTML4
+1299	160	pass	Plugins
+1300	161	pass	Domain
+1301	161	pass	Title
+1302	161	fail	UTF8
+1303	161	fail	Img
+1304	161	fail	Alt
+1305	161	pass	JS
+1306	161	fail	JS_inc
+1307	161	pass	HTML4
+1308	161	fail	Plugins
+1309	162	pass	Domain
+1310	162	pass	Title
+1311	162	fail	UTF8
+1312	162	fail	Img
+1313	162	fail	Alt
+1314	162	pass	JS
+1315	162	fail	JS_inc
+1316	162	pass	HTML4
+1317	162	fail	Plugins
+1318	163	pass	Domain
+1319	163	pass	Title
+1320	163	fail	UTF8
+1321	163	fail	Img
+1322	163	fail	Alt
+1323	163	pass	JS
+1324	163	fail	JS_inc
+1325	163	pass	HTML4
+1326	163	fail	Plugins
+1327	164	pass	Domain
+1328	164	pass	Title
+1329	164	fail	UTF8
+1330	164	fail	Img
+1331	164	fail	Alt
+1332	164	pass	JS
+1333	164	fail	JS_inc
+1334	164	pass	HTML4
+1335	164	fail	Plugins
+1336	165	pass	Domain
+1337	165	pass	Title
+1338	165	fail	UTF8
+1339	165	fail	Img
+1340	165	fail	Alt
+1341	165	pass	JS
+1342	165	fail	JS_inc
+1343	165	pass	HTML4
+1344	165	fail	Plugins
+1345	166	pass	Domain
+1346	166	pass	Title
+1347	166	pass	UTF8
+1348	166	fail	Img
+1349	166	fail	Alt
+1350	166	pass	JS
+1351	166	fail	JS_inc
+1352	166	pass	HTML4
+1353	166	fail	Plugins
+1354	167	pass	Domain
+1355	167	pass	Title
+1356	167	pass	UTF8
+1357	167	fail	Img
+1358	167	fail	Alt
+1359	167	pass	JS
+1360	167	fail	JS_inc
+1361	167	pass	HTML4
+1362	167	fail	Plugins
+1363	168	pass	Domain
+1364	168	pass	Title
+1365	168	fail	UTF8
+1366	168	fail	Img
+1367	168	fail	Alt
+1368	168	pass	JS
+1369	168	fail	JS_inc
+1370	168	pass	HTML4
+1371	168	fail	Plugins
+1372	169	pass	Domain
+1373	169	pass	Title
+1374	169	pass	UTF8
+1375	169	fail	Img
+1376	169	fail	Alt
+1377	169	pass	JS
+1378	169	fail	JS_inc
+1379	169	pass	HTML4
+1380	169	fail	Plugins
+1381	170	pass	Domain
+1382	170	pass	Title
+1383	170	pass	UTF8
+1384	170	fail	Img
+1385	170	fail	Alt
+1386	170	pass	JS
+1387	170	fail	JS_inc
+1388	170	pass	HTML4
+1389	170	fail	Plugins
+1390	171	pass	Domain
+1391	171	pass	Title
+1392	171	pass	UTF8
+1393	171	fail	Img
+1394	171	fail	Alt
+1395	171	pass	JS
+1396	171	fail	JS_inc
+1397	171	pass	HTML4
+1398	171	fail	Plugins
+1399	172	pass	Domain
+1400	172	pass	Title
+1401	172	fail	UTF8
+1402	172	fail	Img
+1403	172	fail	Alt
+1404	172	pass	JS
+1405	172	fail	JS_inc
+1406	172	pass	HTML4
+1407	172	fail	Plugins
+1408	173	pass	Domain
+1409	173	pass	Title
+1410	173	fail	UTF8
+1411	173	fail	Img
+1412	173	fail	Alt
+1413	173	pass	JS
+1414	173	fail	JS_inc
+1415	173	pass	HTML4
+1416	173	fail	Plugins
+1417	174	pass	Domain
+1418	174	pass	Title
+1419	174	pass	UTF8
+1420	174	fail	Img
+1421	174	fail	Alt
+1422	174	pass	JS
+1423	174	fail	JS_inc
+1424	174	pass	HTML4
+1425	174	fail	Plugins
+1426	175	pass	Domain
+1427	175	pass	Title
+1428	175	pass	UTF8
+1429	175	fail	Img
+1430	175	fail	Alt
+1431	175	pass	JS
+1432	175	fail	JS_inc
+1433	175	pass	HTML4
+1434	175	fail	Plugins
+1435	176	pass	Domain
+1436	176	pass	Title
+1437	176	pass	UTF8
+1438	176	fail	Img
+1439	176	fail	Alt
+1440	176	pass	JS
+1441	176	fail	JS_inc
+1442	176	pass	HTML4
+1443	176	fail	Plugins
+1444	177	pass	Domain
+1445	177	pass	Title
+1446	177	pass	UTF8
+1447	177	fail	Img
+1448	177	fail	Alt
+1449	177	pass	JS
+1450	177	fail	JS_inc
+1451	177	pass	HTML4
+1452	177	fail	Plugins
+1453	178	pass	Domain
+1454	178	pass	Title
+1455	178	pass	UTF8
+1456	178	fail	Img
+1457	178	fail	Alt
+1458	178	pass	JS
+1459	178	fail	JS_inc
+1460	178	pass	HTML4
+1461	178	fail	Plugins
+1462	179	pass	Domain
+1463	179	pass	Title
+1464	179	pass	UTF8
+1465	179	fail	Img
+1466	179	fail	Alt
+1467	179	pass	JS
+1468	179	fail	JS_inc
+1469	179	pass	HTML4
+1470	179	fail	Plugins
+1471	180	pass	Domain
+1472	180	pass	Title
+1473	180	pass	UTF8
+1474	180	fail	Img
+1475	180	fail	Alt
+1476	180	pass	JS
+1477	180	fail	JS_inc
+1478	180	pass	HTML4
+1479	180	fail	Plugins
+1480	181	pass	Domain
+1481	181	pass	Title
+1482	181	pass	UTF8
+1483	181	fail	Img
+1484	181	fail	Alt
+1485	181	pass	JS
+1486	181	fail	JS_inc
+1487	181	pass	HTML4
+1488	181	fail	Plugins
+1489	182	pass	Domain
+1490	254	pass	Domain
+1491	254	pass	Title
+1492	254	fail	UTF8
+1493	254	pass	Img
+1494	254	pass	Alt
+1495	254	pass	JS
+1496	254	fail	JS_inc
+1497	254	fail	HTML4
+1498	254	pass	Plugins
+1499	255	pass	Domain
+1500	255	pass	Title
+1501	255	fail	UTF8
+1502	255	pass	Img
+1503	255	pass	Alt
+1504	255	pass	JS
+1505	255	fail	JS_inc
+1506	255	pass	HTML4
+1507	255	fail	Plugins
+1508	256	pass	Domain
+1509	256	pass	Title
+1510	256	fail	UTF8
+1511	256	fail	Img
+1512	256	fail	Alt
+1513	256	pass	JS
+1514	256	fail	JS_inc
+1515	256	pass	HTML4
+1516	256	pass	Plugins
+1517	257	pass	Domain
+1518	257	pass	Title
+1519	257	fail	UTF8
+1520	257	pass	Img
+1521	257	pass	Alt
+1522	257	pass	JS
+1523	257	fail	JS_inc
+1524	257	pass	HTML4
+1525	257	pass	Plugins
 \.
 
 
@@ -1975,76 +4066,113 @@ COPY results (id, pid, pass, name) FROM stdin;
 --
 
 COPY urls (id, pid, path, state, proc, ctime, mtime) FROM stdin;
-1	1	/	done	29422	2010-05-10 14:47:35	2010-05-10 14:47:36
-2	1	www.cnti.gob.ve\n	done	29422	2010-05-10 14:47:35	2010-05-10 14:47:36
-3	1	www.covetel.com.ve\n	done	29422	2010-05-10 14:47:35	2010-05-10 14:47:36
-4	1	www.suscerte.gob.ve\n	done	29422	2010-05-10 14:47:35	2010-05-10 14:47:36
-5	2	/	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:10
-6	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:15
-7	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:18
-8	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:22
-9	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:25
-10	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:29
-11	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:32
-12	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:35
-13	2	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n	done	29914	2010-05-10 14:51:44	2010-05-10 14:52:38
-14	3	/	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:10
-15	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:10
-16	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:11
-17	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:11
-18	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:12
-19	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:12
-20	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:12
-21	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:13
-22	3	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n	done	16195	2010-05-10 23:37:08	2010-05-10 23:37:13
-23	4	/	done	14514	2010-05-11 22:13:46	2010-05-11 22:14:23
-24	4	/acerca-de-luis-chacon.php\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:14:48
-25	4	/contacto.php\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:15:01
-26	4	/index.php?lang=es\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:15:38
-27	4	/servicios.php\n	done	14514	2010-05-11 22:13:46	2010-05-11 22:16:03
-28	5	/	done	17871	2010-05-12 18:28:22	2010-05-12 18:43:43
-29	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-deuda-pblica-nacional-para-2-trimestre-2010\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:44:59
-30	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/05/04/2010-min.-planificacin-y-finanzas-anuncia-cronograma-de-colocacin-de-letras-del-tesoro-para-2-trimestre-2010\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:48:50
-31	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-aumento-de-precios-del-crudo-permitir-mayor-margen-de-maniobra-al-gobierno\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:49:40
-32	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-cadivi-ha-autorizado--4-mil-800-millones-hasta-la-fecha\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:50:36
-33	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/10/03/2010-gobierno-ha-invertido-330-mil-millones-en-materia-social-en-11-aos\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:51:35
-34	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/15/03/2010-min.-planificacin-y-finanzas-anuncia-reprogramacin-de-colocacin-de-deuda\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:52:13
-35	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-escuela-de-planificacin-lanza-sistema-de-formacin-a-distancia-para-comunidades\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:53:42
-36	5	/inicio/notas-de-prensa/2010/scnotas-prensa-2010/27/04/2010-transicin-a-modelo-socialista-requiere-de-poder-productivo-basado-en-el-trabajo\n	done	17871	2010-05-12 18:28:22	2010-05-12 18:56:52
-37	6	/	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-38	6	/index.php?option=com_content&view=article&id=273&Itemid=83\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-39	6	/index.php?option=com_content&view=article&id=45&Itemid=34\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-40	6	/index.php?option=com_content&view=article&id=46&Itemid=54\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-41	6	/index.php?option=com_content&view=article&id=47&Itemid=55\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-42	6	/index.php?option=com_content&view=article&id=48&Itemid=56\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-43	6	/index.php?option=com_content&view=article&id=49&Itemid=60\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-44	6	/index.php?option=com_content&view=article&id=51&Itemid=50\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-45	6	/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-46	6	/index.php?option=com_content&view=article&id=77&Itemid=61\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:41
-47	6	/index.php?option=com_content&view=category&id=34&Itemid=57\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
-48	6	/index.php?option=com_content&view=category&id=35&Itemid=59\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
-49	6	/index.php?option=com_content&view=category&id=37&Itemid=58\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
-50	6	/index.php?option=com_incidentes&Itemid=73\n	done	21953	2010-05-12 19:07:40	2010-05-12 19:07:42
-53	7	/Salud/Servicios-Institucionales\n	new	\N	2010-05-12 19:17:30	2010-05-12 19:17:30
-51	7	/	done	23069	2010-05-12 19:17:30	2010-05-12 19:23:28
-52	7	/Ciudadano\n	run	23069	2010-05-12 19:17:30	2010-05-12 19:23:28
-68	9	/	done	13762	2010-05-13 06:30:40	2010-05-13 06:31:41
-69	9	/?h=nuestro%20banco&i=qui%E9nes_somos&id=169\n	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:00
-70	9	/?h=universitarios\n	done	13762	2010-05-13 06:30:40	2010-05-13 06:32:14
-54	8	/	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
-55	8	/index.php?option=com_content&view=article&id=273&Itemid=83\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
-56	8	/index.php?option=com_content&view=article&id=45&Itemid=34\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:04
-57	8	/index.php?option=com_content&view=article&id=46&Itemid=54\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-58	8	/index.php?option=com_content&view=article&id=47&Itemid=55\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-59	8	/index.php?option=com_content&view=article&id=48&Itemid=56\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-60	8	/index.php?option=com_content&view=article&id=49&Itemid=60\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-61	8	/index.php?option=com_content&view=article&id=51&Itemid=50\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-62	8	/index.php?option=com_content&view=article&id=61:icomo-asociarse&catid=36:faqs&Itemid=29\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-63	8	/index.php?option=com_content&view=article&id=77&Itemid=61\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-64	8	/index.php?option=com_content&view=category&id=34&Itemid=57\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-65	8	/index.php?option=com_content&view=category&id=35&Itemid=59\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:05
-66	8	/index.php?option=com_content&view=category&id=37&Itemid=58\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06
-67	8	/index.php?option=com_incidentes&Itemid=73\n	done	13386	2010-05-13 06:27:03	2010-05-13 06:27:06
+165	14	/actualidad/bicentenario\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:23
+166	14	/actualidad/documentales\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:34
+167	14	/actualidad/dossier\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:43
+168	14	/actualidad/enmienda-constitucional\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:53
+169	14	/actualidad/informe-semanal\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:01
+170	14	/actualidad/la-hojilla\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:09
+171	14	/actualidad/las-l%C3%ADneas-de-ch%C3%A1vez\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:16
+172	14	/actualidad/pacto-de-puerto-rico\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:29
+173	14	/actualidad/sud%C3%A1frica-2010\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:40
+174	14	/art%C3%ADculos\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:49
+175	14	/art%C3%ADculos/\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:53
+176	14	/art%C3%ADculos/opini%C3%B3n/42317\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:02:59
+177	14	/art%C3%ADculos/opini%C3%B3n/42385\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:03:05
+178	14	/contacto\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:03:08
+179	14	/contenido/116\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:03:11
+180	14	/contenido/19388\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:03:16
+181	14	/el-canal\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:03:19
+182	14	/files/converted_videos/42422_Resultado_del_Simulacro_Electoral_.flv\n	run	9755	2010-08-23 02:00:27	2010-08-23 02:03:19
+254	15	/	done	9865	2010-08-23 02:10:03	2010-08-23 02:10:10
+151	13	/	done	16939	2010-08-22 07:15:47	2010-08-22 07:15:52
+255	15	/m8/contenido.asp?id=1\n	done	9865	2010-08-23 02:10:03	2010-08-23 02:10:12
+152	13	/\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:15:53
+153	13	/action/noticia/filteror\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:13
+256	15	/m8/portal.asp\n	done	9865	2010-08-23 02:10:03	2010-08-23 02:10:34
+154	13	/comision_contrataciones.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:18
+155	13	/contacto.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:22
+257	15	/m8/programa.asp?id=2\n	done	9865	2010-08-23 02:10:03	2010-08-23 02:10:38
+156	13	/efemerides.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:37
+157	13	/index_enviar_caso.htm\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:40
+158	13	/logros_g_b.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:48
+159	13	/memoria_revolucionaria.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:54
+160	13	/personaje_del_mes.html\n	done	16939	2010-08-22 07:15:47	2010-08-22 07:19:59
+183	14	/noticias-ciencia-y-salud\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+184	14	/noticias-ciencia-y-salud/42344\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+185	14	/noticias-ciencia-y-salud/42345\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+186	14	/noticias-ciencia-y-salud/42367\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+187	14	/noticias-ciencia-y-salud/42387\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+188	14	/noticias-culturales\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+189	14	/noticias-culturales/42255\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+190	14	/noticias-culturales/42272\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+191	14	/noticias-culturales/42283\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+192	14	/noticias-culturales/42362\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+193	14	/noticias-deportivas\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+194	14	/noticias-deportivas/42378\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+195	14	/noticias-deportivas/42384\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+196	14	/noticias-deportivas/42401\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+197	14	/noticias-deportivas/42408\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+198	14	/noticias-deportivas/42433\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+161	14	/	done	9755	2010-08-23 02:00:27	2010-08-23 02:00:50
+162	14	/\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:00:54
+163	14	/actualidad/Manuelita-S%C3%A1enz-vuelve-con-Bol%C3%ADvar\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:01
+164	14	/actualidad/Mundial-de-Beisbol-Femenino-2010\n	done	9755	2010-08-23 02:00:27	2010-08-23 02:01:12
+199	14	/noticias-econ%C3%B3micas\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+200	14	/noticias-econ%C3%B3micas/42312\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+201	14	/noticias-econ%C3%B3micas/42316\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+202	14	/noticias-econ%C3%B3micas/42318\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+203	14	/noticias-econ%C3%B3micas/42326\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+204	14	/noticias-internacionales\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+205	14	/noticias-internacionales/41369\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+206	14	/noticias-internacionales/41575\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+207	14	/noticias-internacionales/42409\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+208	14	/noticias-internacionales/42425\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+209	14	/noticias-internacionales/42427\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+210	14	/noticias-internacionales/42429\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+211	14	/noticias-internacionales/42438\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+212	14	/noticias-internacionales/42440\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+213	14	/noticias-nacionales\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+214	14	/noticias-nacionales/40327\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+215	14	/noticias-nacionales/40351\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+216	14	/noticias-nacionales/40935\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+217	14	/noticias-nacionales/41084\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+218	14	/noticias-nacionales/41717\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+219	14	/noticias-nacionales/41814\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+220	14	/noticias-nacionales/41831\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+221	14	/noticias-nacionales/41884\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+222	14	/noticias-nacionales/42377\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+223	14	/noticias-nacionales/42405\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+224	14	/noticias-nacionales/42415\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+225	14	/noticias-nacionales/42419\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+226	14	/noticias-nacionales/42424\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+227	14	/noticias-nacionales/42428\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+228	14	/noticias-nacionales/42430\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+229	14	/noticias-nacionales/42431\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+230	14	/noticias-nacionales/42432\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+231	14	/noticias-nacionales/42437\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+232	14	/noticias-nacionales/42439\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+233	14	/programas-videos/dossier\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+234	14	/programas-videos/la-hojilla\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+235	14	/videos-destacadas\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+236	14	/videos-destacadas-en-video/42434\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+237	14	/videos-emisiones\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+238	14	/videos-emisiones-anteriores/40475\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+239	14	/videos-emisiones-anteriores/40636\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+240	14	/videos-emisiones-anteriores/40718\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+241	14	/videos-emisiones-anteriores/40725\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+242	14	/videos-emisiones-anteriores/40813\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+243	14	/videos-emisiones-anteriores/41215\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+244	14	/videos-emisiones-anteriores/41228\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+245	14	/videos-emisiones-anteriores/41595\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+246	14	/videos-emisiones-anteriores/41834\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+247	14	/videos-emisiones-anteriores/41990\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+248	14	/videos-emisiones-anteriores/42303\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+249	14	/videos-emisiones-anteriores/42336\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+250	14	/videos-emisiones-anteriores/42349\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+251	14	/videos-emisiones-anteriores/42392\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+252	14	/videos-emisiones-anteriores/42436\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
+253	14	/videos-especiales-vtv/42380\n	new	\N	2010-08-23 02:00:27	2010-08-23 02:00:27
 \.
 
 
@@ -2109,6 +4237,14 @@ ALTER TABLE ONLY entidadverificadora
 
 ALTER TABLE ONLY institucion
     ADD CONSTRAINT pkidinst PRIMARY KEY (id);
+
+
+--
+-- Name: pkparams; Type: CONSTRAINT; Schema: public; Owner: admin; Tablespace: 
+--
+
+ALTER TABLE ONLY params
+    ADD CONSTRAINT pkparams PRIMARY KEY (id);
 
 
 --
