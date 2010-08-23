@@ -69,6 +69,7 @@ $("document").ready(function(){
 			$("#barra_progreso").progressbar({ value: porcentaje });
 			if (porcentaje == 100){
 				window.clearInterval(intervalo);
+				$("button#detalle_auditoria").button("enable");
 			}
 		});
 	}
@@ -80,8 +81,7 @@ $("document").ready(function(){
 		$("#barra_progreso").progressbar({ value: porcentaje });
 		if (porcentaje < 100){
 			intervalo = window.setInterval(getDatos,1000);
-		} else if (porcentaje == 100) {
-			console.log("100");
+		} else if (porcentaje == 100){
 			$("button#detalle_auditoria").button("enable");
 		}
 	});
