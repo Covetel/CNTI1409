@@ -85,6 +85,11 @@
                                 <a href="/entidades/registrar"> Registrar </a> <br />
                                 <a href="/entidades/listar"> Listar </a> <br />
                         </div>
+                        <h3><a href="#"> Administración <br /> Verificadoras </a></h3>
+                        <div>
+                                <a href="/administracion/parametros"> Parámetros </a> <br />
+                                <a href="/administracion/usuarios"> Usuarios </a> <br />
+                        </div>
                 </div>
 
                 <div id="area_aplicacion">

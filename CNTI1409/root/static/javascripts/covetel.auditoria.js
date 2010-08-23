@@ -8,6 +8,8 @@ $("document").ready(function(){
 	//Cambio el boton Iniciar Auditoria, por un boton jquery ui
 	$("button#iniciar_auditoria").button({ icons: {primary:'ui-icon-gear'} });
 	$("button#detalle_auditoria").button({ icons: {primary:'ui-icon-circle-zoomin'} });
+	//No se puede ver el detalle hasta que el job halla terminado su trabajo.
+	$("button#detalle_auditoria").button({ disabled: true });
 	$("button#reporte").button({ icons: {primary:'ui-icon-note'} });
 	$("button#reporte").button({ disabled: true });
 	$("button#iniciar_auditoria").click(function(){
@@ -67,6 +69,7 @@ $("document").ready(function(){
 			$("#barra_progreso").progressbar({ value: porcentaje });
 			if (porcentaje == 100){
 				window.clearInterval(intervalo);
+				$("button#detalle_auditoria").button("enable");
 			}
 		});
 	}
@@ -78,6 +81,8 @@ $("document").ready(function(){
 		$("#barra_progreso").progressbar({ value: porcentaje });
 		if (porcentaje < 100){
 			intervalo = window.setInterval(getDatos,1000);
+		} else if (porcentaje == 100){
+			$("button#detalle_auditoria").button("enable");
 		}
 	});
 	
