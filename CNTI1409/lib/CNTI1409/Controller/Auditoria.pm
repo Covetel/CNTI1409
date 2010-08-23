@@ -202,7 +202,6 @@ El estado del job.
 sub monitor : Local {
 	my ( $self, $c, $id ) = @_;
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
-	#$c->forward('/auditoria/iniciar/',[$id]) if $auditoria->estado eq 'p';
 	my $estado = $auditoria->estado; 
 	if ($estado eq 'p'){
 		$c->forward('/auditoria/iniciar',[$id]);
@@ -271,22 +270,34 @@ Devuelve un hash que contiene las disposiciones y su estado.
 =cut 
 
 sub disposiciones {
-    my ( $job_id, $estado ) = @_; 
+    my ( $job_id, $self, $c ) = @_; 
+	use Data::Dumper;
     my $j = CNTI::Validator::Jobs->find_job($job_id);
     my $it = $j->children;
+	# Creo un hash de disposiciones por defecto en 'pass'.
     my $disp = {}; 
-    while ( my $u = $it->() ) { 
-        my $it2 = $u->children;
-        while (my $r = $it2->()){
-            $disp->{$r->name} = $r->pass if $r->pass eq $estado;
-        }   
-    }
-	my @dispp = keys %{$disp};
-	my $total = 0;
-	if (@dispp) {
-		$total = $#dispp + 1 if $#dispp >= 0; 
+	my ($fail, $pass) = 0;
+	my @d = $c->model('DB::Disposicion')->all();
+	foreach my $d ( @d ) {
+		$disp->{$d->modulo} = 'pass';
 	}
-    return ($disp, $total);
+
+	# Uso los super iteradores del API.
+	while ( my $u = $it->() ) { 
+	    my $it2 = $u->children;
+	    while (my $r = $it2->()){
+			if ($r->pass ne 'pass') {
+				$disp->{$r->name} = 'fail';
+			}
+		}   
+	}
+	
+	# Cuento las disposiciones fail
+	map { $fail++ if $disp->{$_} eq 'fail' } keys %{$disp};
+	# Cuento las disposiciones pass
+	map { $pass++ if $disp->{$_} eq 'pass' } keys %{$disp};
+
+    return ($disp,$pass, $fail);
 }
 
 =head2 detalle 
@@ -305,10 +316,9 @@ sub detalle : Local {
             my $auditoria = $c->model('DB::Auditoria')->find($id);
 			# Busco el job asociado a la auditoria.
 			my $job_id = $auditoria->job;
-			my ($disp_fail, $total_fail) = disposiciones $job_id, 'fail';
-			my ($disp_pass, $total_pass) = disposiciones $job_id, 'pass';
+			my ($disp, $pass, $fail) = disposiciones $job_id, $self, $c;
 			
-			if ($disp_fail > 0){
+			if ($fail > 0){
 				$resultado_general = 0;
 			}
             $auditoria->update(
@@ -316,8 +326,8 @@ sub detalle : Local {
                     estado    => 'c',
                     fechafin  => DateTime->now,
                     resultado => $resultado_general,
-                    fallidas  => $total_fail,
-                    validas   => $total_pass,
+                    fallidas  => $fail,
+                    validas   => $pass,
                 }
             );
             $c->res->body(1);
