@@ -23,7 +23,7 @@ __PACKAGE__->table("disposicion");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xabdb538)
+  default_value: SCALAR(0x9dc80b8)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -50,7 +50,7 @@ Descripcion de la disposicion
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0xabdb908)
+  default_value: SCALAR(0x9dc7f98)
   is_nullable: 0
 
 Campo booleano que representa si la disposicion esta habilitada o no, este campo es pensado en caracteristicas futuras de la aplicacion
@@ -119,8 +119,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:tf1ZNCsTX1a8XwJFxjb1xw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BEsLh2s68g58veHFgsROsA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

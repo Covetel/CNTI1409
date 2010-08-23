@@ -23,7 +23,7 @@ __PACKAGE__->table("results");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xabd90a0)
+  default_value: SCALAR(0x9dc82a8)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -108,8 +108,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:DdL9T+T5JwkakdoKSL1duw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Xgo/NIqHqmOmsk+gVMQ9Sw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

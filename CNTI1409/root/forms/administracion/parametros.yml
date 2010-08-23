@@ -1,0 +1,39 @@
+action: /administracion/parametros
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: fonts
+      legend: Actualizar Fuentes Libres
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor pulse el botón para actualizar el listado de fuentes libres'
+          attributes:
+              class: informacion
+
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Actualizar Fuentes
+          attributes:
+              title: Presione este botón para actualizar las fuentes.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
