@@ -10,6 +10,7 @@ __PACKAGE__->config({
 	ENCODING     => 'UTF-8',
     CATALYST_VAR => 'c',
 	INCLUDE_PATH => [
+        CNTI1409->path_to( 'root', 'src'),
         CNTI1409->path_to( 'root', 'src', 'reportes' ),
 	],
 

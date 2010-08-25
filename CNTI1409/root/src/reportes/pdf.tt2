@@ -10,11 +10,10 @@
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{textcomp}
+\usepackage{color}
 
 \makeatletter
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
 \providecommand{\tabularnewline}{\\}
 
 \makeatother
@@ -25,13 +24,8 @@
 \begin{document}
 
 \subject{NT CNTI 0003-1: 2008 }
-
-
 \title{PROTOCOLO DE PRUEBA DE CARACTERÍSTICAS TÉCNICAS DE PORTALES DE INTERNET}
-
-
-\author{Entidad Verificadora: Cooperativa Venezolana de Tecnologías Libres
-R.S.}
+\author{Entidad Verificadora: [% auditoria.entidad.nombre %]}
 
 \maketitle
 \tableofcontents{}
@@ -77,91 +71,145 @@ basados en la disposiciones de la norma Características Técnicas de
 Portales de Internet. 
 
 
-\chapter{Reporte de la Auditoría {[}\% auditoria.id \%]}
+\chapter{Reporte de la Auditoría [% auditoria.id %]}
 
 
 \section{Resumen}
-
-%
 \begin{table}[H]
 \begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
 \toprule 
 \addlinespace
-\textbf{Producto a certificar: }Portal del MPPEF & \textbf{Fecha de Ejecución: }23-08-2010\tabularnewline\addlinespace
-\midrule
+\textbf{Producto a certificar: } [% auditoria.portal %] & 
+\textbf{Fecha de Ejecución:} Desde [% auditoria.fechacreacion %] Hasta: [% auditoria.fechafin %]\tabularnewline
 \addlinespace
 \midrule 
-\textbf{Nombre del solicitante:} Ministerio del Poder Popular para
-Economía y Finanzas. & \textbf{Teléfono de Contacto:} 0212-5553322\tabularnewline
+\textbf{Nombre del solicitante:} [% auditoria.institucion.nombre %] & 
+\textbf{Teléfono de Contacto:} [% auditoria.institucion.telefono %] 
+\tabularnewline
+\addlinespace
 \midrule 
-\textbf{Dirección:} Av. Urdaneta, frente al correo carmelitas, torre
-A, Caracas , Venezuela & \textbf{Correo de Contacto:} info@mppef.gob.ve\tabularnewline
+\textbf{Dirección:} [% auditoria.institucion.direccion %] &
+\textbf{Correo de Contacto:} [% auditoria.institucion.correo %] 
+\tabularnewline
 \bottomrule 
+\addlinespace
 \end{longtable}
-
-\caption{Resumen de la Auditoría {[}\% auditoria.id \%]}
-
+\caption{Resumen de la Auditoría [% auditoria.id %]}
 \end{table}
-
 
 
 \subsection{Datos de la Entidad Verificadora}
-
-%
 \begin{table}[H]
 \begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
 \toprule 
 \addlinespace
-\textbf{N\textdegree{} de Acreditación: } & \tabularnewline\addlinespace
-\midrule
+\textbf{Número de Acreditación:} [% auditoria.entidad.registro %] & 
+\tabularnewline
 \addlinespace
 \midrule 
-\textbf{Nombre:}  & \textbf{Teléfono de Contacto:} \tabularnewline
+\textbf{Nombre:} [% auditoria.entidad.nombre %] & 
+\textbf{Teléfono de Contacto:} [% auditoria.entidad.telefono %]
+\tabularnewline
+\addlinespace
 \midrule 
-\textbf{Dirección:}  & \textbf{Correo de Contacto:} \tabularnewline
+\textbf{Dirección:} [% auditoria.entidad.direccion %] &
+\textbf{Correo de Contacto:} [% auditoria.entidad.correo %]
+\tabularnewline
 \bottomrule 
+\addlinespace
 \end{longtable}
-
 \caption{Datos de la Entidad Verificadora}
-
 \end{table}
-
-
 
 \subsection{Resultados de la Prueba}
-
-%
 \begin{table}[H]
 \begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
 \toprule 
 \addlinespace
-\textbf{Cumple: } & \textbf{Fecha de Aceptación: }\tabularnewline\addlinespace
+\textbf{Cumple: } [% IF auditoria.cumple == 1 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de Creación:} [% auditoria.fechacreacion %] 
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{No Cumple: } [% IF auditoria.cumple == 0 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de Inicio: }[% auditoria.fechaini %]
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Se requiere Acciones Correctivas:} [% IF auditoria.acciones_correctivas == 1 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de revisión:} [% auditoria.fechafin %]
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Número de disposiciones que cumple:} [% auditoria.validas %] & 
+\textbf{Número de disposiciones que no cumple:} [% auditoria.fallidas %]
+\tabularnewline
 \midrule
 \addlinespace
 \midrule 
-\textbf{No Cumple:}  & \textbf{Fecha compromiso próxima prueba: }\tabularnewline
-\midrule 
-\textbf{Se requiere Acciones Correctivas:}  & \textbf{Fecha de revisión: }\tabularnewline
+\textbf{Indice de cumplimiento: } [% auditoria.indice %] \% &
+\tabularnewline
 \bottomrule 
+\addlinespace
 \end{longtable}
-
 \caption{Resumen de los resultados}
-
 \end{table}
-
 
 \bigskip{}
 
-
+%% Firmas
 A los fines consiguientes, se hace constar que la información presentada
 en este documento es confiable. 
 
 \vspace{5cm}
 
-
 \begin{tabular}{ccc}
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &  & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\tabularnewline
-Firma del Solicitante &  & Firma del Responsable de la Auditoria\tabularnewline
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &  & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\tabularnewline
+Firma del Solicitante &  & Firma del Responsable de la Auditoria
+\tabularnewline
 \end{tabular}
+
+
+\newpage{}
+\section{Disposiciones}
+\subsection{Nombre del Domino}
+Todo Portal de Internet de los órganos y entes de la Administración
+Pública Nacional deberá ser accesible a través de un nombre de dominio
+compuesto por el dominio de segundo nivel que represente el nombre
+del órgano o ente encargado del Portal de Internet, un dominio genérico
+de segundo nivel (.gob), seguido del dominio de primer nivel de país
+(.ve). 
+
+\begin{table}[H]
+\caption{Casos de Prueba Nombre del Domino}
+\begin{longtable}{|>{\centering}p{0.02\paperwidth}||>{\raggedright}p{0.3\paperwidth}||>{\centering}m{0.05\paperwidth}||>{\raggedright}p{0.25\paperwidth}|}
+\hline 
+\noalign{\vskip\doublerulesep}
+\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\hline 
+\noalign{\vskip\doublerulesep}
+3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
+la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\endhead
+\hline 
+\noalign{\vskip\doublerulesep}
+\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\hline 
+\noalign{\vskip\doublerulesep}
+3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
+la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\endfoot
+\end{longtable}
+
+\end{table}
 \end{document}
 [% END -%]
