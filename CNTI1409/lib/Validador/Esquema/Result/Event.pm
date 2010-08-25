@@ -23,7 +23,7 @@ __PACKAGE__->table("events");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xabdba38)
+  default_value: SCALAR(0x9ddd290)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -96,8 +96,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:CM4h6mrIbNTbU4Qt4CoVZA
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Y4RVUmKjeGVhj6QvNasRDQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
