@@ -29,6 +29,22 @@ The root page (/)
 
 =cut
 
+sub pdf : Local {
+	my ( $self, $c ) = @_;
+	$c->stash->{name} = 'Walter Vargas';
+	my $auditoria = {};
+	$auditoria->{id} = '0002';
+	$c->stash->{auditoria} = $auditoria;
+	my @datos = qw/uno dos tres cuatro cinco seis/;
+	my $file = "reporte-0002.pdf";
+	$c->stash->{datos} = \@datos;
+	if ($c->forward( 'CNTI1409::View::PDF' ) ) {
+     # Only set the content type if we sucessfully processed the template
+     $c->response->content_type('application/pdf');
+     $c->response->header('Content-Disposition', "attachment; filename=$file");
+  	}
+
+}
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;

@@ -121,5 +121,8 @@
 </div>
 
 <p>
+<a href="/reportes/pdf/[% id %]" alt="Ver este reporte en formato PDF"> Ver este reporte en formato PDF </a>
+</p>
+<p>
 <a href="/auditoria/detalle/[% id %]/Domain"> Volver al detalle de la auditoría </a>
 </p>

@@ -185,6 +185,68 @@ sub auditoria : Local {
 	}
 }
 
+=head2 auditoria_struct ($id) 
+
+Este método devuelve un hash que contiene los datos
+de una auditoria. 
+
+=cut
+
+sub auditoria_struct {
+	my ( $self, $c, $id ) = @_;
+	my $auditoria = {};
+	my $aud = $c->model('DB::Auditoria')->find($id);
+	$auditoria->{entidad} = {};
+	$auditoria->{portal} = $aud->portal;
+	$auditoria->{fechacreacion}= $aud->fechacreacion->dmy();
+	$auditoria->{fechaini}= $aud->fechaini->dmy();
+	$auditoria->{fechafin}= $aud->fechafin->dmy();
+	$auditoria->{institucion}->{nombre}= $aud->idinstitucion->nombre;
+	$auditoria->{institucion}->{telefono}= $aud->idinstitucion->telefono;
+	$auditoria->{institucion}->{direccion} = $aud->idinstitucion->direccion;
+	$auditoria->{institucion}->{correo}= $aud->idinstitucion->correo;
+	$auditoria->{id}= $id;
+	$auditoria->{entidad}->{registro}= $aud->idev->registro;
+	$auditoria->{entidad}->{nombre}= $aud->idev->nombre;
+	$auditoria->{entidad}->{telefono}= $aud->idev->telefono;
+	$auditoria->{entidad}->{direccion} = $aud->idev->direccion;
+	$auditoria->{entidad}->{correo}= $aud->idev->correo;
+	$auditoria->{cumple}= $aud->resultado;
+	$auditoria->{validas}= $aud->validas;
+	$auditoria->{fallidas} = $aud->fallidas;
+	my $indice = ($auditoria->{validas} / ($auditoria->{fallidas} + $auditoria->{validas})) * 100 ;
+	# Redondeo el número.
+	$indice = sprintf("%.2f",$indice);
+	$auditoria->{indice}   = $indice;
+
+	my $resolutoria = $c->model('DB::Auditoriadetalle')->search({ idauditoria => $id})->count();
+	if ($resolutoria > 0) {
+		$auditoria->{acciones_correctivas}= 1;
+	} else {
+		$auditoria->{acciones_correctivas}= 0;
+	}
+	return $auditoria;
+}
+
+=head2 pdf($id)
+
+Recibe el ID de una auditoría y genera un reporte en PDF de la misma.
+
+=cut
+
+sub pdf : Local {
+	my ( $self, $c, $id ) = @_;
+	my $auditoria = auditoria_struct($self,$c,$id);
+	my $file = "auditoria-".$auditoria->{id}.".pdf";
+	$c->stash->{auditoria} = $auditoria;
+	if ($c->forward( 'CNTI1409::View::PDF' ) ) {
+     # Only set the content type if we sucessfully processed the template
+     $c->response->content_type('application/pdf');
+     $c->response->header('Content-Disposition', "attachment; filename=$file");
+  	}
+
+}
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>

@@ -11,6 +11,7 @@
 		<th class="ui-state-default"> Disposiciones Aprobadas </th>
 		<th class="ui-state-default"> Disposiciones Falladas </th>
 		<th class="ui-state-default"> Indice de Cumplimiento </th>
+		<th class="ui-state-default"> Reporte </th>
 	</thead>
 	<tbody>
 		[% FOREACH auditoria IN auditorias %]
@@ -24,6 +25,11 @@
 				<td> [% auditoria.pass %]</td>
 				<td> [% auditoria.fail %]</td>
 				<td> [% auditoria.indice %]</td>
+				<td> 
+					<a href="/reportes/pdf/[% auditoria.id %]"> PDF </a> 
+					<br />
+					<a href="/reportes/auditoria/[% auditoria.id %]"> HTML </a> 
+				</td>
 			</tr>
 		[% END %]
 	</tbody>

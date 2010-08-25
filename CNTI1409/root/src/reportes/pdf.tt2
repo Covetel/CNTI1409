@@ -1,0 +1,215 @@
+[%- USE Latex;
+     FILTER latex("pdf") %]
+\documentclass[oneside,spanish]{scrbook}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{color}
+
+\makeatletter
+
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\deactivatetilden
+
+\begin{document}
+
+\subject{NT CNTI 0003-1: 2008 }
+\title{PROTOCOLO DE PRUEBA DE CARACTERÍSTICAS TÉCNICAS DE PORTALES DE INTERNET}
+\author{Entidad Verificadora: [% auditoria.entidad.nombre %]}
+
+\maketitle
+\tableofcontents{}
+
+
+\chapter{Marco Teórico}
+
+
+\section{Introducción}
+
+Este documento tiene como objetivo describir el instrumento a través
+del cual se especifican, desde la perspectiva de la Gerencia de Normalización
+y Certificación enmarcado en el \textquotedblleft{}Proyecto de Certificaciones
+y estándares en Tecnologías de Información para el Estado\textquotedblright{},
+todos los aspectos necesarios que deben llevarse a cabo en el proceso
+de evaluación de Productos y Servicios de Tecnologías Libres de acuerdo
+a lo esperado y basado en la disposiciones de la Norma Técnica de
+Características Técnicas para Portales de Internet, Código NT CNTI
+0003-1: 2008. La realización de las pruebas constituye una herramienta
+fundamental para la verificación adecuada de las disposiciones indicadas
+en la norma. Este Protocolo establece un procedimiento de pruebas
+en función a los criterios establecidos en la norma técnica, además
+de emitir resultados, observaciones y acciones correctivas de dichas
+pruebas.
+
+
+\section{Objetivos}
+
+Establecer un procedimiento de pruebas que sirva de instrumento en
+el proceso de evaluación de Productos y Servicios de Tecnologías de
+Información Libres, que permita verificar el cumplimiento de las disposiciones
+de la Norma Técnica para Portales de Internet, referidas a su Nombre
+de Dominio, Versión de HTML,Consideraciones de Navegabilidad, Diagramación
+Gráfica, Juego de Caracteres, Lenguaje Script, Controladores Añadibles,
+Hojas de estilo en cascada, Meta Etiquetas y Políticas de Seguridad.
+
+
+\section{Alcance}
+
+En el presente documento Protocolo de Prueba se plantea evaluar el
+grado de satisfacción en distintos aspectos funcionales y no funcionales
+basados en la disposiciones de la norma Características Técnicas de
+Portales de Internet. 
+
+
+\chapter{Reporte de la Auditoría [% auditoria.id %]}
+
+
+\section{Resumen}
+\begin{table}[H]
+\begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
+\toprule 
+\addlinespace
+\textbf{Producto a certificar: } [% auditoria.portal %] & 
+\textbf{Fecha de Ejecución:} Desde [% auditoria.fechacreacion %] Hasta: [% auditoria.fechafin %]\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Nombre del solicitante:} [% auditoria.institucion.nombre %] & 
+\textbf{Teléfono de Contacto:} [% auditoria.institucion.telefono %] 
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Dirección:} [% auditoria.institucion.direccion %] &
+\textbf{Correo de Contacto:} [% auditoria.institucion.correo %] 
+\tabularnewline
+\bottomrule 
+\addlinespace
+\end{longtable}
+\caption{Resumen de la Auditoría [% auditoria.id %]}
+\end{table}
+
+
+\subsection{Datos de la Entidad Verificadora}
+\begin{table}[H]
+\begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
+\toprule 
+\addlinespace
+\textbf{Número de Acreditación:} [% auditoria.entidad.registro %] & 
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Nombre:} [% auditoria.entidad.nombre %] & 
+\textbf{Teléfono de Contacto:} [% auditoria.entidad.telefono %]
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Dirección:} [% auditoria.entidad.direccion %] &
+\textbf{Correo de Contacto:} [% auditoria.entidad.correo %]
+\tabularnewline
+\bottomrule 
+\addlinespace
+\end{longtable}
+\caption{Datos de la Entidad Verificadora}
+\end{table}
+
+\subsection{Resultados de la Prueba}
+\begin{table}[H]
+\begin{longtable}{>{\raggedright}m{0.4\paperwidth}>{\raggedright}m{0.3\paperwidth}}
+\toprule 
+\addlinespace
+\textbf{Cumple: } [% IF auditoria.cumple == 1 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de Creación:} [% auditoria.fechacreacion %] 
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{No Cumple: } [% IF auditoria.cumple == 0 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de Inicio: }[% auditoria.fechaini %]
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Se requiere Acciones Correctivas:} [% IF auditoria.acciones_correctivas == 1 %] \textbf{\textcolor{red}{X}} [% END %] & 
+\textbf{Fecha de revisión:} [% auditoria.fechafin %]
+\tabularnewline
+\addlinespace
+\midrule 
+\textbf{Número de disposiciones que cumple:} [% auditoria.validas %] & 
+\textbf{Número de disposiciones que no cumple:} [% auditoria.fallidas %]
+\tabularnewline
+\midrule
+\addlinespace
+\midrule 
+\textbf{Indice de cumplimiento: } [% auditoria.indice %] \% &
+\tabularnewline
+\bottomrule 
+\addlinespace
+\end{longtable}
+\caption{Resumen de los resultados}
+\end{table}
+
+\bigskip{}
+
+%% Firmas
+A los fines consiguientes, se hace constar que la información presentada
+en este documento es confiable. 
+
+\vspace{5cm}
+
+\begin{tabular}{ccc}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &  & \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+\tabularnewline
+Firma del Solicitante &  & Firma del Responsable de la Auditoria
+\tabularnewline
+\end{tabular}
+
+
+\newpage{}
+\section{Disposiciones}
+\subsection{Nombre del Domino}
+Todo Portal de Internet de los órganos y entes de la Administración
+Pública Nacional deberá ser accesible a través de un nombre de dominio
+compuesto por el dominio de segundo nivel que represente el nombre
+del órgano o ente encargado del Portal de Internet, un dominio genérico
+de segundo nivel (.gob), seguido del dominio de primer nivel de país
+(.ve). 
+
+\begin{table}[H]
+\caption{Casos de Prueba Nombre del Domino}
+\begin{longtable}{|>{\centering}p{0.02\paperwidth}||>{\raggedright}p{0.3\paperwidth}||>{\centering}m{0.05\paperwidth}||>{\raggedright}p{0.25\paperwidth}|}
+\hline 
+\noalign{\vskip\doublerulesep}
+\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\hline 
+\noalign{\vskip\doublerulesep}
+3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
+la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\endhead
+\hline 
+\noalign{\vskip\doublerulesep}
+\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\hline 
+\noalign{\vskip\doublerulesep}
+3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
+la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
+\hline
+\noalign{\vskip\doublerulesep}
+\endfoot
+\end{longtable}
+
+\end{table}
+\end{document}
+[% END -%]
