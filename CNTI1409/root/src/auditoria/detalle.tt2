@@ -1,8 +1,7 @@
 [% titulo = 'Portal: ' _ portal _ ' | Auditoria: 000' _ idAuditoria %]
 
 <div class="ayuda">
-Por favor presione sobre cada uno de los botones correspondientes a la disposición evaluada, para inspeccionar y 
-agregar la acción correctiva que corresponda, en caso de que una o más URLs de la muestra hallan fallado las pruebas. 
+En caso de que una o más URLs de la muestra hallan fallado las pruebas, por favor presione sobre cada uno de los botones correspondientes a la disposición evaluada, para inspeccionar y agregar la acción correctiva que corresponda. 
 </div>
 
 <div id="nav">

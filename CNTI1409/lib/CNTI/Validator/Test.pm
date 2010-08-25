@@ -73,7 +73,7 @@ extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    $DB::single = 1;
+			#$DB::single = 1;
     $self->ok( $self->uri->authority =~ /\.gob\.ve$/i );
 }
 
@@ -99,7 +99,7 @@ sub run {
     }
     $node = $node->find('title');
     unless ($node) {
-        $DB::single = 1;
+        #$DB::single = 1;
         $self->event_log( 'error', 'No tiene TITLE' );
         return $self->ok(0);
     }
