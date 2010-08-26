@@ -102,7 +102,6 @@ sub disposiciones {
     while ( my $u = $it->() ) { 
         my $it2 = $u->children;
         while (my $r = $it2->()){
-            # $disp->{$r->name}->{result} = 'pass';
             $disp->{$r->name}->{name} = $r->name;
             my $url = $site . $u->path; 
             $url =~ s/\s//gi;
@@ -183,6 +182,111 @@ sub auditoria : Local {
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
 			}
 	}
+}
+
+=head2 auditoria_struct ($id) 
+
+Este método devuelve un hash que contiene los datos
+de una auditoria. 
+
+=cut
+
+sub auditoria_struct {
+	my ( $self, $c, $id ) = @_;
+	my $auditoria = {};
+	my $aud = $c->model('DB::Auditoria')->find($id);
+	$auditoria->{entidad} = {};
+	$auditoria->{portal} = $aud->portal;
+	$auditoria->{fechacreacion}= $aud->fechacreacion->dmy();
+	$auditoria->{fechaini}= $aud->fechaini->dmy();
+	$auditoria->{fechafin}= $aud->fechafin->dmy();
+	$auditoria->{institucion}->{nombre}= $aud->idinstitucion->nombre;
+	$auditoria->{institucion}->{telefono}= $aud->idinstitucion->telefono;
+	$auditoria->{institucion}->{direccion} = $aud->idinstitucion->direccion;
+	$auditoria->{institucion}->{correo}= $aud->idinstitucion->correo;
+	$auditoria->{id}= $id;
+	$auditoria->{entidad}->{registro}= $aud->idev->registro;
+	$auditoria->{entidad}->{nombre}= $aud->idev->nombre;
+	$auditoria->{entidad}->{telefono}= $aud->idev->telefono;
+	$auditoria->{entidad}->{direccion} = $aud->idev->direccion;
+	$auditoria->{entidad}->{correo}= $aud->idev->correo;
+	$auditoria->{cumple}= $aud->resultado;
+	$auditoria->{validas}= $aud->validas;
+	$auditoria->{fallidas} = $aud->fallidas;
+	my $indice = ($auditoria->{validas} / ($auditoria->{fallidas} + $auditoria->{validas})) * 100 ;
+	# Redondeo el número.
+	$indice = sprintf("%.2f",$indice);
+	$auditoria->{indice}   = $indice;
+
+	my $resolutoria = $c->model('DB::Auditoriadetalle')->search({ idauditoria => $id})->count();
+	if ($resolutoria > 0) {
+		$auditoria->{acciones_correctivas}= 1;
+	} else {
+		$auditoria->{acciones_correctivas}= 0;
+	}
+	
+	# Busco la estructura de disposiciones.
+	my $disp = &disposiciones_struct;
+	$auditoria->{disposiciones} = $disp;
+
+	# Busco los resultados por disposicion. 
+	my $resultados = disposiciones $aud->job;
+	
+	# Itero por todas las disposiciones.
+	foreach my $disposicion (keys %{ $disp }) {
+		if ($resultados->{$disposicion}->{result}){
+			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'No Cumple';
+			# Busco la resolutoria que agrego el auditor a la disposicion. 
+			my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
+				{ idauditoria => $id, iddisposicion => $disp->{$disposicion}->{id} },
+				{ columns => qw / resolutoria / }
+			);
+			if ($resolutoria->resolutoria) {
+				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = $resolutoria->resolutoria;
+			} else {
+				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'El auditor no indico una acción resolutoria';
+			}
+		} else {
+			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'Cumple';
+			$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'No Aplica';
+		}
+	}
+	use Data::Dumper;
+	$c->log->debug(Dumper($auditoria));
+	return $auditoria;
+}
+
+sub disposiciones_struct : Local {
+	my ( $self, $c ) = @_;
+	# Me traigo todas las disposiciones que existen en la base de datos.
+	my @disposiciones = $c->model('DB::Disposicion')->search({habilitado => 'true'})->all();
+	my $disp = {};
+	foreach my $disposicion (@disposiciones){
+		$disp->{$disposicion->modulo}->{nombre} = $disposicion->nombre;
+		$disp->{$disposicion->modulo}->{descripcion} = $disposicion->descripcion;
+		$disp->{$disposicion->modulo}->{descripcion_prueba} = $disposicion->descripcion_prueba;
+		$disp->{$disposicion->modulo}->{id} = $disposicion->id;
+	}
+	return $disp;
+}
+
+=head2 pdf($id)
+
+Recibe el ID de una auditoría y genera un reporte en PDF de la misma.
+
+=cut
+
+sub pdf : Local {
+	my ( $self, $c, $id ) = @_;
+	my $auditoria = auditoria_struct($self,$c,$id);
+	my $file = "auditoria-".$auditoria->{id}.".pdf";
+	$c->stash->{auditoria} = $auditoria;
+	if ($c->forward( 'CNTI1409::View::PDF' ) ) {
+     # Only set the content type if we sucessfully processed the template
+     $c->response->content_type('application/pdf');
+     $c->response->header('Content-Disposition', "attachment; filename=$file");
+  	}
+
 }
 
 =head1 AUTHOR
