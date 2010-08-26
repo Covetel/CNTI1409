@@ -6,7 +6,7 @@ has xpc => ( is => 'ro' );
 has doc => ( is => 'ro' );
 
 around BUILDARGS => sub {
-    $DB::single = 1;
+    # $DB::single = 1;
     my $orig  = shift;
     my $class = shift;
     my %args  = @_;

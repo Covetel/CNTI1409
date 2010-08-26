@@ -298,6 +298,7 @@ use Moose;
 
 extends 'CNTI::Validator::Test';
 
+# $DB::single = 1;
 sub run {
     my $self  = shift;
 
