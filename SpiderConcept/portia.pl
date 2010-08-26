@@ -101,7 +101,7 @@ sub get_recursive {
             unless $mech->success
                 and $mech->status ~~ /^200/
                 and $mech->is_html;
-        say STDERR "SAVED: $url";
+        printf STDERR "SAVED %d, %d: $url", $state->depth, $n;
         $state->queue_set( $url => $mech->title || $url );
         return unless --$n;
 
