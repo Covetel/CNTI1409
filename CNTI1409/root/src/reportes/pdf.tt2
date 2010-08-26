@@ -173,40 +173,34 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
 
 \newpage{}
 \section{Disposiciones}
-\subsection{Nombre del Domino}
-Todo Portal de Internet de los órganos y entes de la Administración
-Pública Nacional deberá ser accesible a través de un nombre de dominio
-compuesto por el dominio de segundo nivel que represente el nombre
-del órgano o ente encargado del Portal de Internet, un dominio genérico
-de segundo nivel (.gob), seguido del dominio de primer nivel de país
-(.ve). 
+
+\subsection{[% auditoria.disposiciones.Domain.nombre %]}
+[% auditoria.disposiciones.Domain.descripcion %]
 
 \begin{table}[H]
-\caption{Casos de Prueba Nombre del Domino}
+\caption{Resultados}
 \begin{longtable}{|>{\centering}p{0.02\paperwidth}||>{\raggedright}p{0.3\paperwidth}||>{\centering}m{0.05\paperwidth}||>{\raggedright}p{0.25\paperwidth}|}
-\hline 
+
+\hline
 \noalign{\vskip\doublerulesep}
-\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+\textbf{ID} & 
+\textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}
+\tabularnewline
 \hline
 \noalign{\vskip\doublerulesep}
 \hline 
 \noalign{\vskip\doublerulesep}
-3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
-la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
+
+[% auditoria.disposiciones.Domain.id %] & 
+[% auditoria.disposiciones.Domain.descripcion_prueba %] & 
+\textbf{\textcolor{red}{ [% auditoria.disposiciones.Domain.resultado %] }} & 
+[% auditoria.disposiciones.Domain.resolutoria %]
+
+\tabularnewline
 \hline
-\noalign{\vskip\doublerulesep}
 \endhead
-\hline 
-\noalign{\vskip\doublerulesep}
-\textbf{N\textdegree{}} & \textbf{Descripción de Prueba } & \multicolumn{1}{c||}{\textbf{Resultado}} & \textbf{Acciones Correctivas}\tabularnewline
+
 \hline
-\noalign{\vskip\doublerulesep}
-\hline 
-\noalign{\vskip\doublerulesep}
-3.1 & Cumple con las especificaciones del nombre de Dominio dispuestas en
-la norma & \textbf{\textcolor{red}{Cumple}} & No es necesario especificar ninguna acción correctiva por los momentos\tabularnewline
-\hline
-\noalign{\vskip\doublerulesep}
 \endfoot
 \end{longtable}
 

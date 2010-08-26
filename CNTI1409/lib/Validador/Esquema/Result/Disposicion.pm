@@ -83,10 +83,9 @@ __PACKAGE__->add_columns(
   },
   "descripcion",
   {
-    data_type => "character varying",
+    data_type => "text",
     default_value => undef,
     is_nullable => 0,
-    size => 100,
   },
   "habilitado",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
@@ -96,6 +95,12 @@ __PACKAGE__->add_columns(
     default_value => undef,
     is_nullable => 1,
     size => 10,
+  },
+  "descripcion_prueba",
+  {
+    data_type => "text",
+    default_value => undef,
+    is_nullable => 0,
   },
 );
 __PACKAGE__->set_primary_key("id");
