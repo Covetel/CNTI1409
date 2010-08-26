@@ -15,6 +15,11 @@ use strict;
 package AracniState;
 use Moose;
 
+# num: número de hijos para cada nodo
+# dir: dirección para adquirir los hijos
+# depth: niveles de profundidad 0 => solo el URL actual
+# queue: cola con todos los urls recolectados
+
 has num => ( is => "rw", isa => "Int", default => 0 );
 has dir => ( is => "rw", isa => "Int", default => 0 );
 has depth => (
@@ -40,6 +45,8 @@ package AracniUrlList;
 use Moose;
 use URI::URL;
 
+# dir: dirección en la que se recorre la lista
+# list: lista de enlaces
 has dir => ( is => "rw", isa => "Int", default => 0 );
 has list => (
     is      => "ro",
@@ -72,22 +79,41 @@ sub list_look { shift->list_get(0) }
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
-package main;
+# My own tailor made UA
+package AracniUA;
+use Moose;
+
+has ua => (is => "ro", builder => "_build_ua", handles => {
+    (map { $_=>$_ } qw(success status is_html title links)) } );
+
 use WWW::Mechanize::Cached;
 
-my $cache = WWW::Mechanize::Cached->new;
-$cache->env_proxy();
-$cache->agent_alias("Linux Mozilla");
+{
+my $cache;
 
-my $base = "http://www.cnti.gob.ve/";
+sub _build_ua {
+    return $cache->clone if $cache;
+    $cache = WWW::Mechanize::Cached->new;
+    $cache->env_proxy();
+    $cache->agent_alias("Linux Mozilla");
+    return $cache;
+}
+}
 
-sub get_url {
+sub get {
+    my $self = shift;
     my $url = shift;
     say STDERR "GET: $url";
-    my $mech = $cache->clone;
-    $mech->get($url);
-    return $mech;
+    $self->ua->get($url);
+    return $self->success and $self->status ~~ /^200/ and $self->is_html;
 }
+
+__PACKAGE__->meta->make_immutable;
+no Moose;
+
+
+package main;
+my $base = "http://www.cnti.gob.ve/";
 
 sub get_recursive {
     my ( $urls, $state ) = @_;
@@ -96,13 +122,11 @@ sub get_recursive {
     while ( $urls->list_count ) {
         my $url = $urls->list_next->url_abs;
         next if $state->queue_exists($url);
-        my $mech = get_url($url);
-        next
-            unless $mech->success
-                and $mech->status ~~ /^200/
-                and $mech->is_html;
+        my $mech = AracniUA->new();
+        $mech->get($url) or next;
         printf STDERR "SAVED %d, %d: $url", $state->depth, $n;
-        $state->queue_set( $url => $mech->title || $url );
+        # Moose says $url must be string!
+        $state->queue_set( "$url" => $mech->title || "$url" );
         return unless --$n;
 
         if ( $state->depth > 0 ) {
@@ -122,12 +146,10 @@ sub spider {
 
     my $queue = {};
 
-    my $mech = get_url($url);
-    return
-        unless $mech->success
-            and $mech->status ~~ /^200/
-            and $mech->is_html;
-    $queue->{$url} = $mech->title || $url;
+    my $mech = AracniUA->new();
+    $mech->get($url) or return;
+    # Moose says $url must be string!
+    $queue->{"$url"} = $mech->title || "$url";
     return if $state->depth <= 0;
     my $list = AracniUrlList->new(
         list => scalar( $mech->links ),
