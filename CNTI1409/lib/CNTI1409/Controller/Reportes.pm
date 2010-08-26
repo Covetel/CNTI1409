@@ -73,7 +73,9 @@ sub wizard : Local : FormConfig {
 			$auditoria->{entidad} = $dato->idev->nombre;
 			$auditoria->{fail} = $dato->fallidas;
 			$auditoria->{pass} = $dato->validas;
-			my $indice = ($dato->validas / ($dato->fallidas + $dato->validas)) * 100 ;
+			my $validas = $dato->validas;
+			my $fallidas = $dato->fallidas;
+			my $indice = ($validas / ($fallidas + $validas)) * 100 ;
 			$indice = sprintf("%.2f",$indice);
 			$auditoria->{indice} = $indice;
 			push @auditorias, $auditoria;
@@ -241,7 +243,7 @@ sub auditoria_struct {
 				{ idauditoria => $id, iddisposicion => $disp->{$disposicion}->{id} },
 				{ columns => qw / resolutoria / }
 			);
-			if ($resolutoria->resolutoria) {
+			if ($resolutoria && $resolutoria->resolutoria) {
 				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = $resolutoria->resolutoria;
 			} else {
 				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'El auditor no indico una acción resolutoria';
@@ -287,6 +289,34 @@ sub pdf : Local {
      $c->response->header('Content-Disposition', "attachment; filename=$file");
   	}
 
+}
+
+=head2 entidades 
+
+Genera un reporte HTML de entidades listo para imprimir.
+
+=cut 
+
+sub entidades : Local {
+	my ( $self, $c ) = @_;
+	# Busco la lista de entidades. 
+	my @entidades = $c->model('DB::Entidadverificadora')->search({})->all();
+	$c->stash->{entidades} = \@entidades;
+	$c->stash->{template} = 'reportes/entidades.tt2';
+}
+
+=head2 instituciones
+
+Genera un reporte HTML de instituciones lista para imprimir.
+
+=cut 
+
+sub instituciones : Local {
+	my ( $self, $c ) = @_;
+	# Busco la lista de instituciones
+	my @instituciones = $c->model('DB::Institucion')->search({})->all();
+	$c->stash->{instituciones} = \@instituciones;
+	$c->stash->{template} = 'reportes/instituciones.tt2';
 }
 
 =head1 AUTHOR

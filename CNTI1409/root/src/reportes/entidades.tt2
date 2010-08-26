@@ -1,0 +1,37 @@
+[% titulo = "Reporte de Entidades Verificadoras"%]
+
+<div class="reportes_mensaje"> 
+En la siguiente tabla se encuentran las Entidades Verificadoras registradas hasta la fecha. La columna <span class="strong">Estado</span>, puede tener dos valores para cada registro: <span class="strong"> Activo </span> o <span class="strong"> Inactivo </span>
+</div>
+
+<table class="dataTable tabla_reporte" id="tabla_reporte">
+	<thead>
+		<th class="ui-state-default"> N° </th>
+		<th class="ui-state-default"> Nombre </th>
+		<th class="ui-state-default"> RIF </th>
+		<th class="ui-state-default"> Persona Contacto </th>
+		<th class="ui-state-default"> Teléfono </th>
+		<th class="ui-state-default"> Correo Electrónico </th>
+		<th class="ui-state-default"> Dirección </th>
+		<th class="ui-state-default"> Página Web </th>
+		<th class="ui-state-default"> Estado </th>
+	</thead>
+	
+	<tbody>
+	[% FOREACH entidad IN entidades %]
+	<tr> 
+		<td> [% entidad.registro %] </td>
+		<td> [% entidad.nombre %] </td>
+		<td> [% entidad.rif %] </td>
+		<td> [% entidad.contacto %] </td>
+		<td> [% entidad.telefono %] </td>
+		<td> [% entidad.correo %] </td>
+		<td> [% entidad.direccion %] </td>
+		<td> [% entidad.web %] </td>
+		[% IF entidad.habilitado == 1 %] <td> Activo </td> [% ELSE %] <td> Inactivo </td> [% END %]
+	</tr>
+	[% END %]
+	</tbody>
+</table>
+
+[% INCLUDE botones_reportes.tt2 %]
