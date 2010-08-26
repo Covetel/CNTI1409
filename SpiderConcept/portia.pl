@@ -79,7 +79,7 @@ my $cache = WWW::Mechanize::Cached->new;
 $cache->env_proxy();
 $cache->agent_alias("Linux Mozilla");
 
-my $base = "http://www.mppef.gob.ve/";
+my $base = "http://www.cnti.gob.ve/";
 
 sub get_url {
     my $url = shift;
