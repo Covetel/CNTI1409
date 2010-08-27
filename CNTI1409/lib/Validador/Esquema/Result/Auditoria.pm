@@ -27,7 +27,7 @@ __PACKAGE__->table("auditoria");
 =head2 id
 
   data_type: bigint
-  default_value: SCALAR(0xaab3808)
+  default_value: SCALAR(0x9cb0cb8)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -82,6 +82,8 @@ Fecha de finalizacion de la auditoria, si este campo contiene un dato se da la a
   default_value: undef
   is_nullable: 0
 
+Fecha de creacion de la audioria
+
 =head2 url
 
   data_type: character varying[]
@@ -89,7 +91,7 @@ Fecha de finalizacion de la auditoria, si este campo contiene un dato se da la a
   is_nullable: 1
   size: 1000
 
-Fecha de creacion de la audioria
+Almacena el listado de las url a auditar en un portal
 
 =head2 estado
 
@@ -98,13 +100,13 @@ Fecha de creacion de la audioria
   is_nullable: 0
   size: 1
 
+Campo que determina el estado de una auditoria, los posibles valores son: p (pendiente), a (abierto), c (cerrado)
+
 =head2 job
 
   data_type: integer
   default_value: undef
   is_nullable: 1
-
-Almacena el listado de las url a auditar en un portal
 
 =head2 resultado
 
@@ -112,7 +114,7 @@ Almacena el listado de las url a auditar en un portal
   default_value: undef
   is_nullable: 1
 
-Campo que determina el estado de una auditoria, los posibles valores son: p (pendiente), a (abierto), c (cerrado)
+Resultado General de la Auditoria, de tipo boolean, TRUE para auditoria sin fallas, FALSE para auditoria fallidas
 
 =head2 fallidas
 
@@ -120,13 +122,15 @@ Campo que determina el estado de una auditoria, los posibles valores son: p (pen
   default_value: undef
   is_nullable: 1
 
+Numero de disposiciones fallidas
+
 =head2 validas
 
   data_type: integer
   default_value: undef
   is_nullable: 1
 
-Resultado General de la Auditoria, de tipo boolean, TRUE para auditoria sin fallas, FALSE para auditoria fallidas
+Numero de disposiciones sin fallas
 
 =cut
 
@@ -232,8 +236,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:OUP0MF9e2f8CyXrJw2/BSQ
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kg6CQmT2Ms2BERys76unpw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

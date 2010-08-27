@@ -23,7 +23,7 @@ __PACKAGE__->table("entidadverificadora");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xabdb988)
+  default_value: SCALAR(0x9ddd280)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -54,7 +54,7 @@ Numero fiscal de la Entidad Verificadora
   is_nullable: 0
   size: 100
 
-correo electronico de la Entidad Verificadora
+correo electronico de la entidad verificadora
 
 =head2 telefono
 
@@ -91,7 +91,7 @@ nombre de la persona contacto de la Entidad Verificadora
 =head2 habilitado
 
   data_type: boolean
-  default_value: SCALAR(0xabd8b20)
+  default_value: SCALAR(0x9ddad98)
   is_nullable: 0
 
 =head2 registro
@@ -100,6 +100,8 @@ nombre de la persona contacto de la Entidad Verificadora
   default_value: undef
   is_nullable: 1
   size: 30
+
+Numero de registro de la entidad verificadora
 
 =cut
 
@@ -191,8 +193,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sRc3BoPJbxEjs4j6OSDP/w
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wnDHIUs60xOuO96y767F2w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

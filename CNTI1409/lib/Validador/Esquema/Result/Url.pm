@@ -23,7 +23,7 @@ __PACKAGE__->table("urls");
 =head2 id
 
   data_type: integer
-  default_value: SCALAR(0xabdc018)
+  default_value: SCALAR(0x9dc7a98)
   is_auto_increment: 1
   is_nullable: 0
 
@@ -140,8 +140,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-05-19 01:06:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:02bDTyFasJl4Q7vJe3gjNw
+# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:eGLSC4oL2pBmSX0GNIM3+w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

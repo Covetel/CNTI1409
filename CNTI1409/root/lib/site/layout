@@ -27,6 +27,7 @@
                 <script type="text/javascript" src="/static/javascripts/jquery.maskedinput-1.2.2.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/json.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.wizard.js"></script>
+                <script type="text/javascript" src="/static/javascripts/reportes.js"></script>
                 <script type="text/javascript" src="/static/javascripts/application.js"></script>
         </head>
         <body>
@@ -73,7 +74,6 @@
                         <div>
                                 <a href="/auditoria/crear"> Crear </a> <br />
                                 <a href="/auditoria/reporte"> Listar </a> <br />
-                                <a href="/reportes/"> Reportes </a> <br />
                         </div>
                         <h3><a href="#"> Instituciones </a></h3>
                         <div>
@@ -85,10 +85,16 @@
                                 <a href="/entidades/registrar"> Registrar </a> <br />
                                 <a href="/entidades/listar"> Listar </a> <br />
                         </div>
-                        <h3><a href="#"> Administración <br /> Verificadoras </a></h3>
+                        <h3><a href="#"> Administración </a></h3>
                         <div>
                                 <a href="/administracion/parametros"> Parámetros </a> <br />
                                 <a href="/administracion/usuarios"> Usuarios </a> <br />
+                        </div>
+                        <h3><a href="#"> Reportes </a></h3>
+                        <div>
+                                <a href="/reportes/instituciones/"> Instituciones </a> <br />
+                                <a href="/reportes/entidades/"> Entidades </a> <br />
+                                <a href="/reportes/wizard"> Auditorias </a> <br />
                         </div>
                 </div>
 

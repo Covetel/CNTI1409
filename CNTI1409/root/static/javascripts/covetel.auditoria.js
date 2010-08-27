@@ -24,9 +24,11 @@ $("document").ready(function(){
 	var estado = $("#estado").html();
 	if (estado == 'Abierta' || estado == 'Cerrada'){
 		$("button#iniciar_auditoria").button({disabled: true});
+		$("button#detalle_auditoria").button("enable");
 	}
 	if (estado == 'Cerrada'){
 		$("button#reporte").button({disabled: false});
+		$("button#detalle_auditoria").button("enable");
 	}
 	if (estado == 'Pendiente'){
 		$("button#detalle_auditoria").button({disabled: true});

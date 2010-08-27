@@ -1,8 +1,9 @@
 package CNTI1409::Controller::Administracion;
 use Moose;
 use namespace::autoclean;
+use utf8;
 
-BEGIN {extends 'Catalyst::Controller'; }
+BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
 =head1 NAME
 
@@ -16,6 +17,19 @@ Catalyst Controller.
 
 =cut
 
+sub auto :Private {
+    my ( $self, $c ) = @_;
+    if ($c->controller eq $c->controller('Root')->action_for('login')) {
+        return 1;
+    }
+    if (!$c->user_exists) {
+        $c->response->redirect($c->uri_for('/login'));
+        return 0;
+    }
+    return 1;
+}
+
+
 
 =head2 index
 
@@ -27,6 +41,36 @@ sub index :Path :Args(0) {
     $c->response->body('Matched CNTI1409::Controller::Administracion in Administracion.');
 }
 
+
+sub parametros : Local : FormConfig {
+    my ( $self, $c ) = @_;
+    my $form = $c->stash->{form};
+	$c->stash->{titulo}     = "Gestión de parámetros de disposiciones";
+	$c->stash->{template} = 'administracion/parametros.tt2';
+	if ($form->submitted_and_valid) {
+        use WWW::Mechanize;    
+        my $row = $c->model("DB::disposicion")->find( 
+			{
+				modulo => "Fonts",
+			},
+			{
+				columns => [ qw / id / ] 
+			}
+        );
+        my $mech = WWW::Mechanize->new;
+        $mech->get("http://fonts.debian.net");
+        my @list;
+        my @fonts = $mech->find_all_images( alt_regex => qr/\.ttf$/ );
+        for my $font (@fonts) {
+            my $fuente = $font->alt;
+            $fuente =~ s/(.*)\.ttf$/$1/;
+            my $result = $c->model('DB::param')->create({
+                disposicion   => "Fonts",
+                parametro       => $fuente,
+            });
+        }
+    }
+}
 
 =head1 AUTHOR
 

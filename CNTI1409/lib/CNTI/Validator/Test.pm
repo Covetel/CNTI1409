@@ -298,6 +298,7 @@ use Moose;
 
 extends 'CNTI::Validator::Test';
 
+# $DB::single = 1;
 sub run {
     my $self  = shift;
 
@@ -320,6 +321,63 @@ sub run {
     $self->event_log( error => "Hay $flashhtml5 controles Flash declarados con HTML5" ) if ($flashhtml5);
 
     $self->ok( $activex == 0  and $flashhtml5 == 0);
+}
+
+package CNTI::Validator::Test::Fonts;
+use Moose;
+use CNTI::Validator::Schema;
+use WWW::Mechanize;
+use CSS::Tiny;
+use URI;
+   
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $css = CSS::Tiny->new();
+    my $mech = WWW::Mechanize->new; 
+    my @styles = $self->htmlt->find('link');
+    my $fontcount = 0;
+    my $errorcount = 0;
+    for my $css (@styles) {
+        if ($css->attr('rel') eq 'stylesheet') {
+            if ($css->attr('href')) {
+                my $href = $css->attr('href');
+                my $urlcss = URI->new($href);
+                my $url;
+                if ( $urlcss->path =~ /^\//) {
+                    $url = $href if $urlcss->authority;
+                    $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+                } else {
+                    $url = $href if $urlcss->authority;
+                    $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
+                }
+                $mech->get($url);
+                my $content = $mech->content(); 
+                $css = CSS::Tiny->read_string($content);
+                for my $style ( values %{$css} ) {
+                    if ($style->{'font-family'}) {
+                        my $fuentes = $style->{'font-family'};
+                        my @fnt = split /,[\ ?]*/, $fuentes;
+                        foreach my $a (@fnt) {
+                            $fontcount++;
+                            my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                            if ( $#rs < 0 ) {
+                                $self->event_log( error => "La fuente $a no es válida" );
+                                $errorcount++;
+                            }
+                        }
+                    }
+                }
+            } else {
+                $self->event_log( warning => "Atributo link de tipo stylesheet con href vacio" );
+            }
+        }
+    }
+    if ($fontcount <= 0) {
+        $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
+    }
+    $self->ok( $errorcount == 0 );
 }
 
 
