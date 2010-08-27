@@ -354,14 +354,30 @@ sub run {
                 }
                 $mech->get($url);
                 my $content = $mech->content(); 
-                $self->event_log( error => "SE HAN ENCONTRADO CSS $url" );
+                $css = CSS::Tiny->read_string($content);
+                for my $style ( values %{$css} ) {
+                    if ($style->{'font-family'}) {
+                        my $fuentes = $style->{'font-family'};
+                        my @fnt = split /,[\ ?]*/, $fuentes;
+                        foreach my $a (@fnt) {
+                            $fontcount++;
+                            my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                            if ( $#rs < 0 ) {
+                                $self->event_log( error => "La fuente $a no es válida" );
+                                $errorcount++;
+                            }
+                        }
+                    }
+                }
             } else {
                 $self->event_log( warning => "Atributo link de tipo stylesheet con href vacio" );
             }
         }
     }
-    $self->event_log( error => "AHHH WTF!!!" );
-    $self->ok( 0 );
+    if ($fontcount <= 0) {
+        $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
+    }
+    $self->ok( $errorcount == 0 );
 }
 
 
