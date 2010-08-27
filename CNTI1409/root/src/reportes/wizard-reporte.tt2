@@ -1,6 +1,6 @@
 <div id="wizard-reporte">
 
-<table class="dataTable reporte_auditorias" id="reporte_auditorias" class="wizard-reporte"> 
+<table class="dataTable tabla_reporte" id="tabla_reporte"> 
 	<thead>
 		<th class="ui-state-default"> Id </th>
 		<th class="ui-state-default"> Institución </th>
@@ -24,7 +24,7 @@
 				<td> [% auditoria.entidad %]</td>
 				<td> [% auditoria.pass %]</td>
 				<td> [% auditoria.fail %]</td>
-				<td> [% auditoria.indice %]</td>
+				<td> [% auditoria.indice %] &#37; </td>
 				<td> 
 					<a href="/reportes/pdf/[% auditoria.id %]"> PDF </a> 
 					<br />

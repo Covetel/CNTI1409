@@ -1,0 +1,36 @@
+[% titulo = "Reporte de Instituciones"%]
+
+<div class="reportes_mensaje"> 
+En la siguiente tabla se encuentran las Instituciones registradas hasta la fecha. La columna <span class="strong">Estado</span>, puede tener dos valores para cada registro: <span class="strong"> Activo </span> o <span class="strong"> Inactivo </span>
+</div>
+
+<table class="dataTable tabla_reporte" id="tabla_reporte" class="wizard-reporte">
+	<thead>
+		<th class="ui-state-default"> ID </th>
+		<th class="ui-state-default"> Nombre </th>
+		<th class="ui-state-default"> RIF </th>
+		<th class="ui-state-default"> Persona Contacto </th>
+		<th class="ui-state-default"> Teléfono </th>
+		<th class="ui-state-default"> Correo Electrónico </th>
+		<th class="ui-state-default"> Dirección </th>
+		<th class="ui-state-default"> Página Web </th>
+		<th class="ui-state-default"> Estado </th>
+	</thead>
+	
+	<tbody>
+	[% FOREACH institucion IN instituciones %]
+	<tr> 
+		<td> [% institucion.id %] </td>
+		<td> [% institucion.nombre %] </td>
+		<td> [% institucion.rif %] </td>
+		<td> [% institucion.contacto %] </td>
+		<td> [% institucion.telefono %] </td>
+		<td> [% institucion.correo %] </td>
+		<td> [% institucion.direccion %] </td>
+		<td> [% institucion.web %] </td>
+		[% IF institucion.habilitado == 1 %] <td> Activo </td> [% ELSE %] <td> Inactivo </td> [% END %]
+	</tr>
+	[% END %]
+	</tbody>
+</table>
+[% INCLUDE botones_reportes.tt2 %]
