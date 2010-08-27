@@ -329,9 +329,8 @@ use CNTI::Validator::Schema;
 use WWW::Mechanize;
 use CSS::Tiny;
 use URI;
-
+   
 extends 'CNTI::Validator::Test';
-
 
 sub run {
     my $self = shift;
@@ -340,43 +339,29 @@ sub run {
     my @styles = $self->htmlt->find('link');
     my $fontcount = 0;
     my $errorcount = 0;
-    $self->event_log( error => "Ejecutado Fonts");
     for my $css (@styles) {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
-                my $url = $href if $urlcss->authority;
-                $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+                my $url;
+                if ( $urlcss->path =~ /^\//) {
+                    $url = $href if $urlcss->authority;
+                    $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+                } else {
+                    $url = $href if $urlcss->authority;
+                    $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
+                }
                 $mech->get($url);
                 my $content = $mech->content(); 
-                $css = CSS::Tiny->read_string($content);
-                for my $style ( values %{$css} ) {
-                    if ($style->{'font-family'}) {
-                        my $fuentes = $style->{'font-family'};
-                        my @fnt = split /,[\ ?]*/, $fuentes;
-                        foreach my $a (@fnt) {
-                            $fontcount++;
-                            my $rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
-                            unless ($rs) {
-                                event_log( error => "La fuente $a no es válida" );
-                                $errorcount++;
-                            } else {
-                                event_log ( warning => "Depurando $a" );
-                            }
-                        }
-                    }
-                }
+                $self->event_log( error => "SE HAN ENCONTRADO CSS $url" );
             } else {
                 $self->event_log( warning => "Atributo link de tipo stylesheet con href vacio" );
             }
         }
     }
-    if ($fontcount <= 0) {
-        $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
-        $self->ok(0);
-    }
-    $self->ok( $errorcount == 0 );
+    $self->event_log( error => "AHHH WTF!!!" );
+    $self->ok( 0 );
 }
 
 
