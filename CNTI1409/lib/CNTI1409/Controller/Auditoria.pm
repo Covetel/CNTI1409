@@ -271,7 +271,6 @@ Devuelve un hash que contiene las disposiciones y su estado.
 
 sub disposiciones {
     my ( $job_id, $self, $c ) = @_; 
-	use Data::Dumper;
     my $j = CNTI::Validator::Jobs->find_job($job_id);
     my $it = $j->children;
 	# Creo un hash de disposiciones por defecto en 'pass'.

@@ -234,6 +234,8 @@ sub auditoria_struct {
 	# Busco los resultados por disposicion. 
 	my $resultados = disposiciones $aud->job;
 	
+	use Data::Dumper;
+	$c->log->debug(Dumper($resultados));	
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
 		if ($resultados->{$disposicion}->{result}){
@@ -280,6 +282,7 @@ Recibe el ID de una auditoría y genera un reporte en PDF de la misma.
 
 sub pdf : Local {
 	my ( $self, $c, $id ) = @_;
+	$c->stash->{template} = 'pdf.tt2';
 	my $auditoria = auditoria_struct($self,$c,$id);
 	my $file = "auditoria-".$auditoria->{id}.".pdf";
 	$c->stash->{auditoria} = $auditoria;
