@@ -209,7 +209,7 @@ sub auditoria_struct {
 	$auditoria->{id}= $id;
 	$auditoria->{entidad}->{registro}= $aud->idev->registro;
 	$auditoria->{entidad}->{nombre}= $aud->idev->nombre;
-	$auditoria->{entidad}->{telefono}= $aud->idev->telefono;
+	#$auditoria->{entidad}->{telefono}= $aud->idev->telefono;
 	$auditoria->{entidad}->{direccion} = $aud->idev->direccion;
 	$auditoria->{entidad}->{correo}= $aud->idev->correo;
 	$auditoria->{cumple}= $aud->resultado;
@@ -234,8 +234,6 @@ sub auditoria_struct {
 	# Busco los resultados por disposicion. 
 	my $resultados = disposiciones $aud->job;
 	
-	use Data::Dumper;
-	$c->log->debug(Dumper($resultados));	
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
 		if ($resultados->{$disposicion}->{result}){
@@ -255,8 +253,6 @@ sub auditoria_struct {
 			$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'No Aplica';
 		}
 	}
-	use Data::Dumper;
-	$c->log->debug(Dumper($auditoria));
 	return $auditoria;
 }
 
@@ -282,7 +278,6 @@ Recibe el ID de una auditoría y genera un reporte en PDF de la misma.
 
 sub pdf : Local {
 	my ( $self, $c, $id ) = @_;
-	$c->stash->{template} = 'pdf.tt2';
 	my $auditoria = auditoria_struct($self,$c,$id);
 	my $file = "auditoria-".$auditoria->{id}.".pdf";
 	$c->stash->{auditoria} = $auditoria;
