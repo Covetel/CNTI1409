@@ -329,9 +329,25 @@ use CNTI::Validator::Schema;
 use WWW::Mechanize;
 use CSS::Tiny;
 use URI;
-
+   
 extends 'CNTI::Validator::Test';
 
+sub httpurl {
+    my ($self, $urlcss, $href) = @_;
+    my $url;
+    if ( $urlcss->path =~ /^\//) {
+        $url = $href if $urlcss->authority;
+        $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+    } else {
+        $url = $href if $urlcss->authority;
+        $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
+    }
+    return $url;
+}
+
+sub checkfonts {
+    my ($self, $css)
+}
 
 sub run {
     my $self = shift;
@@ -340,16 +356,42 @@ sub run {
     my @styles = $self->htmlt->find('link');
     my $fontcount = 0;
     my $errorcount = 0;
-    $self->event_log( error => "Ejecutado Fonts");
+    # Esto ya funciona dejo asi...
+    # Busca los fonts por hojas de estilo
+    # llamadas desde tag link
     for my $css (@styles) {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
-                my $url = $href if $urlcss->authority;
-                $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+                my $url = httpurl $self, $urlcss, $href;
                 $mech->get($url);
-                my $content = $mech->content(); 
+                my $content = $mech->content;
+                my @contenido = split /\n/, $mech->content;
+                for my $lineas (@contenido) {
+                    if ($lineas =~ /\@import\s+\"(.*)\"/) {
+                        my $cssurl = httpurl $self, $1, $href;
+                        my $mech2 = WWW::Mechanize->new();
+                        my $css2 = CSS::Tiny->new();
+                        $mech2->get($cssurl);
+                        my $content2 = $mech2->content;
+                        $css2 = CSS::Tiny->read_string($content2);
+                        for my $style2 ( values %{$css2} ) {
+                            if ($style2->('font-family')) {
+                                my $fuentes2 = $style2->('font-family');
+                                my @fnt2 = split /,[\ ?]*/, $fuentes2;
+                                foreach my $a2 (@fnt2) {
+                                    $fontcount++;
+                                    my @rs2 = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a2 } );
+                                    if ( $#rs2 < 0 ) {
+                                        $self->event_log( error => "La fuente $a no es válida" );
+                                        $errorcount++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 $css = CSS::Tiny->read_string($content);
                 for my $style ( values %{$css} ) {
                     if ($style->{'font-family'}) {
@@ -357,12 +399,10 @@ sub run {
                         my @fnt = split /,[\ ?]*/, $fuentes;
                         foreach my $a (@fnt) {
                             $fontcount++;
-                            my $rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
-                            unless ($rs) {
-                                event_log( error => "La fuente $a no es válida" );
+                            my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                            if ( $#rs < 0 ) {
+                                $self->event_log( error => "La fuente $a no es válida" );
                                 $errorcount++;
-                            } else {
-                                event_log ( warning => "Depurando $a" );
                             }
                         }
                     }
@@ -374,7 +414,6 @@ sub run {
     }
     if ($fontcount <= 0) {
         $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
-        $self->ok(0);
     }
     $self->ok( $errorcount == 0 );
 }
