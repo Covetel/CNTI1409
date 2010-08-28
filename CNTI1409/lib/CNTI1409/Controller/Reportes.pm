@@ -237,7 +237,7 @@ sub auditoria_struct {
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
 		if ($resultados->{$disposicion}->{result}){
-			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'No Cumple';
+			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'Incumple';
 			# Busco la resolutoria que agrego el auditor a la disposicion. 
 			my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
 				{ idauditoria => $id, iddisposicion => $disp->{$disposicion}->{id} },
