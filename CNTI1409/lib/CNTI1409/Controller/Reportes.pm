@@ -2,6 +2,8 @@ package CNTI1409::Controller::Reportes;
 use Moose;
 use namespace::autoclean;
 use utf8;
+use LaTeX::Encode; # Módulo necesario para codificar las urls que van para el PDF.
+use Data::Dumper;
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -236,6 +238,13 @@ sub auditoria_struct {
 	
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
+		my @urls;
+		foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
+			my $path = latex_encode($url); 
+			my $u = { latex_url => $path, path => $url, datos => $resultados->{$disposicion}->{urls}->{$url}};
+			push @urls, $u;	
+		}
+		$auditoria->{disposiciones}->{$disposicion}->{rutas} = \@urls;
 		if ($resultados->{$disposicion}->{result}){
 			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'Incumple';
 			# Busco la resolutoria que agrego el auditor a la disposicion. 
@@ -253,7 +262,6 @@ sub auditoria_struct {
 			$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'No Aplica';
 		}
 	}
-	use Data::Dumper;
 	$c->log->debug(Dumper($auditoria));
 	return $auditoria;
 }

@@ -25,7 +25,7 @@
 
 \subject{NT CNTI 0003-1: 2008 }
 \title{PROTOCOLO DE PRUEBA DE CARACTERÍSTICAS TÉCNICAS DE PORTALES DE INTERNET}
-\author{Entidad Verificadora: [% auditoria.entidad.nombre %]}
+\author{\textbf{Entidad Verificadora:} [% auditoria.entidad.nombre %] \\ \textbf{Institución:} [% auditoria.institucion.nombre %]}
 
 \maketitle
 \tableofcontents{}
@@ -206,6 +206,23 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
  \end{longtable}
 
  \end{table}
+	\subsubsection{Resultados por URL}
+		{\scriptsize
+		\begin{enumerate}
+		[% FOREACH ruta IN disposicion.value.rutas %]
+			\item [% ruta.latex_url %]
+			\begin{enumerate}
+				\item \textbf{Resultado: } 	[% IF ruta.datos.result == 'fail' %]
+												\textcolor{red}{No Cumple}
+												\item \textbf{Mensajes:} [% ruta.datos.mensajes %] 
+											[% ELSE %]
+												Cumple 
+											[% END %] 
+			\end{enumerate}
+		[% END %]
+		\end{enumerate}		
+		}
+
  \clearpage
  [% END %]
 \end{document}
