@@ -20,8 +20,9 @@ use Moose;
 # depth: niveles de profundidad 0 => solo el URL actual
 # queue: cola con todos los urls recolectados
 
-has num => ( is => "rw", isa => "Int", default => 0 );
-has dir => ( is => "rw", isa => "Int", default => 0 );
+has base => ( is => "ro", isa => "Str", required => 1 );
+has num  => ( is => "rw", isa => "Int", default  => 0 );
+has dir  => ( is => "rw", isa => "Int", default  => 0 );
 has depth => (
     is      => "rw",
     isa     => "Int",
@@ -62,7 +63,8 @@ has list => (
 
 sub BUILDARGS {
     my ( $class, %args ) = @_;
-    my @links = grep { index( $_->url_abs, $_->base ) >= 0 } @{ $args{'list'} };
+    my @links
+        = grep { index( $_->url_abs, $_->base ) >= 0 } @{ $args{'list'} };
     my $dir = $args{'dir'} || 0;
     die "Invalid direction" if 0 > $dir || $dir > 2;
     @links = sort { rand(10) > 5 } @links if $dir == 1;
@@ -79,47 +81,13 @@ sub list_look { shift->list_get(0) }
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
-# My own tailor made UA
-package AracniUA;
-use Moose;
-
-has ua => (
-    is      => "ro",
-    builder => "_build_ua",
-    handles => { ( map { $_ => $_ } qw(success status is_html title links) ) }
-);
-
-use WWW::Mechanize::Cached;
-
-{
-my $cache;
-
-sub _build_ua {
-    return $cache->clone if $cache;
-    $cache = WWW::Mechanize::Cached->new;
-    $cache->env_proxy();
-    $cache->agent_alias("Linux Mozilla");
-    return $cache;
-}
-}
-
-sub get {
-    my $self = shift;
-    my $url  = shift;
-    say STDERR "GET: $url";
-    $self->ua->get($url);
-    return $self->success and $self->status ~~ /^200/ and $self->is_html;
-}
-
-__PACKAGE__->meta->make_immutable;
-no Moose;
-
 package main;
+use AracniUA;
 my $base = "http://www.cnti.gob.ve/";
 
 sub spider {
-    my ( $url, $state ) = @_;
-    get_url_recursive( $url, $state, $state->depth );
+    my $state = shift;
+    get_url_recursive( $state->base, $state, $state->depth );
 }
 
 sub get_url_recursive {
@@ -156,6 +124,6 @@ sub get_links_recursive {
 }
 
 use YAML;
-my $state = AracniState->new( depth => 4, num => 9, dir => 0 );
-my $q = spider( $base, $state );
+my $state = AracniState->new( base => $base, depth => 4, num => 9, dir => 0 );
+my $q = spider( $state );
 print YAML::Dump $q;
