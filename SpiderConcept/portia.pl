@@ -83,8 +83,11 @@ no Moose;
 package AracniUA;
 use Moose;
 
-has ua => (is => "ro", builder => "_build_ua", handles => {
-    (map { $_=>$_ } qw(success status is_html title links)) } );
+has ua => (
+    is      => "ro",
+    builder => "_build_ua",
+    handles => { ( map { $_ => $_ } qw(success status is_html title links) ) }
+);
 
 use WWW::Mechanize::Cached;
 
@@ -102,7 +105,7 @@ sub _build_ua {
 
 sub get {
     my $self = shift;
-    my $url = shift;
+    my $url  = shift;
     say STDERR "GET: $url";
     $self->ua->get($url);
     return $self->success and $self->status ~~ /^200/ and $self->is_html;
@@ -111,53 +114,45 @@ sub get {
 __PACKAGE__->meta->make_immutable;
 no Moose;
 
-
 package main;
 my $base = "http://www.cnti.gob.ve/";
 
-sub get_recursive {
-    my ( $urls, $state ) = @_;
+sub spider {
+    my ( $url, $state ) = @_;
+    get_url_recursive( $url, $state, $state->depth );
+}
 
-    my $n = $state->num;
-    while ( $urls->list_count ) {
-        my $url = $urls->list_next->url_abs;
-        next if $state->queue_exists($url);
-        my $mech = AracniUA->new();
-        $mech->get($url) or next;
-        printf STDERR "SAVED %d, %d: $url", $state->depth, $n;
-        # Moose says $url must be string!
-        $state->queue_set( "$url" => $mech->title || "$url" );
-        return unless --$n;
+sub get_url_recursive {
+    my ( $url, $state, $depth ) = @_;
 
-        if ( $state->depth > 0 ) {
+    my $mech = AracniUA->new();
+    $mech->get($url) or next;
+    printf STDERR "SAVED %d: $url", $depth;
+
+    # Moose says $url must be string!
+    $state->queue_set( "$url" => $mech->title || "$url" );
+
+    if ( $depth > 0 ) {
+        my @links = $mech->links;
+        if (@links) {
             my $l = AracniUrlList->new(
-                list => scalar( $mech->links ),
+                list => \@links,
                 dir  => $state->dir
             );
-            $state->depth_dec;
-            get_recursive( $l, $state );
-            $state->depth_inc;
+            get_links_recursive( $l, $state, $depth - 1 );
         }
     }
 }
 
-sub spider {
-    my ( $url, $state ) = @_;
+sub get_links_recursive {
+    my ( $urls, $state, $depth ) = @_;
 
-    my $queue = {};
-
-    my $mech = AracniUA->new();
-    $mech->get($url) or return;
-    # Moose says $url must be string!
-    $queue->{"$url"} = $mech->title || "$url";
-    return if $state->depth <= 0;
-    my $list = AracniUrlList->new(
-        list => scalar( $mech->links ),
-        dir  => $state->dir
-    );
-
-    get_recursive( $list, $state );
-    return $queue;
+    my $n = $state->num;
+    while ( --$n && $urls->list_count ) {
+        my $url = $urls->list_next->url_abs;
+        next if $state->queue_exists($url);
+        get_url_recursive( $url, $state, $depth );
+    }
 }
 
 use YAML;
