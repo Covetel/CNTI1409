@@ -28,6 +28,46 @@ has queue => (
         { queue_get => "get", queue_set => "set", queue_exists => "exists" }
 );
 
+
+sub run {
+    my $self = shift;
+    $self->url_get( $self->base, $self->depth );
+}
+
+
+sub url_get {
+    my ( $self, $url, $depth ) = @_;
+
+    my $mech = AracniUA->new();
+    $mech->get($url) or next;
+    printf STDERR "SAVED %d: $url", $depth;
+
+    # Moose says $url must be string!
+    $self->queue_set( "$url" => $mech->title || "$url" );
+
+    if ( $depth > 0 ) {
+        my @links = $mech->links;
+        if (@links) {
+            my $l = AracniUrlList->new(
+                list => \@links,
+                dir  => $self->dir
+            );
+            $self->add_hyperlinks( $l, $depth - 1 );
+        }
+    }
+}
+
+sub add_hyperlinks {
+    my ( $self, $urls, $depth ) = @_;
+
+    my $n = $self->num;
+    while ( --$n && $urls->list_count ) {
+        my $url = $urls->list_next->url_abs;
+        next if $self->queue_exists($url);
+        $self->url_get( $url, $depth );
+    }
+}
+
 __PACKAGE__->meta->make_immutable;
 no Moose;
 1;
