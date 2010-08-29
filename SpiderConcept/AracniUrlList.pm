@@ -6,6 +6,10 @@ use Moose;
 use URI::URL;
 
 # dir: dirección en la que se recorre la lista
+#   0: izquierda a derecha
+#   1: aleatoriamente
+#   2: derecha a izquierda
+#
 # list: lista de enlaces
 has dir => ( is => "rw", isa => "Int", default => 0 );
 has list => (
@@ -25,8 +29,13 @@ sub BUILDARGS {
     my @links
         = grep { index( $_->url_abs, $_->base ) >= 0 } @{ $args{'list'} };
     my $dir = $args{'dir'} || 0;
+    
+    # La dirección debe estar entre 0 y 2
     die "Invalid direction" if 0 > $dir || $dir > 2;
+
+    # Barajar los enlaces en caso de que $dir == 1
     @links = sort { rand(10) > 5 } @links if $dir == 1;
+
     return { list => \@links, dir => $dir };
 }
 

@@ -39,8 +39,8 @@ sub url_get {
     my ( $self, $url, $depth ) = @_;
 
     my $mech = AracniUA->new();
-    $mech->get($url) or next;
-    printf STDERR "SAVED %d: $url", $depth;
+    $mech->safe_get($url) or return;
+    printf STDERR "SAVED %d: $url\n", $depth;
 
     # Moose says $url must be string!
     $self->queue_set( "$url" => $mech->title || "$url" );
