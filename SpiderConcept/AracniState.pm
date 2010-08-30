@@ -1,24 +1,19 @@
+use utf8;
 use feature ":5.10";
 use strict;
 
 package AracniState;
 use Moose;
+use AracniSchema;
+use Digest::MD5 'md5_hex';
+use URI::URL;
+
+=pod
 
 # num: número de hijos para cada nodo
 # dir: dirección para adquirir los hijos
 # depth: niveles de profundidad 0 => solo el URL actual
 # queue: cola con todos los urls recolectados
-
-has base => ( is => "ro", isa => "Str", required => 1 );
-has num  => ( is => "rw", isa => "Int", default  => 0 );
-has dir  => ( is => "rw", isa => "Int", default  => 0 );
-has depth => (
-    is      => "rw",
-    isa     => "Int",
-    default => 0,
-    traits  => ["Counter"],
-    handles => { depth_dec => "dec", depth_inc => "inc" }
-);
 has queue => (
     is      => "ro",
     isa     => "HashRef[Str]",
@@ -28,22 +23,79 @@ has queue => (
         { queue_get => "get", queue_set => "set", queue_exists => "exists" }
 );
 
+=cut
+
+has job => ( is => "ro", isa => "CNTI::SpiderDB::Result::SpiderJob",
+    handles => { ( map { $_ => $_ } qw(base num dir depth state) ) } );
+
+sub BUILDARGS {
+    my $class = shift;
+    my %args = @_;
+    my %rec;
+    $rec{'num'}   = $args{'num'}   || 0;
+    $rec{'dir'}   = $args{'dir'}   || 0;
+    $rec{'depth'} = $args{'depth'} || 0;
+    $rec{'state'} = $args{'state'} || 0;
+    $rec{'base'}  = $args{'base'}  || die "base is required";
+    return { job   => AracniSchema->resultset("SpiderJob")->create( \%rec ) }
+}
+
+
+my @all_states = qw( new running done );
+
+sub is_new     { shift->state == 0 }
+sub is_running { shift->state == 1 }
+sub is_done    { shift->state == 2 }
+sub state_text { $all_states[ shift->state ] }
+
+sub queue {
+    my $self = shift;
+    $self->job->spider_urls->all;
+}
+
+sub q_find {
+    my ( $self, $cond ) = @_;
+    $self->job->spider_urls->find( $cond ) && 1;
+}
+
+sub q_add {
+    my ( $self, $entry ) = @_;
+    $self->job->create_related( spider_urls => $entry );
+}
 
 sub run {
     my $self = shift;
-    $self->url_get( $self->base, $self->depth );
+    $self->state(1);
+    $self->url_get( URI::URL->new($self->base), $self->depth );
+    $self->state(2);
 }
 
 
 sub url_get {
     my ( $self, $url, $depth ) = @_;
 
-    my $mech = AracniUA->new();
-    $mech->safe_get($url) or return;
-    printf STDERR "SAVED %d: $url\n", $depth;
+    # Delete empty fragments
+    $url->fragment(undef) if defined $url->fragment and "" eq $url->fragment;
 
-    # Moose says $url must be string!
-    $self->queue_set( "$url" => $mech->title || "$url" );
+    # Get a canonical URL
+    my $url_text = $url->canonical;
+
+    # Cleanup redundant /./ paths
+    $url_text =~ s!/\./!/!g;
+
+    # Make futher cleanup of URL here (when more detergent is available)
+
+    my $mech = AracniUA->new();
+    $mech->safe_get($url) or return 0;
+
+    # Reject repeated URLs
+    return 0 if $self->q_find({ url => $url_text });
+
+    # Reject repeated content
+    my $sum = md5_hex( $mech->binary_content );
+    return 0 if $self->q_find({ sum => $sum });
+
+    my $u_rec = $self->q_add( { url => $url_text, sum => $sum, title => $mech->title || $url_text, state => 1 } );
 
     if ( $depth > 0 ) {
         my @links = $mech->links;
@@ -55,17 +107,21 @@ sub url_get {
             $self->add_hyperlinks( $l, $depth - 1 );
         }
     }
+
+    $u_rec->state(2);
+    return 1;
 }
 
 sub add_hyperlinks {
     my ( $self, $urls, $depth ) = @_;
 
-    my $n = $self->num;
-    while ( --$n && $urls->list_count ) {
+    my $n = $self->num - 1;
+    while ( $n && $urls->list_count ) {
         my $url = $urls->list_next->url_abs;
-        next if $self->queue_exists($url);
-        $self->url_get( $url, $depth );
+        next if $self->q_find({ url => "$url" });
+        $self->url_get( $url, $depth ) and --$n;
     }
+say STDERR "List exausted at level $depth ($n)" if $n;
 }
 
 __PACKAGE__->meta->make_immutable;

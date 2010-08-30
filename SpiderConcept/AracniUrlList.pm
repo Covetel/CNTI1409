@@ -1,3 +1,4 @@
+use utf8;
 use feature ":5.10";
 use strict;
 

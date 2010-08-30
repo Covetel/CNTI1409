@@ -9,6 +9,7 @@
 #
 # Arthropoda/Arachnida/Araneae/Salticidae/Spartaeinae/Spartaeini/Portia
 #
+use utf8;
 use feature ":5.10";
 use strict;
 
@@ -19,6 +20,8 @@ use AracniUrlList;
 my $base = "http://www.cnti.gob.ve/";
 
 use YAML;
-my $spider = AracniState->new( base => $base, depth => 4, num => 9, dir => 0 );
-my $q = $spider->run;
-print YAML::Dump $q;
+my $spider = AracniState->new( base => $base, depth => 4, num => 20, dir => 0 );
+$spider->run;
+for ( $spider->queue ) {
+    printf "%s %s\n", $_->sum, $_->title;
+}
