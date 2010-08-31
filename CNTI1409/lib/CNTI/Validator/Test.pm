@@ -379,6 +379,7 @@ sub run {
     my $errorcount = 0;
     my $uri = $self->uri;
     for my $css (@styles) {
+        # Revision en hojas de estilo externas
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
@@ -418,6 +419,8 @@ sub run {
                 $errorcount++;
             }
         }
+        # Revision en etiqueta style
+
     }
     if ($fontcount <= 0) {
         $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
