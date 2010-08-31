@@ -346,7 +346,26 @@ sub httpurl {
 }
 
 sub checkfonts {
-    my ($self, $css)
+    my ($self, $content)= @_;
+    my $fontcount;
+    my $errorcount;
+    my $css = CSS::Tiny->new();
+    $css = CSS::Tiny->read_string($content);
+    for my $style ( values %{$css} ) {
+        if ($style->{'font-family'}) {
+            my $fuentes = $style->{'font-family'};
+            my @fnt = split /,[\ ?]*/, $fuentes;
+            foreach my $a (@fnt) {
+                $fontcount++;
+                my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                if ( $#rs < 0 ) {
+                    $self->event_log( error => "La fuente $a no es válida" );
+                    $errorcount++;
+                }
+            }
+        }
+    }
+    return ("$fontcount", "$errorcount");
 }
 
 sub run {
@@ -362,32 +381,20 @@ sub run {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
                 my $url = httpurl $self, $urlcss, $href;
-                $self->event_log( error => "DEBUG --- $url" );
                 $mech->get($url);
                 my $content = $mech->content;
                 my @contenido = split /\n/, $mech->content;
                 for my $lineas (@contenido) {
+                    $self->event_log( error => "DEBUG --- $lineas" );
+                    $self->ok(0);
                     if ($lineas =~ /\@import\s+\"(.*)\"/i) {
                         my $cssurl = httpurl $self, $1, $href;
                         my $mech2 = WWW::Mechanize->new();
-                        my $css2 = CSS::Tiny->new();
                         $mech2->get($cssurl);
                         my $content2 = $mech2->content;
-                        $css2 = CSS::Tiny->read_string($content2);
-                        for my $style2 ( values %{$css2} ) {
-                            if ($style2->('font-family')) {
-                                my $fuentes2 = $style2->('font-family');
-                                my @fnt2 = split /,[\ ?]*/, $fuentes2;
-                                foreach my $a2 (@fnt2) {
-                                    $fontcount++;
-                                    my @rs2 = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a2 } );
-                                    if ( $#rs2 < 0 ) {
-                                        $self->event_log( error => "La fuente $a no es válida" );
-                                        $errorcount++;
-                                    }
-                                }
-                            }
-                        }
+                        my ($ercnt, $fntcnt) = checkfonts $self, $content2;
+                        $errorcount = $errorcount + $ercnt;
+                       $fontcount = $fontcount + $fntcnt; 
                     }
                 }
                 $css = CSS::Tiny->read_string($content);
