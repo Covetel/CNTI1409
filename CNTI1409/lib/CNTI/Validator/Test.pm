@@ -306,13 +306,13 @@ sub run {
     my $activex = 0;
     my $flashhtml5 = 0;
     for my $plugin (@plugins) {
-        if ( $plugin->attr('classid') =~ /clsid:/ ) {
+        if ( $plugin->attr('classid') =~ /clsid:/i ) {
             $activex++;
         }
     }
     my @embed = $self->htmlt->find('embed');
     for my $flash (@embed) {
-        if ( $flash->attr('src') =~ /swf/ ) {
+        if ( $flash->attr('src') =~ /swf/i or $flash->attr('type') =~ /flash/i or $flash->attr('src') =~ /youtube/ ) {
             $flashhtml5++;
         }
     }
@@ -356,20 +356,18 @@ sub run {
     my @styles = $self->htmlt->find('link');
     my $fontcount = 0;
     my $errorcount = 0;
-    # Esto ya funciona dejo asi...
-    # Busca los fonts por hojas de estilo
-    # llamadas desde tag link
     for my $css (@styles) {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
                 my $url = httpurl $self, $urlcss, $href;
+                $self->event_log( error => "DEBUG --- $url" );
                 $mech->get($url);
                 my $content = $mech->content;
                 my @contenido = split /\n/, $mech->content;
                 for my $lineas (@contenido) {
-                    if ($lineas =~ /\@import\s+\"(.*)\"/) {
+                    if ($lineas =~ /\@import\s+\"(.*)\"/i) {
                         my $cssurl = httpurl $self, $1, $href;
                         my $mech2 = WWW::Mechanize->new();
                         my $css2 = CSS::Tiny->new();
@@ -415,7 +413,8 @@ sub run {
     if ($fontcount <= 0) {
         $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
     }
-    $self->ok( $errorcount == 0 );
+    $self->ok( 0 );
+    # $self->ok( $errorcount == 0 );
 }
 
 
