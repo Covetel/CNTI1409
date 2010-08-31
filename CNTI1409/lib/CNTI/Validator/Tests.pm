@@ -13,7 +13,8 @@ around BUILDARGS => sub {
     my ( $orig, $class, $job ) = @_;
     my $cache = WWW::Mechanize::Cached->new;
     $cache->env_proxy();
-    $cache->agent_alias("Linux Mozilla");
+    $cache->add_header( Accept => '*/*' );
+    $cache->agent_alias('Windows Mozilla');
     { job => $job, cache => $cache };
 };
 

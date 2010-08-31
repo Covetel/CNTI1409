@@ -306,13 +306,13 @@ sub run {
     my $activex = 0;
     my $flashhtml5 = 0;
     for my $plugin (@plugins) {
-        if ( $plugin->attr('classid') =~ /clsid:/ ) {
+        if ( $plugin->attr('classid') =~ /clsid:/i ) {
             $activex++;
         }
     }
     my @embed = $self->htmlt->find('embed');
     for my $flash (@embed) {
-        if ( $flash->attr('src') =~ /swf/ ) {
+        if ( $flash->attr('src') =~ /swf/i or $flash->attr('type') =~ /flash/i or $flash->attr('src') =~ /youtube/ ) {
             $flashhtml5++;
         }
     }
@@ -332,6 +332,42 @@ use URI;
    
 extends 'CNTI::Validator::Test';
 
+sub httpurl {
+    my ($self, $urlcss, $href) = @_;
+    my $url;
+    if ( $urlcss->path =~ /^\//) {
+        $url = $href if $urlcss->authority;
+        $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+    } else {
+        $url = $href if $urlcss->authority;
+        $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
+    }
+    return $url;
+}
+
+sub checkfonts {
+    my ($self, $content)= @_;
+    my $fontcount;
+    my $errorcount;
+    my $css = CSS::Tiny->new();
+    $css = CSS::Tiny->read_string($content);
+    for my $style ( values %{$css} ) {
+        if ($style->{'font-family'}) {
+            my $fuentes = $style->{'font-family'};
+            my @fnt = split /,[\ ?]*/, $fuentes;
+            foreach my $a (@fnt) {
+                $fontcount++;
+                my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                if ( $#rs < 0 ) {
+                    $self->event_log( error => "La fuente $a no es válida" );
+                    $errorcount++;
+                }
+            }
+        }
+    }
+    return ("$fontcount", "$errorcount");
+}
+
 sub run {
     my $self = shift;
     my $css = CSS::Tiny->new();
@@ -344,16 +380,23 @@ sub run {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
-                my $url;
-                if ( $urlcss->path =~ /^\//) {
-                    $url = $href if $urlcss->authority;
-                    $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
-                } else {
-                    $url = $href if $urlcss->authority;
-                    $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
-                }
+                my $url = httpurl $self, $urlcss, $href;
                 $mech->get($url);
-                my $content = $mech->content(); 
+                my $content = $mech->content;
+                my @contenido = split /\n/, $mech->content;
+                for my $lineas (@contenido) {
+                    $self->event_log( error => "DEBUG --- $lineas" );
+                    $self->ok(0);
+                    if ($lineas =~ /\@import\s+\"(.*)\"/i) {
+                        my $cssurl = httpurl $self, $1, $href;
+                        my $mech2 = WWW::Mechanize->new();
+                        $mech2->get($cssurl);
+                        my $content2 = $mech2->content;
+                        my ($ercnt, $fntcnt) = checkfonts $self, $content2;
+                        $errorcount = $errorcount + $ercnt;
+                       $fontcount = $fontcount + $fntcnt; 
+                    }
+                }
                 $css = CSS::Tiny->read_string($content);
                 for my $style ( values %{$css} ) {
                     if ($style->{'font-family'}) {
@@ -377,7 +420,8 @@ sub run {
     if ($fontcount <= 0) {
         $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
     }
-    $self->ok( $errorcount == 0 );
+    $self->ok( 0 );
+    # $self->ok( $errorcount == 0 );
 }
 
 
