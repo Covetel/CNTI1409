@@ -333,22 +333,23 @@ use URI;
 extends 'CNTI::Validator::Test';
 
 sub httpurl {
-    my ($self, $urlcss, $href) = @_;
+    my ($uri, $urlcss, $href) = @_;
     my $url;
     if ( $urlcss->path =~ /^\//) {
         $url = $href if $urlcss->authority;
-        $url = "http://" . $self->uri->authority . $urlcss->path if !($urlcss->authority);
+        $url = "http://" . $uri->authority . $urlcss->path if !($urlcss->authority);
     } else {
         $url = $href if $urlcss->authority;
-        $url = "http://" . $self->uri->authority . "/" . $urlcss->path if !($urlcss->authority);
+        $url = "http://" . $uri->authority . "/" . $urlcss->path if !($urlcss->authority);
     }
     return $url;
 }
 
 sub checkfonts {
-    my ($self, $content)= @_;
-    my $fontcount;
-    my $errorcount;
+    my ($content)= @_;
+    my $fontcount = 0;
+    my $errorcount = 0;
+    my @fonts;
     my $css = CSS::Tiny->new();
     $css = CSS::Tiny->read_string($content);
     for my $style ( values %{$css} ) {
@@ -359,69 +360,70 @@ sub checkfonts {
                 $fontcount++;
                 my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
                 if ( $#rs < 0 ) {
-                    $self->event_log( error => "La fuente $a no es válida" );
+                    push @fonts, $a;
                     $errorcount++;
                 }
             }
         }
     }
-    return ("$fontcount", "$errorcount");
+    return ($fontcount, $errorcount, @fonts);
 }
 
 sub run {
     my $self = shift;
     my $css = CSS::Tiny->new();
     my $mech = WWW::Mechanize->new; 
+    $mech->add_header(Accept => "*/*");
     my @styles = $self->htmlt->find('link');
     my $fontcount = 0;
     my $errorcount = 0;
+    my $uri = $self->uri;
     for my $css (@styles) {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
                 my $urlcss = URI->new($href);
-                my $url = httpurl $self, $urlcss, $href;
+                my $url = httpurl $uri, $urlcss, $href;
                 $mech->get($url);
                 my $content = $mech->content;
-                my @contenido = split /\n/, $mech->content;
-                for my $lineas (@contenido) {
-                    $self->event_log( error => "DEBUG --- $lineas" );
-                    $self->ok(0);
-                    if ($lineas =~ /\@import\s+\"(.*)\"/i) {
-                        my $cssurl = httpurl $self, $1, $href;
-                        my $mech2 = WWW::Mechanize->new();
-                        $mech2->get($cssurl);
-                        my $content2 = $mech2->content;
-                        my ($ercnt, $fntcnt) = checkfonts $self, $content2;
-                        $errorcount = $errorcount + $ercnt;
-                       $fontcount = $fontcount + $fntcnt; 
+                my ($errcount, $fntcount, @fuentes) = checkfonts $content;
+                if ($#fuentes >= 0) {
+                    for my $fuente (@fuentes) {
+                        $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
                     }
                 }
-                $css = CSS::Tiny->read_string($content);
-                for my $style ( values %{$css} ) {
-                    if ($style->{'font-family'}) {
-                        my $fuentes = $style->{'font-family'};
-                        my @fnt = split /,[\ ?]*/, $fuentes;
-                        foreach my $a (@fnt) {
-                            $fontcount++;
-                            my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
-                            if ( $#rs < 0 ) {
-                                $self->event_log( error => "La fuente $a no es válida" );
-                                $errorcount++;
+                $errorcount = $errorcount + $errcount;
+                $fontcount = $fontcount + $fntcount;
+                my @contenido = split /\n/, $mech->content;
+                for my $lineas (@contenido) {
+                    if ($lineas =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
+                        my $cssuri = URI->new($2);
+                        my $cssurl = httpurl $uri, $cssuri, $href;
+                        my $mech2 = WWW::Mechanize->new();
+                        $mech2->add_header(Accept => "*/*");
+                        $mech2->get($cssurl);
+                        my $content2 = $mech2->content;
+                        my ($ercnt, $fntcnt, @subfonts) = checkfonts $content2;
+                        if ($#subfonts >= 0) {
+                            for my $subfont (@subfonts) {
+                                $self->event_log( error => "La fuente $subfont no es libre en el CSS $cssurl");
                             }
                         }
+                        $errorcount = $errorcount + $ercnt;
+                        $fontcount = $fontcount + $fntcnt; 
                     }
                 }
             } else {
                 $self->event_log( warning => "Atributo link de tipo stylesheet con href vacio" );
+                $errorcount++;
             }
         }
     }
     if ($fontcount <= 0) {
         $self->event_log( error => "No se han encontrado fuentes en las hojas de estilo, las fuentes deben ser declaradas en hojas de estilo y no en el HTML" );
+        $errorcount++;
     }
-    $self->ok( 0 );
-    # $self->ok( $errorcount == 0 );
+    $self->ok( $errorcount == 0 );
 }
 
 
