@@ -1,0 +1,5 @@
+dn: ou=cnti1409,dc=cnti,dc=gob,dc=ve
+ou: cnti1409
+objectClass: top
+objectClass: organizationalUnit
+description: Validador de Portales
