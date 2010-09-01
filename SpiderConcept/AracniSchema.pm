@@ -1,4 +1,4 @@
-package AracniSchema;
+package CNTI::Spider::Schema;
 use Moose;
 use CNTI::SpiderDB;
 

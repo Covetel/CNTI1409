@@ -2,9 +2,9 @@ use utf8;
 use feature ":5.10";
 use strict;
 
-package AracniState;
+package CNTI::Spider::State;
 use Moose;
-use AracniSchema;
+use CNTI::Spider::Schema;
 use Digest::MD5 'md5_hex';
 use URI::URL;
 
@@ -37,7 +37,7 @@ sub BUILDARGS {
     $rec{'depth'} = $args{'depth'} || 0;
     $rec{'state'} = $args{'state'} || 0;
     $rec{'base'}  = $args{'base'}  || die "base is required";
-    return { job   => AracniSchema->resultset("SpiderJob")->create( \%rec ) }
+    return { job   => CNTI::Spider::Schema->resultset("SpiderJob")->create( \%rec ) }
 }
 
 
@@ -85,7 +85,7 @@ sub url_get {
 
     # Make futher cleanup of URL here (when more detergent is available)
 
-    my $mech = AracniUA->new();
+    my $mech = CNTI::Spider::UA->new();
     $mech->safe_get($url) or return 0;
 
     # Reject repeated URLs
@@ -100,7 +100,7 @@ sub url_get {
     if ( $depth > 0 ) {
         my @links = $mech->links;
         if (@links) {
-            my $l = AracniUrlList->new(
+            my $l = CNTI::Spider::UrlList->new(
                 list => \@links,
                 dir  => $self->dir
             );

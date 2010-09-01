@@ -3,7 +3,7 @@ use feature ":5.10";
 use strict;
 
 # My own tailor made UA
-package AracniUA;
+package CNTI::Spider::UA;
 use Moose;
 
 has ua => (

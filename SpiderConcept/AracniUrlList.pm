@@ -2,7 +2,7 @@ use utf8;
 use feature ":5.10";
 use strict;
 
-package AracniUrlList;
+package CNTI::Spider::UrlList;
 use Moose;
 use URI::URL;
 
