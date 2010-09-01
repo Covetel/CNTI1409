@@ -13,14 +13,14 @@ use utf8;
 use feature ":5.10";
 use strict;
 
-use AracniUA;
-use AracniState;
-use AracniUrlList;
+use CNTI::Spider::UA;
+use CNTI::Spider::State;
+use CNTI::Spider::UrlList;
 
 my $base = "http://www.cnti.gob.ve/";
 
 use YAML;
-my $spider = AracniState->new( base => $base, depth => 4, num => 20, dir => 0 );
+my $spider = CNTI::Spider::State->new( base => $base, depth => 4, num => 20, dir => 0 );
 $spider->run;
 for ( $spider->queue ) {
     printf "%s %s\n", $_->sum, $_->title;
