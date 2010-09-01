@@ -26,18 +26,27 @@ has queue => (
 =cut
 
 has job => ( is => "ro", isa => "CNTI::SpiderDB::Result::SpiderJob",
-    handles => { ( map { $_ => $_ } qw(base num dir depth state) ) } );
+    handles => { ( map { $_ => $_ } qw(id base num dir depth state update discard_changes) ) } );
 
 sub BUILDARGS {
     my $class = shift;
     my %args = @_;
     my %rec;
-    $rec{'num'}   = $args{'num'}   || 0;
-    $rec{'dir'}   = $args{'dir'}   || 0;
-    $rec{'depth'} = $args{'depth'} || 0;
-    $rec{'state'} = $args{'state'} || 0;
-    $rec{'base'}  = $args{'base'}  || die "base is required";
-    return { job   => CNTI::Spider::Schema->resultset("SpiderJob")->create( \%rec ) }
+
+    if ( exists $args{'id'} ) {
+        my $id = $args{'id'};
+        my $job = CNTI::Spider::Schema->resultset("SpiderJob")->find( { id => $id } );
+        die "Innexistent Id: $id\n" unless defined $id;
+        return { job => $job };
+    }
+    else {
+        $rec{'num'}   = $args{'num'}   || 0;
+        $rec{'dir'}   = $args{'dir'}   || 0;
+        $rec{'depth'} = $args{'depth'} || 0;
+        $rec{'state'} = $args{'state'} || 0;
+        $rec{'base'}  = $args{'base'}  || die "base is required";
+        return { job   => CNTI::Spider::Schema->resultset("SpiderJob")->create( \%rec ) }
+    }
 }
 
 
@@ -65,11 +74,18 @@ sub q_add {
 
 sub run {
     my $self = shift;
-    $self->state(1);
-    $self->url_get( URI::URL->new($self->base), $self->depth );
-    $self->state(2);
+    if ( my $pid = fork ) {
+        return $pid;
+    }
+    else {
+        $self->state(1);
+        $self->update;
+        $self->url_get( URI::URL->new($self->base), $self->depth );
+        $self->state(2);
+        $self->update;
+        exit 0;
+    }
 }
-
 
 sub url_get {
     my ( $self, $url, $depth ) = @_;
@@ -109,6 +125,7 @@ sub url_get {
     }
 
     $u_rec->state(2);
+    $u_rec->update;
     return 1;
 }
 
