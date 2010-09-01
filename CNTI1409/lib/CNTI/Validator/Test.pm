@@ -420,6 +420,37 @@ sub run {
             }
         }
         # Revision en etiqueta style
+        my @styletags = $self->htmlt->find('style'); 
+        for my $styletag (@styletags) {
+            my @lines = $styletag->content_list;
+            my $stylecontent = join ("\n", @lines);
+            my ($styerrorcount, $styfontcount, @styfonts) = checkfonts $stylecontent;
+            if ($#styfonts >= 0) {
+                for my $styfont (@styfonts) {
+                    $self->event_log( error => "La fuente $styfont no es libre, embebido en el HTML" );
+                }
+            }
+            $errorcount = $errorcount + $styerrorcount;
+            $fontcount = $fontcount + $styfontcount;
+            for my $line (@lines) {
+                if ($line =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
+                    my $styuri = URI->new($2);
+                    my $styurl = httpurl $uri, $styuri, "";
+                    my $stymech = WWW::Mechanize->new();
+                    $stymech->add_header(Accept => "*/*");
+                    $stymech->get($styurl);
+                    my $stycontent = $stymech->content;
+                    my ($styercnt, $styfntcnt, @styimportfonts) = checkfonts $stycontent;
+                    if ($#styimportfonts >= 0) {
+                        for my $styimportfont (@styimportfonts) {
+                            $self->event_log( error => "La fuente $styimportfont no es libre en el CSS $styurl");
+                        }
+                    }
+                    $errorcount = $errorcount + $styercnt;
+                    $fontcount = $fontcount + $styfntcnt; 
+                }
+            }
+        }
 
     }
     if ($fontcount <= 0) {
