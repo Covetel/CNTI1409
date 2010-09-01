@@ -110,7 +110,7 @@ sub run {
             }
         }
     }
-    $self->( $errcount == 0);
+    $self->ok( $errcount == 0);
 }
 
 package CNTI::Validator::Test::Title;
@@ -424,6 +424,7 @@ sub run {
                 $mech->get($url);
                 my $content = $mech->content;
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
+                $self->event_log( error => "DEBUG --- Errores: $errcount - Fuentes $fntcount - Array $#fuentes" );
                 if ($#fuentes >= 0) {
                     for my $fuente (@fuentes) {
                         $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
