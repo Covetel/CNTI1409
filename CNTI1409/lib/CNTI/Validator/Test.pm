@@ -77,6 +77,42 @@ sub run {
     $self->ok( $self->uri->authority =~ /\.gob\.ve$/i );
 }
 
+package CNTI::Validator::Test::Meta;
+use Moose;
+use HTML::TreeBuilder;
+use CNTI::Validator::Schema;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+    my @node = $self->htmlt->find('meta');
+    unless (@node) {
+        $self->event_log( error => "No tiene etiqueta meta");
+        $errcount++;
+    }
+    for my $father (@node) {
+        unless ($father->parent eq 'head') {
+            $self->event_log( error => "La etiqueta meta no está dentro del tag head");
+            $errcount++;
+        }
+    }
+    my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta' } );
+    for my $nod (@node) {
+        if ($nod->attr('name')) {
+            for my $record (@rs) {
+                my $val = $record->get_column('parametro');
+                unless ($nod->attr('name') =~ /$val/i) {
+                    $self->event_log( error => "No está definida la meta $val");
+                    $errcount++;
+                }
+            }
+        }
+    }
+    $self->( $errcount == 0);
+}
+
 package CNTI::Validator::Test::Title;
 use Moose;
 use CNTI::Validator::LibXML;
