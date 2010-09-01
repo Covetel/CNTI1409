@@ -231,13 +231,15 @@ sub auditoria_struct {
 	
 	# Busco la estructura de disposiciones.
 	my $disp = &disposiciones_struct;
-	$auditoria->{disposiciones} = $disp;
 
 	# Busco los resultados por disposicion. 
 	my $resultados = disposiciones $aud->job;
 	
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
+		# Si no hay resultados para la disposición en el Job, entonces next.
+		next if $resultados->{$disposicion} eq '' ;
+		$auditoria->{disposiciones}->{$disposicion} = $disp->{$disposicion};
 		my @urls;
 		foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
 			my $path = latex_encode($url); 
