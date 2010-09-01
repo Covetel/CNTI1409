@@ -382,7 +382,7 @@ sub httpurl {
 }
 
 sub checkfonts {
-    my ($content)= @_;
+    my $content= shift;
     my $fontcount = 0;
     my $errorcount = 0;
     my @fonts;
@@ -423,8 +423,8 @@ sub run {
                 my $url = httpurl $uri, $urlcss, $href;
                 $mech->get($url);
                 my $content = $mech->content;
+                $self->event_log( error => "DEBUG --- CSS: $url - Content: $content" );
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
-                $self->event_log( error => "DEBUG --- Errores: $errcount - Fuentes $fntcount - Array $#fuentes" );
                 if ($#fuentes >= 0) {
                     for my $fuente (@fuentes) {
                         $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
