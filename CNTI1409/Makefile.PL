@@ -33,6 +33,7 @@ requires 'CSS::Tiny';
 requires 'Template::Latex';
 requires 'LaTeX::Encode';
 requires 'Catalyst::Authentication::Store::LDAP';
+requires 'Catalyst::Model::LDAP';
 
 
 test_requires 'Test::More' => '0.88';
