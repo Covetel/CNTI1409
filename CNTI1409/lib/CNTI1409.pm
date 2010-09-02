@@ -20,6 +20,7 @@ use Catalyst qw/
 	Unicode::Encoding
 	StackTrace
     Authentication
+	Authorization::Roles
     Session
     Session::Store::FastMmap
     Session::State::Cookie

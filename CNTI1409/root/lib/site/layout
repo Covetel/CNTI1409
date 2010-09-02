@@ -57,7 +57,7 @@
 								<img src="/static/images/loading.gif" title="Cargando ..." />
 						</div>
                         <div id="is_usuario">
-                                <div id="is_usuario_uid"> administrador@dominio.com.ve </div>
+                                <div id="is_usuario_uid"> [% c.user.ldap_entry.uid %] </div>
                         </div>
                         <div id="is_enlaces">
                                 <ul>
@@ -70,32 +70,13 @@
                 </div>
 
                 <div id="menu_vertical">
-                        <h3><a href="#"> Auditor&iacute;a </a></h3>
-                        <div>
-                                <a href="/auditoria/crear"> Crear </a> <br />
-                                <a href="/auditoria/reporte"> Listar </a> <br />
-                        </div>
-                        <h3><a href="#"> Instituciones </a></h3>
-                        <div>
-                                <a href="/instituciones/registrar"> Registrar</a> <br />
-                                <a href="/instituciones/listar"> Listar </a> <br />
-                        </div>
-                        <h3><a href="#"> Entidades <br /> Verificadoras </a></h3>
-                        <div>
-                                <a href="/entidades/registrar"> Registrar </a> <br />
-                                <a href="/entidades/listar"> Listar </a> <br />
-                        </div>
-                        <h3><a href="#"> Administración </a></h3>
-                        <div>
-                                <a href="/administracion/parametros"> Parámetros </a> <br />
-                                <a href="/administracion/usuarios"> Usuarios </a> <br />
-                        </div>
-                        <h3><a href="#"> Reportes </a></h3>
-                        <div>
-                                <a href="/reportes/instituciones/"> Instituciones </a> <br />
-                                <a href="/reportes/entidades/"> Entidades </a> <br />
-                                <a href="/reportes/wizard"> Auditorias </a> <br />
-                        </div>
+						[% IF c.check_user_roles('Administrador') %]
+							[% INCLUDE menus/menu_administrador.tt2 %]
+						[% ELSIF c.check_user_roles('Auditor') %]
+							[% INCLUDE menus/menu_auditor.tt2 %]
+						[% ELSIF c.check_user_roles('AuditorJefe') %]
+							[% INCLUDE menus/menu_auditorJefe.tt2 %]
+						[% END %]
                 </div>
 
                 <div id="area_aplicacion">

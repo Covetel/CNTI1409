@@ -1,0 +1,9 @@
+<h3><a href="#"> Auditor&iacute;a </a></h3>
+<div>
+		<a href="/auditoria/crear"> Crear </a> <br />
+		<a href="/auditoria/reporte"> Listar </a> <br />
+</div>
+<h3><a href="#"> Reportes </a></h3>
+<div>
+		<a href="/reportes/wizard"> Auditorias </a> <br />
+</div>

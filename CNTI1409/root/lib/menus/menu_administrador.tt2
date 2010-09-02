@@ -1,0 +1,26 @@
+<h3><a href="#"> Auditor&iacute;a </a></h3>
+<div>
+		<a href="/auditoria/crear"> Crear </a> <br />
+		<a href="/auditoria/reporte"> Listar </a> <br />
+</div>
+<h3><a href="#"> Instituciones </a></h3>
+<div>
+		<a href="/instituciones/registrar"> Registrar</a> <br />
+		<a href="/instituciones/listar"> Listar </a> <br />
+</div>
+<h3><a href="#"> Entidades <br /> Verificadoras </a></h3>
+<div>
+		<a href="/entidades/registrar"> Registrar </a> <br />
+		<a href="/entidades/listar"> Listar </a> <br />
+</div>
+<h3><a href="#"> Administración </a></h3>
+<div>
+		<a href="/administracion/parametros"> Parámetros </a> <br />
+		<a href="/administracion/usuarios"> Usuarios </a> <br />
+</div>
+<h3><a href="#"> Reportes </a></h3>
+<div>
+		<a href="/reportes/instituciones/"> Instituciones </a> <br />
+		<a href="/reportes/entidades/"> Entidades </a> <br />
+		<a href="/reportes/wizard"> Auditorias </a> <br />
+</div>
