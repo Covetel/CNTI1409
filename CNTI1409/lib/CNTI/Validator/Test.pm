@@ -87,28 +87,35 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self = shift;
     my $errcount = 0;
+    my @metas;
+    my @rs_metas = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta' } );
+    my %hash;
+    for my $meta (@rs_metas) {
+        $hash{$meta->get_column('parametro')}=0;
+    }
     my @node = $self->htmlt->find('meta');
     unless (@node) {
         $self->event_log( error => "No tiene etiqueta meta");
         $errcount++;
     }
     for my $father (@node) {
-        unless ($father->parent eq 'head') {
+        unless ($father->parent->tag eq 'head') {
             $self->event_log( error => "La etiqueta meta no está dentro del tag head");
             $errcount++;
         }
-    }
-    my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta' } );
-    for my $nod (@node) {
-        if ($nod->attr('name')) {
-            for my $record (@rs) {
-                my $val = $record->get_column('parametro');
-                unless ($nod->attr('name') =~ /$val/i) {
-                    $self->event_log( error => "No está definida la meta $val");
-                    $errcount++;
-                }
+        if ($father->attr('name')) {
+            my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta', parametro => $father->attr('name') } );
+            if ($#rs < 0) {
+                push @metas, $father->attr('name');
+                $errcount++;
+            } else {
+                $hash{$father->attr('name')} = 1;
             }
         }
+    }
+    my @keys_with_values = grep { $hash{$_} == 0 } keys %hash;
+    if ($errcount) {
+        $self->event_log( error => "No está definida la meta $_" ) for @keys_with_values;
     }
     $self->ok( $errcount == 0);
 }
@@ -395,7 +402,7 @@ sub checkfonts {
             my @fnt = split /,[\ ?]*/, $fuentes;
             foreach my $a (@fnt) {
                 $fontcount++;
-                my @rs = CNTI::Validator::Schema->resultset('Param')->search( { parametro => $a } );
+                my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => "Fonts", parametro => $a } );
                 if ( $#rs < 0 ) {
                     push @fonts, $a;
                     $errorcount++;
@@ -420,8 +427,9 @@ sub run {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
-                my $urlcss = URI->new($href);
-                my $url = httpurl $uri, $urlcss, $href;
+                # my $urlcss = URI->new($href);
+                # my $url = httpurl $uri, $urlcss, $href;
+                my $url = URI->new_abs( $href, $self->uri );
                 $mech->get($url);
                 my $content = $mech->content;
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
@@ -435,8 +443,10 @@ sub run {
                 my @contenido = split /\n/, $mech->content;
                 for my $lineas (@contenido) {
                     if ($lineas =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                        my $cssuri = URI->new($2);
-                        my $cssurl = httpurl $uri, $cssuri, $href;
+                        # my $cssuri = URI->new($2);
+                        # my $cssurl = httpurl $uri, $cssuri, $href;
+                        my $hre = $2;
+                        my $cssurl = URI->new_abs( $hre, $self->uri );
                         my $mech2 = WWW::Mechanize->new();
                         $mech2->add_header(Accept => "*/*");
                         $mech2->get($cssurl);
@@ -471,8 +481,10 @@ sub run {
             $fontcount = $fontcount + $styfontcount;
             for my $line (@lines) {
                 if ($line =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                    my $styuri = URI->new($2);
-                    my $styurl = httpurl $uri, $styuri, "";
+                    # my $styuri = URI->new($2);
+                    # my $styurl = httpurl $uri, $styuri, "";
+                    my $resource = $2;
+                    my $styurl = URI->new_abs( $resource, $self->uri );
                     my $stymech = WWW::Mechanize->new();
                     $stymech->add_header(Accept => "*/*");
                     $stymech->get($styurl);
