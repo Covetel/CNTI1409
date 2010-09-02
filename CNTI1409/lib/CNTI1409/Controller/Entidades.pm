@@ -51,9 +51,24 @@ sub registrar : Local : FormConfig {
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
         my $entidad = $c->model('DB::Entidadverificadora')->new_result({});
-        $form->model->update($entidad);
-        $mensaje = "La Entidad " . $form->param_value('nombre') . " se ha registrado con éxito";
-        $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => 0}));
+        my $e = $form->model->update($entidad);
+		
+		use Net::LDAP::Entry;
+		my $entry = Net::LDAP::Entry->new;
+		# Construyo el DN de la entidad. 
+		my $dn = "cn=".$e->nombre.",".$c->config->{base_entidades};
+		$entry->dn($dn);
+		# Agrego los atributos.
+		$entry->add( objectClass => [qw/top posixGroup/], cn => $e->nombre, gidNumber => $e->id);
+		my $mesg = $c->model('LDAP')->add($entry);
+		if ($mesg->is_error()){
+			my $error = 1;
+	        $mensaje = "La Entidad " . $form->param_value('nombre') . "no se ha registrado con éxito en LDAP";
+		} else {
+			my $error = 0;
+	        $mensaje = "La Entidad " . $form->param_value('nombre') . " se ha registrado con éxito";
+		}
+        $c->response->redirect($c->uri_for($self->action_for('registrar'),{ mensaje => $mensaje, error => $error}));
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
