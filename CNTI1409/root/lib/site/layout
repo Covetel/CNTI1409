@@ -57,7 +57,10 @@
 								<img src="/static/images/loading.gif" title="Cargando ..." />
 						</div>
                         <div id="is_usuario">
-                                <div id="is_usuario_uid"> [% c.user.ldap_entry.uid %] </div>
+                                <div id="is_usuario_uid"> 
+									[% c.user.ldap_entry.uid %] | 
+									[% rol %] 
+								</div>
                         </div>
                         <div id="is_enlaces">
                                 <ul>

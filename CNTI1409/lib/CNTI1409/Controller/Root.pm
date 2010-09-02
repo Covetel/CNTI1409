@@ -48,6 +48,7 @@ sub inicio : Local {
     }
 	use Data::Dumper;
 	my @roles = $c->user->roles();
+	$c->stash->{rol} = $roles[0] if @roles ;
 	my $name = $c->user->ldap_entry->cn;
 	$c->log->debug(Dumper(@roles));
 	$c->log->debug($name);
@@ -87,12 +88,12 @@ sub login : Local : FormConfig {
                 return;
             } else {
                 $c->stash->{error} = 1;
-                $c->stash->{mensaje} = "Correo o Contraseña no válidos";
+                $c->stash->{mensaje} = "Usuario o Contraseña no válidos";
             }
         }
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
-        $c->stash->{mensaje} = "Correo o Contraseña no válidos";
+        $c->stash->{mensaje} = "Usuario o Contraseña no válidos";
     }
 	$c->stash->{template} = 'ingresar.tt2';
 }
