@@ -7,8 +7,8 @@ use base qw/Catalyst::Model::LDAP/;
 __PACKAGE__->config(
     host              => 'localhost',
     base              => 'ou=cnti1409,dc=cnti,dc=gob,dc=ve',
-    dn                => '',
-    password          => '',
+    dn                => 'cn=admin,dc=cnti,dc=gob,dc=ve',
+    password          => '123321...',
     start_tls         => 0,
     start_tls_options => { verify => 'require' },
     options           => {},  # Options passed to search
@@ -28,7 +28,7 @@ LDAP Catalyst model component.
 
 =head1 AUTHOR
 
-,,,
+Walter Vargas <walter@covetel.com.ve>
 
 =head1 LICENSE
 

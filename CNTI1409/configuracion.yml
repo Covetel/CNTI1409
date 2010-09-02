@@ -59,3 +59,8 @@ authentication:
                 role_value: uid
                 role_search_options:
                     deref: always
+
+
+# Configuración General LDAP. 
+# Base de busqueda de Entidades.
+base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
