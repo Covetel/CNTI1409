@@ -1,5 +1,0 @@
-dn: ou=usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
-ou: usuarios
-objectClass: top
-objectClass: organizationalUnit
-description: Usuarios del validador de Portales
