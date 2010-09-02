@@ -362,8 +362,9 @@ sub run {
 package CNTI::Validator::Test::Fonts;
 use Moose;
 use CNTI::Validator::Schema;
+use CNTI::Validator::CSS;
 use WWW::Mechanize;
-use CSS::Tiny;
+# use CNTI::Validator::CSS;
 use URI;
    
 extends 'CNTI::Validator::Test';
@@ -386,8 +387,8 @@ sub checkfonts {
     my $fontcount = 0;
     my $errorcount = 0;
     my @fonts;
-    my $css = CSS::Tiny->new();
-    $css = CSS::Tiny->read_string($content);
+    my $css = CNTI::Validator::CSS->new();
+    $css = CNTI::Validator::CSS->read_string($content);
     for my $style ( values %{$css} ) {
         if ($style->{'font-family'}) {
             my $fuentes = $style->{'font-family'};
@@ -407,7 +408,7 @@ sub checkfonts {
 
 sub run {
     my $self = shift;
-    my $css = CSS::Tiny->new();
+    my $css = CNTI::Validator::CSS->new();
     my $mech = WWW::Mechanize->new; 
     $mech->add_header(Accept => "*/*");
     my @styles = $self->htmlt->find('link');
@@ -423,7 +424,6 @@ sub run {
                 my $url = httpurl $uri, $urlcss, $href;
                 $mech->get($url);
                 my $content = $mech->content;
-                $self->event_log( error => "DEBUG --- CSS: $url - Content: $content" );
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
                 if ($#fuentes >= 0) {
                     for my $fuente (@fuentes) {
