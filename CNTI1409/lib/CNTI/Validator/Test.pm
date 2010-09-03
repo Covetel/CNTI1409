@@ -123,6 +123,42 @@ sub run {
     $self->ok( $errcount == 0);
 }
 
+package CNTI::Validator::Test::Layout;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+    my $tblcount = 0;
+
+    my @frames = $self->htmlt->find('frame');
+    my $numframes = $#frames + 1;
+    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo <frame> " ) if ($#frames >= 0);
+    $errcount++ if ($#frames >= 0);
+    my @iframes = $self->htmlt->find('iframe');
+    my $numiframes = $#iframes + 1;
+    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo <frame> " ) if ($#iframes >= 0);
+    $errcount++ if ($#iframes >= 0);
+    
+    my @nodes = $self->htmlt->find('table');
+    if ($#nodes >= 0) {
+        for my $table (@nodes) {
+            my @hijos = $table->descendants();
+            for my $hijo (@hijos) {
+                my @tblchild = $hijo->find('table');
+                if ($#tblchild >= 3) {
+                    $errcount++;
+                    $tblcount++;
+                }
+            }
+        }
+    }
+    $self->event_log( error => "Posible maquetado por tablas, demasiadas tablas anidadas" ) if $tblcount;
+    $self->ok( $errcount == 0 );
+}
+
 package CNTI::Validator::Test::Title;
 use Moose;
 use CNTI::Validator::LibXML;
@@ -354,6 +390,8 @@ sub run {
     for my $plugin (@plugins) {
         if ( $plugin->attr('classid') =~ /clsid:/i ) {
             $activex++;
+        } elsif ( $plugin->attr('data') =~ /\.swf/i ) {
+            $flashhtml5++;
         }
     }
     my @embed = $self->htmlt->find('embed');
@@ -364,7 +402,7 @@ sub run {
     }
 
     $self->event_log( error => "Hay $activex controles ActiveX" ) if ($activex);
-    $self->event_log( error => "Hay $flashhtml5 controles Flash declarados con HTML5" ) if ($flashhtml5);
+    $self->event_log( error => "Hay $flashhtml5 controles Flash declarados" ) if ($flashhtml5);
 
     $self->ok( $activex == 0  and $flashhtml5 == 0);
 }
@@ -520,14 +558,16 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self = shift;
     my $errcount = 0;
-
+     
     my @nodes = $self->htmlt->find('a');
     if ($#nodes >= 0) {
         for my $node (@nodes) {
-            if ($node->attr('href') =~ /(\.doc|\.docx|\.ppt|\.pptx|\.xls|\.xlsx)/i ) {
-                my $file = $node->attr('href');
-                $self->eveny_log( error => "El archivo $file no tiene un formato libre" );
-                $errcount++;
+            my $f = $node->attr('href');
+            if ($node->attr('href')) {
+                if ($f =~ /(\.doc|\.docx|\.ppt|\.pptx|\.xls|\.xlsx)/i ) {
+                    $self->event_log( error => "El archivo $f no tiene un formato libre" );
+                    $errcount++;
+                }
             }
         }
     }
