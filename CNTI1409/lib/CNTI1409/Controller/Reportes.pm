@@ -37,11 +37,27 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 
 =cut
 
-sub wizard : Local : FormConfig {
+sub wizard : Local : Form {
 	my ( $self, $c ) = @_;
-    my $form = $c->stash->{form};
+	my ($entidad_id, $entidad_nombre);
+	my $form = $self->form;
 	$c->stash->{titulo}     = "Generador de Reportes";
 	$c->stash->{template} 	= 'reportes/wizard.tt2';
+	if ($c->check_user_roles( qw/Administrador/ )){
+		$form->load_config_file('reportes/wizard.yml');
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+		$form->load_config_file('reportes/wizard_auditor.yml');
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		$entidad_id = $entidad->gidNumber;
+		$entidad_nombre = $entidad->cn;
+	}
+	$form->process;
+	$c->stash->{form} = $form;
 	if ($form->submitted_and_valid) {
 		my $desde = $c->req->params->{'desde'};	
 		my $hasta = $c->req->params->{'hasta'};	
@@ -62,7 +78,13 @@ sub wizard : Local : FormConfig {
 			}
         );
 		my $idpatron = $row->id;
-		my @datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		my @datos;
+		if ($c->check_user_roles( qw/Administrador/ )){
+			@datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+			@datos = $c->model('DB::Auditoria')->search({ idev => $entidad_id, $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+
+		}
 		my @auditorias;
 		foreach my $dato (@datos){
 			my $auditoria = {};

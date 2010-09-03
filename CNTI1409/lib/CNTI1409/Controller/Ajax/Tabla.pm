@@ -196,8 +196,6 @@ sub auditorias_GET {
 	my @roles = $c->user->roles();
 	my $rs;
 	# Si el usuario es Administrador, lo ve todo. 
-	use Data::Dumper;
-	$c->log->debug(Dumper(@roles));
 	if ($c->check_user_roles( qw/Administrador/ )){
 		$rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
 	} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
