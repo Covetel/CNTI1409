@@ -123,6 +123,42 @@ sub run {
     $self->ok( $errcount == 0);
 }
 
+package CNTI::Validator::Test::Layout;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+    my $tblcount = 0;
+
+    my @frames = $self->htmlt->find('frame');
+    my $numframes = $#frames + 1;
+    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo <frame> " ) if ($#frames >= 0);
+    $errcount++ if ($#frames >= 0);
+    my @iframes = $self->htmlt->find('iframe');
+    my $numiframes = $#iframes + 1;
+    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo <frame> " ) if ($#iframes >= 0);
+    $errcount++ if ($#iframes >= 0);
+    
+    my @nodes = $self->htmlt->find('table');
+    if ($#nodes >= 0) {
+        for my $table (@nodes) {
+            my @hijos = $table->descendants();
+            for my $hijo (@hijos) {
+                my @tblchild = $hijo->find('table');
+                if ($#tblchild >= 3) {
+                    $errcount++;
+                    $tblcount++;
+                }
+            }
+        }
+    }
+    $self->event_log( error => "Posible maquetado por tablas, demasiadas tablas anidadas" ) if $tblcount;
+    $self->ok( $errcount == 0 );
+}
+
 package CNTI::Validator::Test::Title;
 use Moose;
 use CNTI::Validator::LibXML;
