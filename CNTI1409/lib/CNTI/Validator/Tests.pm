@@ -7,13 +7,13 @@ use CNTI::Validator::Test;
 has job   => ( is => 'ro', isa => 'CNTI::Validator::Monitor::Job', required => 1 );
 has cache => ( is => 'ro', isa => 'WWW::Mechanize::Cached',        required => 1 );
 
-my @tests = qw(Domain Title UTF8 Img Alt JS JS_inc HTML4 Plugins Fonts);
+my @tests = qw(Domain Title UTF8 Img Alt JS JS_inc HTML4 Plugins Fonts Meta Formatos Layout);
 
 around BUILDARGS => sub {
     my ( $orig, $class, $job ) = @_;
     my $cache = WWW::Mechanize::Cached->new;
     $cache->env_proxy();
-    $cache->add_header( Accept => '*/*' );
+    $cache->add_header( 'Accept-Encoding' => 'gzip,deflate' );
     $cache->agent_alias('Windows Mozilla');
     { job => $job, cache => $cache };
 };

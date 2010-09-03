@@ -193,7 +193,22 @@ sub auditorias_GET {
 	}
     use DateTime;
 	my ($self, $c) = @_;
-	my $rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
+	my @roles = $c->user->roles();
+	my $rs;
+	# Si el usuario es Administrador, lo ve todo. 
+	if ($c->check_user_roles( qw/Administrador/ )){
+		$rs = $c->model('DB::Auditoria')->search({},{join => 'idev', join => 'idinstitucion'});
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		my $entidad_id = $entidad->gidNumber;
+		$rs = $c->model('DB::Auditoria')->search({idev => $entidad_id},{join => 'idev', join => 'idinstitucion'});
+	}
+	
 	my %data;
     $data{aaData} = [
        map {

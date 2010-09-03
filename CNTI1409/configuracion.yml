@@ -26,19 +26,41 @@ breadcrumbs:
     /instituciones/listar: Lista de Instituciones
     /instituciones/registrar: Registrar Institución
 
-# Configuración de el módulo básico de autenticación.
-Plugin::Authentication:
-  default_realm: members
-  realms:
-    members:
-      credential:
-        class: Password
-        password_field: password
-        password_type: clear
-      store:
-        class: Minimal
-        users:
-          administrador@dominio.com.ve:
-            editor: yes
-            password: administrador
+# Configuración del Módulo de Autenticación LDAP.
+authentication:
+    default_realm: ldap
+    realms:
+        ldap:
+            credential:
+                class: Password
+                password_field: password
+                password_type:  self_check
+            store:
+                class: LDAP
+                ldap_server: localhost
+                ldap_server_options:
+                    timeout: 30
+                binddn: cn=admin,dc=cnti,dc=gob,dc=ve
+                bindpw: 123321...
+                start_tls: 0
+                start_tls_options:
+                    verify: none
+                user_basedn: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+                user_filter: (&(objectClass=posixAccount)(uid=%s))
+                user_scope: sub
+                user_field: uid
+                user_search_options:
+                    deref: always
+                use_roles: 1
+                role_basedn: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+                role_filter: (&(objectClass=posixGroup)(memberUid=%s))
+                role_scope: sub
+                role_field: cn
+                role_value: uid
+                role_search_options:
+                    deref: always
 
+
+# Configuración General LDAP. 
+# Base de busqueda de Entidades.
+base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve

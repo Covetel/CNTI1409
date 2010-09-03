@@ -29,23 +29,6 @@ The root page (/)
 
 =cut
 
-sub pdf : Local {
-	my ( $self, $c ) = @_;
-	$c->stash->{name} = 'Walter Vargas';
-	my $auditoria = {};
-	$auditoria->{id} = '0002';
-	$c->stash->{auditoria} = $auditoria;
-	my @datos = qw/uno dos tres cuatro cinco seis/;
-	my $file = "reporte-0002.pdf";
-	$c->stash->{datos} = \@datos;
-	if ($c->forward( 'CNTI1409::View::PDF' ) ) {
-     # Only set the content type if we sucessfully processed the template
-     $c->response->content_type('application/pdf');
-     $c->response->header('Content-Disposition', "attachment; filename=$file");
-  	}
-
-}
-
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
     $c->forward('/login');
@@ -63,6 +46,15 @@ sub inicio : Local {
         $c->response->redirect($c->uri_for('/login'));
         return 0;
     }
+	use Data::Dumper;
+	my $usuario = $c->user->username;
+	my @roles = $c->user->roles();
+	$c->stash->{rol} = $roles[0] if @roles ;
+	my $name = $c->user->ldap_entry->cn;
+	# Busco la entidad a la que pertenece el usuario.
+	my $entidad = $c->model('LDAP')->search(base => $c->config->{base_entidades}, filter => "(&(objectClass=posixGroup)(memberUid=$usuario))")->shift_entry;
+	$c->log->debug(Dumper($entidad->cn)) if $entidad;
+	$c->log->debug($c->model('LDAP'));
 	$c->stash->{template} = 'inicio.tt2';
 }
 
@@ -94,19 +86,17 @@ sub login : Local : FormConfig {
     my $form = $c->stash->{form};
     if ($form->submitted_and_valid) { 
         if ( my $user = $form->param_value('correo') and my $password = $form->param_value('password') ) {
-            if ( $c->authenticate( { username => $user,
-                                     password => $password } ) ) {
+            if ( $c->authenticate( { id => $user, password => $password } ) ) {
                 $c->response->redirect($c->uri_for($c->controller('Root')->action_for('inicio')));
                 return;
-
             } else {
                 $c->stash->{error} = 1;
-                $c->stash->{mensaje} = "Correo o Contraseña no válidos";
+                $c->stash->{mensaje} = "Usuario o Contraseña no válidos";
             }
         }
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
-        $c->stash->{mensaje} = "Correo o Contraseña no válidos";
+        $c->stash->{mensaje} = "Usuario o Contraseña no válidos";
     }
 	$c->stash->{template} = 'ingresar.tt2';
 }

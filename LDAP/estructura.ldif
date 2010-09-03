@@ -1,0 +1,67 @@
+dn: dc=cnti,dc=gob,dc=ve
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: CNTI
+dc: cnti
+
+dn: cn=admin,dc=cnti,dc=gob,dc=ve
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: {crypt}YzZ9VoqaMlXVc
+
+dn: ou=cnti1409,dc=cnti,dc=gob,dc=ve
+ou: cnti1409
+objectClass: top
+objectClass: organizationalUnit
+description: Validador de Portales
+
+dn: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: organizationalUnit
+objectClass: top
+ou: Entidades
+
+dn: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: organizationalUnit
+objectClass: top
+ou: Roles
+
+dn: cn=Administrador,ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: posixGroup
+objectClass: top
+cn: Administrador
+gidNumber: 1000
+memberUid: ucnti
+
+dn: cn=Auditor,ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: posixGroup
+objectClass: top
+cn: Auditor
+gidNumber: 1001
+
+dn: cn=AuditorJefe,ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: posixGroup
+objectClass: top
+cn: AuditorJefe
+gidNumber: 1002
+
+dn: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: top
+objectClass: organizationalUnit
+description: Usuarios del validador de Portales
+ou: Usuarios
+
+dn: cn=Usuario1 CNTI,ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+givenName: Usuario1
+sn: CNTI
+cn: Usuario1 CNTI
+uid: ucnti
+userPassword: {MD5}ebWUvajbFyIXOgXRvtHDfQ==
+uidNumber: 1001
+gidNumber: 1000
+homeDirectory: /home/users/ucnti

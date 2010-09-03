@@ -37,11 +37,27 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 
 =cut
 
-sub wizard : Local : FormConfig {
+sub wizard : Local : Form {
 	my ( $self, $c ) = @_;
-    my $form = $c->stash->{form};
+	my ($entidad_id, $entidad_nombre);
+	my $form = $self->form;
 	$c->stash->{titulo}     = "Generador de Reportes";
 	$c->stash->{template} 	= 'reportes/wizard.tt2';
+	if ($c->check_user_roles( qw/Administrador/ )){
+		$form->load_config_file('reportes/wizard.yml');
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+		$form->load_config_file('reportes/wizard_auditor.yml');
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		$entidad_id = $entidad->gidNumber;
+		$entidad_nombre = $entidad->cn;
+	}
+	$form->process;
+	$c->stash->{form} = $form;
 	if ($form->submitted_and_valid) {
 		my $desde = $c->req->params->{'desde'};	
 		my $hasta = $c->req->params->{'hasta'};	
@@ -62,8 +78,13 @@ sub wizard : Local : FormConfig {
 			}
         );
 		my $idpatron = $row->id;
-		$c->log->debug($idpatron);
-		my @datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		my @datos;
+		if ($c->check_user_roles( qw/Administrador/ )){
+			@datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+		} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+			@datos = $c->model('DB::Auditoria')->search({ idev => $entidad_id, $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
+
+		}
 		my @auditorias;
 		foreach my $dato (@datos){
 			my $auditoria = {};
@@ -143,6 +164,7 @@ sub auditoria : Local {
                                 { modulo => "$name" },
                                 { columns => [ qw / id / ] }
                 	);
+					next if !$dispo;
 					my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
 						{ idauditoria => $id, iddisposicion => $dispo->id },
                 		{ columns => qw / resolutoria / }
@@ -231,17 +253,24 @@ sub auditoria_struct {
 	
 	# Busco la estructura de disposiciones.
 	my $disp = &disposiciones_struct;
-	$auditoria->{disposiciones} = $disp;
 
 	# Busco los resultados por disposicion. 
 	my $resultados = disposiciones $aud->job;
 	
 	# Itero por todas las disposiciones.
 	foreach my $disposicion (keys %{ $disp }) {
+		# Si no hay resultados para la disposición en el Job, entonces next.
+		next if $resultados->{$disposicion} eq '' ;
+		$auditoria->{disposiciones}->{$disposicion} = $disp->{$disposicion};
 		my @urls;
 		foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
 			my $path = latex_encode($url); 
 			my $u = { latex_url => $path, path => $url, datos => $resultados->{$disposicion}->{urls}->{$url}};
+			my $mensaje = $u->{datos}->{mensajes};
+			if ($mensaje){
+				$mensaje = latex_encode($mensaje);
+				$u->{datos}->{mensajes} = $mensaje;
+			}
 			push @urls, $u;	
 		}
 		$auditoria->{disposiciones}->{$disposicion}->{rutas} = \@urls;

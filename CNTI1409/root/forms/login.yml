@@ -15,16 +15,16 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese su correo electrónico y contraseña para ingresar al Sistema Automatizado del Protocolo de Pruebas de Portales de Internet
+          content: 'Por favor ingrese su usuario y contraseña para ingresar al Sistema Automatizado del Protocolo de Pruebas de Portales de Internet
 '
           attributes:
               class: informacion
 
         - type: Text
           name: correo
-          label: Correo Electrónico
+          label: Usuario
           attributes:
-              title: 'Por favor ingrese el correo electrónico. Ejemplo: admin@cnti.gob.ve'
+              title: 'Por favor ingrese el usuario. Ejemplo: wvargas'
               class: input_text
               id: correo
           constraints:
