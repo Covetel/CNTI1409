@@ -49,40 +49,84 @@ sub index :Path :Args(0) {
 
 =cut
 
-sub crear : Local : FormConfig {
+sub crear : Local : Form {
     my ( $self, $c, $mensaje, $error ) = @_;
-        $c->stash->{mensaje} = $c->req->params->{mensaje};
-        my $form = $c->stash->{form};
-        if ($form->submitted_and_valid) {
-            my $upload = $c->request->upload('Examinar');
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
+    my $form = $self->form;
+	my ($entidad_id, $entidad_nombre, $idev);
+	if ($c->check_user_roles( qw/Administrador/ )){
+		$form->load_config_file('auditoria/crear.yml');
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ ) || $c->check_user_roles( qw/Auditor/ )){
+		$form->load_config_file('auditoria/crear_auditor.yml');
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		$entidad_id = $entidad->gidNumber;
+		if ($entidad_nombre = $entidad->cn){
+			$c->stash->{entidad} = $entidad_nombre;
+			utf8::decode($entidad_nombre);
+		}
+
+		my $fieldset = $form->get_element({ name => 'seleccionar_entidad' });
+		my $block = $fieldset->get_element({ name => 'informacion_entidad_verificadora'});
+		$block->content($entidad_nombre);
+		
+	}
+	$form->process;
+	$c->stash->{form} = $form;
+    if ($form->submitted_and_valid) {
+           my $upload = $c->request->upload('Examinar');
             my $pop = $upload->filename;
             my $archivo = "/tmp/$pop";
             $upload->copy_to($archivo);
             open ARCHIVO, "<encoding(UTF-8)", $archivo;
             my @portales = <ARCHIVO>;
             my $idinstitucion = $c->model('DB::Institucion')->find(
-                                                                    { "lower(me.nombre)" => lc($c->req->params->{idinstitucion}), habilitado => "true" },
-                                                                    { columns => [ qw / id / ] }
-                                                                   );
-            my $idev = $c->model('DB::Entidadverificadora')->find(
-                                                                    { "lower(me.nombre)" => lc($c->req->params->{idev}), habilitado => "true" },
-                                                                    { columns => [ qw / id / ] }
-                                                                );
-
-            if ($idinstitucion && $idev) {
-                $c->model('DB::Auditoria')->create({
-                                                       idev            => $idev,
-                                                       idinstitucion   => $idinstitucion,
-                                                       portal          => $c->req->params->{portal},
-                                                       fechacreacion   => DateTime->now,
-                                                       url             => \@portales,
-                                                   });
+                {
+                    "lower(me.nombre)" =>
+                      lc( $c->req->params->{idinstitucion} ),
+                    habilitado => "true"
+                },
+                { columns => [qw / id /] }
+            );
+			# Busco el ID de la entidad verificadora si $entidad_id vale vacio
+			if ($entidad_id eq '') {
+	            $idev = $c->model('DB::Entidadverificadora')->find(
+	                {
+	                    "lower(me.nombre)" => lc( $c->req->params->{idev} ),
+	                    habilitado         => "true"
+	                },
+	                { columns => [qw / id /] }
+	            );
+			} else {
+				$idev = $entidad_id;
+			}
+            if ( $idinstitucion && $idev ) {
+                $c->model('DB::Auditoria')->create(
+                    {
+                        idev          => $idev,
+                        idinstitucion => $idinstitucion,
+                        portal        => $c->req->params->{portal},
+                        fechacreacion => DateTime->now,
+                        url           => \@portales,
+                    }
+                );
                 $mensaje = "La auditoría se ha registrado con éxito";
-                $c->response->redirect($c->uri_for($self->action_for('crear'),{ mensaje => $mensaje, error => 0}));
-            } else {
+                $c->response->redirect(
+                    $c->uri_for(
+                        $self->action_for('crear'),
+                        { mensaje => $mensaje, error => 0 }
+                    )
+                );
+            }
+            else {
                 $c->stash->{error} = 1;
                 my @err_fields = $form->has_errors;
-                $c->stash->{mensaje} = "Verifique la Institución o Entidad Verificadora, los datos no coinciden... ";
+                $c->stash->{mensaje} =
+"Verifique la Institución o Entidad Verificadora, los datos no coinciden... ";
             }
         } elsif ($form->has_errors && $form->submitted) {
             $c->stash->{error} = 1;

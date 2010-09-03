@@ -1,0 +1,113 @@
+action: /auditoria/crear
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: seleccionar_institucion
+      legend: Seleccionar Institución
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor ingrese el nombre de la Institución correctamente.'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: idinstitucion
+          label: Nombre Institución
+          attributes:
+              title: 'Por favor ingrese el nombre de la Institución. Ejemplo: Centro Nacional de Tecnologías de Información.' 
+              class: input_text
+              id: idinstitucion
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+          validator: 'CNTI1409::Existe::Institucion'
+
+    - type: Fieldset
+      name: seleccionar_entidad
+      legend: Entidad Verificadora
+      elements:
+        - type: Block
+          name: informacion_entidad_verificadora
+          tag: div
+          content: ' '
+          attributes:
+              class: informacion
+        
+    - type: Fieldset
+      name: producto
+      legend: Portal a Auditar
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor ingrese el nombre del portal a ser auditado.'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: portal
+          label: Nombre del Portal
+          attributes:
+              title: 'Por favor ingrese el nombre del Portal a ser auditado. Ejemplo: Portal CNTI.' 
+              class: input_text
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+ 
+    - type: Fieldset
+      name: muestra
+      legend: Muestra
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor seleccione el archivo con las URLs de la muestra a auditar.'
+          attributes:
+              class: informacion
+
+        - type: File
+          name: muestra_archivo
+          label: Muestra
+          name: Examinar
+          attributes:
+              title: 'Por favor presiones el botón "Examinar" y seleccione el archivo de la muestra que desea evaluar. Recuerde que debe tener formato TXT.'
+              type: 'text'
+          constraints:
+              - Required
+
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Crear Auditoría
+          attributes:
+              title: Presione este botón para crear la entidad auditoría.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape    
