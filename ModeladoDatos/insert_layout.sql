@@ -1,0 +1,1 @@
+INSERT INTO disposicion (nombre, descripcion, habilitado, modulo, descripcion_prueba) VALUES ('Maquetado del sitio', 'Verificar que el maquetado del portal no sea por medio de tablas', TRUE, 'Layout', 'Verificar que el maquetado del portal no sea por medio de tablas');

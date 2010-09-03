@@ -1,0 +1,1 @@
+INSERT INTO disposicion (nombre, descripcion, habilitado, modulo, descripcion_prueba) VALUES ('Uso de formatos libres', 'Verificar que no existan formatos no libres disponibles para la descarga', TRUE, 'Formatos', 'Verificar que no existan formatos no libres disponibles para la descarga');
