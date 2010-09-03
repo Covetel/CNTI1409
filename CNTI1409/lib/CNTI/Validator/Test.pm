@@ -512,6 +512,27 @@ sub run {
     $self->ok( $errorcount == 0 );
 }
 
+package CNTI::Validator::Test::Formatos;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+
+    my @nodes = $self->htmlt->find('a');
+    if ($#nodes >= 0) {
+        for my $node (@nodes) {
+            if ($node->attr('href') =~ /(\.doc|\.docx|\.ppt|\.pptx|\.xls|\.xlsx)/i ) {
+                my $file = $node->attr('href');
+                $self->eveny_log( error => "El archivo $file no tiene un formato libre" );
+                $errcount++;
+            }
+        }
+    }
+    $self->ok( $errcount == 0 );
+}
 
 package CNTI::Validator::Test::HTML4;
 use Moose;
