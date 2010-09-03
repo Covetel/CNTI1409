@@ -7,8 +7,22 @@ Descripción: Esta libreria se encarga de controlar el comportamiento del Wizard
 
 function autocomplete_filtro(filtro){
 	var tabla;
-	if ( filtro == 'idev' ) { tabla = 'entidades'; }
-	if ( filtro == 'idinstitucion' ) { tabla = 'instituciones'; }
+    if ( filtro == 'idev' ) { 
+		tabla = 'entidades'; 
+		$("div.label > label").each(function(){
+			if ($(this).attr('for') == 'patron'){
+				$(this).html('Nombre de la Entidad');
+			}
+		});
+	}
+	if ( filtro == 'idinstitucion' ) { 
+		tabla = 'instituciones';
+		$("div.label > label").each(function(){
+			if ($(this).attr('for') == 'patron'){
+				$(this).html('Nombre de la Institución');
+			}
+		});
+	}
 
 	$("#patron").autocomplete({
 		source: '/ajax/autocompletar/'+tabla,
