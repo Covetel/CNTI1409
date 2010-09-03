@@ -91,7 +91,7 @@ sub run {
     my @rs_metas = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta' } );
     my %hash;
     for my $meta (@rs_metas) {
-        $hash{$meta->get_column('parametro')}=0;
+        $hash{$meta->get_column('parametro')} = 0;
     }
     my @node = $self->htmlt->find('meta');
     unless (@node) {
@@ -106,11 +106,14 @@ sub run {
         if ($father->attr('name')) {
             my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta', parametro => $father->attr('name') } );
             if ($#rs < 0) {
-                push @metas, $father->attr('name');
+                # push @metas, $father->attr('name');
                 $errcount++;
             } else {
                 $hash{$father->attr('name')} = 1;
             }
+        } else {
+            $self->event_log( error => "Solo está definida la meta http-equiv" );
+            $errcount++;
         }
     }
     my @keys_with_values = grep { $hash{$_} == 0 } keys %hash;
