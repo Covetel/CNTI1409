@@ -125,8 +125,7 @@ sub crear : Local : Form {
             else {
                 $c->stash->{error} = 1;
                 my @err_fields = $form->has_errors;
-                $c->stash->{mensaje} =
-"Verifique la Institución o Entidad Verificadora, los datos no coinciden... ";
+                $c->stash->{mensaje} = "Verifique la Institución o Entidad Verificadora, los datos no coinciden... ";
             }
         } elsif ($form->has_errors && $form->submitted) {
             $c->stash->{error} = 1;
@@ -354,26 +353,29 @@ sub detalle : Local {
 	if ($c->req->method eq 'POST'){
         my $cerrar = $c->req->params->{cerrar};
         if ($cerrar) {
-			my $resultado_general = 1;
-            my $id = $c->req->params->{id};
-            my $auditoria = $c->model('DB::Auditoria')->find($id);
-			# Busco el job asociado a la auditoria.
-			my $job_id = $auditoria->job;
-			my ($disp, $pass, $fail) = disposiciones $job_id, $self, $c;
+			if ( $c->check_user_roles(qw/Administrador/) || $c->check_user_roles(qw/AuditorJefe/) ){
+				# Solo los Administradores o los Auditores Jefes pueden Cerrar una auditoría.
+				my $resultado_general = 1;
+            	my $id = $c->req->params->{id};
+            	my $auditoria = $c->model('DB::Auditoria')->find($id);
+				# Busco el job asociado a la auditoria.
+				my $job_id = $auditoria->job;
+				my ($disp, $pass, $fail) = disposiciones $job_id, $self, $c;
 			
-			if ($fail > 0){
-				$resultado_general = 0;
-			}
-            $auditoria->update(
-                {
+				if ($fail > 0){
+					$resultado_general = 0;
+				}
+            	$auditoria->update(
+                	{
                     estado    => 'c',
                     fechafin  => DateTime->now,
                     resultado => $resultado_general,
                     fallidas  => $fail,
                     validas   => $pass,
-                }
-            );
-            $c->res->body(1);
+                	}
+            	);
+            	$c->res->body(1);
+			}
         } else {
             my $modulo = $c->req->params->{disposicion};
             my $idAuditoria = $c->req->params->{id};

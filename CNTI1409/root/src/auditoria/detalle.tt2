@@ -74,9 +74,17 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 	<button id="guardar" [% IF cierra == 1 %] disabled="disabled" [% END %]> Guardar </button>
 </div>
 [% END %]
+
+[% IF c.check_user_roles('Administrador') %]
 <div class="multi">
 	<button id="cerrar" [% IF cierra == 1 %] disabled="disabled" [% END %]> Cerrar Auditoría </button>
 </div>
+[% ELSIF c.check_user_roles('AuditorJefe') %]
+<div class="multi">
+	<button id="cerrar" [% IF cierra == 1 %] disabled="disabled" [% END %]> Cerrar Auditoría </button>
+</div>
+[% END %]
+
 </form>
 
 <div> 

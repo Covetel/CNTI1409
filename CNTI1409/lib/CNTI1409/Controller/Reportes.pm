@@ -39,6 +39,8 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 
 sub wizard : Local : Form {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/AuditorJefe/);
+
 	my ($entidad_id, $entidad_nombre);
 	my $form = $self->form;
 	$c->stash->{titulo}     = "Generador de Reportes";
@@ -340,6 +342,7 @@ Genera un reporte HTML de entidades listo para imprimir.
 
 sub entidades : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de entidades. 
 	my @entidades = $c->model('DB::Entidadverificadora')->search({})->all();
 	$c->stash->{entidades} = \@entidades;
@@ -354,6 +357,7 @@ Genera un reporte HTML de instituciones lista para imprimir.
 
 sub instituciones : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de instituciones
 	my @instituciones = $c->model('DB::Institucion')->search({})->all();
 	$c->stash->{instituciones} = \@instituciones;

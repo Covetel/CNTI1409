@@ -58,8 +58,7 @@
 						</div>
                         <div id="is_usuario">
                                 <div id="is_usuario_uid"> 
-									[% c.user.ldap_entry.uid %] | 
-									[% rol = c.user.roles; rol %] 
+									[% c.user.ldap_entry.uid %] 
 								</div>
                         </div>
                         <div id="is_enlaces">
