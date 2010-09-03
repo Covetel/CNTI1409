@@ -143,6 +143,9 @@ sub auditoria : Local {
                                 { modulo => "$name" },
                                 { columns => [ qw / id / ] }
                 	);
+					use Data::Dumper;
+					next if !$dispo;
+					$c->log->debug(Dumper($dispo));	
 					my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
 						{ idauditoria => $id, iddisposicion => $dispo->id },
                 		{ columns => qw / resolutoria / }
@@ -244,6 +247,11 @@ sub auditoria_struct {
 		foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
 			my $path = latex_encode($url); 
 			my $u = { latex_url => $path, path => $url, datos => $resultados->{$disposicion}->{urls}->{$url}};
+			my $mensaje = $u->{datos}->{mensajes};
+			if ($mensaje){
+				$mensaje = latex_encode($mensaje);
+				$u->{datos}->{mensajes} = $mensaje;
+			}
 			push @urls, $u;	
 		}
 		$auditoria->{disposiciones}->{$disposicion}->{rutas} = \@urls;
