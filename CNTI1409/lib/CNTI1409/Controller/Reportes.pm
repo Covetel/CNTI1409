@@ -62,7 +62,6 @@ sub wizard : Local : FormConfig {
 			}
         );
 		my $idpatron = $row->id;
-		$c->log->debug($idpatron);
 		my @datos = $c->model('DB::Auditoria')->search({ $filtro => $idpatron, fechaini => {-between => [$desde, $hasta]} });
 		my @auditorias;
 		foreach my $dato (@datos){
@@ -143,9 +142,7 @@ sub auditoria : Local {
                                 { modulo => "$name" },
                                 { columns => [ qw / id / ] }
                 	);
-					use Data::Dumper;
 					next if !$dispo;
-					$c->log->debug(Dumper($dispo));	
 					my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
 						{ idauditoria => $id, iddisposicion => $dispo->id },
                 		{ columns => qw / resolutoria / }
