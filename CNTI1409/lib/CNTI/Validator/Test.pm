@@ -354,6 +354,8 @@ sub run {
     for my $plugin (@plugins) {
         if ( $plugin->attr('classid') =~ /clsid:/i ) {
             $activex++;
+        } elsif ( $plugin->attr('data') =~ /\.swf/i ) {
+            $flashhtml5++;
         }
     }
     my @embed = $self->htmlt->find('embed');
@@ -364,7 +366,7 @@ sub run {
     }
 
     $self->event_log( error => "Hay $activex controles ActiveX" ) if ($activex);
-    $self->event_log( error => "Hay $flashhtml5 controles Flash declarados con HTML5" ) if ($flashhtml5);
+    $self->event_log( error => "Hay $flashhtml5 controles Flash declarados" ) if ($flashhtml5);
 
     $self->ok( $activex == 0  and $flashhtml5 == 0);
 }
@@ -520,14 +522,16 @@ extends 'CNTI::Validator::Test';
 sub run {
     my $self = shift;
     my $errcount = 0;
-
+     
     my @nodes = $self->htmlt->find('a');
     if ($#nodes >= 0) {
         for my $node (@nodes) {
-            if ($node->attr('href') =~ /(\.doc|\.docx|\.ppt|\.pptx|\.xls|\.xlsx)/i ) {
-                my $file = $node->attr('href');
-                $self->eveny_log( error => "El archivo $file no tiene un formato libre" );
-                $errcount++;
+            my $f = $node->attr('href');
+            if ($node->attr('href')) {
+                if ($f =~ /(\.doc|\.docx|\.ppt|\.pptx|\.xls|\.xlsx)/i ) {
+                    $self->event_log( error => "El archivo $f no tiene un formato libre" );
+                    $errcount++;
+                }
             }
         }
     }
