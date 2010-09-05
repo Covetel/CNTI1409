@@ -464,19 +464,6 @@ use URI;
    
 extends 'CNTI::Validator::Test';
 
-sub httpurl {
-    my ($uri, $urlcss, $href) = @_;
-    my $url;
-    if ( $urlcss->path =~ /^\//) {
-        $url = $href if $urlcss->authority;
-        $url = "http://" . $uri->authority . $urlcss->path if !($urlcss->authority);
-    } else {
-        $url = $href if $urlcss->authority;
-        $url = "http://" . $uri->authority . "/" . $urlcss->path if !($urlcss->authority);
-    }
-    return $url;
-}
-
 sub checkfonts {
     my $content= shift;
     my $fontcount = 0;
@@ -515,24 +502,22 @@ sub run {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
-                # my $urlcss = URI->new($href);
-                # my $url = httpurl $uri, $urlcss, $href;
                 my $url = URI->new_abs( $href, $self->uri );
                 $mech->get($url);
                 my $content = $mech->content;
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
                 if ($#fuentes >= 0) {
-                    for my $fuente (@fuentes) {
-                        $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
-                    }
+                    my $fuente = shift @fuentes;
+                    $self->event_log( error => "Se han encontrado fuentes no libres tal como $fuente en el CSS $url" );
+                    #for my $fuente (@fuentes) {
+                    #    $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
+                    #}
                 }
                 $errorcount = $errorcount + $errcount;
                 $fontcount = $fontcount + $fntcount;
                 my @contenido = split /\n/, $mech->content;
                 for my $lineas (@contenido) {
                     if ($lineas =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                        # my $cssuri = URI->new($2);
-                        # my $cssurl = httpurl $uri, $cssuri, $href;
                         my $hre = $2;
                         my $cssurl = URI->new_abs( $hre, $self->uri );
                         my $mech2 = WWW::Mechanize->new();
@@ -541,9 +526,11 @@ sub run {
                         my $content2 = $mech2->content;
                         my ($ercnt, $fntcnt, @subfonts) = checkfonts $content2;
                         if ($#subfonts >= 0) {
-                            for my $subfont (@subfonts) {
-                                $self->event_log( error => "La fuente $subfont no es libre en el CSS $cssurl");
-                            }
+                            my $subfont = shift @subfonts;
+                            $self->event_log( error => "Se han encontrado fuentes no libres tal como $subfont en el CSS $cssurl" );
+                            #for my $subfont (@subfonts) {
+                            #    $self->event_log( error => "La fuente $subfont no es libre en el CSS $cssurl");
+                            #}
                         }
                         $errorcount = $errorcount + $ercnt;
                         $fontcount = $fontcount + $fntcnt; 
@@ -561,16 +548,16 @@ sub run {
             my $stylecontent = join ("\n", @lines);
             my ($styerrorcount, $styfontcount, @styfonts) = checkfonts $stylecontent;
             if ($#styfonts >= 0) {
-                for my $styfont (@styfonts) {
-                    $self->event_log( error => "La fuente $styfont no es libre, embebido en el HTML" );
-                }
+                my $styfont = shift @styfonts;
+                $self->event_log( error => "Se han encontrado fuentes no libres tal como $styfont en el HTML" );
+                #for my $styfont (@styfonts) {
+                #    $self->event_log( error => "La fuente $styfont no es libre, embebido en el HTML" );
+                #}
             }
             $errorcount = $errorcount + $styerrorcount;
             $fontcount = $fontcount + $styfontcount;
             for my $line (@lines) {
                 if ($line =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                    # my $styuri = URI->new($2);
-                    # my $styurl = httpurl $uri, $styuri, "";
                     my $resource = $2;
                     my $styurl = URI->new_abs( $resource, $self->uri );
                     my $stymech = WWW::Mechanize->new();
@@ -579,9 +566,11 @@ sub run {
                     my $stycontent = $stymech->content;
                     my ($styercnt, $styfntcnt, @styimportfonts) = checkfonts $stycontent;
                     if ($#styimportfonts >= 0) {
-                        for my $styimportfont (@styimportfonts) {
-                            $self->event_log( error => "La fuente $styimportfont no es libre en el CSS $styurl");
-                        }
+                        my $styimportfont = shift @styimportfonts;
+                        $self->event_log( error => "Se han encontrado fuentes no libres tal como $styimportfont en el CSS $styurl" );
+                        #for my $styimportfont (@styimportfonts) {
+                        #    $self->event_log( error => "La fuente $styimportfont no es libre en el CSS $styurl");
+                        #}
                     }
                     $errorcount = $errorcount + $styercnt;
                     $fontcount = $fontcount + $styfntcnt; 
