@@ -1,0 +1,2 @@
+INSERT INTO disposicion (nombre, descripcion, habilitado, modulo, descripcion_prueba) VALUES ('Validar CSS contra W3C', 'Hacer uso del validador oficial de la W3C para la validación de CSS', TRUE, 'W3C_CSS', 'Hacer uso del validador oficial de la W3C para la validación de CSS');
+INSERT INTO disposicion (nombre, descripcion, habilitado, modulo, descripcion_prueba) VALUES ('Validar HTML contra W3C', 'Hacer uso del validador oficial de la W3C para la validación del HTML', TRUE, 'W3C_HTML', 'Hacer uso del validador oficial de la W3C para la validación del HTML');
