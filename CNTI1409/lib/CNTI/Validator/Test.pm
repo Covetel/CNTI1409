@@ -136,18 +136,25 @@ sub run {
     #Verificar que la disposicion aplique.
     my @inputs = $self->htmlt->find('input');
     for my $input (@inputs) {
-        $found = $input->attr('type') eq 'password' ? $found + 1 : $found + 0;
         if ($input->attr('type')) {
             if ($input->attr('type') eq 'password') {
+                $found++;
                 my @parents = $input->parent;
+                my $counttable = 0;
                 for my $parent (@parents) {
                     if ($parent->tag eq "table") {
+                        $counttable++;
                         unless ($parent->attr('action') =~ /https/i) {
-                            $self->event_log( error => "Hay datos sensibles que no se envian hacia un medio cifrado SSL");
+                            $self->event_log( error => "Hay datos sensibles que no se envian hacia un medio cifrado SSL" );
+                            $errcount++;
+                        } else {
+                            $self->event_log( warning => "Lo siento, no se pudo determinar la URL en el action del formulario, favor verificar manualmente" );
                             $errcount++;
                         }
                     }
                 }
+                $self->event_log( error => "Hay un etiqueta input sin la declaración de form, HTML mal formado" ) unless $counttable;
+                $errcount++ unless $counttable;
             }
         }
     }
@@ -157,6 +164,8 @@ sub run {
             $self->event_log( warning => "Hay un dato sensible que se envía en texto plano" );
             $errcount++;
         }
+    } else {
+        $self->event_log( warning => "No se encontraron datos sensibles, la disposición no aplica en esta URL" );
     }
     $self->ok( $errcount == 0 );
 }
@@ -173,11 +182,11 @@ sub run {
 
     my @frames = $self->htmlt->find('frame');
     my $numframes = $#frames + 1;
-    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo <frame> " ) if ($#frames >= 0);
+    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo frame " ) if ($#frames >= 0);
     $errcount++ if ($#frames >= 0);
     my @iframes = $self->htmlt->find('iframe');
     my $numiframes = $#iframes + 1;
-    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo <frame> " ) if ($#iframes >= 0);
+    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo iframe " ) if ($#iframes >= 0);
     $errcount++ if ($#iframes >= 0);
     
     my @nodes = $self->htmlt->find('table');
