@@ -123,6 +123,44 @@ sub run {
     $self->ok( $errcount == 0);
 }
 
+package CNTI::Validator::Test::SSL;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+    my $found = 0;
+
+    #Verificar que la disposicion aplique.
+    my @inputs = $self->htmlt->find('input');
+    for my $input (@inputs) {
+        $found = $input->attr('type') eq 'password' ? $found + 1 : $found + 0;
+        if ($input->attr('type')) {
+            if ($input->attr('type') eq 'password') {
+                my @parents = $input->parent;
+                for my $parent (@parents) {
+                    if ($parent->tag eq "table") {
+                        unless ($parent->attr('action') =~ /https/i) {
+                            $self->event_log( error => "Hay datos sensibles que no se envian hacia un medio cifrado SSL");
+                            $errcount++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if ($found) {
+        # primero verificar si se esta en una pagina https
+        unless ($self->uri->scheme eq "https") {
+            $self->event_log( warning => "Hay un dato sensible que se envía en texto plano" );
+            $errcount++;
+        }
+    }
+    $self->ok( $errcount == 0 );
+}
+
 package CNTI::Validator::Test::Layout;
 use Moose;
 
