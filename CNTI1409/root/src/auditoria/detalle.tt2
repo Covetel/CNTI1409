@@ -58,7 +58,29 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 </div>
 <div class="text label">
 		<label for="comentarios"> Acciones Correctivas: </label>
-		<textarea id="acciones_correctivas" name="acciones_correctivas" [% IF cierra == 1 %] disabled="disabled" [% END %]>[% acciones %]</textarea>
+		[% IF acciones %]
+		[% IF c.check_user_roles('Administrador') %]
+		<textarea 
+			id="acciones_correctivas" 
+			name="acciones_correctivas">[% acciones %]</textarea>
+		[% ELSIF c.check_user_roles('AuditorJefe') %]
+		<textarea 
+			id="acciones_correctivas" 
+			name="acciones_correctivas">[% acciones %]
+		</textarea>
+		[% ELSIF c.check_user_roles('Auditor')%]
+		<textarea 
+			id="acciones_correctivas" 
+			name="acciones_correctivas" 
+			[% IF cierra == 1 %] 
+				disabled="disabled" 
+			[% END %]
+			>[% acciones %]</textarea>
+		[% END %]
+		[% ELSE %]
+			<textarea id="acciones_correctivas" name="acciones_correctivas"></textarea>
+		[% END %]
+
 </div>
 [% ELSE %]
 <div class="informacion">

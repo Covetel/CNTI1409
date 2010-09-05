@@ -388,13 +388,14 @@ sub detalle : Local {
             }
             if ( $idAuditoria && $modulo ) {
                 my $auDetalle = $c->model('DB::Auditoriadetalle');
-                my $idDisposicion = $c->model('DB::Disposicion')->find(
-                                                                            { modulo => "$modulo" },
-                                                                            { columns => [ qw / id / ] }
-                                                                      );
+                my $idDisposicion = $c->model('DB::Disposicion')->find( 
+					{ modulo => "$modulo" }, 
+					{ columns => [qw / id /] } 
+				);
+
                 if ($idDisposicion) {
                     my $data = $idDisposicion->id;
-                    $auDetalle->create({
+                    $auDetalle->update({
                             idauditoria => "$idAuditoria",
                             iddisposicion => "$data",
                             resolutoria => "$resolutoria"
@@ -458,10 +459,10 @@ sub detalle : Local {
         
         # Verificamos si existe un comentario de acciones correctivas
         # para esta disposicion
-        my $dispo = $c->model('DB::Disposicion')->find(
-                                                                    { modulo => "$disposicion" },
-                                                                    { columns => [ qw / id / ] }
-                                                              );
+        my $dispo =
+          $c->model('DB::Disposicion')
+          ->find( { modulo => "$disposicion" }, { columns => [qw / id /] } );
+
         my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
                 { idauditoria => $id, iddisposicion => $dispo->id },
                 { columns => qw / resolutoria / }
