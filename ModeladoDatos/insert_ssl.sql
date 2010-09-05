@@ -1,0 +1,1 @@
+INSERT INTO disposicion (nombre, descripcion, habilitado, modulo, descripcion_prueba) VALUES ('Uso de SSL', 'Verificar el uso de SSL para el envío de indatos sensibles', TRUE, 'SSL', 'Verificar el uso de SSL para el envío de indatos sensibles');
