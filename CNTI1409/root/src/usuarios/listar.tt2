@@ -4,12 +4,12 @@
 	<thead> 
 	<tr>
 		<th id="uid">Usuario</th>
-		<th id="nombre">Nombre</th>
-		<th id="apellido">Apellido</th>
-		<th id="correo">Correo Eletrónico</th>
+		<th id="nombre">Nombre y Apellido</th>
+		<th id="correo">Correo Electrónico</th>
+		<th id="uidNumber">uidNumber</th>
+		<th id="entidad">Entidad Verificadora</th>
 		<th id="rol">Rol</th>
-		<th id="entidad">Enidad</th>
-		<th id="desactivar">Desactivar</th>
+		<th id="entidad">Información</th>
 	</tr>
 	</tr>
 	</thead>

@@ -234,10 +234,29 @@ sub usuarios_GET {
 	        filter => "(&(objectClass=posixGroup)(memberUid=".$u->uid."))"
 	    )->shift_entry;	
 		if ($entidad && $entidad->gidNumber > 0){
-			return $entidad->cn;
+			my $cn = $entidad->cn;
+			utf8::decode($cn);
+			return $cn;
 		} else {
 			return "No Pertenece";
 		}
+	}
+	sub info {
+		my ($u) = @_;
+		my $admin = "<a href='/usuarios/info/".$u->uid."'>Detalle</a>";
+		return $admin;
+	}
+	sub rol {
+		my ($u,$self,$c) = @_;
+		my $r = '';
+		my @roles = $c->model('LDAP')->search(
+			base => $c->config->{base_roles},
+			filter => "(&(objectClass=posixGroup)(memberUid=".$u->uid."))",
+		)->entries();
+		foreach my $rol (@roles){
+			$r = $rol->cn . " ".$r;	
+		}
+		return $r;
 	}
 	my ($self, $c) = @_;
 	# Si el usuario es administrador ve a todos los usuarios. 
@@ -248,7 +267,16 @@ sub usuarios_GET {
            	filter => "(&(objectClass=posixAccount)(uid=*))"
         )->entries();
 		my %data;
-    	$data{aaData} = [ map { [ $_->uid, $_->cn, $_->mail, $_->uidNumber, &entidad($_,$self,$c), ] } @usuarios];
+    $data{aaData} = [
+        map {
+            [
+                $_->uid, $_->cn, $_->mail, $_->uidNumber,
+                &entidad( $_, $self, $c ),
+                &rol( $_, $self, $c ),
+                &info($_)
+            ]
+          } @usuarios
+    ];
 		$self->status_ok($c, entity => \%data);
 	} elsif ($c->check_user_roles( qw/AuditorJefe/ )){
 		# Busco la entidad verificadora a la que pertenece el usuario. 
@@ -271,7 +299,16 @@ sub usuarios_GET {
 			push @usuarios,$usuario;	
 		}
 		my %data;
-    	$data{aaData} = [ map { [ $_->uid, $_->cn, $_->mail, $_->uidNumber, &entidad($_,$self,$c), ] } @usuarios];
+    $data{aaData} = [
+        map {
+            [
+                $_->uid,  $_->cn,
+                $_->mail, $_->uidNumber,
+                &entidad( $_, $self, $c ), &rol($_, $self, $c),
+                &info($_)
+            ]
+          } @usuarios
+    ];
 		$self->status_ok($c, entity => \%data);
 
 	} 

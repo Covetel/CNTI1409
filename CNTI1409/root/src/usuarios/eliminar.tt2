@@ -1,0 +1,2 @@
+[% titulo = 'Usuario Eliminado' %]
+[% INCLUDE mensajes.tt2 %]

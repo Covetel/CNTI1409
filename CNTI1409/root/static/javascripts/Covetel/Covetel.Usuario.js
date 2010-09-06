@@ -28,6 +28,8 @@ function Covetel_usuario (){
 
 }
 
+var usersTable = null;
+
 if (!usuario){
 	var usuario = new Covetel_usuario();
 }
@@ -98,5 +100,22 @@ $(document).ready(function(){
 		}).responseText+')');
 		
 	});
+
+
+	// Population to table users.
+	usersTable = $("#tabla_usuarios").dataTable({
+		"sAjaxSource": '/ajax/tabla/usuarios',
+        "bAutoWidth": false,
+		"bProcessing": false,
+		"bJQueryUI": true,
+		//"aaSorting": [[ 8, "desc" ]],
+ 		"oLanguage": {
+            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+        },
+	});
+
+
+	//Información del usuario. 
+	$("div#usuario_tabs").tabs();	
 
 });
