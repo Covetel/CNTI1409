@@ -447,22 +447,26 @@ sub run {
 
 package CNTI::Validator::Test::W3C_HTML;
 use Moose;
+use WebService::Validator::HTML::W3C;
 
 extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    my $w3c = WebService::Validator::HTML::W3C->new;
+    my $w3c = WebService::Validator::HTML::W3C->new(detailed => 1);
     my $errcount = 0;
     my $uri = $self->uri;
-    my $ok = $w3c->validate(uri => $uri);
-
-    if ($ok and !$w3c->is_valid) {
-        my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
-        my $html = "<a href=$url>Ver Reporte</a>";
-        $self->event_log( error => "Errores de validación en el HTML, $html" );
+    my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
+    my $html = "<a href=$url>Ver Reporte</a>";
+    if ($w3c->validate("$uri")) {
+        if (!$w3c->is_valid) {
+            $self->event_log( error => "Errores de validación en el HTML, $html" );
+            $errcount++;
+        }
+    } else {
+        $self->event_log( error => "Ha ocurrido un error " . $w3c->validator_error . ", Por favor de click en el enlace para verificar manualmente, $html" );
         $errcount++;
-    }
+     }
     $self->ok($errcount == 0);
 }
 
@@ -503,7 +507,6 @@ use Moose;
 use CNTI::Validator::Schema;
 use CNTI::Validator::CSS;
 use WWW::Mechanize;
-# use CNTI::Validator::CSS;
 use URI;
    
 extends 'CNTI::Validator::Test';
