@@ -1,0 +1,17 @@
+[% titulo = 'Usuarios Registrados' %] 
+<div class="tabla">
+<table id="tabla_usuarios" class="dataTable" border="0"> 
+	<thead> 
+	<tr>
+		<th id="uid">Usuario</th>
+		<th id="nombre">Nombre</th>
+		<th id="apellido">Apellido</th>
+		<th id="correo">Correo Eletrónico</th>
+		<th id="rol">Rol</th>
+		<th id="entidad">Enidad</th>
+		<th id="desactivar">Desactivar</th>
+	</tr>
+	</tr>
+	</thead>
+</table>
+</div>

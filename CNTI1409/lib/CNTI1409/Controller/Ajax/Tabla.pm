@@ -222,9 +222,64 @@ sub auditorias_GET {
 	$self->status_ok($c, entity => \%data);
 }
 
+sub usuarios : Local : ActionClass('REST') {}
+
+sub usuarios_GET {
+	use Data::Dumper;
+	sub entidad {
+		my ($u,$self,$c) = @_;
+		# Busco si pertenece a una entidad
+	    my $entidad = $c->model('LDAP')->search(
+	        base   => $c->config->{base_entidades},
+	        filter => "(&(objectClass=posixGroup)(memberUid=".$u->uid."))"
+	    )->shift_entry;	
+		if ($entidad && $entidad->gidNumber > 0){
+			return $entidad->cn;
+		} else {
+			return "No Pertenece";
+		}
+	}
+	my ($self, $c) = @_;
+	# Si el usuario es administrador ve a todos los usuarios. 
+	if ($c->check_user_roles( qw/Administrador/ )){
+		# Busco todos los usuarios, todas las cuentas del tipo posixAccount.
+        my @usuarios = $c->model('LDAP')->search(
+         	base   => $c->config->{base_usuarios},
+           	filter => "(&(objectClass=posixAccount)(uid=*))"
+        )->entries();
+		my %data;
+    	$data{aaData} = [ map { [ $_->uid, $_->cn, $_->mail, $_->uidNumber, &entidad($_,$self,$c), ] } @usuarios];
+		$self->status_ok($c, entity => \%data);
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ )){
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		my $entidad_id = $entidad->gidNumber;
+		
+		# Busco todos los miembros de esa entidad. 
+		my @uids = $entidad->memberUid;
+		my @usuarios;
+		foreach my $uid (@uids) {
+			# Busco los datos del usuario en LDAP.
+        	my $usuario = $c->model('LDAP')->search(
+           	 	base   => $c->config->{base_usuarios},
+            	filter => "(&(objectClass=posixAccount)(uid=$uid))"
+        	)->shift_entry;
+			push @usuarios,$usuario;	
+		}
+		my %data;
+    	$data{aaData} = [ map { [ $_->uid, $_->cn, $_->mail, $_->uidNumber, &entidad($_,$self,$c), ] } @usuarios];
+		$self->status_ok($c, entity => \%data);
+
+	} 
+}
+
 =head1 AUTHOR
 
-,,,
+Walter Vargas <walter@covetel.com.ve>
 
 =head1 LICENSE
 
@@ -234,4 +289,3 @@ it under the same terms as Perl itself.
 =cut
 
 __PACKAGE__->meta->make_immutable;
-

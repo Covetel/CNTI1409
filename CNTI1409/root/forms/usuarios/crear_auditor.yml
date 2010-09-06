@@ -58,6 +58,19 @@ elements:
               min: 4
               max: 250
 
+        - type: Text
+          name: mail
+          label: Correo Electrónico
+          attributes:
+              title: 'Por favor ingrese el Correo Electrónico del usuario'
+              class: input_text
+              id: mail
+          constraints:
+            - Required
+            - type: Length
+              min: 5
+              max: 250
+
     - type: Fieldset
       name: datos_fieldset
       legend: Contraseña

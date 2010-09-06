@@ -10,5 +10,5 @@
 <h3><a href="#"> Usuarios </a></h3>
 <div>
 		<a href="/usuarios/crear"> Crear </a> <br />
-		<a href="/usuarios/lista"> Listar </a> <br />
+		<a href="/usuarios/listar"> Listar </a> <br />
 </div>

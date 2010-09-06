@@ -27,6 +27,17 @@ sub index :Path :Args(0) {
 
 }
 
+=head2 listar
+
+Permite listar los usuarios del sistema
+
+=cut
+
+sub listar : Local {
+	my ( $self, $c ) = @_;
+	$c->stash->{template} = 'usuarios/listar.tt2';
+}
+
 =head2 crear 
 
 Permite Crear Usuarios.
@@ -82,6 +93,7 @@ sub crear : Local : Form {
 			givenName 	=> $c->req->params->{nombre},
 			sn 			=> $c->req->params->{apellido},
 			userPassword => $passwd,
+			mail 		=> $c->req->params->{mail},
         );
 
 		# Evaluo el rol. 
@@ -127,10 +139,15 @@ sub crear : Local : Form {
 	            base   => $c->config->{base_roles},
 	            filter => "(&(objectClass=posixGroup)(gidNumber=$gidNumber))"
 	        )->shift_entry;
-			my @members = $rol->memberUid;
-			push @members,$c->req->params->{uid};
-			$rol->replace(memberUid => \@members);
-			$rol->update();
+			if ($rol->exists("memberUid")) {
+				my @members = $rol->memberUid;
+				push @members,$c->req->params->{uid};
+				$rol->replace(memberUid => \@members);
+				$rol->update();
+			} else {
+				$rol->add(memberUid => [$c->req->params->{uid}]);
+				$rol->update();
+			}
 
 		} elsif ($c->req->params->{rol} eq 'administrador') {
 			$gidNumber = 1000;
