@@ -34,6 +34,7 @@ requires 'Template::Latex';
 requires 'LaTeX::Encode';
 requires 'Catalyst::Authentication::Store::LDAP';
 requires 'Catalyst::Model::LDAP';
+requires 'Digest::MD5';
 
 
 test_requires 'Test::More' => '0.88';
