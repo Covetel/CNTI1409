@@ -2,7 +2,7 @@
 
 [% INCLUDE mensajes.tt2 %]
 
-[% IF accion != 'eliminar' %]
+[% IF error != 1 %]
 <div id="usuario_tabs">
 <ul>
 	<li> <a href="#usuario_informacion">Datos del Usuario</a> </li>

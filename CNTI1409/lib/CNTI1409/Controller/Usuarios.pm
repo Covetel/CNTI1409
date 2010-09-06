@@ -102,30 +102,69 @@ Permite Editar un usuario. (Eliminar, Cambiar Password.)
 
 sub info : Local : Form {
 	my ( $self, $c, $uid ) = @_;
-
-	# Si es un usuario Auditor Jefe, solo puede ver la información de sus usuarios. 
 	
-	if ($uid eq ''){
+	my ($user_entidad_id); 
+	# Si es un usuario Auditor Jefe, solo puede ver la información de sus usuarios. 
+	# Busco la entidad a la que pertenece el usuario. 
+	if ($c->check_any_user_role("AuditorJefe") && !$c->check_any_user_role("Administrador")){
+		my ($cn, $entidad) = &entidad($c->user,$self,$c);
+		if ($entidad){
+			$user_entidad_id = $entidad->gidNumber;	
+		}
+	}
+	
+	
+	if (!$uid){
 		$uid = $c->req->params->{uid};
 	}
 	$c->stash->{uid} = $uid;
     $c->stash->{mensaje} = $c->req->params->{mensaje};
 	$c->stash->{accion} = $c->req->params->{accion};
 	#Busco la información del usuario. 
-		my $usuario = $c->model('LDAP')->search(
-			base   => $c->config->{base_usuarios},
-			filter => "(&(objectClass=posixAccount)(uid=$uid))"
-		)->shift_entry;
+	my $usuario = $c->model('LDAP')->search(
+		base   => $c->config->{base_usuarios},
+		filter => "(&(objectClass=posixAccount)(uid=$uid))"
+	)->shift_entry;
+	
+	my ($cn, $entidad) = &entidad($usuario,$self,$c) if $usuario;
+	my ($rol) = &rol($usuario,$self,$c) if $usuario;
 
-		if ($usuario) {
-			$c->stash->{roles} = &rol($usuario,$self,$c);
-			$c->stash->{usuario} = $usuario;
-			$c->stash->{entidad} = &entidad($usuario,$self,$c);
+
+	if ($usuario) {
+		$c->stash->{roles} = &rol($usuario,$self,$c);
+		$c->stash->{usuario} = $usuario;
+		$c->stash->{entidad} = $cn;
+	} else {
+		$c->stash->{error} = 1;
+		$c->stash->{mensaje} = "Usuario no encontrado";
+	}
+
+	$c->stash->{template} = 'usuarios/info.tt2';
+
+	if ($c->check_any_user_role(qw/AuditorJefe/) && !$c->check_any_user_role("Administrador")){
+		if ($user_entidad_id && $entidad){
+			if ($user_entidad_id != $entidad->gidNumber){
+					$c->stash->{roles} = '';
+					$c->stash->{usuario} = '';
+					$c->stash->{error} = 1;
+					$c->stash->{mensaje} = "Usuario no encontrado";
+			}
 		} else {
+			$c->stash->{roles} = '';
+			$c->stash->{usuario} = '';
 			$c->stash->{error} = 1;
 			$c->stash->{mensaje} = "Usuario no encontrado";
 		}
-	$c->stash->{template} = 'usuarios/info.tt2';
+	}
+
+	if ($c->check_any_user_role("Auditor") && !$c->check_any_user_role("Administrador")){
+		if ($uid ne $c->user->username){
+			$c->stash->{roles} = '';
+			$c->stash->{usuario} = '';
+			$c->stash->{error} = 1;
+			$c->stash->{mensaje} = "Usuario no encontrado";
+		}
+	}
 
 	# Creo el formulario para actualizar el password
     my $form = $self->form;
@@ -138,23 +177,104 @@ sub info : Local : Form {
 	$form->process;
 	$c->stash->{form} = $form;
     if ($form->submitted_and_valid) {
-		my $uid = $c->req->params->{'uid'};
+		# Cambio de password. 
+
+		my $uid 	= $c->req->params->{'uid'};
+		my $passwd 	= $c->req->params->{'passwd'};
+
 		my $usuario = $c->model('LDAP')->search(
 			base   => $c->config->{base_usuarios},
 			filter => "(&(objectClass=posixAccount)(uid=$uid))"
 		)->shift_entry;
 		if ($usuario){
-			my $passwd = md5_base64($c->req->params->{passwd});
-			$passwd = "{MD5}".$passwd."==";
-			$usuario->replace(userPassword => $passwd);
-			my $mesg = $usuario->update();
-			if ($mesg->done()){
-		        $c->response->redirect(
-		            $c->uri_for(
-		                $self->action_for('info'),
-		                { uid => $uid, mensaje => "La contraseña ha sido cambiada con éxito" }
-		            )
-		        );
+			if ($c->check_any_user_role("Administrador")){
+				$usuario = &change_password($usuario,$c->req->params->{passwd});
+				my $mesg = $usuario->update();
+				if ($mesg->done()){
+					$c->log->debug("El usuario Administrador le ha cambiado la contraseña al usuario ".$usuario->uid);
+		        	$c->response->redirect(
+		            	$c->uri_for(
+		                	$self->action_for('info'),
+		                	{ uid => $uid, mensaje => "La contraseña ha sido cambiada con éxito" }
+		           		)
+		        	);
+				}
+			} elsif ($c->check_any_user_role("AuditorJefe")){
+				# Puede cambiar el password de el mismo. 
+				# Puede cambiar el password de usuarios auditores de su organizacion. 
+				my $roles = &rol($usuario,$self,$c);
+				if ($roles =~ m/Auditor/ || $roles =~ m/AuditorJefe/){
+					my $usuario_entidad = &entidad($usuario,$self,$c);
+					if ($c->user->username eq $usuario->uid ){
+						$usuario = &change_password($usuario,$c->req->params->{passwd});
+						my $mesg = $usuario->update();
+						if ($mesg->done()){
+							$c->log->debug("El usuario ".$usuario->uid." Actualizo su password");
+				        	$c->response->redirect(
+				            	$c->uri_for(
+				                	$self->action_for('info'),
+				                	{ uid => $uid, mensaje => "La contraseña ha sido cambiada con éxito" }
+				           		)
+				        	);
+						}
+					} elsif ( $usuario_entidad eq 'No Pertenece'){
+						# Busco los roles del usuario. 	
+						my $rol = &rol($usuario,$self,$c);
+						if ($rol =~ m/Administrador/){
+                            $c->log->debug(
+								"ALERTA: Hay un intento de suplantación de identidad, por el usuario: ".$c->user->username
+                            );
+				        	$c->response->redirect(
+				            	$c->uri_for(
+				                	$self->action_for('info'),
+				                	{ uid => $uid, mensaje => "Usuario no encontrado", error => 1 }
+				           		)
+				        	);
+						} else {
+
+						}
+					} elsif ( $usuario_entidad->gidNumber == $user_entidad_id) {
+						$usuario = &change_password($usuario,$c->req->params->{passwd});
+						my $mesg = $usuario->update();
+						if ($mesg->done()){
+							$c->log->debug("El usuario ".$c->user->username." Actualizo el password de".$usuario->uid);
+				        	$c->response->redirect(
+				            	$c->uri_for(
+				                	$self->action_for('info'),
+				                	{ uid => $uid, mensaje => "La contraseña ha sido cambiada con éxito" }
+				           		)
+				        	);
+						}
+
+					}
+				} else {
+		        	$c->response->redirect(
+		            	$c->uri_for(
+		                	$self->action_for('info'),
+		                	{ uid => $uid, mensaje => "Operación no permitida", error => 1 }
+		           		)
+		        	);
+				}
+			} elsif ($c->check_any_user_role("Auditor")){
+				if ($uid ne $c->user->username){
+					$c->log->debug("ALERTA: El usuario: ".$c->user->username. " Intenta cambiar el passwd de: ".$uid );
+					$c->stash->{roles} = '';
+					$c->stash->{usuario} = '';
+					$c->stash->{error} = 1;
+					$c->stash->{mensaje} = "Usuario no encontrado";
+				} else {
+					$usuario = &change_password($usuario,$c->req->params->{passwd});
+					my $mesg = $usuario->update();
+					if ($mesg->done()){
+						$c->log->debug("El usuario ".$c->user->username." Actualizo su password. ");
+				       	$c->response->redirect(
+				           	$c->uri_for(
+				               	$self->action_for('info'),
+				               	{ uid => $uid, mensaje => "Su contraseña ha sido cambiada con éxito" }
+				          		)
+				       	);
+					}
+				}
 			}
 		}
 	} elsif ($form->has_errors && $form->submitted) {
@@ -173,6 +293,14 @@ sub info : Local : Form {
 	$form2->insert_before($h,$fieldset);
 	$form2->process;
 	$c->stash->{form2} = $form2;
+}
+
+sub change_password {
+	my ($usuario, $passwd) = @_;
+	my $p = md5_base64($passwd);
+	$p = "{MD5}".$p."==";
+	$usuario->replace(userPassword => $p);
+	return $usuario;
 }
 
 sub rol {
@@ -198,7 +326,7 @@ sub entidad {
 	if ($entidad && $entidad->gidNumber > 0){
 		my $cn = $entidad->cn;
 		utf8::decode($cn);
-		return $cn;
+		return ($cn,$entidad);
 	} else {
 		return "No Pertenece";
 	}
