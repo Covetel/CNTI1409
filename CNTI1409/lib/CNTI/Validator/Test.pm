@@ -422,6 +422,50 @@ sub run {
     $self->ok( $errors == 0 );
 }
 
+package CNTI::Validator::Test::W3C_CSS;
+use Moose;
+use WebService::Validator::CSS::W3C;
+
+extends 'CNTI::Validator::Test';
+
+
+sub run {
+    my $self = shift;
+    my $w3c = WebService::Validator::CSS::W3C->new;
+    my $errcount = 0;
+    my $uri = $self->uri;
+    my $ok = $w3c->validate(uri => $uri);
+  
+  if ($ok and !$w3c->is_valid) {
+       my $url = 'http://jigsaw.w3.org/css-validator/validator?uri=' . $uri . '&profile=css3&usermedium=all&warning=1&lang=es';
+       my $html = "<a href=$url>Ver Reporte</a>";
+       $self->event_log( error => "Las hojas de estilo no son válidas, $html" );
+       $errcount++;
+   }
+   $self->ok($errcount == 0);
+}
+
+package CNTI::Validator::Test::W3C_HTML;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $w3c = WebService::Validator::HTML::W3C->new;
+    my $errcount = 0;
+    my $uri = $self->uri;
+    my $ok = $w3c->validate(uri => $uri);
+
+    if ($ok and !$w3c->is_valid) {
+        my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
+        my $html = "<a href=$url>Ver Reporte</a>";
+        $self->event_log( error => "Errores de validación en el HTML, $html" );
+        $errcount++;
+    }
+    $self->ok($errcount == 0);
+}
+
 package CNTI::Validator::Test::Plugins;
 use Moose;
 
