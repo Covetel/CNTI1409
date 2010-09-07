@@ -37,7 +37,7 @@ authentication:
                 password_type:  self_check
             store:
                 class: LDAP
-                ldap_server: 127.0.0.1
+                ldap_server: localhost
                 ldap_server_options:
                     timeout: 30
                 binddn: cn=admin,dc=cnti,dc=gob,dc=ve
