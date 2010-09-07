@@ -39,6 +39,8 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 
 sub wizard : Local : Form {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/AuditorJefe/);
+
 	my ($entidad_id, $entidad_nombre);
 	my $form = $self->form;
 	$c->stash->{titulo}     = "Generador de Reportes";
@@ -91,16 +93,21 @@ sub wizard : Local : Form {
 			$auditoria->{id} = $dato->id;
 			$auditoria->{institucion} = $dato->idinstitucion->nombre;
 			$auditoria->{portal} = $dato->portal;
-			$auditoria->{estado} = $dato->estado;
+			$auditoria->{estado} = 'Abierta' if $dato->estado eq 'a';
+			$auditoria->{estado} = 'Pendiente' if $dato->estado eq 'p';
+			$auditoria->{estado} = 'Cerrada' if $dato->estado eq 'c';
 			$auditoria->{fecha} = $dato->fechacreacion->dmy();
 			$auditoria->{entidad} = $dato->idev->nombre;
 			$auditoria->{fail} = $dato->fallidas;
 			$auditoria->{pass} = $dato->validas;
-			my $validas = $dato->validas;
-			my $fallidas = $dato->fallidas;
-			my $indice = ($validas / ($fallidas + $validas)) * 100 ;
-			$indice = sprintf("%.2f",$indice);
-			$auditoria->{indice} = $indice;
+			if ($dato->estado eq 'c'){
+				my $validas = $dato->validas;
+				my $fallidas = $dato->fallidas;
+				my $indice = ($validas / ($fallidas + $validas)) * 100 ;
+				$indice = sprintf("%.2f",$indice);
+				$auditoria->{indice} = $indice;
+			}
+			
 			push @auditorias, $auditoria;
 		}
 		$c->stash->{auditorias} = \@auditorias;
@@ -335,6 +342,7 @@ Genera un reporte HTML de entidades listo para imprimir.
 
 sub entidades : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de entidades. 
 	my @entidades = $c->model('DB::Entidadverificadora')->search({})->all();
 	$c->stash->{entidades} = \@entidades;
@@ -349,6 +357,7 @@ Genera un reporte HTML de instituciones lista para imprimir.
 
 sub instituciones : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de instituciones
 	my @instituciones = $c->model('DB::Institucion')->search({})->all();
 	$c->stash->{instituciones} = \@instituciones;

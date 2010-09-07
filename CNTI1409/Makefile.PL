@@ -34,6 +34,8 @@ requires 'Template::Latex';
 requires 'LaTeX::Encode';
 requires 'Catalyst::Authentication::Store::LDAP';
 requires 'Catalyst::Model::LDAP';
+requires 'Digest::MD5';
+requires 'WebService::Validator::CSS::W3C';
 
 
 test_requires 'Test::More' => '0.88';

@@ -123,6 +123,53 @@ sub run {
     $self->ok( $errcount == 0);
 }
 
+package CNTI::Validator::Test::SSL;
+use Moose;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $errcount = 0;
+    my $found = 0;
+
+    #Verificar que la disposicion aplique.
+    my @inputs = $self->htmlt->find('input');
+    for my $input (@inputs) {
+        if ($input->attr('type')) {
+            if ($input->attr('type') eq 'password') {
+                $found++;
+                my @parents = $input->parent;
+                my $counttable = 0;
+                for my $parent (@parents) {
+                    if ($parent->tag eq "table") {
+                        $counttable++;
+                        unless ($parent->attr('action') =~ /https/i) {
+                            $self->event_log( error => "Hay datos sensibles que no se envian hacia un medio cifrado SSL" );
+                            $errcount++;
+                        } else {
+                            $self->event_log( warning => "Lo siento, no se pudo determinar la URL en el action del formulario, favor verificar manualmente" );
+                            $errcount++;
+                        }
+                    }
+                }
+                $self->event_log( error => "Hay un etiqueta input sin la declaración de form, HTML mal formado" ) unless $counttable;
+                $errcount++ unless $counttable;
+            }
+        }
+    }
+    if ($found) {
+        # primero verificar si se esta en una pagina https
+        unless ($self->uri->scheme eq "https") {
+            $self->event_log( warning => "Hay un dato sensible que se envía en texto plano" );
+            $errcount++;
+        }
+    } else {
+        $self->event_log( warning => "No se encontraron datos sensibles, la disposición no aplica en esta URL" );
+    }
+    $self->ok( $errcount == 0 );
+}
+
 package CNTI::Validator::Test::Layout;
 use Moose;
 
@@ -135,11 +182,11 @@ sub run {
 
     my @frames = $self->htmlt->find('frame');
     my $numframes = $#frames + 1;
-    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo <frame> " ) if ($#frames >= 0);
+    $self->event_log( error => "Se ha encontrado $numframes etiquetas de tipo frame " ) if ($#frames >= 0);
     $errcount++ if ($#frames >= 0);
     my @iframes = $self->htmlt->find('iframe');
     my $numiframes = $#iframes + 1;
-    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo <frame> " ) if ($#iframes >= 0);
+    $self->event_log( error => "Se ha encontrado $numiframes etiquetas de tipo iframe " ) if ($#iframes >= 0);
     $errcount++ if ($#iframes >= 0);
     
     my @nodes = $self->htmlt->find('table');
@@ -375,6 +422,54 @@ sub run {
     $self->ok( $errors == 0 );
 }
 
+package CNTI::Validator::Test::W3C_CSS;
+use Moose;
+use WebService::Validator::CSS::W3C;
+
+extends 'CNTI::Validator::Test';
+
+
+sub run {
+    my $self = shift;
+    my $w3c = WebService::Validator::CSS::W3C->new;
+    my $errcount = 0;
+    my $uri = $self->uri;
+    my $ok = $w3c->validate(uri => $uri);
+  
+  if ($ok and !$w3c->is_valid) {
+       my $url = 'http://jigsaw.w3.org/css-validator/validator?uri=' . $uri . '&profile=css3&usermedium=all&warning=1&lang=es';
+       my $html = "<a href=$url>Ver Reporte</a>";
+       $self->event_log( error => "Las hojas de estilo no son válidas, $html" );
+       $errcount++;
+   }
+   $self->ok($errcount == 0);
+}
+
+package CNTI::Validator::Test::W3C_HTML;
+use Moose;
+use WebService::Validator::HTML::W3C;
+
+extends 'CNTI::Validator::Test';
+
+sub run {
+    my $self = shift;
+    my $w3c = WebService::Validator::HTML::W3C->new(detailed => 1);
+    my $errcount = 0;
+    my $uri = $self->uri;
+    my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
+    my $html = "<a href=$url>Ver Reporte</a>";
+    if ($w3c->validate("$uri")) {
+        if (!$w3c->is_valid) {
+            $self->event_log( error => "Errores de validación en el HTML, $html" );
+            $errcount++;
+        }
+    } else {
+        $self->event_log( error => "Ha ocurrido un error " . $w3c->validator_error . ", Por favor de click en el enlace para verificar manualmente, $html" );
+        $errcount++;
+     }
+    $self->ok($errcount == 0);
+}
+
 package CNTI::Validator::Test::Plugins;
 use Moose;
 
@@ -412,23 +507,9 @@ use Moose;
 use CNTI::Validator::Schema;
 use CNTI::Validator::CSS;
 use WWW::Mechanize;
-# use CNTI::Validator::CSS;
 use URI;
    
 extends 'CNTI::Validator::Test';
-
-sub httpurl {
-    my ($uri, $urlcss, $href) = @_;
-    my $url;
-    if ( $urlcss->path =~ /^\//) {
-        $url = $href if $urlcss->authority;
-        $url = "http://" . $uri->authority . $urlcss->path if !($urlcss->authority);
-    } else {
-        $url = $href if $urlcss->authority;
-        $url = "http://" . $uri->authority . "/" . $urlcss->path if !($urlcss->authority);
-    }
-    return $url;
-}
 
 sub checkfonts {
     my $content= shift;
@@ -468,24 +549,22 @@ sub run {
         if ($css->attr('rel') eq 'stylesheet') {
             if ($css->attr('href')) {
                 my $href = $css->attr('href');
-                # my $urlcss = URI->new($href);
-                # my $url = httpurl $uri, $urlcss, $href;
                 my $url = URI->new_abs( $href, $self->uri );
                 $mech->get($url);
                 my $content = $mech->content;
                 my ($errcount, $fntcount, @fuentes) = checkfonts $content;
                 if ($#fuentes >= 0) {
-                    for my $fuente (@fuentes) {
-                        $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
-                    }
+                    my $fuente = shift @fuentes;
+                    $self->event_log( error => "Se han encontrado fuentes no libres tal como $fuente en el CSS $url" );
+                    #for my $fuente (@fuentes) {
+                    #    $self->event_log( error => "La fuente $fuente no es libre en el CSS $url");
+                    #}
                 }
                 $errorcount = $errorcount + $errcount;
                 $fontcount = $fontcount + $fntcount;
                 my @contenido = split /\n/, $mech->content;
                 for my $lineas (@contenido) {
                     if ($lineas =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                        # my $cssuri = URI->new($2);
-                        # my $cssurl = httpurl $uri, $cssuri, $href;
                         my $hre = $2;
                         my $cssurl = URI->new_abs( $hre, $self->uri );
                         my $mech2 = WWW::Mechanize->new();
@@ -494,9 +573,11 @@ sub run {
                         my $content2 = $mech2->content;
                         my ($ercnt, $fntcnt, @subfonts) = checkfonts $content2;
                         if ($#subfonts >= 0) {
-                            for my $subfont (@subfonts) {
-                                $self->event_log( error => "La fuente $subfont no es libre en el CSS $cssurl");
-                            }
+                            my $subfont = shift @subfonts;
+                            $self->event_log( error => "Se han encontrado fuentes no libres tal como $subfont en el CSS $cssurl" );
+                            #for my $subfont (@subfonts) {
+                            #    $self->event_log( error => "La fuente $subfont no es libre en el CSS $cssurl");
+                            #}
                         }
                         $errorcount = $errorcount + $ercnt;
                         $fontcount = $fontcount + $fntcnt; 
@@ -514,16 +595,16 @@ sub run {
             my $stylecontent = join ("\n", @lines);
             my ($styerrorcount, $styfontcount, @styfonts) = checkfonts $stylecontent;
             if ($#styfonts >= 0) {
-                for my $styfont (@styfonts) {
-                    $self->event_log( error => "La fuente $styfont no es libre, embebido en el HTML" );
-                }
+                my $styfont = shift @styfonts;
+                $self->event_log( error => "Se han encontrado fuentes no libres tal como $styfont en el HTML" );
+                #for my $styfont (@styfonts) {
+                #    $self->event_log( error => "La fuente $styfont no es libre, embebido en el HTML" );
+                #}
             }
             $errorcount = $errorcount + $styerrorcount;
             $fontcount = $fontcount + $styfontcount;
             for my $line (@lines) {
                 if ($line =~ /\@import\s+(url|)\(?["|'](.*)["|']\)?/i) {
-                    # my $styuri = URI->new($2);
-                    # my $styurl = httpurl $uri, $styuri, "";
                     my $resource = $2;
                     my $styurl = URI->new_abs( $resource, $self->uri );
                     my $stymech = WWW::Mechanize->new();
@@ -532,9 +613,11 @@ sub run {
                     my $stycontent = $stymech->content;
                     my ($styercnt, $styfntcnt, @styimportfonts) = checkfonts $stycontent;
                     if ($#styimportfonts >= 0) {
-                        for my $styimportfont (@styimportfonts) {
-                            $self->event_log( error => "La fuente $styimportfont no es libre en el CSS $styurl");
-                        }
+                        my $styimportfont = shift @styimportfonts;
+                        $self->event_log( error => "Se han encontrado fuentes no libres tal como $styimportfont en el CSS $styurl" );
+                        #for my $styimportfont (@styimportfonts) {
+                        #    $self->event_log( error => "La fuente $styimportfont no es libre en el CSS $styurl");
+                        #}
                     }
                     $errorcount = $errorcount + $styercnt;
                     $fontcount = $fontcount + $styfntcnt; 

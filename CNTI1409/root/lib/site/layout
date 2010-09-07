@@ -17,10 +17,11 @@
                 <link href="/static/stylesheets/jquery-ui-1.8.1.custom.css" rel="stylesheet" type="text/css" media="screen" />
                 <link type="image/x-icon" rel="shortcut icon" href="/static/images/favicon.ico"/>
                 <script type="text/javascript" src="/static/javascripts/jquery-1.4.2.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>
+                <script type="text/javascript" src="/static/javascripts/Covetel/Covetel.Usuario.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.auditoria.js"></script>
-                <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.dataTables.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery.jeditable.mini.js"></script>
@@ -58,8 +59,7 @@
 						</div>
                         <div id="is_usuario">
                                 <div id="is_usuario_uid"> 
-									[% c.user.ldap_entry.uid %] | 
-									[% rol = c.user.roles; rol %] 
+									<a title="Click aquí para cambiar la contraseña" href="/usuarios/info/[% c.user.ldap_entry.uid %]"> [% c.user.username %] </a> 
 								</div>
                         </div>
                         <div id="is_enlaces">

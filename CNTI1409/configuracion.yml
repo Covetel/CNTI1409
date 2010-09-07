@@ -64,3 +64,12 @@ authentication:
 # Configuración General LDAP. 
 # Base de busqueda de Entidades.
 base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de Usuarios.
+base_usuarios: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de los roles.
+base_roles: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Rama de mantenimiento. 
+base_mantenimiento: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
