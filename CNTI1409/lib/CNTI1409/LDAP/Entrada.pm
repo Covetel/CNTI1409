@@ -22,6 +22,13 @@ Retorna un array con los roles del usuario.
 
 =cut
 
+sub prueba {
+	my ($self) = @_;
+	use Data::Dumper;
+	print Dumper $self;
+	print "prueba";
+}
+
 sub roles {
 	my ($self) = @_;
 	# Busco los roles que posee el usuario. 
@@ -139,6 +146,26 @@ sub delete {
 	# Elimino el usuario del LDAP. 
 	my $mesg = $ldap->delete($self->dn());
 
+}
+
+=head2 entidad_verificadora
+
+Busca la entidad verificadora en LDAP. 
+
+=cut 
+
+sub entidad_verificadora {
+	my ($self) = @_;
+	my $ldap = $self->_ldap_client();
+	my $entidad = $ldap->search(
+		base => $config->{base_entidades},
+		filter => "(&(objectClass=posixGroup)(memberUid=".$self->uid."))",
+	)->shift_entry();
+	if ($entidad){
+		return $entidad;
+	} else {
+		return undef;
+	}
 }
 
 1;

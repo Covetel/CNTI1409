@@ -56,6 +56,7 @@ Elimina usuarios del LDAP.
 
 sub eliminar : Local {
 	my ( $self, $c ) = @_;
+	my $u = $c->model('LDAP')->usuario($c->user->username);
 	$c->assert_any_user_role(qw/AuditorJefe Administrador/);
 	$c->stash->{template} = 'usuarios/eliminar.tt2';
 	my $uid = $c->req->params->{uid};
@@ -65,12 +66,42 @@ sub eliminar : Local {
 	if ($c->user->username ne $uid){
 		# Busco el usuario en el LDAP. 
 		my $usuario = $c->model('LDAP')->usuario($uid);
-		my $mesg = $usuario->delete();	
-		if ($mesg->done()){
-			$c->stash->{mensaje} = "El usuario $uid ha sido eliminado";
+		if ($usuario) {
+			if ($c->check_any_user_role("Administrador")){
+				my $mesg = $usuario->delete();	
+				if ($mesg->done()){
+					$c->stash->{mensaje} = "El usuario $uid ha sido eliminado";
+				} else {
+					$c->stash->{error} = 1;
+					$c->stash->{mensaje} = $mesg->error_text();
+				}
+			} elsif ($c->check_any_user_role("AuditorJefe")){
+				if ($usuario->is_administrador){
+					$c->stash->{error} = 1;
+					$c->stash->{mensaje} = "Operación no permitida";
+					utf8::decode($c->stash->{mensaje});
+					$c->detach( 'CNTI1409::View::VistaPrincipal'); 
+				} else {
+					# Comparo los uidNumber de las entidades. 
+					if ($u->entidad_verificadora->gidNumber == $usuario->entidad_verificadora->gidNumber) {
+						my $mesg = $usuario->delete();	
+						if ($mesg->done()){
+							$c->stash->{mensaje} = "El usuario $uid ha sido eliminado";
+						} else {
+							$c->stash->{error} = 1;
+							$c->stash->{mensaje} = $mesg->error_text();
+						}
+					} else {
+						$c->stash->{error} = 1;
+						$c->stash->{mensaje} = "Operación no permitida";
+						utf8::decode($c->stash->{mensaje});
+						$c->detach( 'CNTI1409::View::VistaPrincipal'); 
+					}
+				}
+			}
 		} else {
 			$c->stash->{error} = 1;
-			$c->stash->{mensaje} = $mesg->error_text();
+			$c->stash->{mensaje} = "Usuario no encontrado";
 		}
 	} else {
 		$c->stash->{error} = 1;
