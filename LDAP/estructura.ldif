@@ -29,8 +29,7 @@ objectClass: top
 ou: Mantenimiento
 description:: Tm8gYm9ycmFyIGVzdGEgcmFtYSwgbmVjZXNhcmlhIHBhcmEgbGEgY3JlYWNpw7NuIGRlIHVzdWFyaW9z
 
-dn: cn=Usuario Mantenimiento,ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=
- ve
+dn: cn=Usuario Mantenimiento,ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: top
@@ -91,4 +90,3 @@ mail: cnti@cnti.gob.ve
 gidNumber: 1000
 uidNumber: 1000
 userPassword: {MD5}ebWUvajbFyIXOgXRvtHDfQ==
-
