@@ -11,6 +11,8 @@ __PACKAGE__->config(
     password          => '123321...',
     start_tls         => 0,
     start_tls_options => { verify => 'require' },
+	entry_class 	  => 'CNTI1409::LDAP::Entrada',
+	connection_class  => 'CNTI1409::LDAP::Connection',
     options           => {},  # Options passed to search
 );
 

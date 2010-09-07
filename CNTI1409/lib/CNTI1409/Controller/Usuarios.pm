@@ -24,6 +24,27 @@ Catalyst Controller.
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+	use Data::Dumper;
+	my $usuario = $c->model('LDAP')->search(
+		base => $c->config->{base_usuarios},
+		filter => "(&(objectClass=posixAccount)(uid=wvargas))"
+	)->shift_entry;
+
+	my @r = $usuario->roles();
+
+	if ($usuario->is_administrador){
+		$c->log->debug("Es administrador");
+	}
+
+	if ($usuario->is_auditorJefe){
+		$c->log->debug("Es Auditor Jefe");
+	}
+
+
+	my $u = $c->model('LDAP')->usuario("lramirez");
+	$c->log->debug(Dumper($u));
+
+	$c->response->body($u);
 
 }
 
@@ -43,45 +64,8 @@ sub eliminar : Local {
 	# Este sistema no permite suicidios.
 	if ($c->user->username ne $uid){
 		# Busco el usuario en el LDAP. 
-		my $usuario = $c->model('LDAP')->search(
-			base   => $c->config->{base_usuarios},
-			filter => "(&(objectClass=posixAccount)(uid=$uid))"
-		)->shift_entry;
-	
-		# Elimino la pertenencia del usuario a los roles. 
-		my @roles = $c->model('LDAP')->search(
-			base => $c->config->{base_roles},
-			filter => "(&(objectClass=posixGroup)(memberUid=".$uid."))",
-		)->entries();
-		foreach my $rol (@roles){
-			if ($rol->exists("memberUid")) {
-				my @newuids;
-				my @uids = $rol->memberUid;
-				foreach my $u (@uids){
-					push @newuids, $u if $u ne $uid;
-				}
-				$rol->replace(memberUid => \@newuids);
-				$rol->update();
-			}
-		}
-	
-		# Elimino la pertenencia del usuario a la entidad verificadora.
-		my $entidad = $c->model('LDAP')->search(
-			base => $c->config->{base_entidades},
-			filter => "(&(objectClass=posixGroup)(memberUid=".$uid."))",
-		)->shift_entry();
-		if ($entidad && $entidad->exists("memberUid")) {
-			my @newuids;
-			my @uids = $entidad->memberUid;
-			foreach my $u (@uids){
-				push @newuids, $u if $u ne $uid;
-			}
-			$entidad->replace(memberUid => \@newuids);
-			$entidad->update();
-		}
-		
-		# Elimino el usuario del LDAP. 
-		my $mesg = $c->model('LDAP')->delete($usuario->dn());
+		my $usuario = $c->model('LDAP')->usuario($uid);
+		my $mesg = $usuario->delete();	
 		if ($mesg->done()){
 			$c->stash->{mensaje} = "El usuario $uid ha sido eliminado";
 		} else {
