@@ -2,7 +2,7 @@ package CNTI::Spider::Schema;
 use Moose;
 use CNTI::SpiderDB;
 
-my $dbfile  = "spiderdb"
+my $dbfile  = "spiderdb";
 my $dsn 	= "dbi:SQLite:dbname=" . $dbfile;
 my $user 	= "";
 my $passwd 	= "";

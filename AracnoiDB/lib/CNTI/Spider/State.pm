@@ -138,7 +138,7 @@ sub add_hyperlinks {
         next if $self->q_find({ url => "$url" });
         $self->url_get( $url, $depth ) and --$n;
     }
-say STDERR "List exausted at level $depth ($n)" if $n;
+#say STDERR "List exausted at level $depth ($n)" if $n;
 }
 
 __PACKAGE__->meta->make_immutable;

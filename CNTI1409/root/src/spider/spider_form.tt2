@@ -1,0 +1,28 @@
+[% INCLUDE mensajes.tt2 %]
+
+[% IF id == 0%]
+	[% titulo = 'Iniciar la Araña' %]
+	[% form %]
+[% ELSIF id > 0 %]
+	[% titulo = 'Ejecutando la araña para el sitio '_ base %]
+	<p>
+		Descubriendo las direcciones de hipertexto contenidas en el portal 
+		<span class="strong"> [% base %] </span>
+		<br />
+		Nivel de profundidad: <span class="strong"> [% prof %] </span> <br />
+		Número de direcciones máximo por nivel: <span class="strong"> [% numero %] </span>
+	</p>
+	<div class="spider_id" id="spider_urls_[% id %]">
+
+	</div>
+	<p>
+		<span class="strong"> Total Urls:  </span> <span id="spider_total_urls"> 0 </span> <br />
+		<span class="strong"> Estado:  </span> <span id="spider_estado"> Iniciando </span>
+	</p>
+	<p>
+		<button disabled="disabled" id="spider_descargar_muestra"> Descargar Muestra </button>
+	</p>
+	<p>
+		<a href="/spider/iniciar"> Volver </a>
+	</p>
+[% END %]

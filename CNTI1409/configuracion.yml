@@ -25,6 +25,7 @@ breadcrumbs:
     /inicio: Inicio
     /instituciones/listar: Lista de Instituciones
     /instituciones/registrar: Registrar Institución
+    /spider: Araña
 
 # Configuración del Módulo de Autenticación LDAP.
 authentication:

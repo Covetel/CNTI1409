@@ -29,3 +29,7 @@
 		<a href="/usuarios/crear"> Crear </a> <br />
 		<a href="/usuarios/listar"> Listar </a> <br />
 </div>
+<h3><a href="#"> Araña </a></h3>
+<div>
+		<a href="/spider/iniciar"> Iniciar </a> <br />
+</div>

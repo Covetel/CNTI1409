@@ -20,6 +20,7 @@
                 <script type="text/javascript" src="/static/javascripts/jquery.qtip-1.0.0-rc3.min.js"></script>
                 <script type="text/javascript" src="/static/javascripts/Covetel/Covetel.Usuario.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.js"></script>
+                <script type="text/javascript" src="/static/javascripts/covetel.spider.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.rest.js"></script>
                 <script type="text/javascript" src="/static/javascripts/covetel.auditoria.js"></script>
                 <script type="text/javascript" src="/static/javascripts/jquery-ui-1.8.1.custom.min.js"></script>

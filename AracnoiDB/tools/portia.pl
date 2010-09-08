@@ -33,10 +33,9 @@ if ( $spider->run ) {
         sleep 1;
 
         # refrescar el registro
-        $monitor->discard_changes;
+        $monitor->discard_changes; 
     }
-}
-else {
+} else {
     # Ej hijo nunca regresa del metodo run, asi que esto no debería ejecutarse
     die "Child returned!!!!!!!!!!!!!!\n"
 }

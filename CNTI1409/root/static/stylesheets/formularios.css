@@ -171,6 +171,11 @@ span.strong {
  font-weight: bold;
 }
 
+span.important {
+ font-weight: bold;
+ color: #f00;
+}
+
 select.input_select {
  width: 250px;
  text-align: left;
