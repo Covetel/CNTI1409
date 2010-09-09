@@ -6,6 +6,7 @@
 var oTable;
 var oEntidades;
 var oAuditoria;
+var oMetas;
 var giRedraw = false;
 
 // Función que elimina una columna en la tabla
@@ -259,6 +260,29 @@ $("#loading").ajaxStop(function(){
      return value;
     }
 
+    /* Función que envía el dato a editar en la tabla
+     * parametros a la controladora por AJAX
+     */
+    function submitEditMetas(value, settings)
+    { 
+        var n = $(this).index();
+        var o = $("th").get(n);
+        var campo = $(o).attr('id');
+        var aPos = oEntidades.fnGetPosition( this );
+        var tr = this.parentNode;
+        var d = oEntidades.fnGetData(tr);
+        var datos = ({'valor': value, 'id': d[0], 'campo': campo});
+        var jsoon = $.JSON.encode(datos);
+        $.ajax({
+            url: "/ajax/tabla/metaetiquetas", 
+            type: "POST",
+            data: jsoon,
+            processData: false,
+            contentType: 'application/json',
+        });
+     return value;
+    }
+
     // Maneja las propiedades de la tabla instituciones
 	oTable = $("#tabla_instituciones").dataTable({
 		"sAjaxSource": '/ajax/tabla/instituciones',
@@ -364,7 +388,54 @@ $("#loading").ajaxStop(function(){
                 }); // Fin de click
 		},
 	});
-	
+
+    // Maneja las propiedades de la tabla metas
+	oMetas = $("#tabla_metas").dataTable({
+		"sAjaxSource": '/ajax/tabla/metaetiquetas',
+        "bAutoWidth": false,
+		"bProcessing": false,
+		"bJQueryUI": true,
+		"aaSorting": [[ 9, "desc" ]],
+		"aoColumns": [
+						{"bSearchable": false, "bVisible": false},
+						{"sClass": "tEdit"},
+						{"sClass": "tEdit"},
+                    ], 
+ 		"oLanguage": {
+            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+        },
+		"fnDrawCallback": function () {
+			fila_desactivar('tabla_metas');
+			$("#tabla_metas tbody td.tEdit").editable(submitEditMetas);
+            $("div.borrar").html("<button class='borrar'> Eliminar </button>");
+			boton_desactivar_activar();
+            $("button.borrar").click(function(){
+                    var tr = oEntidades.fnGetPosition(this.parentNode.parentNode.parentNode);
+                    var c = confirm("Está seguro de eliminar este registro ?");
+                    if (c) {
+                        var id      = $(this).parent().attr('id');
+                        var codigo  = id.split("_");
+                        codigo      = ({ 'codigo': codigo[1]});
+                        var jsoon   = $.JSON.encode(codigo);
+                        $.ajax({
+                            url: "/ajax/tabla/metaetiquetas",
+                            type: "DELETE",
+                            data: jsoon,
+                            processData: false,
+                            contentType: 'application/json',
+                            complete: function (data) {
+                                    delTr(tr, "metas");
+                            },
+                        }); // Fin de ajax
+                    } else {
+                        return false;
+                    }
+                }); // Fin de click
+		},
+	});
+
+
+
     // Maneja las propiedades de la tabla auditorias
 	oAuditorias = $("#tabla_auditorias").dataTable({
 		"sAjaxSource": '/ajax/tabla/auditorias',
@@ -397,6 +468,8 @@ $("#loading").ajaxStop(function(){
             });
         },
 	});
+
+                       
 
 
 	// Cambio dinámicamente los nombres de los campos en los mensajes de error. 

@@ -116,6 +116,28 @@ sub instituciones_PUT : Local {
     $self->status_ok($c, entity => { valor => 1,});
 }
 
+=head2 Metaetiquetas
+
+Seccion REST para procesar las meta etiquetas
+
+=cut
+sub metaetiquetas : Local : ActionClass('REST') {}
+
+sub metaetiquetas_GET {
+    use DateTime;
+    my ($self, $c) = @_;
+    my $rs;
+    $rs = $c->model('DB::Param')->search({});
+    my %data;
+    $data{aaData} = [
+        map {[
+                $_->id, $_->disposicion,    $_->parametro,
+            ]} $rs->all
+    ];
+    $self->status_ok($c, entity => \%data);
+}
+
+
 =head2 Entidades
 
 Seccion REST para procesar las entidades verificadoras
@@ -180,6 +202,8 @@ sub entidades_PUT : Local {
     $rs->update;
     $self->status_ok($c, entity => { valor => 1,});
 }
+
+
 
 
 sub auditorias : Local : ActionClass('REST') {}

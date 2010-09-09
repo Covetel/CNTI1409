@@ -42,7 +42,7 @@ sub index :Path :Args(0) {
 }
 
 
-sub parametros : Local : FormConfig {
+sub fonts : Local : FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
 	$c->stash->{titulo}     = "Gestión de parámetros de disposiciones";
@@ -71,6 +71,12 @@ sub parametros : Local : FormConfig {
         }
     }
 }
+
+sub metas : Local {
+    my ( $self, $c ) = @_;
+	$c->stash->{template} = 'administracion/metas.tt2';	
+} 
+
 
 =head1 AUTHOR
 
