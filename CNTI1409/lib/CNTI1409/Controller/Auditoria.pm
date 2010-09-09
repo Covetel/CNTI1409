@@ -395,7 +395,7 @@ sub detalle : Local {
 
                 if ($idDisposicion) {
                     my $data = $idDisposicion->id;
-                    $auDetalle->update({
+                    $auDetalle->update_or_create({
                             idauditoria => "$idAuditoria",
                             iddisposicion => "$data",
                             resolutoria => "$resolutoria"
