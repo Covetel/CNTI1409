@@ -27,8 +27,8 @@ has list => (
 
 sub BUILDARGS {
     my ( $class, %args ) = @_;
-    my @links
-        = grep { index( $_->url_abs, $_->base ) >= 0 } @{ $args{'list'} };
+
+    my @links = @{ $args{'list'} };
     my $dir = $args{'dir'} || 0;
     
     # La dirección debe estar entre 0 y 2

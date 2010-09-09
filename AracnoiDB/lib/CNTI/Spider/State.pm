@@ -96,6 +96,19 @@ sub run {
     }
 }
 
+sub run_single {
+    my $self = shift;
+    $self->state(1);
+    $self->update;
+    $self->url_get( URI::URL->new( $self->base ), $self->depth );
+    $self->state(2);
+    $self->update;
+}
+
+sub _same_site {
+    my ($u0, $u1) = @_;
+    return $u0->scheme eq $u1->scheme && $u0->authority eq $u1->authority;
+}
 sub url_get {
     my ( $self, $url, $depth ) = @_;
 
@@ -120,6 +133,8 @@ sub url_get {
     my $sum = md5_hex( $mech->binary_content );
     return 0 if $self->q_find( { sum => $sum } );
 
+    #print STDERR "$url\n";
+
     my $u_rec = $self->q_add(
         {   url   => $url_text,
             sum   => $sum,
@@ -131,6 +146,7 @@ sub url_get {
     if ( $depth > 0 ) {
         my @links = $mech->links;
         if (@links) {
+            @links = grep { _same_site( $url, $_->url_abs ) } @links;
             my $l = CNTI::Spider::UrlList->new(
                 list => \@links,
                 dir  => $self->dir
