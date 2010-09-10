@@ -6,7 +6,7 @@
 		<th id="id">ID </th>
 		<th id="disposicion">Etiqueta</th>
 		<th id="parametro">Valor</th>
-	</tr>
+		<th id="eliminar">Eliminar</th>
 	</tr>
 	</thead>
 </table>

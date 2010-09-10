@@ -127,15 +127,43 @@ sub metaetiquetas_GET {
     use DateTime;
     my ($self, $c) = @_;
     my $rs;
-    $rs = $c->model('DB::Param')->search({});
+    $rs = $c->model('DB::Param')->search({ disposicion => 'Meta' });
     my %data;
     $data{aaData} = [
         map {[
                 $_->id, $_->disposicion,    $_->parametro,
+                "<div class='button'><button id='metas_".$_->id."' class='borrar'>Eliminar</button></div>",
             ]} $rs->all
     ];
     $self->status_ok($c, entity => \%data);
 }
+
+sub metaetiquetas_POST {
+	my ($self, $c) = @_;
+	my $valor = $c->req->data->{valor};
+	my $id = $c->req->data->{id};
+    my $campo = $c->req->data->{campo};
+    my $rs = $c->model('DB::Param')->find($id);
+    $rs->$campo($valor);
+    $rs->update;
+	$self->status_accepted(
+               $c,
+               entity => {
+                   value => $valor,
+               }
+	);
+}
+
+
+sub metaetiquetas_DELETE {
+	my ($self, $c) = @_;
+	my $id = $c->req->data->{codigo};
+	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
+    my $rs = $c->model('DB::Param')->find($id);
+    $rs->delete;
+    $self->status_ok($c, entity => { valor => 1,});
+}
+
 
 
 =head2 Entidades

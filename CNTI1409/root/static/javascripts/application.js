@@ -15,6 +15,8 @@ function delTr (tr, tabla) {
         oTable.fnDeleteRow(tr);
     } else if (tabla = "entidad" ) {
         oEntidades.fnDeleteRow(tr);
+    } else if (tabla = "metas" ) {
+        oMetas.fnDeleteRow(tr);
     }
 }
 
@@ -268,9 +270,9 @@ $("#loading").ajaxStop(function(){
         var n = $(this).index();
         var o = $("th").get(n);
         var campo = $(o).attr('id');
-        var aPos = oEntidades.fnGetPosition( this );
+        var aPos = oMetas.fnGetPosition( this );
         var tr = this.parentNode;
-        var d = oEntidades.fnGetData(tr);
+        var d = oMetas.fnGetData(tr);
         var datos = ({'valor': value, 'id': d[0], 'campo': campo});
         var jsoon = $.JSON.encode(datos);
         $.ajax({
@@ -395,11 +397,12 @@ $("#loading").ajaxStop(function(){
         "bAutoWidth": false,
 		"bProcessing": false,
 		"bJQueryUI": true,
-		"aaSorting": [[ 9, "desc" ]],
+		"aaSorting": [[ 1, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
+						{"sClass": "tNoEdit"},
 						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
+						{"bSearchable": false, "sClass": "tDesactivar"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
@@ -407,13 +410,12 @@ $("#loading").ajaxStop(function(){
 		"fnDrawCallback": function () {
 			fila_desactivar('tabla_metas');
 			$("#tabla_metas tbody td.tEdit").editable(submitEditMetas);
-            $("div.borrar").html("<button class='borrar'> Eliminar </button>");
-			boton_desactivar_activar();
+            //$("div.borrar").html("<button class='borrar'> Eliminar </button>");
             $("button.borrar").click(function(){
-                    var tr = oEntidades.fnGetPosition(this.parentNode.parentNode.parentNode);
+                    var tr = oMetas.fnGetPosition(this.parentNode.parentNode.parentNode);
                     var c = confirm("Está seguro de eliminar este registro ?");
                     if (c) {
-                        var id      = $(this).parent().attr('id');
+                        var id      = $(this).attr('id');
                         var codigo  = id.split("_");
                         codigo      = ({ 'codigo': codigo[1]});
                         var jsoon   = $.JSON.encode(codigo);
@@ -431,7 +433,8 @@ $("#loading").ajaxStop(function(){
                         return false;
                     }
                 }); // Fin de click
-		},
+
+        },
 	});
 
 

@@ -72,7 +72,7 @@ sub fonts : Local : FormConfig {
     }
 }
 
-sub metas : Local {
+sub metas : Local : FormConfig {
     my ( $self, $c ) = @_;
 	$c->stash->{template} = 'administracion/metas.tt2';	
 } 
