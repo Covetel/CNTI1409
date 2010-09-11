@@ -9,5 +9,6 @@
 		<th id="eliminar">Eliminar</th>
 	</tr>
 	</thead>
+    <div><a href="/administracion/metas">[+] Agregar nueva metaetiqueta</a></div>
 </table>
 </div>

@@ -13,9 +13,9 @@ var giRedraw = false;
 function delTr (tr, tabla) { 
     if (tabla == "institucion" ) {
         oTable.fnDeleteRow(tr);
-    } else if (tabla = "entidad" ) {
+    } else if (tabla == "entidad" ) {
         oEntidades.fnDeleteRow(tr);
-    } else if (tabla = "metas" ) {
+    } else if (tabla == "metas" ) {
         oMetas.fnDeleteRow(tr);
     }
 }
