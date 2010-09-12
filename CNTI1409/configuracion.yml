@@ -36,22 +36,6 @@ base_roles: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 # Rama de mantenimiento. 
 base_mantenimiento: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 
-
-# Configuración de las migajitas de pan.
-breadcrumbs:
-  hide_home: 1
-  hide_index: 1
-  labels:
-    /auditoria: Auditoría
-    /auditoria/crear: Crear Auditoría
-    /auditoria/detalle: Detalle de la Auditoría
-    /auditoria/reporte: Lista de Auditorías
-    /entidades: Entidades Verificadoras
-    /inicio: Inicio
-    /instituciones/listar: Lista de Instituciones
-    /instituciones/registrar: Registrar Institución
-    /spider: Araña
-
 # Configuración del Módulo de Autenticación LDAP.
 authentication:
     default_realm: ldap
@@ -85,3 +69,22 @@ authentication:
                 role_value: uid
                 role_search_options:
                     deref: always
+
+# Configuración de las migajitas de pan.
+breadcrumbs:
+  hide_home: 1
+  hide_index: 1
+  labels:
+    /auditoria: Auditoría
+    /auditoria/crear: Crear Auditoría
+    /auditoria/detalle: Detalle de la Auditoría
+    /auditoria/reporte: Lista de Auditorías
+    /entidades: Entidades Verificadoras
+    /inicio: Inicio
+    /instituciones/listar: Lista de Instituciones
+    /instituciones/registrar: Registrar Institución
+    /spider: Araña
+
+
+# Validador W3C.
+validator_uri: http://validator.w3.org/check
