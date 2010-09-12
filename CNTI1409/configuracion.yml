@@ -12,15 +12,30 @@ Model::DB:
     dsn: dbi:Pg:dbname=validador;host=localhost
     pg_enable_utf8: 1
 
-# Configuracin LDAP.
+# Configuración General LDAP. 
 Model::LDAP:
    host: localhost
+   # Base de busqueda general
    base: ou=cnti1409,dc=cnti,dc=gob,dc=ve
+   # Usuario de LDAP.
    dn: cn=admin,dc=cnti,dc=gob,dc=ve
    password: 123321...
    start_tls: 0
    entry_class: CNTI1409::LDAP::Entrada
    connection_class: CNTI1409::LDAP::Connection
+
+# Base de busqueda de Entidades.
+base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de Usuarios.
+base_usuarios: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de los roles.
+base_roles: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Rama de mantenimiento. 
+base_mantenimiento: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
 
 # Configuración de las migajitas de pan.
 breadcrumbs:
@@ -70,17 +85,3 @@ authentication:
                 role_value: uid
                 role_search_options:
                     deref: always
-
-
-# Configuración General LDAP. 
-# Base de busqueda de Entidades.
-base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
-
-# Base de busqueda de Usuarios.
-base_usuarios: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
-
-# Base de busqueda de los roles.
-base_roles: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
-
-# Rama de mantenimiento. 
-base_mantenimiento: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
