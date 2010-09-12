@@ -12,6 +12,16 @@ Model::DB:
     dsn: dbi:Pg:dbname=validador;host=localhost
     pg_enable_utf8: 1
 
+# Configuracin LDAP.
+Model::LDAP:
+   host: localhost
+   base: ou=cnti1409,dc=cnti,dc=gob,dc=ve
+   dn: cn=admin,dc=cnti,dc=gob,dc=ve
+   password: 123321...
+   start_tls: 0
+   entry_class: CNTI1409::LDAP::Entrada
+   connection_class: CNTI1409::LDAP::Connection
+
 # Configuración de las migajitas de pan.
 breadcrumbs:
   hide_home: 1

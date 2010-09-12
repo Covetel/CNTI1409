@@ -4,18 +4,6 @@ use strict;
 use warnings;
 use base qw/Catalyst::Model::LDAP/;
 
-__PACKAGE__->config(
-    host              => 'localhost',
-    base              => 'ou=cnti1409,dc=cnti,dc=gob,dc=ve',
-    dn                => 'cn=admin,dc=cnti,dc=gob,dc=ve',
-    password          => '123321...',
-    start_tls         => 0,
-    start_tls_options => { verify => 'require' },
-	entry_class 	  => 'CNTI1409::LDAP::Entrada',
-	connection_class  => 'CNTI1409::LDAP::Connection',
-    options           => {},  # Options passed to search
-);
-
 =head1 NAME
 
 CNTI1409::Model::LDAP - LDAP Catalyst model component
