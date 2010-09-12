@@ -299,10 +299,10 @@ sub info : Local : Form {
 	}
 
 	# Creo el formulario para eliminar el usuario
-    my $form2 = $self->form;
+    	my $form2 = $self->form;
 	$form2->load_config_file('usuarios/borrar.yml');
-	my $fieldset = $form2->get_element({ name => 'datos_fieldset' });
-	my $h = $form2->element('Hidden');
+	$fieldset = $form2->get_element({ name => 'datos_fieldset' });
+	$h = $form2->element('Hidden');
 	$h->name('uid');
 	$h->value($uid);
 	$form2->insert_before($h,$fieldset);
