@@ -87,4 +87,5 @@ breadcrumbs:
 
 
 # Validador W3C.
-validator_uri: http://validator.w3.org/check
+css_validator_uri: http://jigsaw.w3.org/css-validator/validator
+html_validator_uri: http://validator.w3.org/check
