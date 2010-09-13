@@ -21,6 +21,7 @@ elements:
 
         - type: Text
           name: base
+          default: "http://"
           label: URL Base
           attributes:
               title: 'Indique la url base'

@@ -126,6 +126,11 @@ function boton_desactivar_activar(){
 
 $(document).ready(function(){
 
+jQuery(function($){
+   $.mask.definitions['~']='[JG]';
+   $("#rif").mask("~-99999999-9");
+});
+
 // Utilizado por la ventana de login. 
 $("#area_aplicacion_login").accordion({ collapsible: false ,active: 0 });
 $("#area_aplicacion_login form").css('margin-left','200px');
