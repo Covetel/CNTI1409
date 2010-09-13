@@ -16,6 +16,9 @@ use Catalyst::Runtime 5.80;
 # Static::Simple: will serve static files from the application's root
 #                 directory
 
+#use Catalyst qw/
+#	-Debug
+#	StackTrace
 use Catalyst qw/
     ConfigLoader
     Static::Simple

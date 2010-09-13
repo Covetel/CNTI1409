@@ -43,9 +43,6 @@ sub datos : Local {
 	$usuario->{uid} = $c->user->username;
 	$usuario->{cn} = $c->user->cn;
 	$usuario->{roles} = [$c->user->roles];
-
-	use Data::Dumper;
-	$c->log->debug(Dumper($usuario));
     $self->status_ok($c, entity => $usuario);
 }
 

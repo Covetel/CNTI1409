@@ -22,13 +22,6 @@ Retorna un array con los roles del usuario.
 
 =cut
 
-sub prueba {
-	my ($self) = @_;
-	use Data::Dumper;
-	print Dumper $self;
-	print "prueba";
-}
-
 sub roles {
 	my ($self) = @_;
 	# Busco los roles que posee el usuario. 

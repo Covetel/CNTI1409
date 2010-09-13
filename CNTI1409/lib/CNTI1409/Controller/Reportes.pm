@@ -4,6 +4,7 @@ use namespace::autoclean;
 use utf8;
 use LaTeX::Encode; # Módulo necesario para codificar las urls que van para el PDF.
 use Data::Dumper;
+use Chart::Bars; 
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -150,6 +151,26 @@ sub disposiciones {
     return $disp;
 }
 
+sub grafica {
+	my ($cumple,$no_cumple,$institucion) = @_;
+	
+	my $title = 'Gráfico de indice de cumplimento';
+	utf8::decode($title);
+	utf8::decode($institucion);
+	my $obj = Chart::Bars->new(600,300); 
+
+	$obj->set(title => $title);
+	$obj->set(y_label => 'Disposiciones');
+	$obj->set(min_val => 1);
+	$obj->set(max_val => 16);
+	$obj->set(integer_ticks_only => 'true');
+	$obj->set(legend_labels => ['No Cumple','Cumple']);
+	$obj->add_dataset($institucion);
+	$obj->add_dataset($no_cumple);
+	$obj->add_dataset($cumple);
+	$obj->png('root/static/images/grafica.png');
+}
+
 =head2 auditoria($id)
 
 Genera el reporte de una auditoría.
@@ -213,6 +234,8 @@ sub auditoria : Local {
                 $c->stash->{disposiciones} = $disposiciones;
                 $c->stash->{id}         = $auditoria->id;
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
+				
+				&grafica($resultados->{dpass}, $resultados->{dfail}, $producto->{solicitante});
 			}
 	}
 }

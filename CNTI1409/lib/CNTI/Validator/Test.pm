@@ -438,7 +438,7 @@ sub run {
     my $uri = $config->{css_validator_uri}; 
     my $w3c = WebService::Validator::CSS::W3C->new($ua, $uri);
     my $errcount = 0;
-    my $uri = $self->uri;
+    $uri = $self->uri;
     my $ok = $w3c->validate(uri => $uri);
   
   if ($ok and !$w3c->is_valid) {
@@ -463,7 +463,7 @@ sub run {
     my $uri = $config->{html_validator_uri}; 
     my $w3c = WebService::Validator::HTML::W3C->new(validator_uri => $uri, detailed => 1);
     my $errcount = 0;
-    my $uri = $self->uri;
+    $uri = $self->uri;
     my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
     my $html = "<a href=$url>Ver Reporte</a>";
     if ($w3c->validate("$uri")) {

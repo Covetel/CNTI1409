@@ -42,7 +42,6 @@ sub index :Path :Args(0) {
 
 
 	my $u = $c->model('LDAP')->usuario("lramirez");
-	$c->log->debug(Dumper($u));
 
 	$c->response->body($u);
 

@@ -216,5 +216,5 @@ $("document").ready(function(){
 
 	});
 
-	$("#reporte_disposiciones").accordion();
+	//$("#reporte_disposiciones").accordion();
 });
