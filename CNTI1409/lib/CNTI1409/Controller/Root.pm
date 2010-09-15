@@ -46,15 +46,6 @@ sub inicio : Local {
         $c->response->redirect($c->uri_for('/login'));
         return 0;
     }
-	use Data::Dumper;
-	my $usuario = $c->user->username;
-	my @roles = $c->user->roles();
-	$c->stash->{rol} = $roles[0] if @roles ;
-	my $name = $c->user->ldap_entry->cn;
-	# Busco la entidad a la que pertenece el usuario.
-	my $entidad = $c->model('LDAP')->search(base => $c->config->{base_entidades}, filter => "(&(objectClass=posixGroup)(memberUid=$usuario))")->shift_entry;
-	$c->log->debug(Dumper($entidad->cn)) if $entidad;
-	$c->log->debug($c->model('LDAP'));
 	$c->stash->{template} = 'inicio.tt2';
 }
 

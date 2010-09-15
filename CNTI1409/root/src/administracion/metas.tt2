@@ -1,0 +1,15 @@
+[% titulo = 'Listado de Metas a Auditar' %] 
+
+<div class="tabla">
+<table id="tabla_metas" class="dataTable" border="0"> 
+	<thead> 
+	<tr>
+		<th id="id">ID </th>
+		<th id="disposicion">Etiqueta</th>
+		<th id="parametro">Valor</th>
+		<th id="eliminar">Eliminar</th>
+	</tr>
+	</thead>
+    <div><a href="/administracion/addmetas">[+] Agregar nueva metaetiqueta</a></div>
+</table>
+</div>

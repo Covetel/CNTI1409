@@ -40,6 +40,7 @@ elements:
               title: 'Por favor ingrese el R.I.F. de la Institución correctamente. Ejemplo: G-00000000-0.'
               class: input_text
               maxlength: 15
+              id: rif
           constraints:
             - Required
             - type: Length

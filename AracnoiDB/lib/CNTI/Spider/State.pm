@@ -25,17 +25,25 @@ has queue => (
 
 =cut
 
-has job => ( is => "ro", isa => "CNTI::SpiderDB::Result::SpiderJob",
-    handles => { ( map { $_ => $_ } qw(id base num dir depth state update discard_changes) ) } );
+has job => (
+    is      => "ro",
+    isa     => "CNTI::SpiderDB::Result::SpiderJob",
+    handles => {
+        (   map { $_ => $_ }
+                qw(id base num dir depth state update discard_changes)
+        )
+    }
+);
 
 sub BUILDARGS {
     my $class = shift;
-    my %args = @_;
+    my %args  = @_;
     my %rec;
 
     if ( exists $args{'id'} ) {
-        my $id = $args{'id'};
-        my $job = CNTI::Spider::Schema->resultset("SpiderJob")->find( { id => $id } );
+        my $id  = $args{'id'};
+        my $job = CNTI::Spider::Schema->resultset("SpiderJob")
+            ->find( { id => $id } );
         die "Innexistent Id: $id\n" unless defined $id;
         return { job => $job };
     }
@@ -45,10 +53,11 @@ sub BUILDARGS {
         $rec{'depth'} = $args{'depth'} || 0;
         $rec{'state'} = $args{'state'} || 0;
         $rec{'base'}  = $args{'base'}  || die "base is required";
-        return { job   => CNTI::Spider::Schema->resultset("SpiderJob")->create( \%rec ) }
+        return { job =>
+                CNTI::Spider::Schema->resultset("SpiderJob")->create( \%rec )
+        };
     }
 }
-
 
 my @all_states = qw( new running done );
 
@@ -64,7 +73,7 @@ sub queue {
 
 sub q_find {
     my ( $self, $cond ) = @_;
-    $self->job->spider_urls->find( $cond ) && 1;
+    $self->job->spider_urls->find($cond) && 1;
 }
 
 sub q_add {
@@ -80,13 +89,26 @@ sub run {
     else {
         $self->state(1);
         $self->update;
-        $self->url_get( URI::URL->new($self->base), $self->depth );
+        $self->url_get( URI::URL->new( $self->base ), $self->depth );
         $self->state(2);
         $self->update;
         exit 0;
     }
 }
 
+sub run_single {
+    my $self = shift;
+    $self->state(1);
+    $self->update;
+    $self->url_get( URI::URL->new( $self->base ), $self->depth );
+    $self->state(2);
+    $self->update;
+}
+
+sub _same_site {
+    my ($u0, $u1) = @_;
+    return $u0->scheme eq $u1->scheme && $u0->authority eq $u1->authority;
+}
 sub url_get {
     my ( $self, $url, $depth ) = @_;
 
@@ -105,17 +127,26 @@ sub url_get {
     $mech->safe_get($url) or return 0;
 
     # Reject repeated URLs
-    return 0 if $self->q_find({ url => $url_text });
+    return 0 if $self->q_find( { url => $url_text } );
 
     # Reject repeated content
     my $sum = md5_hex( $mech->binary_content );
-    return 0 if $self->q_find({ sum => $sum });
+    return 0 if $self->q_find( { sum => $sum } );
 
-    my $u_rec = $self->q_add( { url => $url_text, sum => $sum, title => $mech->title || $url_text, state => 1 } );
+    #print STDERR "$url\n";
+
+    my $u_rec = $self->q_add(
+        {   url   => $url_text,
+            sum   => $sum,
+            title => $mech->title || $url_text,
+            state => 1
+        }
+    );
 
     if ( $depth > 0 ) {
         my @links = $mech->links;
         if (@links) {
+            @links = grep { _same_site( $url, $_->url_abs ) } @links;
             my $l = CNTI::Spider::UrlList->new(
                 list => \@links,
                 dir  => $self->dir
@@ -135,10 +166,11 @@ sub add_hyperlinks {
     my $n = $self->num - 1;
     while ( $n && $urls->list_count ) {
         my $url = $urls->list_next->url_abs;
-        next if $self->q_find({ url => "$url" });
+        next if $self->q_find( { url => "$url" } );
         $self->url_get( $url, $depth ) and --$n;
     }
-#say STDERR "List exausted at level $depth ($n)" if $n;
+
+    #say STDERR "List exausted at level $depth ($n)" if $n;
 }
 
 __PACKAGE__->meta->make_immutable;

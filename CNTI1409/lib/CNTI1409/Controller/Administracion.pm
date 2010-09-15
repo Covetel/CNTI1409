@@ -42,7 +42,7 @@ sub index :Path :Args(0) {
 }
 
 
-sub parametros : Local : FormConfig {
+sub fonts : Local : FormConfig {
     my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
 	$c->stash->{titulo}     = "Gestión de parámetros de disposiciones";
@@ -70,6 +70,29 @@ sub parametros : Local : FormConfig {
             });
         }
     }
+}
+
+sub metas : Local {
+    my ( $self, $c ) = @_;
+	$c->stash->{template} = 'administracion/metas.tt2';	
+} 
+
+
+sub addmetas : Local : FormConfig {
+    my ( $self, $c, $mensaje, $error ) = @_;
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
+    my $form = $c->stash->{form};
+    if ($form->submitted_and_valid) { 
+        my $params = $c->model('DB::Param')->new_result({});
+        $form->model->update($params);
+        $mensaje = "La metaetiqueta " . $form->param_value('parametro') . " se ha registrado con éxito";
+        $c->response->redirect($c->uri_for($self->action_for('metas'),{ mensaje => $mensaje, error => 0}));
+	} elsif ($form->has_errors && $form->submitted) {
+        $c->stash->{error} = 1;
+        my @err_fields = $form->has_errors;
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+    }
+    $c->stash->{template} = 'administracion/addmetas.tt2';
 }
 
 =head1 AUTHOR

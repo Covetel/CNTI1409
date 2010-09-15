@@ -53,6 +53,7 @@ elements:
           attributes:
               title: 'Por favor indique correctamente el RIF de la Entidad Verificadora, Ejemplo: J-29532381-6'
               class: input_text
+              id: rif
               maxlength: 15
           constraints:
               - Required

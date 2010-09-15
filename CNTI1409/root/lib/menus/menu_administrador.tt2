@@ -19,10 +19,10 @@
 		<a href="/reportes/entidades/"> Entidades </a> <br />
 		<a href="/reportes/wizard"> Auditorias </a> <br />
 </div>
-<h3><a href="#"> Administración </a></h3>
+<h3><a href="#"> Parámetros </a></h3>
 <div>
-		<a href="/administracion/parametros"> Parámetros </a> <br />
-		<a href="/administracion/usuarios"> Usuarios </a> <br />
+		<a href="/administracion/fonts"> Fuentes </a> <br />
+		<a href="/administracion/metas"> Meta Etiquetas </a> <br />
 </div>
 <h3><a href="#"> Usuarios </a></h3>
 <div>

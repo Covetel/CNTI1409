@@ -115,3 +115,22 @@ table.tabla_reporte {
 button#printOut{
  display: none;
 }
+
+table.lista_disposiciones {
+ border: 1px solid #eee;
+}
+
+table.lista_disposiciones tr {
+ border: 1px solid #eee;
+}
+
+table.lista_disposiciones td {
+ border: 1px solid #eee;
+}
+
+table.lista_disposiciones td.disp_name {
+ border: 1px solid #eee;
+ color: #D01313;
+ font-weight: bold;
+ text-align: center;
+}

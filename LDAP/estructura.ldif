@@ -60,16 +60,13 @@ objectClass: posixGroup
 objectClass: top
 cn: Auditor
 gidNumber: 1001
-memberUid: oadministrador
 memberUid: ucnti
-memberUid: jmesa
 
 dn: cn=AuditorJefe,ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 objectClass: posixGroup
 objectClass: top
 cn: AuditorJefe
 gidNumber: 1002
-memberUid: oadministrador
 memberUid: ucnti
 
 dn: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve

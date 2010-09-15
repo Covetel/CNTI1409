@@ -1,0 +1,62 @@
+action: /administracion/addmetas
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: metas
+      legend: Definir Metaetiquetas a evaluar
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor ingrese el nombre de la nueva metaetiqueta a evaluar'
+          attributes:
+              class: informacion
+
+        - type: Text
+          name: parametro
+          label: Metaetiqueta
+          attributes:
+              title: 'Nombre de la metaetiqueta'
+              class: input_text
+              id: parametro
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+
+        - type: Hidden
+          name: disposicion
+          value: Meta
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Ingresar
+          attributes:
+              title: Presione este botón para agregar la metaetiqueta
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape

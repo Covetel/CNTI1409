@@ -7,8 +7,7 @@ name 'CNTI1409';
 all_from 'lib/CNTI1409.pm';
 
 
-requires 'AutoLoader';
-requires 'XML::Parser';
+requires 'AutoLoader' => '5.70';
 requires 'Catalyst::Runtime' => '5.80020';
 requires 'Catalyst::Action::RenderView' => '0.14';
 requires 'Catalyst::Plugin::ConfigLoader' => '0.27';
@@ -37,7 +36,7 @@ requires 'common::sense' => '3.0';
 requires 'Config::Any::YAML';
 requires 'Data::Dumper' => '2.121_14';
 requires 'DateTime' => '0.53';
-requires 'Digest::MD5';
+requires 'Digest::MD5' => '2.39';
 requires 'Encode' => '2.23';
 requires 'File::MMagic' => '1.27';
 requires 'HTML::TreeBuilder' => '3.23';
@@ -55,7 +54,7 @@ requires 'XML::LibXML' => '1.70';
 requires 'HTML::FormFu' => '0.06001';
 requires 'HTML::FormFu::Model::DBIC' => '0.06000';
 requires 'HTML::FormFu::Validator';
-requires 'DBD::Pg';
+requires 'DBD::Pg' => '2.8.7';
 requires 'DateTime::Format::Pg' => '0.16004';
 requires 'Sub::Uplevel' => '0.22';
 requires 'CSS::Tiny' => '1.15';
@@ -63,7 +62,6 @@ requires 'Template::Latex' => '3.0001';
 requires 'LaTeX::Encode' => '0.03';
 
 # Nuestras librerias.
-=pod
 requires 'CNTI::Validator::CSS';
 requires 'CNTI::ValidatorDB';
 requires 'CNTI::Validator::Jobs';
@@ -75,7 +73,6 @@ requires 'CNTI::Validator::Monitor::URL';
 requires 'CNTI::Validator::Schema';
 requires 'CNTI::Validator::Test';
 requires 'CNTI::Validator::Tests';
-=cut
 
 test_requires 'Test::More' => '0.88';
 catalyst;

@@ -89,6 +89,7 @@ sub run {
     my $errcount = 0;
     my @metas;
     my @rs_metas = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta' } );
+    my $numetas = $#rs_metas;
     my %hash;
     for my $meta (@rs_metas) {
         $hash{$meta->get_column('parametro')} = 0;
@@ -104,21 +105,19 @@ sub run {
             $errcount++;
         }
         if ($father->attr('name')) {
+            my $atrib = $father->attr('name');
             my @rs = CNTI::Validator::Schema->resultset('Param')->search( { disposicion => 'Meta', parametro => $father->attr('name') } );
-            if ($#rs < 0) {
-                # push @metas, $father->attr('name');
-                $errcount++;
-            } else {
+            if ($#rs >= 0) {
                 $hash{$father->attr('name')} = 1;
             }
-        } else {
-            $self->event_log( error => "Solo está definida la meta http-equiv" );
-            $errcount++;
         }
     }
     my @keys_with_values = grep { $hash{$_} == 0 } keys %hash;
-    if ($errcount) {
+    if (@keys_with_values) {
         $self->event_log( error => "No está definida la meta $_" ) for @keys_with_values;
+        $errcount++;
+    } else {
+        $errcount = 0;
     }
     $self->ok( $errcount == 0);
 }
@@ -425,15 +424,21 @@ sub run {
 package CNTI::Validator::Test::W3C_CSS;
 use Moose;
 use WebService::Validator::CSS::W3C;
+use Config::Any::YAML;
+use LWP::UserAgent;
+
 
 extends 'CNTI::Validator::Test';
 
 
 sub run {
     my $self = shift;
-    my $w3c = WebService::Validator::CSS::W3C->new;
+    my $config = Config::Any::YAML->load("configuracion.yml");
+    my $ua = LWP::UserAgent->new(agent => 'Mozilla/5.0');
+    my $uri = $config->{css_validator_uri}; 
+    my $w3c = WebService::Validator::CSS::W3C->new($ua, $uri);
     my $errcount = 0;
-    my $uri = $self->uri;
+    $uri = $self->uri;
     my $ok = $w3c->validate(uri => $uri);
   
   if ($ok and !$w3c->is_valid) {
@@ -448,14 +453,17 @@ sub run {
 package CNTI::Validator::Test::W3C_HTML;
 use Moose;
 use WebService::Validator::HTML::W3C;
+use Config::Any::YAML;
 
 extends 'CNTI::Validator::Test';
 
 sub run {
     my $self = shift;
-    my $w3c = WebService::Validator::HTML::W3C->new(detailed => 1);
+    my $config = Config::Any::YAML->load("configuracion.yml");
+    my $uri = $config->{html_validator_uri}; 
+    my $w3c = WebService::Validator::HTML::W3C->new(validator_uri => $uri, detailed => 1);
     my $errcount = 0;
-    my $uri = $self->uri;
+    $uri = $self->uri;
     my $url = "http://validator.w3.org/check?uri=$uri&charset=%28detect+automatically%29&doctype=Inline&group=0";
     my $html = "<a href=$url>Ver Reporte</a>";
     if ($w3c->validate("$uri")) {
