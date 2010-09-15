@@ -26,6 +26,7 @@ sub auto :Private {
         $c->response->redirect($c->uri_for('/login'));
         return 0;
     }
+	$c->assert_user_roles(qw/Administrador/);
     return 1;
 }
 

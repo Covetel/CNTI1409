@@ -23,6 +23,26 @@ objectClass: organizationalUnit
 objectClass: top
 ou: Entidades
 
+dn: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: organizationalUnit
+objectClass: top
+ou: Mantenimiento
+description:: Tm8gYm9ycmFyIGVzdGEgcmFtYSwgbmVjZXNhcmlhIHBhcmEgbGEgY3JlYWNpw7NuIGRlIHVzdWFyaW9z
+
+dn: cn=Usuario Mantenimiento,ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+givenName: Usuario
+sn: Mantenimiento
+cn: Usuario Mantenimiento
+uid: umantenimiento
+userPassword: {MD5}MWie/19PklTuuSPrcYneSw==
+gidNumber: 1000
+homeDirectory: /home/users/umantenimiento
+description: Este usuario se usa para calcular el proximo uidNumber, no borrar!
+uidNumber: 1001
+
 dn: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 objectClass: organizationalUnit
 objectClass: top
@@ -40,28 +60,30 @@ objectClass: posixGroup
 objectClass: top
 cn: Auditor
 gidNumber: 1001
+memberUid: ucnti
 
 dn: cn=AuditorJefe,ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 objectClass: posixGroup
 objectClass: top
 cn: AuditorJefe
 gidNumber: 1002
+memberUid: ucnti
 
 dn: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
-objectClass: top
 objectClass: organizationalUnit
-description: Usuarios del validador de Portales
+objectClass: top
 ou: Usuarios
 
-dn: cn=Usuario1 CNTI,ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+dn: uid=ucnti,ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+objectClass: top
 objectClass: inetOrgPerson
 objectClass: posixAccount
-objectClass: top
-givenName: Usuario1
-sn: CNTI
-cn: Usuario1 CNTI
+cn: Usuario CNTI
 uid: ucnti
-userPassword: {MD5}ebWUvajbFyIXOgXRvtHDfQ==
-uidNumber: 1001
-gidNumber: 1000
 homeDirectory: /home/users/ucnti
+givenName: Usuario
+sn: CNTI
+mail: cnti@cnti.gob.ve
+gidNumber: 1000
+uidNumber: 1000
+userPassword: {MD5}ebWUvajbFyIXOgXRvtHDfQ==

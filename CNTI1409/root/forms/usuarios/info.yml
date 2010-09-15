@@ -1,0 +1,73 @@
+action: /usuarios/info
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: datos_fieldset
+      legend: Cambiar Contraseña
+      attributes: 
+          id: claves
+      elements:
+        - type: Block
+          tag: div
+          content: 'Por favor ingrese un par de contraseñas fuertes, recuerde que debe ser igual en los dos campos.'
+          attributes:
+              class: informacion
+
+        - type: Password
+          name: passwd
+          label: Contraseña
+          attributes:
+              title: 'Por favor ingrese la contraseña'
+              class: input_text
+              id: passwd
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+
+        - type: Password
+          name: passwd2
+          label: Repita la contraseña
+          attributes:
+              title: 'Por favor repita la contraseña'
+              class: input_text
+              id: passwd2
+          constraints:
+            - Required
+            - type: Length
+              min: 4
+              max: 250
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Actualizar Contraseña
+          attributes:
+              title: Presione este botón para cambiar la contraseña.
+              class: input_submit
+        
+        - type: Reset
+          name: reset
+          # The text to be displayed
+          value: Reiniciar
+          attributes:
+              title: Presione este botón para inicializar en blanco los campos del formulario.
+              class: input_reset
+
+filter:
+    # Filtrado de espacios en blanco y caracteres HTML
+    - TrimEdges
+    - HTMLEscape    

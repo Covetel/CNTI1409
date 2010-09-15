@@ -13,14 +13,23 @@
 		<a href="/entidades/registrar"> Registrar </a> <br />
 		<a href="/entidades/listar"> Listar </a> <br />
 </div>
-<h3><a href="#"> Administración </a></h3>
-<div>
-		<a href="/administracion/parametros"> Parámetros </a> <br />
-		<a href="/administracion/usuarios"> Usuarios </a> <br />
-</div>
 <h3><a href="#"> Reportes </a></h3>
 <div>
 		<a href="/reportes/instituciones/"> Instituciones </a> <br />
 		<a href="/reportes/entidades/"> Entidades </a> <br />
 		<a href="/reportes/wizard"> Auditorias </a> <br />
+</div>
+<h3><a href="#"> Parámetros </a></h3>
+<div>
+		<a href="/administracion/fonts"> Fuentes </a> <br />
+		<a href="/administracion/metas"> Meta Etiquetas </a> <br />
+</div>
+<h3><a href="#"> Usuarios </a></h3>
+<div>
+		<a href="/usuarios/crear"> Crear </a> <br />
+		<a href="/usuarios/listar"> Listar </a> <br />
+</div>
+<h3><a href="#"> Araña </a></h3>
+<div>
+		<a href="/spider/iniciar"> Iniciar </a> <br />
 </div>

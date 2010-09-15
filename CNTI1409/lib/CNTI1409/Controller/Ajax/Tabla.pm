@@ -116,6 +116,56 @@ sub instituciones_PUT : Local {
     $self->status_ok($c, entity => { valor => 1,});
 }
 
+=head2 Metaetiquetas
+
+Seccion REST para procesar las meta etiquetas
+
+=cut
+sub metaetiquetas : Local : ActionClass('REST') {}
+
+sub metaetiquetas_GET {
+    use DateTime;
+    my ($self, $c) = @_;
+    my $rs;
+    $rs = $c->model('DB::Param')->search({ disposicion => 'Meta' });
+    my %data;
+    $data{aaData} = [
+        map {[
+                $_->id, $_->disposicion,    $_->parametro,
+                "<div class='button'><button id='metas_".$_->id."' class='borrar'>Eliminar</button></div>",
+            ]} $rs->all
+    ];
+    $self->status_ok($c, entity => \%data);
+}
+
+sub metaetiquetas_POST {
+	my ($self, $c) = @_;
+	my $valor = $c->req->data->{valor};
+	my $id = $c->req->data->{id};
+    my $campo = $c->req->data->{campo};
+    my $rs = $c->model('DB::Param')->find($id);
+    $rs->$campo($valor);
+    $rs->update;
+	$self->status_accepted(
+               $c,
+               entity => {
+                   value => $valor,
+               }
+	);
+}
+
+
+sub metaetiquetas_DELETE {
+	my ($self, $c) = @_;
+	my $id = $c->req->data->{codigo};
+	# Se debe validar que la institución no esta en uso en una auditoría abierta o pendiente. 
+    my $rs = $c->model('DB::Param')->find($id);
+    $rs->delete;
+    $self->status_ok($c, entity => { valor => 1,});
+}
+
+
+
 =head2 Entidades
 
 Seccion REST para procesar las entidades verificadoras
@@ -182,6 +232,8 @@ sub entidades_PUT : Local {
 }
 
 
+
+
 sub auditorias : Local : ActionClass('REST') {}
 
 sub auditorias_GET {
@@ -222,9 +274,101 @@ sub auditorias_GET {
 	$self->status_ok($c, entity => \%data);
 }
 
+sub usuarios : Local : ActionClass('REST') {}
+
+sub usuarios_GET {
+	use Data::Dumper;
+	sub entidad {
+		my ($u,$self,$c) = @_;
+		# Busco si pertenece a una entidad
+	    my $entidad = $c->model('LDAP')->search(
+	        base   => $c->config->{base_entidades},
+	        filter => "(&(objectClass=posixGroup)(memberUid=".$u->uid."))"
+	    )->shift_entry;	
+		if ($entidad && $entidad->gidNumber > 0){
+			my $cn = $entidad->cn;
+			utf8::decode($cn);
+			return $cn;
+		} else {
+			return "No Pertenece";
+		}
+	}
+	sub info {
+		my ($u) = @_;
+		my $admin = "<a href='/usuarios/info/".$u->uid."'>Detalle</a>";
+		return $admin;
+	}
+	sub rol {
+		my ($u,$self,$c) = @_;
+		my $r = '';
+		my @roles = $c->model('LDAP')->search(
+			base => $c->config->{base_roles},
+			filter => "(&(objectClass=posixGroup)(memberUid=".$u->uid."))",
+		)->entries();
+		foreach my $rol (@roles){
+			$r = $rol->cn . " ".$r;	
+		}
+		return $r;
+	}
+	my ($self, $c) = @_;
+	# Si el usuario es administrador ve a todos los usuarios. 
+	if ($c->check_user_roles( qw/Administrador/ )){
+		# Busco todos los usuarios, todas las cuentas del tipo posixAccount.
+        my @usuarios = $c->model('LDAP')->search(
+         	base   => $c->config->{base_usuarios},
+           	filter => "(&(objectClass=posixAccount)(uid=*))"
+        )->entries();
+		my %data;
+    $data{aaData} = [
+        map {
+            [
+                $_->uid, $_->cn, $_->mail, $_->uidNumber,
+                &entidad( $_, $self, $c ),
+                &rol( $_, $self, $c ),
+                &info($_)
+            ]
+          } @usuarios
+    ];
+		$self->status_ok($c, entity => \%data);
+	} elsif ($c->check_user_roles( qw/AuditorJefe/ )){
+		# Busco la entidad verificadora a la que pertenece el usuario. 
+		my $usuario = $c->user->username;
+        my $entidad = $c->model('LDAP')->search(
+            base   => $c->config->{base_entidades},
+            filter => "(&(objectClass=posixGroup)(memberUid=$usuario))"
+        )->shift_entry;
+		my $entidad_id = $entidad->gidNumber;
+		
+		# Busco todos los miembros de esa entidad. 
+		my @uids = $entidad->memberUid;
+		my @usuarios;
+		foreach my $uid (@uids) {
+			# Busco los datos del usuario en LDAP.
+        	my $usuario = $c->model('LDAP')->search(
+           	 	base   => $c->config->{base_usuarios},
+            	filter => "(&(objectClass=posixAccount)(uid=$uid))"
+        	)->shift_entry;
+			push @usuarios,$usuario;	
+		}
+		my %data;
+    $data{aaData} = [
+        map {
+            [
+                $_->uid,  $_->cn,
+                $_->mail, $_->uidNumber,
+                &entidad( $_, $self, $c ), &rol($_, $self, $c),
+                &info($_)
+            ]
+          } @usuarios
+    ];
+		$self->status_ok($c, entity => \%data);
+
+	} 
+}
+
 =head1 AUTHOR
 
-,,,
+Walter Vargas <walter@covetel.com.ve>
 
 =head1 LICENSE
 
@@ -234,4 +378,3 @@ it under the same terms as Perl itself.
 =cut
 
 __PACKAGE__->meta->make_immutable;
-

@@ -1,0 +1,36 @@
+#!/usr/bin/env perl
+# IMPORTANT: if you delete this file your app will not work as
+# expected.  You have been warned.
+use inc::Module::Install;
+
+name 'CNTI1409';
+all_from 'lib/CNTI1409.pm';
+
+
+[% FOREACH module IN modules %]
+[% IF module.version != 'undef' %]
+requires '[% module.id %]' => '[% module.version %]';
+[% ELSE %]
+requires '[% module.id %]';
+[% END %]
+[% END %]
+
+# Nuestras librerias.
+requires 'CNTI::Validator::CSS';
+requires 'CNTI::ValidatorDB';
+requires 'CNTI::Validator::Jobs';
+requires 'CNTI::Validator::LibXML';
+requires 'CNTI::Validator::Monitor::Event';
+requires 'CNTI::Validator::Monitor::Job';
+requires 'CNTI::Validator::Monitor::Result';
+requires 'CNTI::Validator::Monitor::URL';
+requires 'CNTI::Validator::Schema';
+requires 'CNTI::Validator::Test';
+requires 'CNTI::Validator::Tests';
+
+test_requires 'Test::More' => '0.88';
+catalyst;
+
+install_script glob('script/*.pl');
+auto_install;
+WriteAll;

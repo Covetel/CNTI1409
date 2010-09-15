@@ -4,6 +4,7 @@ use namespace::autoclean;
 use utf8;
 use LaTeX::Encode; # Módulo necesario para codificar las urls que van para el PDF.
 use Data::Dumper;
+use Chart::Bars; 
 
 BEGIN {extends 'Catalyst::Controller::HTML::FormFu'; }
 
@@ -39,6 +40,8 @@ Este método, genera un wizard html que permite la creación de reportes custom.
 
 sub wizard : Local : Form {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/AuditorJefe/);
+
 	my ($entidad_id, $entidad_nombre);
 	my $form = $self->form;
 	$c->stash->{titulo}     = "Generador de Reportes";
@@ -91,16 +94,21 @@ sub wizard : Local : Form {
 			$auditoria->{id} = $dato->id;
 			$auditoria->{institucion} = $dato->idinstitucion->nombre;
 			$auditoria->{portal} = $dato->portal;
-			$auditoria->{estado} = $dato->estado;
+			$auditoria->{estado} = 'Abierta' if $dato->estado eq 'a';
+			$auditoria->{estado} = 'Pendiente' if $dato->estado eq 'p';
+			$auditoria->{estado} = 'Cerrada' if $dato->estado eq 'c';
 			$auditoria->{fecha} = $dato->fechacreacion->dmy();
 			$auditoria->{entidad} = $dato->idev->nombre;
 			$auditoria->{fail} = $dato->fallidas;
 			$auditoria->{pass} = $dato->validas;
-			my $validas = $dato->validas;
-			my $fallidas = $dato->fallidas;
-			my $indice = ($validas / ($fallidas + $validas)) * 100 ;
-			$indice = sprintf("%.2f",$indice);
-			$auditoria->{indice} = $indice;
+			if ($dato->estado eq 'c'){
+				my $validas = $dato->validas;
+				my $fallidas = $dato->fallidas;
+				my $indice = ($validas / ($fallidas + $validas)) * 100 ;
+				$indice = sprintf("%.2f",$indice);
+				$auditoria->{indice} = $indice;
+			}
+			
 			push @auditorias, $auditoria;
 		}
 		$c->stash->{auditorias} = \@auditorias;
@@ -141,6 +149,26 @@ sub disposiciones {
         }   
     }   
     return $disp;
+}
+
+sub grafica {
+	my ($cumple,$no_cumple,$institucion) = @_;
+	
+	my $title = 'Gráfico de indice de cumplimento';
+	utf8::decode($title);
+	utf8::decode($institucion);
+	my $obj = Chart::Bars->new(600,300); 
+
+	$obj->set(title => $title);
+	$obj->set(y_label => 'Disposiciones');
+	$obj->set(min_val => 1);
+	$obj->set(max_val => 16);
+	$obj->set(integer_ticks_only => 'true');
+	$obj->set(legend_labels => ['No Cumple','Cumple']);
+	$obj->add_dataset($institucion);
+	$obj->add_dataset($no_cumple);
+	$obj->add_dataset($cumple);
+	$obj->png('root/static/images/grafica.png');
 }
 
 =head2 auditoria($id)
@@ -206,6 +234,8 @@ sub auditoria : Local {
                 $c->stash->{disposiciones} = $disposiciones;
                 $c->stash->{id}         = $auditoria->id;
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
+				
+				&grafica($resultados->{dpass}, $resultados->{dfail}, $producto->{solicitante});
 			}
 	}
 }
@@ -335,6 +365,7 @@ Genera un reporte HTML de entidades listo para imprimir.
 
 sub entidades : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de entidades. 
 	my @entidades = $c->model('DB::Entidadverificadora')->search({})->all();
 	$c->stash->{entidades} = \@entidades;
@@ -349,6 +380,7 @@ Genera un reporte HTML de instituciones lista para imprimir.
 
 sub instituciones : Local {
 	my ( $self, $c ) = @_;
+	$c->assert_user_roles(qw/Administrador/);
 	# Busco la lista de instituciones
 	my @instituciones = $c->model('DB::Institucion')->search({})->all();
 	$c->stash->{instituciones} = \@instituciones;

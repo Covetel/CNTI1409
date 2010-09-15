@@ -1,0 +1,44 @@
+[% titulo = 'Información del Usuario: ' _ usuario.cn %]
+
+[% INCLUDE mensajes.tt2 %]
+
+[% IF error != 1 %]
+<div id="usuario_tabs">
+<ul>
+	<li> <a href="#usuario_informacion">Datos del Usuario</a> </li>
+	<li> <a href="#usuario_clave">Cambiar Contraseña</a> </li>
+	[% IF c.check_any_user_role('AuditorJefe','Administrador') && c.user.username != usuario.uid %]
+		<li> <a href="#usuario_borrar">Eliminar Usuario</a> </li>
+	[% END %]
+</ul>
+<div id="usuario_informacion">
+	<div> 
+		<span class="strong"> Usuario:  </span> <span> [% usuario.uid %] </span>
+	</div>
+	<div>
+		<span class="strong"> Nombre:  </span> <span> [% usuario.cn %] </span>
+	</div>
+	<div>
+		<span class="strong"> Correo Electrónico:  </span> <span> [% usuario.mail %] </span>
+	</div>
+	<div>
+		<span class="strong"> Roles:  </span> <span> [% roles %] </span>
+	</div>
+	<div>
+		<span class="strong"> Entidad Verificadora:  </span> <span> [% entidad %] </span>
+	</div>
+</div>
+
+<div id="usuario_clave">
+[% form %]
+</div>
+
+[% IF c.check_any_user_role('AuditorJefe','Administrador') && c.user.username != usuario.uid %]
+	<div id="usuario_borrar">
+		[% form2 %]
+	</div>
+[% END %]
+</div>
+
+[% END %]
+

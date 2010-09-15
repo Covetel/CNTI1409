@@ -5,6 +5,7 @@ Descripción: Esta libreria se encarga de controlar el monitor de Jobs y los ele
 */
 
 $("document").ready(function(){
+
 	//Cambio el boton Iniciar Auditoria, por un boton jquery ui
 	$("button#iniciar_auditoria").button({ icons: {primary:'ui-icon-gear'} });
 	$("button#detalle_auditoria").button({ icons: {primary:'ui-icon-circle-zoomin'} });
@@ -119,8 +120,18 @@ $("document").ready(function(){
 
 	var acciones_correctivas = $("#acciones_correctivas").val();
     if (acciones_correctivas != ''){
-        $("button#guardar").button({disabled: true});
-        $("textarea#acciones_correctivas").attr('disabled','disabled');
+		if (usuario.check_any_user_roles('Administrador')){
+			// Boton Actualizar
+       		$("button#guardar").button({enabled: true, label: 'Actualizar'});
+       		$("textarea#acciones_correctivas").removeAttr('disabled');
+		} else if (usuario.check_any_user_roles('AuditorJefe')){
+			// Boton Actualizar
+       		$("button#guardar").button({enabled: true, label: 'Actualizar'});
+       		$("textarea#acciones_correctivas").removeAttr('disabled');
+		} else if (usuario.check_any_user_roles('Auditor')){
+       		$("button#guardar").button({disabled: true});
+       		$("textarea#acciones_correctivas").attr('disabled','disabled');
+		} 
     }
     
     // click de las UL
@@ -158,8 +169,16 @@ $("document").ready(function(){
 				if (respuesta == 1){
 					$("div.error_disposicion").hide("slow");
 					$("div.mensaje_disposicion").show("slow");
-					$("button#guardar").button({disabled: true});
-					$("textarea").attr('disabled','disabled');
+					if (usuario.check_any_user_roles('Administrador')){
+       					$("button#guardar").button({enabled: true, label: 'Actualizar'});
+       					$("textarea#acciones_correctivas").removeAttr('disabled');
+					} else if (usuario.check_any_user_roles('AuditorJefe')){
+       					$("button#guardar").button({enabled: true, label: 'Actualizar'});
+       					$("textarea#acciones_correctivas").removeAttr('disabled');
+					} else if (usuario.check_any_user_roles('Auditor')){
+						$("button#guardar").button({disabled: true});
+						$("textarea").attr('disabled','disabled');
+					}
 				} else {
 					$("div.error_disposicion").show("slow");
 				}		
@@ -197,5 +216,5 @@ $("document").ready(function(){
 
 	});
 
-	$("#reporte_disposiciones").accordion();
+	//$("#reporte_disposiciones").accordion();
 });

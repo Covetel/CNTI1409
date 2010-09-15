@@ -3,6 +3,7 @@
 	<li> <a href="#reporte_producto">Información del Producto</a> </li>
 	<li> <a href="#reporte_entidad">Información de la Entidad Verificadora</a> </li>
 	<li> <a href="#reporte_resultado">Resultado de la Prueba</a> </li>
+	<li> <a href="#reporte_grafica">Gráfica</a> </li>
 	<li> <a href="#reporte_disposiciones">Disposiciones</a> </li>
 </ul>
 
@@ -78,10 +79,19 @@
 	 		<span class="reporte_resultado_paso"> [% resultados.indice %]% </span>
 		</div>
 </div>
+<div id="reporte_grafica">
+	<img src="/static/images/grafica.png" Alt="Gráfica de Indice de Cumplimiento"/> 
+</div>
 <div id="reporte_disposiciones">
+	<table class="lista_disposiciones">
+	<thead>
+		<th class="ui-state-default"> Disposición </th> <th class="ui-state-default" > Resultado </th>
+	</thead>
+	<tbody>
 	[% FOREACH disp IN disposiciones %]
-		<h3><a href="#[% disp.name %]">[% disp.value.name %] </a> </h3>
-		<div>
+	<tr>
+		<td class="disp_name"> [% disp.value.name %] </td>	
+		<td>
 			<ol class="disposiciones">
 				<li> <span class="strong"> Resultado General: </span> 
                     [% IF disp.value.result == "fail" %]
@@ -113,8 +123,11 @@
 		 		</ol>
 				</li>
 			</ol>
-		</div>
+		</td>
+	</tr>
 	[% END %]
+	</tbody>
+	</table>
 </div>
 
 

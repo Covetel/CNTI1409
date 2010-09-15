@@ -6,14 +6,17 @@
 var oTable;
 var oEntidades;
 var oAuditoria;
+var oMetas;
 var giRedraw = false;
 
 // Función que elimina una columna en la tabla
 function delTr (tr, tabla) { 
     if (tabla == "institucion" ) {
         oTable.fnDeleteRow(tr);
-    } else if (tabla = "entidad" ) {
+    } else if (tabla == "entidad" ) {
         oEntidades.fnDeleteRow(tr);
+    } else if (tabla == "metas" ) {
+        oMetas.fnDeleteRow(tr);
     }
 }
 
@@ -122,6 +125,11 @@ function boton_desactivar_activar(){
 }
 
 $(document).ready(function(){
+
+jQuery(function($){
+   $.mask.definitions['~']='[JG]';
+   $("#rif").mask("~-99999999-9");
+});
 
 // Utilizado por la ventana de login. 
 $("#area_aplicacion_login").accordion({ collapsible: false ,active: 0 });
@@ -259,6 +267,29 @@ $("#loading").ajaxStop(function(){
      return value;
     }
 
+    /* Función que envía el dato a editar en la tabla
+     * parametros a la controladora por AJAX
+     */
+    function submitEditMetas(value, settings)
+    { 
+        var n = $(this).index();
+        var o = $("th").get(n);
+        var campo = $(o).attr('id');
+        var aPos = oMetas.fnGetPosition( this );
+        var tr = this.parentNode;
+        var d = oMetas.fnGetData(tr);
+        var datos = ({'valor': value, 'id': d[0], 'campo': campo});
+        var jsoon = $.JSON.encode(datos);
+        $.ajax({
+            url: "/ajax/tabla/metaetiquetas", 
+            type: "POST",
+            data: jsoon,
+            processData: false,
+            contentType: 'application/json',
+        });
+     return value;
+    }
+
     // Maneja las propiedades de la tabla instituciones
 	oTable = $("#tabla_instituciones").dataTable({
 		"sAjaxSource": '/ajax/tabla/instituciones',
@@ -364,7 +395,55 @@ $("#loading").ajaxStop(function(){
                 }); // Fin de click
 		},
 	});
-	
+
+    // Maneja las propiedades de la tabla metas
+	oMetas = $("#tabla_metas").dataTable({
+		"sAjaxSource": '/ajax/tabla/metaetiquetas',
+        "bAutoWidth": false,
+		"bProcessing": false,
+		"bJQueryUI": true,
+		"aaSorting": [[ 1, "desc" ]],
+		"aoColumns": [
+						{"bSearchable": false, "bVisible": false},
+						{"sClass": "tNoEdit"},
+						{"sClass": "tEdit"},
+						{"bSearchable": false, "sClass": "tDesactivar"},
+                    ], 
+ 		"oLanguage": {
+            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+        },
+		"fnDrawCallback": function () {
+			fila_desactivar('tabla_metas');
+			$("#tabla_metas tbody td.tEdit").editable(submitEditMetas);
+            //$("div.borrar").html("<button class='borrar'> Eliminar </button>");
+            $("button.borrar").click(function(){
+                    var tr = oMetas.fnGetPosition(this.parentNode.parentNode.parentNode);
+                    var c = confirm("Está seguro de eliminar este registro ?");
+                    if (c) {
+                        var id      = $(this).attr('id');
+                        var codigo  = id.split("_");
+                        codigo      = ({ 'codigo': codigo[1]});
+                        var jsoon   = $.JSON.encode(codigo);
+                        $.ajax({
+                            url: "/ajax/tabla/metaetiquetas",
+                            type: "DELETE",
+                            data: jsoon,
+                            processData: false,
+                            contentType: 'application/json',
+                            complete: function (data) {
+                                    delTr(tr, "metas");
+                            },
+                        }); // Fin de ajax
+                    } else {
+                        return false;
+                    }
+                }); // Fin de click
+
+        },
+	});
+
+
+
     // Maneja las propiedades de la tabla auditorias
 	oAuditorias = $("#tabla_auditorias").dataTable({
 		"sAjaxSource": '/ajax/tabla/auditorias',
@@ -397,6 +476,8 @@ $("#loading").ajaxStop(function(){
             });
         },
 	});
+
+                       
 
 
 	// Cambio dinámicamente los nombres de los campos en los mensajes de error. 

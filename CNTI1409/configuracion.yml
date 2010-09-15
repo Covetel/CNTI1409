@@ -12,19 +12,29 @@ Model::DB:
     dsn: dbi:Pg:dbname=validador;host=localhost
     pg_enable_utf8: 1
 
-# Configuración de las migajitas de pan.
-breadcrumbs:
-  hide_home: 1
-  hide_index: 1
-  labels:
-    /auditoria: Auditoría
-    /auditoria/crear: Crear Auditoría
-    /auditoria/detalle: Detalle de la Auditoría
-    /auditoria/reporte: Lista de Auditorías
-    /entidades: Entidades Verificadoras
-    /inicio: Inicio
-    /instituciones/listar: Lista de Instituciones
-    /instituciones/registrar: Registrar Institución
+# Configuración General LDAP. 
+Model::LDAP:
+   host: localhost
+   # Base de busqueda general
+   base: ou=cnti1409,dc=cnti,dc=gob,dc=ve
+   # Usuario de LDAP.
+   dn: cn=admin,dc=cnti,dc=gob,dc=ve
+   password: 123321...
+   start_tls: 0
+   entry_class: CNTI1409::LDAP::Entrada
+   connection_class: CNTI1409::LDAP::Connection
+
+# Base de busqueda de Entidades.
+base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de Usuarios.
+base_usuarios: ou=Usuarios,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Base de busqueda de los roles.
+base_roles: ou=Roles,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Rama de mantenimiento. 
+base_mantenimiento: ou=Mantenimiento,ou=cnti1409,dc=cnti,dc=gob,dc=ve
 
 # Configuración del Módulo de Autenticación LDAP.
 authentication:
@@ -60,7 +70,22 @@ authentication:
                 role_search_options:
                     deref: always
 
+# Configuración de las migajitas de pan.
+breadcrumbs:
+  hide_home: 1
+  hide_index: 1
+  labels:
+    /auditoria: Auditoría
+    /auditoria/crear: Crear Auditoría
+    /auditoria/detalle: Detalle de la Auditoría
+    /auditoria/reporte: Lista de Auditorías
+    /entidades: Entidades Verificadoras
+    /inicio: Inicio
+    /instituciones/listar: Lista de Instituciones
+    /instituciones/registrar: Registrar Institución
+    /spider: Araña
 
-# Configuración General LDAP. 
-# Base de busqueda de Entidades.
-base_entidades: ou=Entidades,ou=cnti1409,dc=cnti,dc=gob,dc=ve
+
+# Validador W3C.
+css_validator_uri: http://jigsaw.w3.org/css-validator/validator
+html_validator_uri: http://validator.w3.org/check

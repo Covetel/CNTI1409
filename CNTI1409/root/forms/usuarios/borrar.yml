@@ -1,0 +1,34 @@
+action: /usuarios/eliminar
+# indicator is the field that is used to test for form submission
+indicator: Botones.submit
+
+# Start listing the form elements
+#auto_fieldset: 1
+
+languages:
+    - es
+
+elements:
+    - type: Fieldset
+      name: datos_fieldset
+      legend: Eliminar Usuario
+      attributes: 
+          id: eliminar
+      elements:
+        - type: Block
+          tag: div
+          content: 'Debe estar totalmente seguro de lo que esta haciendo. Para eliminar el usuario presione el boton Eliminar'
+          attributes:
+              class: informacion
+
+    # The Submit button
+    - type: Multi
+      name: Botones
+      elements:
+        - type: Submit
+          name: submit
+          # The text to be displayed
+          value: Eliminar Usuario
+          attributes:
+              title: Presione este botón para eliminar el usuario.
+              class: input_submit
