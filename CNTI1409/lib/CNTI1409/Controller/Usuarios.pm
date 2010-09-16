@@ -432,7 +432,6 @@ sub crear : Local : Form {
 					},
 					{ columns => [qw / id /] }
 				);
-				$c->log->debug($ev->id);
 				$idev = $ev->id;
 			} else {
 				$idev = $entidad_id;
