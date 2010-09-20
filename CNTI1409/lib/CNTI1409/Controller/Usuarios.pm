@@ -40,7 +40,6 @@ sub index :Path :Args(0) {
 		$c->log->debug("Es Auditor Jefe");
 	}
 
-
 	my $u = $c->model('LDAP')->usuario("lramirez");
 
 	$c->response->body($u);
@@ -541,8 +540,7 @@ sub crear : Local : Form {
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
-		my $label = $form->get_field($err_fields[0])->label;
-        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong''> $label </span>";
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
 	}
 }
 

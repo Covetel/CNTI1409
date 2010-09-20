@@ -46,6 +46,13 @@ sub datos : Local {
     $self->status_ok($c, entity => $usuario);
 }
 
+sub exists : Local {
+	my ( $self, $c, $uid ) = @_;
+	my $resp = {};
+	$resp->{exists} = $c->model('LDAP')->user_exists($uid);
+    $self->status_ok($c, entity => $resp);
+}
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>
