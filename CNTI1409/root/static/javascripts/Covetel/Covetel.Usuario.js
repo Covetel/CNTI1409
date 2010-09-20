@@ -28,6 +28,22 @@ function Covetel_usuario (){
 
 }
 
+function element_error(element,msj){
+	element.val('');
+	element.focus();
+	element.parent().addClass("error error_constraint_required");
+
+	element.parent().append();
+
+	element.before('<div class="element_msj_error"> '+msj+' </div>');
+	/*element.qtip({
+		content: msj,
+		show: { ready: true, solo: true },
+		position: { adjust: {x: 0, y: -50} }
+	});*/
+
+}
+
 var usersTable = null;
 
 if (!usuario){
@@ -47,7 +63,7 @@ $(document).ready(function(){
 	});
 
 	// Autocreate del uid.
-	$("#uid").focus(function(){
+	$("#apellido").blur(function(){
 		//Busco el nombre 
 		var nombre = $("#nombre").val();
 		//Busco el apellido
@@ -58,11 +74,35 @@ $(document).ready(function(){
 		//Saco la primera letra del nombre para el uid
 		var uid = nombre.charAt(0);
 		uid += apellido;
-		
 		//Asigo al valor de uid. 
 		$("#uid").val(uid);
 	});
 
+	//Valido que el uid no este ya registrado en el LDAP. 
+	$("#uid").blur(function(){
+		var uid = $("#uid").val();
+		if (uid != ''){
+			$("#uid").parent().removeClass("error error_constraint_required");
+			$(".element_msj_error").remove();	
+			$.ajax({
+				url: "/ajax/usuario/exists/"+uid, 
+				type: "GET",
+				dataType: "json",
+				complete: function (data) {
+					var datos = $.parseJSON(data.responseText);
+					if (datos.exists) {
+						$(".element_msj_error").remove();	
+						element_error($("#uid"),'El Identificador '+uid+' esta siendo usado por otro usuario, por favor ingrese un identifador diferente');
+					} else {
+						$("#uid").parent().removeClass("error error_constraint_required");
+					};
+				},
+			}); // Fin de ajax
+		} else {
+			$(".element_msj_error").remove();	
+			element_error($("#uid"),'Debe ingresar un Identificador válido');
+		}
+	});
 
 	//Valido que las contraseñas sean iguales.
 	$("#passwd2").blur(function(){
@@ -89,17 +129,6 @@ $(document).ready(function(){
 		}
 	});
 
-	//Valido que el uid no este ya registrado en el LDAP. 
-	$("#uid").blur(function(){
-		var uid = $("#uid").val();
-		this.datos = eval('('+$.ajax({
-			async: false,
-			url: '/ajax/usuario/datos/',
-			dataType: "json",
-			complete: this.set,
-		}).responseText+')');
-		
-	});
 
 
 	// Population to table users.
@@ -110,7 +139,7 @@ $(document).ready(function(){
 		"bJQueryUI": true,
 		//"aaSorting": [[ 8, "desc" ]],
  		"oLanguage": {
-            "sUrl": "/static/javascripts/dataTables.spanish.txt"
+            "sUrl": "/static/javascripts/dataTables.spanish.txt",
         },
 	});
 

@@ -34,4 +34,20 @@ sub usuario {
 	}
 }
 
+=head2 user_exists ($uid)
+
+Recibe $uid, devuelve 1 si $uid existe en el LDAP.
+
+=cut 
+
+
+sub user_exists {
+	my ( $self, $uid) = @_;
+	my $count = $self->search( 
+			base 	=> $config->{base_usuarios},
+			filter 	=> "(&(objectClass=posixAccount)(uid=".$uid."))"
+	)->count();
+	return $count;
+}
+
 
