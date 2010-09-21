@@ -52,6 +52,11 @@ if (!usuario){
 
 $(document).ready(function(){
 	
+	// Si ocurrio un error en el campo entidad verificadora, muestro el field. 
+	$(".error_validator_cnti1409_existe_entidadusuario").ready(function(){
+		$("#fielset_entidad_verificadora").show();	
+	});
+
 	// Creo el fieldset Entidad Verificadora si el rol es Auditor o AuditorJefe	
 	$("#rol").change(function(){
 		var rol = $("#rol :selected").val();
