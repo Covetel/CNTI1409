@@ -95,7 +95,7 @@ $(document).ready(function(){
 						element_error($("#uid"),'El Identificador '+uid+' esta siendo usado por otro usuario, por favor ingrese un identifador diferente');
 					} else {
 						$("#uid").parent().removeClass("error error_constraint_required");
-					};
+					}
 				},
 			}); // Fin de ajax
 		} else {
