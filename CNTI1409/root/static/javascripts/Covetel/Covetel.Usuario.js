@@ -52,13 +52,14 @@ if (!usuario){
 
 $(document).ready(function(){
 	
+
 	// Creo el fieldset Entidad Verificadora si el rol es Auditor o AuditorJefe	
 	$("#rol").change(function(){
 		var rol = $("#rol :selected").val();
 		if (rol == 'auditor' || rol == 'auditorJefe') {
-			$("#fielset_entidad_verificadora").show("fast");	
+			$("#fielset_entidad_verificadora").show();	
 		} else if (rol == 'administrador'){
-			$("#fielset_entidad_verificadora").hide("fast");	
+			$("#fielset_entidad_verificadora").hide();	
 		}
 	});
 
@@ -95,7 +96,7 @@ $(document).ready(function(){
 						element_error($("#uid"),'El Identificador '+uid+' esta siendo usado por otro usuario, por favor ingrese un identifador diferente');
 					} else {
 						$("#uid").parent().removeClass("error error_constraint_required");
-					};
+					}
 				},
 			}); // Fin de ajax
 		} else {
@@ -143,6 +144,10 @@ $(document).ready(function(){
         },
 	});
 
+	// Si ocurrio un error en el campo entidad verificadora, muestro el field. 
+	$(".error_validator_cnti1409_existe_entidadusuario").ready(function(){
+		$("#fielset_entidad_verificadora").show();	
+	});
 
 	//Información del usuario. 
 	$("div#usuario_tabs").tabs();	

@@ -54,6 +54,7 @@ elements:
               title:  'Por favor ingrese el nombre de la Entidad Verificadora. Ejemplo: Asociación Cooperativa de Tecnologías Libres R.S..' 
               class: input_text
               id: idev
+          validator: 'CNTI1409::Existe::EntidadUsuario'
 
     - type: Fieldset
       name: datos_fieldset
@@ -125,7 +126,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese un par de contraseñas fuertes, recuerde que debe ser igual en los dos campos.'
+          content: 'Por favor ingrese un par de contraseñas fuertes, recuerde que debe ser igual en los dos campos, la longitud minima es de cuatro (4) dígitos.'
           attributes:
               class: informacion
 
