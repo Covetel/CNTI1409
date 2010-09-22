@@ -26,7 +26,7 @@
     </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="CNTI-14-09" note="" work="4430700" start="20091125T000000Z" end="20100709T170000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="CNTI-14-09" note="" work="4430700" start="20091125T000000Z" end="20100927T000000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
       <task id="2" name="Sprint I" note="" work="1066500" start="20091125T000000Z" end="20100212T101500Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
         <task id="3" name="Dise&#xF1;o" note="" work="497700" start="20091125T000000Z" end="20100202T101500Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <task id="4" name="An&#xE1;lisis Inicial de Requerimientos sobre TDR" note="" work="57600" start="20091125T000000Z" end="20091126T170000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
@@ -304,20 +304,20 @@
           <constraint type="must-start-on" time="20100531T000000Z"/>
         </task>
       </task>
-      <task id="80" name="Sprint III" note="" work="1607400" start="20091125T000000Z" end="20100621T000000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="81" name="Reuni&#xF3;n Inicial de Planificaci&#xF3;n del Sprint" note="" work="12600" start="20100518T000000Z" end="20100518T113000Z" work-start="20100518T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20100518T000000Z"/>
+      <task id="80" name="Sprint III" note="" work="1607400" start="20091125T000000Z" end="20100927T000000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="81" name="Reuni&#xF3;n Inicial de Planificaci&#xF3;n del Sprint" note="" work="12600" start="20100720T000000Z" end="20100720T113000Z" work-start="20100720T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20100720T000000Z"/>
         </task>
-        <task id="82" name="Dise&#xF1;o" note="" work="288000" start="20100518T113000Z" end="20100524T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <task id="82" name="Dise&#xF1;o" note="" work="288000" start="20100720T113000Z" end="20100726T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <predecessors>
             <predecessor id="1" predecessor-id="81" type="FS"/>
           </predecessors>
-          <task id="83" name="Actualizaci&#xF3;n del Dise&#xF1;o del Prototipo V.3.0" note="" work="28800" start="20100518T113000Z" end="20100519T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="84" name="Tercera Reuni&#xF3;n con el Product Owner" note="" work="28800" start="20100518T113000Z" end="20100519T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="85" name="Actualizaci&#xF3;n del Manual del estilo Web V.3.0" note="" work="57600" start="20100518T113000Z" end="20100520T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="86" name="Actualizaci&#xF3;n de las Especificaciones de los Requerimientos del Sistema V.3.0" note="" work="28800" start="20100518T113000Z" end="20100519T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="87" name="Actualizaci&#xF3;n del Documento de Arquitectura de Software V.3.0" note="" work="115200" start="20100518T113000Z" end="20100524T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-          <task id="88" name="Actualizaci&#xF3;n de los Diagramas del Sistema" note="" work="28800" start="20100518T113000Z" end="20100519T113000Z" work-start="20100518T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="83" name="Actualizaci&#xF3;n del Dise&#xF1;o del Prototipo V.3.0" note="" work="28800" start="20100720T113000Z" end="20100721T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="84" name="Tercera Reuni&#xF3;n con el Product Owner" note="" work="28800" start="20100720T113000Z" end="20100721T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="85" name="Actualizaci&#xF3;n del Manual del estilo Web V.3.0" note="" work="57600" start="20100720T113000Z" end="20100722T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="86" name="Actualizaci&#xF3;n de las Especificaciones de los Requerimientos del Sistema V.3.0" note="" work="28800" start="20100720T113000Z" end="20100721T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="87" name="Actualizaci&#xF3;n del Documento de Arquitectura de Software V.3.0" note="" work="115200" start="20100720T113000Z" end="20100726T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+          <task id="88" name="Actualizaci&#xF3;n de los Diagramas del Sistema" note="" work="28800" start="20100720T113000Z" end="20100721T113000Z" work-start="20100720T113000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
         </task>
         <task id="89" name="Desarrollo" note="" work="730800" start="20091125T000000Z" end="20091228T105320Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
           <task id="90" name="Crear Modulo de Autentificaci&#xF3;n y Autorizaci&#xF3;n" note="" work="57600" start="20091125T000000Z" end="20091126T092320Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
@@ -413,8 +413,8 @@
           </task>
           <task id="112" name="Actualizaci&#xF3;n de los Diagramas del Sistema" note="" work="28800" start="20091125T000000Z" end="20091125T170000Z" work-start="20091125T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
         </task>
-        <task id="113" name="Tercera Entrega" note="" work="0" start="20100621T000000Z" end="20100621T000000Z" work-start="20100621T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
-          <constraint type="must-start-on" time="20100621T000000Z"/>
+        <task id="113" name="Tercera Entrega" note="" work="0" start="20100927T000000Z" end="20100927T000000Z" work-start="20100927T080000Z" percent-complete="0" priority="0" type="milestone" scheduling="fixed-work">
+          <constraint type="must-start-on" time="20100927T000000Z"/>
         </task>
       </task>
       <task id="114" name="Documentaci&#xF3;n Capacitaci&#xF3;n" note="" work="259200" start="20100621T000000Z" end="20100629T170000Z" work-start="20100621T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
@@ -453,132 +453,132 @@
     </task>
   </tasks>
   <resource-groups>
-    <group id="1" name="Seguridad" admin-name="Walter Vargas" admin-phone="04165023755" admin-email="walter@covetel.com.ve"/>
-    <group id="2" name="Maquetado" admin-name="Jes&#xFA;s Lugo" admin-phone="" admin-email=""/>
+    <group id="1" name="Desarrollo" admin-name="Juan Mesa" admin-phone="04165023757" admin-email="juan@covetel.com.ve"/>
+    <group id="2" name="Analistas" admin-name="Vilma Perez" admin-phone="" admin-email=""/>
     <group id="3" name="Control de Calidad" admin-name="Lilibeth Ram&#xED;rez" admin-phone="04165023756" admin-email="lilibeth@covetel.com.ve"/>
-    <group id="4" name="Analistas" admin-name="Vilma Perez" admin-phone="" admin-email=""/>
-    <group id="5" name="Desarrollo" admin-name="Juan Mesa" admin-phone="04165023757" admin-email="juan@covetel.com.ve"/>
+    <group id="4" name="Maquetado" admin-name="Jes&#xFA;s Lugo" admin-phone="" admin-email=""/>
+    <group id="5" name="Seguridad" admin-name="Walter Vargas" admin-phone="04165023755" admin-email="walter@covetel.com.ve"/>
   </resource-groups>
   <resources>
-    <resource group="5" id="1" name="Hector Lozada" short-name="HL" type="1" units="0" email="" note="" std-rate="150"/>
-    <resource group="2" id="2" name="Jos&#xE9; Rey" short-name="JR" type="1" units="0" email="" note="" std-rate="150"/>
-    <resource group="3" id="3" name="Lilibeth Ram&#xED;rez" short-name="LR" type="1" units="0" email="" note="" std-rate="150"/>
-    <resource group="4" id="4" name="Julio Cesar Vera" short-name="JV" type="1" units="0" email="" note="" std-rate="150"/>
-    <resource group="1" id="5" name="Walter Vargas" short-name="WV" type="1" units="0" email="" note="" std-rate="150"/>
-    <resource group="5" id="6" name="Juan Mesa" short-name="JM" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="1" id="1" name="Juan Mesa" short-name="JM" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="5" id="2" name="Walter Vargas" short-name="WV" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="2" id="3" name="Julio Cesar Vera" short-name="JV" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="3" id="4" name="Lilibeth Ram&#xED;rez" short-name="LR" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="4" id="5" name="Jos&#xE9; Rey" short-name="JR" type="1" units="0" email="" note="" std-rate="150"/>
+    <resource group="1" id="6" name="Hector Lozada" short-name="HL" type="1" units="0" email="" note="" std-rate="150"/>
   </resources>
   <allocations>
+    <allocation task-id="117" resource-id="1" units="100"/>
+    <allocation task-id="116" resource-id="1" units="100"/>
+    <allocation task-id="98" resource-id="1" units="100"/>
+    <allocation task-id="95" resource-id="1" units="100"/>
+    <allocation task-id="92" resource-id="1" units="100"/>
+    <allocation task-id="50" resource-id="1" units="100"/>
+    <allocation task-id="48" resource-id="1" units="67"/>
+    <allocation task-id="45" resource-id="1" units="100"/>
+    <allocation task-id="44" resource-id="1" units="100"/>
+    <allocation task-id="40" resource-id="1" units="100"/>
+    <allocation task-id="39" resource-id="1" units="100"/>
+    <allocation task-id="17" resource-id="1" units="100"/>
+    <allocation task-id="14" resource-id="1" units="100"/>
+    <allocation task-id="100" resource-id="1" units="50"/>
+    <allocation task-id="90" resource-id="1" units="35"/>
+    <allocation task-id="53" resource-id="1" units="50"/>
+    <allocation task-id="43" resource-id="1" units="30"/>
+    <allocation task-id="42" resource-id="1" units="35"/>
+    <allocation task-id="20" resource-id="1" units="40"/>
+    <allocation task-id="12" resource-id="1" units="20"/>
+    <allocation task-id="10" resource-id="1" units="20"/>
+    <allocation task-id="5" resource-id="1" units="40"/>
+    <allocation task-id="4" resource-id="1" units="35"/>
     <allocation task-id="66" resource-id="2" units="100"/>
-    <allocation task-id="65" resource-id="2" units="100"/>
-    <allocation task-id="64" resource-id="2" units="100"/>
-    <allocation task-id="63" resource-id="2" units="100"/>
-    <allocation task-id="62" resource-id="2" units="100"/>
-    <allocation task-id="61" resource-id="2" units="100"/>
-    <allocation task-id="60" resource-id="2" units="100"/>
-    <allocation task-id="59" resource-id="2" units="100"/>
-    <allocation task-id="57" resource-id="2" units="100"/>
-    <allocation task-id="56" resource-id="2" units="100"/>
-    <allocation task-id="55" resource-id="2" units="100"/>
-    <allocation task-id="100" resource-id="2" units="100"/>
-    <allocation task-id="99" resource-id="2" units="100"/>
-    <allocation task-id="96" resource-id="2" units="100"/>
-    <allocation task-id="93" resource-id="2" units="100"/>
-    <allocation task-id="90" resource-id="2" units="100"/>
-    <allocation task-id="53" resource-id="2" units="100"/>
-    <allocation task-id="52" resource-id="2" units="100"/>
-    <allocation task-id="51" resource-id="2" units="100"/>
+    <allocation task-id="117" resource-id="2" units="100"/>
+    <allocation task-id="116" resource-id="2" units="100"/>
+    <allocation task-id="97" resource-id="2" units="100"/>
+    <allocation task-id="94" resource-id="2" units="100"/>
+    <allocation task-id="91" resource-id="2" units="100"/>
+    <allocation task-id="81" resource-id="2" units="100"/>
+    <allocation task-id="84" resource-id="2" units="100"/>
+    <allocation task-id="48" resource-id="2" units="67"/>
+    <allocation task-id="45" resource-id="2" units="100"/>
+    <allocation task-id="44" resource-id="2" units="100"/>
+    <allocation task-id="33" resource-id="2" units="100"/>
     <allocation task-id="40" resource-id="2" units="100"/>
     <allocation task-id="39" resource-id="2" units="100"/>
-    <allocation task-id="18" resource-id="2" units="100"/>
-    <allocation task-id="42" resource-id="2" units="10"/>
-    <allocation task-id="115" resource-id="3" units="100"/>
-    <allocation task-id="111" resource-id="3" units="100"/>
-    <allocation task-id="109" resource-id="3" units="100"/>
-    <allocation task-id="105" resource-id="3" units="100"/>
-    <allocation task-id="107" resource-id="3" units="100"/>
-    <allocation task-id="108" resource-id="3" units="100"/>
-    <allocation task-id="88" resource-id="3" units="100"/>
-    <allocation task-id="86" resource-id="3" units="100"/>
-    <allocation task-id="83" resource-id="3" units="100"/>
-    <allocation task-id="76" resource-id="3" units="100"/>
-    <allocation task-id="75" resource-id="3" units="100"/>
-    <allocation task-id="74" resource-id="3" units="100"/>
-    <allocation task-id="36" resource-id="3" units="100"/>
-    <allocation task-id="35" resource-id="3" units="100"/>
-    <allocation task-id="29" resource-id="3" units="100"/>
-    <allocation task-id="28" resource-id="3" units="100"/>
-    <allocation task-id="27" resource-id="3" units="100"/>
-    <allocation task-id="26" resource-id="3" units="100"/>
-    <allocation task-id="31" resource-id="3" units="100"/>
-    <allocation task-id="106" resource-id="3" units="100"/>
-    <allocation task-id="87" resource-id="3" units="100"/>
-    <allocation task-id="85" resource-id="3" units="100"/>
-    <allocation task-id="73" resource-id="3" units="100"/>
-    <allocation task-id="72" resource-id="3" units="100"/>
-    <allocation task-id="38" resource-id="3" units="100"/>
-    <allocation task-id="37" resource-id="3" units="100"/>
-    <allocation task-id="25" resource-id="3" units="100"/>
-    <allocation task-id="20" resource-id="3" units="10"/>
+    <allocation task-id="16" resource-id="2" units="100"/>
+    <allocation task-id="15" resource-id="2" units="100"/>
+    <allocation task-id="100" resource-id="2" units="50"/>
+    <allocation task-id="90" resource-id="2" units="35"/>
+    <allocation task-id="53" resource-id="2" units="50"/>
+    <allocation task-id="43" resource-id="2" units="40"/>
+    <allocation task-id="42" resource-id="2" units="35"/>
+    <allocation task-id="20" resource-id="2" units="50"/>
+    <allocation task-id="12" resource-id="2" units="20"/>
+    <allocation task-id="10" resource-id="2" units="40"/>
+    <allocation task-id="9" resource-id="2" units="100"/>
+    <allocation task-id="5" resource-id="2" units="40"/>
+    <allocation task-id="4" resource-id="2" units="35"/>
+    <allocation task-id="6" resource-id="2" units="100"/>
     <allocation task-id="12" resource-id="3" units="30"/>
     <allocation task-id="11" resource-id="3" units="50"/>
-    <allocation task-id="10" resource-id="3" units="40"/>
     <allocation task-id="8" resource-id="3" units="50"/>
-    <allocation task-id="7" resource-id="3" units="100"/>
-    <allocation task-id="5" resource-id="3" units="20"/>
-    <allocation task-id="4" resource-id="3" units="30"/>
+    <allocation task-id="115" resource-id="4" units="100"/>
+    <allocation task-id="111" resource-id="4" units="100"/>
+    <allocation task-id="109" resource-id="4" units="100"/>
+    <allocation task-id="105" resource-id="4" units="100"/>
+    <allocation task-id="107" resource-id="4" units="100"/>
+    <allocation task-id="108" resource-id="4" units="100"/>
+    <allocation task-id="88" resource-id="4" units="100"/>
+    <allocation task-id="86" resource-id="4" units="100"/>
+    <allocation task-id="83" resource-id="4" units="100"/>
+    <allocation task-id="76" resource-id="4" units="100"/>
+    <allocation task-id="75" resource-id="4" units="100"/>
+    <allocation task-id="74" resource-id="4" units="100"/>
+    <allocation task-id="36" resource-id="4" units="100"/>
+    <allocation task-id="35" resource-id="4" units="100"/>
+    <allocation task-id="29" resource-id="4" units="100"/>
+    <allocation task-id="28" resource-id="4" units="100"/>
+    <allocation task-id="27" resource-id="4" units="100"/>
+    <allocation task-id="26" resource-id="4" units="100"/>
+    <allocation task-id="31" resource-id="4" units="100"/>
+    <allocation task-id="106" resource-id="4" units="100"/>
+    <allocation task-id="87" resource-id="4" units="100"/>
+    <allocation task-id="85" resource-id="4" units="100"/>
+    <allocation task-id="73" resource-id="4" units="100"/>
+    <allocation task-id="72" resource-id="4" units="100"/>
+    <allocation task-id="38" resource-id="4" units="100"/>
+    <allocation task-id="37" resource-id="4" units="100"/>
+    <allocation task-id="25" resource-id="4" units="100"/>
+    <allocation task-id="20" resource-id="4" units="10"/>
     <allocation task-id="12" resource-id="4" units="30"/>
     <allocation task-id="11" resource-id="4" units="50"/>
+    <allocation task-id="10" resource-id="4" units="40"/>
     <allocation task-id="8" resource-id="4" units="50"/>
+    <allocation task-id="7" resource-id="4" units="100"/>
+    <allocation task-id="5" resource-id="4" units="20"/>
+    <allocation task-id="4" resource-id="4" units="30"/>
     <allocation task-id="66" resource-id="5" units="100"/>
-    <allocation task-id="117" resource-id="5" units="100"/>
-    <allocation task-id="116" resource-id="5" units="100"/>
-    <allocation task-id="97" resource-id="5" units="100"/>
-    <allocation task-id="94" resource-id="5" units="100"/>
-    <allocation task-id="91" resource-id="5" units="100"/>
-    <allocation task-id="81" resource-id="5" units="100"/>
-    <allocation task-id="84" resource-id="5" units="100"/>
-    <allocation task-id="48" resource-id="5" units="67"/>
-    <allocation task-id="45" resource-id="5" units="100"/>
-    <allocation task-id="44" resource-id="5" units="100"/>
-    <allocation task-id="33" resource-id="5" units="100"/>
+    <allocation task-id="65" resource-id="5" units="100"/>
+    <allocation task-id="64" resource-id="5" units="100"/>
+    <allocation task-id="63" resource-id="5" units="100"/>
+    <allocation task-id="62" resource-id="5" units="100"/>
+    <allocation task-id="61" resource-id="5" units="100"/>
+    <allocation task-id="60" resource-id="5" units="100"/>
+    <allocation task-id="59" resource-id="5" units="100"/>
+    <allocation task-id="57" resource-id="5" units="100"/>
+    <allocation task-id="56" resource-id="5" units="100"/>
+    <allocation task-id="55" resource-id="5" units="100"/>
+    <allocation task-id="100" resource-id="5" units="100"/>
+    <allocation task-id="99" resource-id="5" units="100"/>
+    <allocation task-id="96" resource-id="5" units="100"/>
+    <allocation task-id="93" resource-id="5" units="100"/>
+    <allocation task-id="90" resource-id="5" units="100"/>
+    <allocation task-id="53" resource-id="5" units="100"/>
+    <allocation task-id="52" resource-id="5" units="100"/>
+    <allocation task-id="51" resource-id="5" units="100"/>
     <allocation task-id="40" resource-id="5" units="100"/>
     <allocation task-id="39" resource-id="5" units="100"/>
-    <allocation task-id="16" resource-id="5" units="100"/>
-    <allocation task-id="15" resource-id="5" units="100"/>
-    <allocation task-id="100" resource-id="5" units="50"/>
-    <allocation task-id="90" resource-id="5" units="35"/>
-    <allocation task-id="53" resource-id="5" units="50"/>
-    <allocation task-id="43" resource-id="5" units="40"/>
-    <allocation task-id="42" resource-id="5" units="35"/>
-    <allocation task-id="20" resource-id="5" units="50"/>
-    <allocation task-id="12" resource-id="5" units="20"/>
-    <allocation task-id="10" resource-id="5" units="40"/>
-    <allocation task-id="9" resource-id="5" units="100"/>
-    <allocation task-id="5" resource-id="5" units="40"/>
-    <allocation task-id="4" resource-id="5" units="35"/>
-    <allocation task-id="6" resource-id="5" units="100"/>
-    <allocation task-id="117" resource-id="6" units="100"/>
-    <allocation task-id="116" resource-id="6" units="100"/>
-    <allocation task-id="98" resource-id="6" units="100"/>
-    <allocation task-id="95" resource-id="6" units="100"/>
-    <allocation task-id="92" resource-id="6" units="100"/>
-    <allocation task-id="50" resource-id="6" units="100"/>
-    <allocation task-id="48" resource-id="6" units="67"/>
-    <allocation task-id="45" resource-id="6" units="100"/>
-    <allocation task-id="44" resource-id="6" units="100"/>
-    <allocation task-id="40" resource-id="6" units="100"/>
-    <allocation task-id="39" resource-id="6" units="100"/>
-    <allocation task-id="17" resource-id="6" units="100"/>
-    <allocation task-id="14" resource-id="6" units="100"/>
-    <allocation task-id="100" resource-id="6" units="50"/>
-    <allocation task-id="90" resource-id="6" units="35"/>
-    <allocation task-id="53" resource-id="6" units="50"/>
-    <allocation task-id="43" resource-id="6" units="30"/>
-    <allocation task-id="42" resource-id="6" units="35"/>
-    <allocation task-id="20" resource-id="6" units="40"/>
-    <allocation task-id="12" resource-id="6" units="20"/>
-    <allocation task-id="10" resource-id="6" units="20"/>
-    <allocation task-id="5" resource-id="6" units="40"/>
-    <allocation task-id="4" resource-id="6" units="35"/>
+    <allocation task-id="18" resource-id="5" units="100"/>
+    <allocation task-id="42" resource-id="5" units="10"/>
   </allocations>
 </project>
