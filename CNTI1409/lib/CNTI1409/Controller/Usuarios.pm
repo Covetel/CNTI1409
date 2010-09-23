@@ -293,7 +293,8 @@ sub info : Local : Form {
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
-        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+		my $label = $form->get_field($err_fields[0])->label; 
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong''> $label </span> ";
 	}
 
 	# Creo el formulario para eliminar el usuario
@@ -540,7 +541,8 @@ sub crear : Local : Form {
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
-        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+		my $label = $form->get_field($err_fields[0])->label; 
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong''> $label </span> ";
 	}
 }
 
