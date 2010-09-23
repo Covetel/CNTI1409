@@ -58,6 +58,7 @@ elements:
           attributes:
               title: Presione este botón para cambiar la contraseña.
               class: input_submit
+              id: usuario_cambiar_password_submit
         
         - type: Reset
           name: reset
