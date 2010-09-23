@@ -152,4 +152,16 @@ $(document).ready(function(){
 	//Información del usuario. 
 	$("div#usuario_tabs").tabs();	
 
+	//Cuando hagan click sobre el boton de submit. 
+	$("input#crear_usuario_submit").click(function(){
+		var rol = $("#rol :selected").val();
+		if (rol == '-'){
+			alert("Debe seleccionar un Rol para el usuario");
+			return false;
+		} else {
+			return true;
+		}
+	});
+	
+
 });
