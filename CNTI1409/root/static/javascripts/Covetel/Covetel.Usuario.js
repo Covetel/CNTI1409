@@ -152,7 +152,7 @@ $(document).ready(function(){
 	//Información del usuario. 
 	$("div#usuario_tabs").tabs();	
 
-	//Cuando hagan click sobre el boton de submit. 
+	//Cuando hagan click sobre el boton de crear usuario 
 	$("input#crear_usuario_submit").click(function(){
 		var rol = $("#rol :selected").val();
 		if (rol == '-'){
@@ -161,6 +161,15 @@ $(document).ready(function(){
 		} else {
 			return true;
 		}
+	});
+
+	//Cuando hagan click en el boton eliminar usuario.
+	$("input#eliminar_usuario_submit").click(function(){
+		if (confirm("¿ Realmente desea eliminar este usuario ?")){
+			return true;
+		} else {
+			return false;
+		}	
 	});
 	
 
