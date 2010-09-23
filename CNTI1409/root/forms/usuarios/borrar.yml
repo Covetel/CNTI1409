@@ -32,3 +32,4 @@ elements:
           attributes:
               title: Presione este botón para eliminar el usuario.
               class: input_submit
+              id: eliminar_usuario_submit

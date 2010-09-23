@@ -1,2 +1,4 @@
 [% titulo = 'Usuario Eliminado' %]
 [% INCLUDE mensajes.tt2 %]
+
+<a href="/usuarios/listar/"> Volver </a>

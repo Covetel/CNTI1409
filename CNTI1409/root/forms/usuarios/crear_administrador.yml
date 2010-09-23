@@ -167,6 +167,7 @@ elements:
           attributes:
               title: Presione este botón para crear el usuario.
               class: input_submit
+              id: crear_usuario_submit
         
         - type: Reset
           name: reset
