@@ -28,6 +28,30 @@ function Covetel_usuario (){
 
 }
 
+function error_passwords(){
+		//Leo el valor del passwd1 y lo comparo con el valor de passwd2
+		var p1 = $("#passwd").val();
+		var p2 = $("#passwd2").val();
+		if (p1 != p2) {
+
+			$("#passwd").val('');
+			$("#passwd2").val('');
+			$("#passwd").focus();
+			$("#passwd").parent().addClass("error error_constraint_required");
+			$("#passwd2").parent().addClass("error error_constraint_required");
+		
+			$("#passwd").qtip({
+				content: 'Las contraseñas no coinciden',
+				show: { ready: true },
+				position: { adjust: {x: 0, y: -20} }
+			});
+
+		} else {
+			$("#passwd").parent().removeClass("error error_constraint_required");
+			$("#passwd2").parent().removeClass("error error_constraint_required");
+		}
+}
+
 function element_error(element,msj){
 	element.val('');
 	element.focus();
@@ -171,6 +195,25 @@ $(document).ready(function(){
 			return false;
 		}	
 	});
+
+
+	// Cuando hacen click en actualizar contraseñas, valido que ambas contraseñas sean iguales. 
+	$("input#usuario_cambiar_password_submit").click(function(){
+		var p1 = $("#passwd").val();
+		var p2 = $("#passwd2").val();
+		console.log("actualizar password");
+		if (p1 == '' && p2 == ''){
+			alert("Error: Debe indicar un par de contraseñas válidas");
+			return false;
+		} 
+		
+		if (p1 != p2){
+			error_passwords();
+			return false; 
+		}
+		
+	});
+	
 	
 
 });

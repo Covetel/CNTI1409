@@ -42,3 +42,9 @@
 
 [% END %]
 
+[% IF error == 1 %]
+
+ <a href="/usuarios/info/[% usuario.uid %]"> Volver </a>
+
+[% END %]
+
