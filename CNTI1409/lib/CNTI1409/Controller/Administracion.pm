@@ -43,7 +43,8 @@ sub index :Path :Args(0) {
 
 
 sub fonts : Local : FormConfig {
-    my ( $self, $c ) = @_;
+    my ( $self, $c, $mensaje, $error ) = @_;
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
 	$c->stash->{titulo}     = "Gestión de parámetros de disposiciones";
 	$c->stash->{template} = 'administracion/parametros.tt2';
@@ -61,6 +62,7 @@ sub fonts : Local : FormConfig {
         $mech->get("http://fonts.debian.net");
         my @list;
         my @fonts = $mech->find_all_images( alt_regex => qr/\.ttf$/ );
+        my $rsfonts = $c->model('DB::param')->search({ disposicion => 'Fonts' })->delete;
         for my $font (@fonts) {
             my $fuente = $font->alt;
             $fuente =~ s/(.*)\.ttf$/$1/;
@@ -69,6 +71,10 @@ sub fonts : Local : FormConfig {
                 parametro       => $fuente,
             });
         }
+        $c->response->redirect($c->uri_for($self->action_for('fonts'),{ mensaje => "Las fuentes se han actualizado", error => 0}));
+	} elsif ($form->has_errors && $form->submitted) {
+        $c->stash->{error} = 1;
+        $c->stash->{mensaje} = "Ha ocurrido un error ";
     }
 }
 
