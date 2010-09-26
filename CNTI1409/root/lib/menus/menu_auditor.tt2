@@ -3,7 +3,7 @@
 		<a href="/auditoria/crear"> Crear </a> <br />
 		<a href="/auditoria/reporte"> Listar </a> <br />
 </div>
-<h3><a href="#"> Araña </a></h3>
+<h3><a href="#"> Muestra </a></h3>
 <div>
 		<a href="/spider/iniciar"> Iniciar </a> <br />
 </div>

@@ -1,6 +1,6 @@
-action: /administracion/parametros
+action: /administracion/fonts
 # indicator is the field that is used to test for form submission
-indicator: Botones.submit
+indicator: submit
 
 # Start listing the form elements
 #auto_fieldset: 1
@@ -19,8 +19,6 @@ elements:
           attributes:
               class: informacion
 
-    - type: Multi
-      name: Botones
       elements:
         - type: Submit
           name: submit
@@ -29,11 +27,3 @@ elements:
           attributes:
               title: Presione este botón para actualizar las fuentes.
               class: input_submit
-        
-        - type: Reset
-          name: reset
-          # The text to be displayed
-          value: Reiniciar
-          attributes:
-              title: Presione este botón para inicializar en blanco los campos del formulario.
-              class: input_reset
