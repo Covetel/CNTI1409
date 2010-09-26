@@ -11,11 +11,11 @@ languages:
 elements:
     - type: Fieldset
       name: datos_institucion
-      legend: Iniciar Araña
+      legend: Muestra
       elements:
         - type: Block
           tag: div
-          content: Indique los datos.
+          content: 'Recuerde que debe indicar la URL Base del portal para generar la muestra, esta url debe estar bien formada, ejemplo: http://www.cnti.gob.ve'
           attributes:
               class: informacion
 
