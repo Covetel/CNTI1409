@@ -1,10 +1,10 @@
 [% INCLUDE mensajes.tt2 %]
 
 [% IF id == 0%]
-	[% titulo = 'Iniciar la Araña' %]
+	[% titulo = 'Iniciar la Muestra' %]
 	[% form %]
 [% ELSIF id > 0 %]
-	[% titulo = 'Ejecutando la araña para el sitio '_ base %]
+	[% titulo = 'Creando la muestra para el sitio '_ base %]
 	<p>
 		Descubriendo las direcciones de hipertexto contenidas en el portal 
 		<span class="strong"> [% base %] </span>
