@@ -6,6 +6,7 @@ En la siguiente tabla se encuentran las Entidades Verificadoras registradas hast
 
 <table class="dataTable tabla_reporte" id="tabla_reporte">
 	<thead>
+		<tr>
 		<th class="ui-state-default"> N° </th>
 		<th class="ui-state-default"> Nombre </th>
 		<th class="ui-state-default"> RIF </th>
@@ -15,6 +16,7 @@ En la siguiente tabla se encuentran las Entidades Verificadoras registradas hast
 		<th class="ui-state-default"> Dirección </th>
 		<th class="ui-state-default"> Página Web </th>
 		<th class="ui-state-default"> Estado </th>
+		</tr>
 	</thead>
 	
 	<tbody>

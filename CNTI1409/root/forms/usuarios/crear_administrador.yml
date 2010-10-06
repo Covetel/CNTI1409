@@ -23,7 +23,7 @@ elements:
           name: rol
           label: Rol del usuario
           options: 
-              - ['-', ' ']
+              - ['-', ' - ']
               - ['administrador', 'Administrador']
               - ['auditorJefe', 'Auditor Jefe']
               - ['auditor', 'Auditor']

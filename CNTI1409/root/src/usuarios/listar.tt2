@@ -9,8 +9,7 @@
 		<th id="uidNumber">uidNumber</th>
 		<th id="entidad">Entidad Verificadora</th>
 		<th id="rol">Rol</th>
-		<th id="entidad">Información</th>
-	</tr>
+		<th id="entidad2">Información</th>
 	</tr>
 	</thead>
 </table>

@@ -53,7 +53,7 @@ elements:
           name: filtro
           label: Buscar Por
           options: 
-              - ['-', ' ']
+              - ['-', ' - ']
               - ['idinstitucion', 'Institución']
           attributes:
               title:  'Por favor seleccione el filtro de búsqueda' 

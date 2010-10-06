@@ -53,7 +53,7 @@ elements:
           name: filtro
           label: Buscar Por
           options: 
-              - ['-', ' ']
+              - ['-', ' - ']
               - ['idev', 'Entidad Verificadora']
               - ['idinstitucion', 'Institución']
           attributes:

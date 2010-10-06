@@ -4,8 +4,9 @@
 En la siguiente tabla se encuentran las Instituciones registradas hasta la fecha. La columna <span class="strong">Estado</span>, puede tener dos valores para cada registro: <span class="strong"> Activo </span> o <span class="strong"> Inactivo </span>
 </div>
 
-<table class="dataTable tabla_reporte" id="tabla_reporte" class="wizard-reporte">
+<table class="dataTable tabla_reporte wizard-reporte" id="tabla_reporte">
 	<thead>
+		<tr>
 		<th class="ui-state-default"> ID </th>
 		<th class="ui-state-default"> Nombre </th>
 		<th class="ui-state-default"> RIF </th>
@@ -15,6 +16,7 @@ En la siguiente tabla se encuentran las Instituciones registradas hasta la fecha
 		<th class="ui-state-default"> Dirección </th>
 		<th class="ui-state-default"> Página Web </th>
 		<th class="ui-state-default"> Estado </th>
+		</tr>
 	</thead>
 	
 	<tbody>
