@@ -164,7 +164,9 @@ sub resumen : Local {
 	my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
 	if ($auditoria) {
 		# Muestra
+		
 		my $muestra = join '<br />', @{$auditoria->url};
+		$muestra =~ s/&/&amp;/g;
 		
 		# Variable estado 
 		my $estado;
@@ -445,12 +447,15 @@ sub detalle : Local {
 	           	while ( my $r = $it2->() ) {
 				 	next if $r->name ne $disposicion; 
                     $sitios = $site . $u->path;
+					$sitios =~ s/&/&amp;/g;
 					push @{$h->{url}},{ disposicion => $r->name, path => $sitios, pass => $r->pass} if $r->pass ne 'pass';
                     $pass = 'fail' if ($r->pass ne 'pass');
                     if ($r->pass ne 'pass') {
                         my $it3 = $r->children;
                         while ( my $r2 = $it3->()) {
-                            push @{$errores->{er}},{ sitio => $sitios, error => $r2->message };
+							my $mensaje = $r2->message;
+							$mensaje =~ s/&/&amp;/g;
+                            push @{$errores->{er}},{ sitio => $sitios, error => $mensaje };
                         }
                     }
 	           	}

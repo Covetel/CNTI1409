@@ -2,7 +2,7 @@
 <div class="mensaje">
 	<div class="ui-widget">
 		 <div class="ui-state-highlight ui-corner-all">
-			 <p><span class="ui-icon ui-icon-info"></span>
+			 <p><span class="ui-icon ui-icon-info">&nbsp;</span>
 			 <strong> Mensaje:  </strong> [% mensaje %]</p>
 		</div>
 	</div> 
@@ -13,7 +13,7 @@
 <div class="mensaje">
 	<div class="ui-widget">
 		 <div class="ui-state-error ui-corner-all" >
-			 <p><span class="ui-icon ui-icon-info"></span>
+			 <p><span class="ui-icon ui-icon-info">&nbsp;</span>
 			 <strong> Error:  </strong> [% mensaje %]</p>
 		</div>
 	</div> 

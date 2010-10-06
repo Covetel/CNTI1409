@@ -61,7 +61,7 @@
 				El resultado general de la auditoría es negativo.
 			[% END %] 
 		</span>
-		<span class="icono"> <img src="/static/images/[% resultados.general %].png" alt="[%resultados.general%]" title="[%resultados.general%]"> </span>
+		<span class="icono"> <img src="/static/images/[% resultados.general %].png" alt="[%resultados.general%]" title="[%resultados.general%]" /> </span>
 	</div>
 	[% IF resultados.general == 'fallo' %]
 		<div> 
@@ -85,7 +85,9 @@
 <div id="reporte_disposiciones">
 	<table class="lista_disposiciones">
 	<thead>
+		<tr>
 		<th class="ui-state-default"> Disposición </th> <th class="ui-state-default" > Resultado </th>
+		</tr>
 	</thead>
 	<tbody>
 	[% FOREACH disp IN disposiciones %]
@@ -104,23 +106,25 @@
 					<li> <span class="strong"> Acciones Correctivas: </span> [% disp.value.resolutoria %] </li>
 				[% END %]
 				<li> <span class="strong"> Urls: </span> 
-				<ol>
-				[% FOREACH url IN disp.value.urls %]
-					<li> <span class="strong"> + [% url.key %]</span> </li>
-						<ol>
-							<li> <span class="strong"> Resultado:  </span> 
-                                [% IF url.value.result == "pass" %]
-                                    Pasó
-                                [% ELSE %]
-                                    Falló
-                                [% END %]
-                            </li>
-							[% IF url.value.mensajes %]
-							    <li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes %] </li>
-							[% END %]
-						</ol>
-				[% END %]
-		 		</ol>
+					<ul>
+					[% FOREACH url IN disp.value.urls %]
+						<li>[% url.key.replace('&','&amp;') %]</li>
+						<li>
+							<ol>
+								<li> <span class="strong"> Resultado:  </span> 
+                 	               [% IF url.value.result == "pass" %]
+                  	                  Pasó
+                   	             [% ELSE %]
+                   	                 Falló
+                    	            [% END %]
+                    	        </li>
+								[% IF url.value.mensajes %]
+								    <li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes.replace('&','&amp;') %] </li>
+								[% END %]
+							</ol>
+						</li>
+					[% END %]
+		 			</ul>
 				</li>
 			</ol>
 		</td>
@@ -134,7 +138,7 @@
 </div>
 
 <p>
-<a href="/reportes/pdf/[% id %]" alt="Ver este reporte en formato PDF"> Ver este reporte en formato PDF </a>
+<a href="/reportes/pdf/[% id %]" title="Ver este reporte en formato PDF"> Ver este reporte en formato PDF </a>
 </p>
 <p>
 <a href="/auditoria/detalle/[% id %]/Domain"> Volver al detalle de la auditoría </a>

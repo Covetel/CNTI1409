@@ -15,7 +15,7 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 <div class="mensaje_disposicion">
 	<div class="ui-widget">
 		 <div class="ui-state-highlight ui-corner-all">
-			 <p><span class="ui-icon ui-icon-info"></span>
+			 <p><span class="ui-icon ui-icon-info">&nbsp;</span>
 			 <strong> Mensaje:  </strong> Las acciones correctivas fueron guardadas exitosamente !</p>
 		</div>
 	</div> 
@@ -24,15 +24,15 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 <div class="error_disposicion">
 	<div class="ui-widget">
 		 <div class="ui-state-error ui-corner-all" >
-			 <p><span class="ui-icon ui-icon-info"></span>
+			 <p><span class="ui-icon ui-icon-info">&nbsp;</span>
 			 <strong> Error:  </strong> Ocurrio un error al guardar </p>
 		</div>
 	</div> 
 </div>
 
-<form name="disposicion" id="disposicion" method="POST" action="#">
+<form name="disposicion" id="disposicion" method="post" action="#">
 <fieldset> 
-<legend title=" [% descripcion %] "> Disposición: [% nombre %] </legend>
+<legend> Disposición: [% nombre %] </legend>
 [% IF fail %]
 <div class="informacion">
  <span class="mensajito">En el siguiente campo, se muestran las URL que fallaron para esta disposición. </span>
@@ -43,15 +43,19 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 		<div id="progreso"> 
 			<ul class="urls">
 				[% FOREACH url IN urls %]
-					<!--<li class="url_done"><a href="[% url.path %]" target="_blank"> [% url.path %] </a></li>-->
-					<li class="url_done"> [% url.path %] </li>
+					<li class="url_done"> 
+						[% url.path %] 
+					</li>
+					<li>
                     <ul>
                         [% FOREACH msjerror IN er %] 
                             [% IF msjerror.sitio == url.path %]
                                 <li> [% msjerror.error %] </li>
                             [% END %]
                         [% END %]
+						<li> &nbsp; </li>
                     </ul>
+					</li>
 				[% END %]
 			</ul>
 		</div>
