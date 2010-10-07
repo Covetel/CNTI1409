@@ -5,16 +5,12 @@ Descripción:    Estilo para los controles tipo tablas.
 */
 
 div#progreso {
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
 background-color: #FFFFCE;
 font-size: 0.7em;
 height: 100px;
 }
 
 div.spider_id {
--webkit-border-radius: 10px;
--moz-border-radius: 10px;
 background-color: #FFFFCE;
 font-size: 0.7em;
 height: 200px;

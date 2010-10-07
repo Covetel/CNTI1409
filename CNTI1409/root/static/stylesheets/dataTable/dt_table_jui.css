@@ -34,13 +34,11 @@
 .paging_two_button .fg-button {
 	float: left;
 	cursor: pointer;
-	* cursor: hand;
 }
 
 .paging_full_numbers .fg-button {
 	padding: 2px 6px;
 	cursor: pointer;
-	* cursor: hand;
 }
 
 .paging_full_numbers {
@@ -58,7 +56,6 @@
 table.display thead th {
 	padding: 3px 0px 3px 10px;
 	cursor: pointer;
-	* cursor: hand;
 }
 
 
@@ -78,7 +75,6 @@ table.display thead th {
 .dataTables_wrapper {
 	position: relative;
 	min-height: 302px;
-	_height: 302px;
 	clear: both;
 }
 
@@ -299,12 +295,9 @@ td.details {
 .paging_full_numbers span.paginate_button,
  	.paging_full_numbers span.paginate_active {
 	border: 1px solid #aaa;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
 	padding: 2px 5px;
 	margin: 0 3px;
 	cursor: pointer;
-	*cursor: hand;
 }
 
 .paging_full_numbers span.paginate_button {

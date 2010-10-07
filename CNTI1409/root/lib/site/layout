@@ -56,7 +56,7 @@
 						 </ul>
 						</div>
 						<div id="loading"> 
-								<img src="/static/images/loading.gif" title="Cargando ..." />
+								<img src="/static/images/loading.gif" alt="Cargando ..." />
 						</div>
                         <div id="is_usuario">
                                 <div id="is_usuario_uid"> 
@@ -73,7 +73,8 @@
                         </div>
                 </div>
 
-                <div id="menu_vertical">
+                <div id="menu">
+					<div id="menu_vertical">
 						[% IF c.check_user_roles('Administrador') %]
 							[% INCLUDE menus/menu_administrador.tt2 %]
 						[% ELSIF c.check_user_roles('Auditor') %]
@@ -81,8 +82,11 @@
 						[% ELSIF c.check_user_roles('AuditorJefe') %]
 							[% INCLUDE menus/menu_auditorJefe.tt2 %]
 						[% END %]
+					</div>
+					<div id="w3c">
+						[% INCLUDE w3c_buttons.tt2 %]
+					</div>
                 </div>
-
                 <div id="area_aplicacion">
                         <h3><a href="#"> [% titulo %] </a> </h3>
                         <div>

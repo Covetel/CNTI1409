@@ -51,9 +51,21 @@ div#informacion_sesion {
 
 div#menu_vertical {
  width: 	125px;
+ height: 	200px;
+}
+
+div#menu {
+ width: 	125px;
  display: 	inline; 
  float: 	left;
  height: 	200px;
+}
+
+div#w3c {
+ margin-top: 120px;
+}
+div#w3c a {
+ color: #fff;
 }
 
 div#area_aplicacion {
