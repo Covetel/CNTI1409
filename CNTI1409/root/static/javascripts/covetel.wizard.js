@@ -47,14 +47,14 @@ $("document").ready(function(){
 	$("#reporte_auditorias tr:even").addClass('even'); 
 	
 	$("#print").click(function(){
-		$("#cintillo_institucional, #informacion_sesion, #menu_vertical").hide("slow"); 
+		$("#cintillo_institucional, #informacion_sesion, #menu_vertical, #menu, #w3c").hide("slow"); 
 		$("div#area_aplicacion").css('margin-left','2px').width("100%");
 		$("#printOut").css('display','block');
 		$("#print").hide();
 	});
 	
 	$("#printOut").click(function(){
-		$("#cintillo_institucional, #informacion_sesion, #menu_vertical").show("slow"); 
+		$("#cintillo_institucional, #informacion_sesion, #menu_vertical, #menu, #w3c").show("slow"); 
 		$("div#area_aplicacion").css('margin-left','146px').width("85%");
 		$("#print").show();
 		$("#printOut").hide();

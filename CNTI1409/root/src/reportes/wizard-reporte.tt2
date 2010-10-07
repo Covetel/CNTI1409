@@ -2,6 +2,7 @@
 
 <table class="dataTable tabla_reporte" id="tabla_reporte"> 
 	<thead>
+		<tr>
 		<th class="ui-state-default"> Id </th>
 		<th class="ui-state-default"> Institución </th>
 		<th class="ui-state-default"> Portal </th>
@@ -12,6 +13,7 @@
 		<th class="ui-state-default"> Disposiciones Falladas </th>
 		<th class="ui-state-default"> Indice de Cumplimiento </th>
 		<th class="ui-state-default"> Reporte </th>
+		</tr>
 	</thead>
 	<tbody>
 		[% FOREACH auditoria IN auditorias %]
