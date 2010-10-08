@@ -56,6 +56,13 @@ div#menu_vertical {
  height: 	200px;
 }
 
+div#w3c {
+ width: 	125px;
+ display: 	inline; 
+ float: 	left;
+ height: 	200px;
+}
+
 div#area_aplicacion {
  width: 	83%;
  margin-left: 	146px;
