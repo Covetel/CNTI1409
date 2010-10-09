@@ -27,10 +27,14 @@
 				<td> [% auditoria.pass %]</td>
 				<td> [% auditoria.fail %]</td>
 				<td> [% auditoria.indice %] &#37; </td>
-				<td> 
+				<td>
+					[% IF auditoria.estado == 'Cerrada' %] 
 					<a href="/reportes/pdf/[% auditoria.id %]"> PDF </a> 
 					<br />
 					<a href="/reportes/auditoria/[% auditoria.id %]"> HTML </a> 
+					[% ELSE %]
+						No Disponible.
+					[% END %]
 				</td>
 			</tr>
 		[% END %]

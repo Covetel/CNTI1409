@@ -236,6 +236,9 @@ sub auditoria : Local {
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
 				
 				&grafica($resultados->{dpass}, $resultados->{dfail}, $producto->{solicitante});
+			} else {
+				$c->stash->{error} = 1;
+				$c->stash->{mensaje} = 'La auditoría no existe o no esta cerrada. Solo se generan reportes para las auditorías cuyo estado es Cerrado';
 			}
 	}
 }
@@ -262,6 +265,7 @@ sub auditoria_struct {
 	$auditoria->{institucion}->{correo}= $aud->idinstitucion->correo;
 	$auditoria->{id}= $id;
 	$auditoria->{entidad}->{registro}= $aud->idev->registro;
+	$auditoria->{estado}= $aud->estado;
 	$auditoria->{entidad}->{nombre}= $aud->idev->nombre;
 	#$auditoria->{entidad}->{telefono}= $aud->idev->telefono;
 	$auditoria->{entidad}->{direccion} = $aud->idev->direccion;
@@ -346,15 +350,21 @@ Recibe el ID de una auditoría y genera un reporte en PDF de la misma.
 
 sub pdf : Local {
 	my ( $self, $c, $id ) = @_;
-	my $auditoria = auditoria_struct($self,$c,$id);
-	my $file = "auditoria-".$auditoria->{id}.".pdf";
-	$c->stash->{auditoria} = $auditoria;
-	if ($c->forward( 'CNTI1409::View::PDF' ) ) {
-     # Only set the content type if we sucessfully processed the template
-     $c->response->content_type('application/pdf');
-     $c->response->header('Content-Disposition', "attachment; filename=$file");
-  	}
-
+	my $aud = $c->model('DB::Auditoria')->find($id);
+	if ($aud->estado eq 'c'){
+		my $auditoria = auditoria_struct($self,$c,$id);
+		my $file = "auditoria-".$auditoria->{id}.".pdf";
+		$c->stash->{auditoria} = $auditoria;
+		if ($c->forward( 'CNTI1409::View::PDF' ) ) {
+     	# Only set the content type if we sucessfully processed the template
+     		$c->response->content_type('application/pdf');
+     		$c->response->header('Content-Disposition', "attachment; filename=$file");
+  		}
+	} else {
+		$c->stash->{template} = 'reportes/auditoria.tt2';
+		$c->stash->{error} = 1;
+		$c->stash->{mensaje} = 'La auditoría no existe o no esta cerrada. Solo se generan reportes para las auditorías cuyo estado es Cerrado';
+	}
 }
 
 =head2 entidades 

@@ -1,3 +1,5 @@
+[% INCLUDE mensajes.tt2 %]
+[% UNLESS error %]
 <div id="reporte_tabs">
 <ul>
 	<li> <a href="#reporte_producto">Información del Producto</a> </li>
@@ -143,3 +145,4 @@
 <p>
 <a href="/auditoria/detalle/[% id %]/Domain"> Volver al detalle de la auditoría </a>
 </p>
+[% END %]
