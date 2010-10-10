@@ -36,6 +36,9 @@ sub iniciar : Local : FormConfig {
 			$c->stash->{base} = $c->req->params->{base};
 			$c->stash->{prof} = $c->req->params->{prof};
 			$c->stash->{numero} = $c->req->params->{numero};
+		if ($c->req->params->{prof} == 0){
+			$c->req->params->{prof} = 1000000;
+		}
         my $spider = CNTI::Spider::State->new(
             base  => $c->req->params->{base},
             depth => $c->req->params->{prof},
@@ -48,7 +51,8 @@ sub iniciar : Local : FormConfig {
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
         my @err_fields = $form->has_errors;
-        $c->stash->{mensaje} = "Ha ocurrido un error en el campo $err_fields[0] ";
+		my $label = $form->get_field($err_fields[0])->label; 
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong'> $label </span>";
     }
 	$c->log->debug($form->has_errors);
 	$c->log->debug($form->submitted);

@@ -15,7 +15,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Recuerde que debe indicar la URL Base del portal para generar la muestra, esta url debe estar bien formada, ejemplo: http://www.cnti.gob.ve'
+          content: 'Recuerde que debe indicar la URL Base del portal para generar la muestra, esta url debe estar bien formada, ejemplo: http://www.cnti.gob.ve. Adicionalmente cabe destacar que si introduce como valor 0 en el campo Número de Urls y en el campo Profundidad, la búsqueda no tendrá límite alguno, y terminara solo cuando no encuentre mas direcciones.'
           attributes:
               class: informacion
 
@@ -27,6 +27,11 @@ elements:
               title: 'Indique la url base'
               class: input_text
           constraints:
+            - type: Regex
+              common:
+               - URI
+               - HTTP
+               - {'-scheme': 'https?'}
             - Required
             - type: Length
               min: 4
@@ -43,7 +48,7 @@ elements:
             - Required
             - type: Length
               min: 1
-              max: 2
+              max: 10
               message: "El valor no puede contener mas de 2 caracateres "
 
         - type: Text
@@ -56,7 +61,7 @@ elements:
             - Required
             - type: Length
               min: 1
-              max: 2
+              max: 10
               message: "El valor no puede contener mas de 2 caracateres "
 
     # The Submit button
