@@ -46,10 +46,14 @@ elements:
               class: input_text
           constraints:
             - Required
+            - type: Regex
+              common:
+               - num
+               - int
             - type: Length
               min: 1
               max: 10
-              message: "El valor no puede contener mas de 2 caracateres "
+              message: "El valor no puede contener mas de 10 caracateres "
 
         - type: Text
           name: prof
@@ -59,10 +63,14 @@ elements:
               class: input_text
           constraints:
             - Required
+            - type: Regex
+              common:
+               - num
+               - int
             - type: Length
               min: 1
               max: 10
-              message: "El valor no puede contener mas de 2 caracateres "
+              message: "El valor no puede contener mas de 10 caracateres "
 
     # The Submit button
     - type: Multi
