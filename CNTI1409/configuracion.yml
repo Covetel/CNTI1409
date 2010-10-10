@@ -84,7 +84,7 @@ breadcrumbs:
     /instituciones/listar: Lista de Instituciones
     /instituciones/registrar: Registrar Institución
     /spider: Muestra
-
+    /reportes/wizard: Auditorías
 
 # Validador W3C.
 css_validator_uri: http://jigsaw.w3.org/css-validator/validator
