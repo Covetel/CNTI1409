@@ -30,6 +30,10 @@ sub index :Path :Args(0) {
 sub iniciar : Local : FormConfig {
 	my ( $self, $c ) = @_;
     my $form = $c->stash->{form};
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
 	use Data::Dumper;
 	$c->stash->{id} = 0;
     if ($form->submitted_and_valid) { 

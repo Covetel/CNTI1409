@@ -44,6 +44,10 @@ sub wizard : Local : Form {
 
 	my ($entidad_id, $entidad_nombre);
 	my $form = $self->form;
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
 	$c->stash->{titulo}     = "Generador de Reportes";
 	$c->stash->{template} 	= 'reportes/wizard.tt2';
 	if ($c->check_user_roles( qw/Administrador/ )){

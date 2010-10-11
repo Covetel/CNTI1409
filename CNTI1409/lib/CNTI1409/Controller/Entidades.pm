@@ -50,6 +50,10 @@ sub registrar : Local : FormConfig {
     my ( $self, $c, $mensaje, $error ) = @_;
     $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
     if ($form->submitted_and_valid) { 
         my $entidad = $c->model('DB::Entidadverificadora')->new_result({});
         my $e = $form->model->update($entidad);

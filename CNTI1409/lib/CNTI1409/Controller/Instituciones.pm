@@ -44,6 +44,10 @@ sub registrar : Local : FormConfig {
     my ( $self, $c, $mensaje, $error ) = @_;
     $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $c->stash->{form};
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
     if ($form->submitted_and_valid) { 
         my $instituciones = $c->model('DB::Institucion')->new_result({});
         $form->model->update($instituciones);

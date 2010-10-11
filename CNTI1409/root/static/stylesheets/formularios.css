@@ -168,3 +168,16 @@ select.input_select {
  padding: 5px;
  background-color: #fff;
 }
+
+/* Para los campos obligatorios */
+div.requerido {
+ font-size: 0.6em;
+ color: #f00;
+ font-weight: bold;
+}
+
+span.requerido {
+ font-size: 1.5em;
+ color: #f00;
+ font-weight: bold;
+}

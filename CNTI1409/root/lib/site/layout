@@ -31,6 +31,7 @@
                 <script type="text/javascript" src="/static/javascripts/covetel.wizard.js"></script>
                 <script type="text/javascript" src="/static/javascripts/reportes.js"></script>
                 <script type="text/javascript" src="/static/javascripts/application.js"></script>
+                <script type="text/javascript" src="/static/javascripts/Covetel/Covetel.Formularios.js"></script>
         </head>
         <body>
                 <div id="cintillo_institucional">

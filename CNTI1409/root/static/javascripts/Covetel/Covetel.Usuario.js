@@ -82,6 +82,7 @@ $(document).ready(function(){
 		var rol = $("#rol :selected").val();
 		if (rol == 'auditor' || rol == 'auditorJefe') {
 			$("#fielset_entidad_verificadora").show();	
+			$("#idev").parent().campo_requerido();
 		} else if (rol == 'administrador'){
 			$("#fielset_entidad_verificadora").hide();	
 		}

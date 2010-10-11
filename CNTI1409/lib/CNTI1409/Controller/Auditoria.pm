@@ -53,6 +53,10 @@ sub crear : Local : Form {
     my ( $self, $c, $mensaje, $error ) = @_;
     $c->stash->{mensaje} = $c->req->params->{mensaje};
     my $form = $self->form;
+
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
 	my ($entidad_id, $entidad_nombre, $idev);
 	if ($c->check_user_roles( qw/Administrador/ )){
 		$form->load_config_file('auditoria/crear.yml');
