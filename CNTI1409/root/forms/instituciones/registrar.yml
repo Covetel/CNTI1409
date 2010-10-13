@@ -71,6 +71,9 @@ elements:
               class: input_text
           constraints:
             - Required
+            - type: Regex
+              regex: '^\D+$'
+              message: "El nombre no puede tener números"
             - type: Length
               min: 4
               max: 250
