@@ -263,11 +263,11 @@ sub run {
             push @errors, $@ if $@;
         }
         else {
-            push @warnings, "HTTP charset: $ct_charset";
+            push @warnings, "Error en el formato de codificación de caracteres: $ct_charset";
         }
     }
     else {
-        push @warnings, "No HTTP Charset";
+        push @warnings, "Formato de codificación de caracteres inválido";
     }
     $content ||= $resp->content;
 
@@ -285,7 +285,7 @@ sub run {
     for my $m (@metas) {
         my $c = $m->attr('content');
         if ( $c =~ /^([^;]+)(?:;\s*charset=(\S+))?/i ) {
-            push @errors, "HTTP charset '$ct_charset' does not match META charset '$2'"
+            push @errors, "El formato de codificación de caracteres HTTP '$ct_charset' no corresponde con el formato de codificación de caracteres especificado en la etiqueta META:  '$2'"
                 if lc($ct_charset) ne lc($2);
         }
     }
