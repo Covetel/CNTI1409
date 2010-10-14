@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# APP_NAME is the Catalyst-normalized name of your app (lowercased,
+# s/::/_/g)
+# i.e. the portion before "_create.pl" in scripts/*_create.pl
+# myapp_user must exist and have a valid shell (i.e. /bin/bash)
+APP_NAME=CNTI1409
+APP_PATH=/home/overdrive/CNTI-14-09/$APP_NAME
+APP_USER=www-data
+
+case $1 in
+start)
+    echo -n "Starting PROD $APP_NAME..."
+
+    cd "$APP_PATH"
+    plackup -s Plack::Server::Coro script/cnti1409.psgi -p 3000 &
+
+    echo " started."
+    ;;
+
+stop)
+    echo -n "Stopping PROD $APP_NAME: "
+    killall plackup
+    echo " OK."
+    ;;
+
+restart|force-reload)
+    $0 stop
+    echo -n "A necessary sleep... "; sleep 2; echo "done."
+    $0 start
+    ;;
+
+*)
+    echo "Usage: $0 { stop | start | restart }"
+    exit 1
+    ;;
+esac
