@@ -10,6 +10,7 @@ has 'server' => (is => 'ro', isa => 'SOAP::Transport::HTTP::Daemon', lazy => 1, 
 sub _server_soap {
 	my ($self) = @_;
 	return SOAP::Transport::HTTP::Daemon->new(LocalAddr => $self->address, LocalPort => $self->port)->dispatch_to($self->clase); 
+	
 }
 
 sub start {
