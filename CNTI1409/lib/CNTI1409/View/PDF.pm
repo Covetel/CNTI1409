@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use base 'Catalyst::View::TT';
+use CNTI1409;
 
 __PACKAGE__->config({
 	TEMPLATE_EXTENSION => '.tt2',
