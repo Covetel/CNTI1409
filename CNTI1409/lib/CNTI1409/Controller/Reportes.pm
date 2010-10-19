@@ -20,6 +20,23 @@ Esta controladora es responsable de generar todos los reportes del sistema.
 
 =cut
 
+=head2 auto
+
+Redirecciona a Login.
+
+=cut
+
+sub auto :Private {
+    my ( $self, $c ) = @_;
+    if ($c->controller eq $c->controller('Root')->action_for('login')) {
+        return 1;
+    }
+    if (!$c->user_exists) {
+        $c->response->redirect($c->uri_for('/login'));
+        return 0;
+    }
+    return 1;
+}
 
 =head2 index
 
