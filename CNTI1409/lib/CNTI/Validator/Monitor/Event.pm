@@ -106,7 +106,7 @@ La clase de DBIx::Class que se utiliza como modelo para esta.
 
 La clase de monitoreo para los objetos hijos.
 
-=head parent_class
+=head1 parent_class
 
 La clase para el objeto padre
 
