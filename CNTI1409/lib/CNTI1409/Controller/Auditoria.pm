@@ -82,12 +82,9 @@ sub crear : Local : Form {
 	$form->process;
 	$c->stash->{form} = $form;
     if ($form->submitted_and_valid) {
-           my $upload = $c->request->upload('Examinar');
-            my $pop = $upload->filename;
-            my $archivo = "/tmp/$pop";
-            $upload->copy_to($archivo);
-            open ARCHIVO, "<encoding(UTF-8)", $archivo;
-            my @portales = <ARCHIVO>;
+            my $upload = $c->request->upload('Examinar');
+			my $ar = $upload->slurp;
+            my @portales = split '\n', $ar;
             my $idinstitucion = $c->model('DB::Institucion')->find(
                 {
                     "lower(me.nombre)" =>
