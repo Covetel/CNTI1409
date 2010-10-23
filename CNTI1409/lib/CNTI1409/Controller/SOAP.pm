@@ -33,14 +33,24 @@ sub getAuditoria: WSDLPort('AuditoriaSOAP')  {
 	my ( $self, $c, $parametro ) = @_;
 	my $a; 
 	my $auditoria = $c->model('DB::Auditoria')->find($parametro->{'AuditoriaId'});
-	$a->{'idauditoria'} = $auditoria->id;
-	$a->{'portal'} = $auditoria->portal;
-	$a->{'entidadverificadora'} = $auditoria->idev->nombre;
-	$a->{'institucion'} = $auditoria->idinstitucion->nombre;
-	$a->{'disposicionesfallidas'} = $auditoria->fallidas;
-	$a->{'disposicionesvalidas'} = $auditoria->validas;
-	$a->{'nombre'} = $auditoria->idev->nombre . " " . $auditoria->portal;
-	$c->stash->{soap}->compile_return({Auditoria => $a});
+	if ($auditoria) {
+		$a->{'idauditoria'} = $auditoria->id;
+		$a->{'portal'} = $auditoria->portal;
+		$a->{'entidadverificadora'} = $auditoria->idev->nombre;
+		$a->{'institucion'} = $auditoria->idinstitucion->nombre;
+		$a->{'disposicionesfallidas'} = $auditoria->fallidas;
+		$a->{'disposicionesvalidas'} = $auditoria->validas;
+		$a->{'nombre'} = $auditoria->idev->nombre . " " . $auditoria->portal;
+		$c->stash->{soap}->compile_return({Auditoria => $a});
+	} else {
+        $c->stash->{soap}->fault(
+            {
+                code   => 'Server',
+                reason => 'Auditoria no encontrada',
+                detail => 'El Id que proporciono no fue encontrado en la base de datos.'
+            }
+        );
+	}
 }
 
 sub get_mensaje :WSDLPort('AuditoriaSOAP')  {
