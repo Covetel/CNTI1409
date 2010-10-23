@@ -22,24 +22,24 @@ Catalyst Controller.
 
 =cut
 
+=head2 getAuditoria (AuditoriaId) 
 
-=head2 index
+ Este método recibe el id de la auditoria y devuelve un hash con la información
+ de la auditoria.
 
-=cut
-
+=cut 
 
 sub getAuditoria: WSDLPort('AuditoriaSOAP')  {
-	my ( $self, $c, $id ) = @_;
-	use Data::Dumper;
-	$c->log->debug(Dumper($id));
+	my ( $self, $c, $parametro ) = @_;
 	my $a; 
-	$a->{'idauditoria'} = 1;
-	$a->{'portal'} = 'Portal de pruebas';
-	$a->{'entidadverificadora'} = 'Cooperativa Venezolana de Tecnologias Libres R.S.';
-	$a->{'institucion'} = 'Centro Nacional de Tecnologias de Informacion';
-	$a->{'disposicionesfallidas'} = 10;
-	$a->{'disposicionesvalidas'} = 6;
-	$a->{'nombre'} = 'paja';
+	my $auditoria = $c->model('DB::Auditoria')->find($parametro->{'AuditoriaId'});
+	$a->{'idauditoria'} = $auditoria->id;
+	$a->{'portal'} = $auditoria->portal;
+	$a->{'entidadverificadora'} = $auditoria->idev->nombre;
+	$a->{'institucion'} = $auditoria->idinstitucion->nombre;
+	$a->{'disposicionesfallidas'} = $auditoria->fallidas;
+	$a->{'disposicionesvalidas'} = $auditoria->validas;
+	$a->{'nombre'} = $auditoria->idev->nombre . " " . $auditoria->portal;
 	$c->stash->{soap}->compile_return({Auditoria => $a});
 }
 
