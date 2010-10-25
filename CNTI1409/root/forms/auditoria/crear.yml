@@ -95,7 +95,7 @@ elements:
           label: Muestra
           name: Examinar
           attributes:
-              title: 'Por favor presiones el botón "Examinar" y seleccione el archivo de la muestra que desea evaluar. Recuerde que debe tener formato TXT.'
+              title: 'Por favor presione el botón "Examinar" y seleccione el archivo de la muestra que desea evaluar. Recuerde que debe tener formato TXT.'
           constraints:
               - Required
 

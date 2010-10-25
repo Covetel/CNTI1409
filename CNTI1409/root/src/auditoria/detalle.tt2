@@ -1,7 +1,7 @@
 [% titulo = 'Portal: ' _ portal _ ' | Auditoria: 000' _ idAuditoria %]
 
 <div class="ayuda">
-En caso de que una o más URLs de la muestra hallan fallado las pruebas, por favor presione sobre cada uno de los botones correspondientes a la disposición evaluada, para inspeccionar y agregar la acción correctiva que corresponda. 
+En caso de que uno o más URLs de la muestra hallan fallado las pruebas, por favor presione sobre cada uno de los botones correspondientes a la disposición evaluada, para inspeccionar y agregar la acción correctiva que corresponda. 
 </div>
 
 <div id="nav">
@@ -35,7 +35,7 @@ En caso de que una o más URLs de la muestra hallan fallado las pruebas, por fav
 <legend> Disposición: [% nombre %] </legend>
 [% IF fail %]
 <div class="informacion">
- <span class="mensajito">En el siguiente campo, se muestran las URL que fallaron para esta disposición. </span>
+ <span class="mensajito">En el siguiente campo, se muestran los URL que fallaron para esta disposición. </span>
  <span id="icon"> <img src="/static/images/fallo.png" alt="fallo" title="fallo" /> </span>
  <div class="clear"> &nbsp; </div>
 </div>
