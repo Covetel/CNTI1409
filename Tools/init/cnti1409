@@ -2,6 +2,11 @@
 # s/::/_/g)
 # i.e. the portion before "_create.pl" in scripts/*_create.pl
 # myapp_user must exist and have a valid shell (i.e. /bin/bash)
+export MODULEBUILDRC="/opt/perl5/.modulebuildrc"
+export PERL_MM_OPT="INSTALL_BASE=/opt/perl5"
+export PERL5LIB="/opt/perl5/lib/perl5/i486-linux-gnu-thread-multi:/opt/perl5/lib/perl5:$PERL5LIB"
+export PATH="/opt/perl5/bin:$PATH"
+
 APP_NAME=cnti1409
 APP_PATH=/opt/CNTI-14-09/CNTI1409
 APP_USER=www-data
