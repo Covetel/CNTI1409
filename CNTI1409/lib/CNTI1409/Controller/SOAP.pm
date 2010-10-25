@@ -53,11 +53,39 @@ sub getAuditoria: WSDLPort('AuditoriaSOAP')  {
 	}
 }
 
+=head2 get_mensaje (mensaje) 
+
+ Método que devuelve un mensaje de prueba
+
+=cut 
+
 sub get_mensaje :WSDLPort('AuditoriaSOAP')  {
 	my ( $self, $c, $mensaje ) = @_;
-	use Data::Dumper;
-	$c->log->debug(Dumper($mensaje));
 	$c->stash->{soap}->compile_return({mensaje => 'mensaje_salida_prueba'});
+}
+
+=head2 get_lista_auditorias () 
+
+ Devuelve la lista de auditorias.
+
+=cut 
+
+sub get_lista_auditorias : WSDLPort('AuditoriaSOAP') {
+	my ( $self, $c, $parametro ) = @_;
+	my $auditorias = [];
+	my @rs = $c->model('DB::Auditoria')->search({})->all;
+	foreach my $auditoria (@rs) {
+		my $a;
+		$a->{'idauditoria'} = $auditoria->id;
+		$a->{'portal'} = $auditoria->portal;
+		$a->{'entidadverificadora'} = $auditoria->idev->nombre;
+		$a->{'institucion'} = $auditoria->idinstitucion->nombre;
+		$a->{'disposicionesfallidas'} = $auditoria->fallidas | -1;
+		$a->{'disposicionesvalidas'} = $auditoria->validas | -1;
+		$a->{'nombre'} = $auditoria->idev->nombre . " " . $auditoria->portal;
+		push @$auditorias, $a;
+	}
+	$c->stash->{soap}->compile_return({ ListaAuditorias => { Auditoria => $auditorias } });
 }
 
 #sub index :Local SOAP('RPCEndpoint') {}

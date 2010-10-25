@@ -18,11 +18,19 @@
 	<wsdl:message name="getAuditoriaSolicitud">
   		<wsdl:part name="AuditoriaId" type="xsd:int"/>
 	</wsdl:message>
-
+	
 	<wsdl:message name="getAuditoriaRespuesta">
   		<wsdl:part name="Auditoria" element="auditoriat:Auditoria" />
 	</wsdl:message>
 	
+	<wsdl:message name="getListaAuditoriasSolicitud">
+  		<wsdl:part name="AuditoriaEstado" type="xsd:string"/>
+	</wsdl:message>
+	
+	<wsdl:message name="getListaAuditoriasRespuesta">
+  		<wsdl:part name="ListaAuditorias" element="auditoriat:ListaAuditorias" />
+	</wsdl:message>
+
 	<wsdl:message name="mensaje_solicitud">
   		<wsdl:part name="mensaje_solicitud" type="xsd:string" />
 	</wsdl:message>
@@ -40,6 +48,10 @@
    			<wsdl:input message="auditorias:mensaje_solicitud" />
    			<wsdl:output message="auditorias:mensaje_respuesta" />
 		</wsdl:operation>
+  		<wsdl:operation name="get_lista_auditorias">
+   		 	<wsdl:input message="auditorias:getListaAuditoriasSolicitud" />
+   			<wsdl:output message="auditorias:getListaAuditoriasRespuesta" />
+		</wsdl:operation>
 	</wsdl:portType>
 	
 	<wsdl:binding name="AuditoriaSOAPHTTP" type="auditorias:AuditoriaSOAP">
@@ -54,6 +66,15 @@
 			</wsdl:output>
 		</wsdl:operation>
   		<wsdl:operation name="get_mensaje">
+   			<soap:operation style="rpc" />
+   			<wsdl:input>
+				<soap:body namespace="auditoria:servicio" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body namespace="auditoria:servicio" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+  		<wsdl:operation name="get_lista_auditorias">
    			<soap:operation style="rpc" />
    			<wsdl:input>
 				<soap:body namespace="auditoria:servicio" use="literal"/>
