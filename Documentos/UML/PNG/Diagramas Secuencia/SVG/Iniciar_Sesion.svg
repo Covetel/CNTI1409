@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="864"
+   height="202"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="fig134787.svg">
+  <metadata
+     id="metadata196">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs194">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 101 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="864 : 101 : 1"
+       inkscape:persp3d-origin="432 : 67.333333 : 1"
+       id="perspective198" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview192"
+     showgrid="false"
+     inkscape:zoom="1.2384259"
+     inkscape:cx="408.86601"
+     inkscape:cy="99.284452"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g3104"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Iniciar_Sesion.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <g
+       id="g3008">
+      <g
+         id="g4">
+        <ellipse
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           cx="167"
+           cy="14"
+           rx="10"
+           ry="10"
+           id="ellipse6" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-anchor="middle"
+           x="168"
+           y="37"
+           id="text8">:Vista:Pagina_Inicio</text>
+      </g>
+      <g
+         id="g10">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="308"
+           y1="45"
+           x2="308"
+           y2="202"
+           id="line12" />
+      </g>
+      <g
+         id="g14">
+        <ellipse
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           cx="308"
+           cy="19"
+           rx="10"
+           ry="10"
+           id="ellipse16" />
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="308"
+           y1="9"
+           x2="313"
+           y2="4"
+           id="line18" />
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="308"
+           y1="9"
+           x2="313"
+           y2="14"
+           id="line20" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-anchor="middle"
+           x="308"
+           y="42"
+           id="text22">:Controlador:Iniciar_Sesion</text>
+      </g>
+      <g
+         id="g24">
+        <ellipse
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           cx="456"
+           cy="14"
+           rx="10"
+           ry="10"
+           id="ellipse26" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-anchor="middle"
+           x="457"
+           y="37"
+           id="text28">:Vista:Iniciar_Sesion</text>
+      </g>
+      <g
+         id="g30">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="456"
+           y1="45"
+           x2="456"
+           y2="202"
+           id="line32" />
+      </g>
+      <g
+         id="g34">
+        <rect
+           fill="#808080"
+           stroke="none"
+           stroke-opacity="1"
+           x="848"
+           y="8"
+           width="3"
+           height="21"
+           id="rect36" />
+        <rect
+           fill="#808080"
+           stroke="none"
+           stroke-opacity="1"
+           x="763"
+           y="26"
+           width="88"
+           height="3"
+           id="rect38" />
+        <rect
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="759"
+           y="4"
+           width="89"
+           height="22"
+           id="rect40" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-decoration="underline"
+           text-anchor="middle"
+           x="804"
+           y="19"
+           id="text42">Modelo:Usuarios</text>
+      </g>
+      <g
+         id="g44">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="625"
+           y1="45"
+           x2="625"
+           y2="202"
+           id="line46" />
+      </g>
+      <g
+         id="g48">
+        <ellipse
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           cx="625"
+           cy="19"
+           rx="10"
+           ry="10"
+           id="ellipse50" />
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="625"
+           y1="9"
+           x2="630"
+           y2="4"
+           id="line52" />
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="625"
+           y1="9"
+           x2="630"
+           y2="14"
+           id="line54" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-anchor="middle"
+           x="626"
+           y="42"
+           id="text56">:Controlador:Sesion_Usuario</text>
+      </g>
+      <g
+         id="g58">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="167"
+           y1="45"
+           x2="167"
+           y2="202"
+           id="line60" />
+      </g>
+      <g
+         id="g62">
+        <rect
+           fill="#808080"
+           stroke="none"
+           stroke-opacity="1"
+           x="88"
+           y="8"
+           width="3"
+           height="21"
+           id="rect64" />
+        <rect
+           fill="#808080"
+           stroke="none"
+           stroke-opacity="1"
+           x="15"
+           y="26"
+           width="76"
+           height="3"
+           id="rect66" />
+        <rect
+           fill="#ffffc0"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="11"
+           y="4"
+           width="77"
+           height="22"
+           id="rect68" />
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           text-decoration="underline"
+           text-anchor="middle"
+           x="50"
+           y="19"
+           id="text70">:Administrador</text>
+      </g>
+      <g
+         id="g72">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="51"
+           y1="45"
+           x2="51"
+           y2="202"
+           id="line74" />
+      </g>
+      <g
+         id="g76">
+        <line
+           stroke="black"
+           stroke-dasharray="18,6"
+           stroke-opacity="1"
+           x1="805"
+           y1="45"
+           x2="805"
+           y2="202"
+           id="line78" />
+      </g>
+      <g
+         id="g80">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="451"
+           y="92"
+           width="10"
+           height="39"
+           id="rect82" />
+      </g>
+      <g
+         id="g84">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="620"
+           y="90"
+           width="10"
+           height="98"
+           id="rect86" />
+      </g>
+      <g
+         id="g88">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="800"
+           y="90"
+           width="10"
+           height="68"
+           id="rect90" />
+      </g>
+      <g
+         id="g92">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="451"
+           y="166"
+           width="10"
+           height="24"
+           id="rect94" />
+      </g>
+      <g
+         id="g96">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="46"
+           y="82"
+           width="10"
+           height="35"
+           id="rect98" />
+      </g>
+      <g
+         id="g100">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="162"
+           y="82"
+           width="10"
+           height="26"
+           id="rect102" />
+      </g>
+      <g
+         id="g104">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="303"
+           y="93"
+           width="10"
+           height="33"
+           id="rect106" />
+      </g>
+      <g
+         id="g108">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="57"
+           y1="87"
+           x2="162"
+           y2="87"
+           id="line110" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="162,87 158,83 158,91"
+           id="polygon112" />
+      </g>
+      <g
+         id="g114">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="173"
+           y1="98"
+           x2="303"
+           y2="98"
+           id="line116" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="303,98 299,94 299,102"
+           id="polygon118" />
+      </g>
+      <g
+         id="g120">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="462"
+           y1="113"
+           x2="620"
+           y2="113"
+           id="line122" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="620,113 616,109 616,117"
+           id="polygon124" />
+      </g>
+      <g
+         id="g126">
+        <rect
+           fill="none"
+           stroke="black"
+           stroke-width="1"
+           stroke-opacity="1"
+           x="626"
+           y="158"
+           width="10"
+           height="24"
+           id="rect128" />
+      </g>
+      <g
+         id="g130">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="631"
+           y1="103"
+           x2="800"
+           y2="103"
+           id="line132" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="800,103 796,99 796,107"
+           id="polygon134" />
+      </g>
+      <g
+         id="g136">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="462"
+           y1="171"
+           x2="620"
+           y2="171"
+           id="line138" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="462,171 466,167 466,175"
+           id="polygon140" />
+      </g>
+      <g
+         id="g142">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="314"
+           y1="98"
+           x2="451"
+           y2="98"
+           id="line144" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="451,98 447,94 447,102"
+           id="polygon146" />
+      </g>
+      <g
+         id="g148">
+        <path
+           fill="none"
+           stroke="black"
+           stroke-opacity="1"
+           d="M 638 159 L 655 159 L 655 166 L 638 166"
+           id="path150" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="638,166 642,170 642,162"
+           id="polygon152" />
+      </g>
+      <g
+         id="g154">
+        <line
+           stroke="black"
+           stroke-opacity="1"
+           x1="631"
+           y1="129"
+           x2="800"
+           y2="129"
+           id="line156" />
+        <polygon
+           fill="#000000"
+           stroke="none"
+           points="631,129 635,125 635,133"
+           id="polygon158" />
+      </g>
+      <g
+         id="g160">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="494"
+           y="102"
+           id="text162">iniciar_sesion()</text>
+      </g>
+      <g
+         id="g164">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="678"
+           y="92"
+           id="text166">obtener_datos()</text>
+      </g>
+      <g
+         id="g168">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="676"
+           y="118"
+           id="text170">devolver_datos</text>
+      </g>
+      <g
+         id="g172">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="492"
+           y="160"
+           id="text174">notificar_sesion()</text>
+      </g>
+      <g
+         id="g176">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="87"
+           y="76"
+           id="text178">acceder_web()</text>
+      </g>
+      <g
+         id="g180">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="188"
+           y="87"
+           id="text182">enlace:iniciar_sesion()</text>
+      </g>
+      <g
+         id="g184">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="355"
+           y="87"
+           id="text186">enviar_login()</text>
+      </g>
+      <g
+         id="g188">
+        <text
+           font-family="Helvetica"
+           font-size="8"
+           fill="#000000"
+           xml:space="preserve"
+           x="606"
+           y="152"
+           id="text190">comprobar_datos()</text>
+      </g>
+    </g>
+    <text
+       id="text3004"
+       y="-6.8261681"
+       x="13.304673"
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         style="font-size:18px"
+         y="-6.8261681"
+         x="13.304673"
+         id="tspan3006"
+         sodipodi:role="line">Iniciar Sesión</tspan></text>
+  </g>
+</svg>

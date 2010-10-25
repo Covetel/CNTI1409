@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="831"
+   height="339"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Cerrar_Auditoria.svg"
+   inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Cerrar_Auditoria.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata200">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs198">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 169.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="831 : 169.5 : 1"
+       inkscape:persp3d-origin="415.5 : 113 : 1"
+       id="perspective202" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview196"
+     showgrid="false"
+     inkscape:zoom="1.2876053"
+     inkscape:cx="362.09904"
+     inkscape:cy="295.22033"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g3012">
+    <g
+       id="g4">
+      <ellipse
+         id="ellipse6"
+         ry="10"
+         rx="10"
+         cy="18"
+         cx="580"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text8"
+         y="41"
+         x="581"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Detallar_Resultado_Aduitoria</text>
+    </g>
+    <g
+       id="g10">
+      <ellipse
+         id="ellipse12"
+         ry="10"
+         rx="10"
+         cy="19"
+         cx="387"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <line
+         id="line14"
+         y2="4"
+         x2="392"
+         y1="9"
+         x1="387"
+         stroke-opacity="1"
+         stroke="black" />
+      <line
+         id="line16"
+         y2="14"
+         x2="392"
+         y1="9"
+         x1="387"
+         stroke-opacity="1"
+         stroke="black" />
+      <text
+         id="text18"
+         y="42"
+         x="388"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Controlador:Auditoria_Detalle</text>
+    </g>
+    <g
+       id="g20">
+      <line
+         id="line22"
+         y2="339"
+         x2="387"
+         y1="45"
+         x1="387"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g24">
+      <line
+         id="line26"
+         y2="339"
+         x2="580"
+         y1="49"
+         x1="580"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g28">
+      <line
+         id="line30"
+         y2="339"
+         x2="772"
+         y1="64"
+         x1="772"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g32">
+      <line
+         id="line34"
+         y2="339"
+         x2="186"
+         y1="45"
+         x1="186"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g36">
+      <ellipse
+         id="ellipse38"
+         ry="10"
+         rx="10"
+         cy="14"
+         cx="186"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text40"
+         y="37"
+         x="186"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Resumen_Auditoria</text>
+    </g>
+    <g
+       id="g42">
+      <rect
+         id="rect44"
+         height="21"
+         width="3"
+         y="8"
+         x="78"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect46"
+         height="3"
+         width="76"
+         y="26"
+         x="5"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect48"
+         height="22"
+         width="77"
+         y="4"
+         x="1"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text50"
+         y="19"
+         x="40"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Administrador</text>
+    </g>
+    <g
+       id="g52">
+      <line
+         id="line54"
+         y2="339"
+         x2="41"
+         y1="45"
+         x1="41"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g56">
+      <rect
+         id="rect58"
+         height="21"
+         width="3"
+         y="27"
+         x="815"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect60"
+         height="3"
+         width="88"
+         y="45"
+         x="730"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect62"
+         height="22"
+         width="89"
+         y="23"
+         x="726"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text64"
+         y="38"
+         x="771"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">Modelo:Usuarios</text>
+    </g>
+    <g
+       id="g66">
+      <rect
+         id="rect68"
+         height="42"
+         width="10"
+         y="103"
+         x="575"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g70">
+      <rect
+         id="rect72"
+         height="32"
+         width="10"
+         y="68"
+         x="36"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g74">
+      <rect
+         id="rect76"
+         height="38"
+         width="10"
+         y="69"
+         x="181"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g78">
+      <rect
+         id="rect80"
+         height="56"
+         width="10"
+         y="120"
+         x="767"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g82">
+      <rect
+         id="rect84"
+         height="34"
+         width="10"
+         y="87"
+         x="382"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g86">
+      <rect
+         id="rect88"
+         height="43"
+         width="10"
+         y="155"
+         x="575"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g90">
+      <rect
+         id="rect92"
+         height="49"
+         width="10"
+         y="183"
+         x="382"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g94">
+      <rect
+         id="rect96"
+         height="52"
+         width="10"
+         y="216"
+         x="767"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g98">
+      <rect
+         id="rect100"
+         height="57"
+         width="10"
+         y="255"
+         x="382"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g102">
+      <rect
+         id="rect104"
+         height="32"
+         width="10"
+         y="295"
+         x="575"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g106">
+      <line
+         id="line108"
+         y2="112"
+         x2="575"
+         y1="112"
+         x1="393"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon110"
+         points="575,112 571,108 571,116"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g112">
+      <line
+         id="line114"
+         y2="228"
+         x2="767"
+         y1="228"
+         x1="393"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon116"
+         points="767,228 763,224 763,232"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g118">
+      <line
+         id="line120"
+         y2="261"
+         x2="767"
+         y1="261"
+         x1="393"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon122"
+         points="393,261 397,257 397,265"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g124">
+      <line
+         id="line126"
+         y2="307"
+         x2="575"
+         y1="307"
+         x1="393"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon128"
+         points="575,307 571,303 571,311"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g130">
+      <line
+         id="line132"
+         y2="75"
+         x2="181"
+         y1="75"
+         x1="47"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon134"
+         points="181,75 177,71 177,79"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g136">
+      <line
+         id="line138"
+         y2="163"
+         x2="767"
+         y1="163"
+         x1="586"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon140"
+         points="586,163 590,159 590,167"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g142">
+      <line
+         id="line144"
+         y2="127"
+         x2="767"
+         y1="127"
+         x1="586"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon146"
+         points="767,127 763,123 763,131"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g148">
+      <line
+         id="line150"
+         y2="94"
+         x2="382"
+         y1="94"
+         x1="192"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon152"
+         points="382,94 378,90 378,98"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g154">
+      <line
+         id="line156"
+         y2="191"
+         x2="575"
+         y1="191"
+         x1="393"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon158"
+         points="393,191 397,187 397,195"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g160">
+      <text
+         id="text162"
+         y="181"
+         x="400"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">confirmar_acciones_correctivas()</text>
+    </g>
+    <g
+       id="g164">
+      <text
+         id="text166"
+         y="220"
+         x="509"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">guardar_acciones_correctivas()</text>
+    </g>
+    <g
+       id="g168">
+      <text
+         id="text170"
+         y="254"
+         x="516"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">resulta_guardar_acciones()</text>
+    </g>
+    <g
+       id="g172">
+      <text
+         id="text174"
+         y="299"
+         x="405"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">notificar_acciones_correctivas()</text>
+    </g>
+    <g
+       id="g176">
+      <text
+         id="text178"
+         y="102"
+         x="407"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">enviar_resultado_auditoria()</text>
+    </g>
+    <g
+       id="g180">
+      <text
+         id="text182"
+         y="67"
+         x="75"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">acceder_web()</text>
+    </g>
+    <g
+       id="g184">
+      <text
+         id="text186"
+         y="119"
+         x="598"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">solicitar_acciones_correctivas()</text>
+    </g>
+    <g
+       id="g188">
+      <text
+         id="text190"
+         y="85"
+         x="224"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">enlace:detalle_auditoria()</text>
+    </g>
+    <g
+       id="g192">
+      <text
+         id="text194"
+         y="156"
+         x="603"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">indicar_acciones_correctivas()</text>
+    </g>
+    <text
+       id="text3008"
+       y="-8.8158884"
+       x="3.1065421"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="-8.8158884"
+         x="3.1065421"
+         id="tspan3010"
+         sodipodi:role="line">Cerrar Auditoria</tspan></text>
+  </g>
+</svg>

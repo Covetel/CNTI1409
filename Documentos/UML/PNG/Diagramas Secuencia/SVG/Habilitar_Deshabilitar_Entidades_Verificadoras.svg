@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="821"
+   height="241"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Habilitar_Deshabilitar_Entidades_Verificadoras.svg">
+  <metadata
+     id="metadata182">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs180">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 120.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="821 : 120.5 : 1"
+       inkscape:persp3d-origin="410.5 : 80.333333 : 1"
+       id="perspective184" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview178"
+     showgrid="false"
+     inkscape:zoom="1.3032887"
+     inkscape:cx="163.97096"
+     inkscape:cy="148.93532"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g4">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="596"
+       cy="14"
+       rx="10"
+       ry="10"
+       id="ellipse6" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="596"
+       y="37"
+       id="text8">:Vista:Listar_Entidades</text>
+  </g>
+  <g
+     id="g10">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="84"
+       y="8"
+       width="3"
+       height="21"
+       id="rect12" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="11"
+       y="26"
+       width="76"
+       height="3"
+       id="rect14" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="7"
+       y="4"
+       width="77"
+       height="22"
+       id="rect16" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="46"
+       y="19"
+       id="text18">:Administrador</text>
+  </g>
+  <g
+     id="g20">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="367"
+       cy="19"
+       rx="10"
+       ry="10"
+       id="ellipse22" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="367"
+       y1="9"
+       x2="372"
+       y2="4"
+       id="line24" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="367"
+       y1="9"
+       x2="372"
+       y2="14"
+       id="line26" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="367"
+       y="42"
+       id="text28">:Controlador:Entidades</text>
+  </g>
+  <g
+     id="g30">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="367"
+       y1="45"
+       x2="367"
+       y2="241"
+       id="line32" />
+  </g>
+  <g
+     id="g34">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="157"
+       cy="14"
+       rx="10"
+       ry="10"
+       id="ellipse36" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="158"
+       y="37"
+       id="text38">:Vista:Pagina_Inicio</text>
+  </g>
+  <g
+     id="g40">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="157"
+       y1="45"
+       x2="157"
+       y2="241"
+       id="line42" />
+  </g>
+  <g
+     id="g44">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="47"
+       y1="45"
+       x2="47"
+       y2="241"
+       id="line46" />
+  </g>
+  <g
+     id="g48">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="596"
+       y1="45"
+       x2="596"
+       y2="241"
+       id="line50" />
+  </g>
+  <g
+     id="g52">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="805"
+       y="8"
+       width="3"
+       height="21"
+       id="rect54" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="720"
+       y="26"
+       width="88"
+       height="3"
+       id="rect56" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="716"
+       y="4"
+       width="89"
+       height="22"
+       id="rect58" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="761"
+       y="19"
+       id="text60">Modelo:Usuarios</text>
+  </g>
+  <g
+     id="g62">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="762"
+       y1="45"
+       x2="762"
+       y2="241"
+       id="line64" />
+  </g>
+  <g
+     id="g66">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="42"
+       y="86"
+       width="10"
+       height="39"
+       id="rect68" />
+  </g>
+  <g
+     id="g70">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="152"
+       y="86"
+       width="10"
+       height="24"
+       id="rect72" />
+  </g>
+  <g
+     id="g74">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="362"
+       y="99"
+       width="10"
+       height="24"
+       id="rect76" />
+  </g>
+  <g
+     id="g78">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="591"
+       y="112"
+       width="10"
+       height="34"
+       id="rect80" />
+  </g>
+  <g
+     id="g82">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="362"
+       y="135"
+       width="10"
+       height="36"
+       id="rect84" />
+  </g>
+  <g
+     id="g86">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="757"
+       y="153"
+       width="10"
+       height="66"
+       id="rect88" />
+  </g>
+  <g
+     id="g90">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="362"
+       y="183"
+       width="10"
+       height="46"
+       id="rect92" />
+  </g>
+  <g
+     id="g94">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="591"
+       y="205"
+       width="10"
+       height="24"
+       id="rect96" />
+  </g>
+  <g
+     id="g98">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="53"
+       y1="91"
+       x2="152"
+       y2="91"
+       id="line100" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="152,91 148,87 148,95"
+       id="polygon102" />
+  </g>
+  <g
+     id="g104">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="373"
+       y1="117"
+       x2="591"
+       y2="117"
+       id="line106" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="591,117 587,113 587,121"
+       id="polygon108" />
+  </g>
+  <g
+     id="g110">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="373"
+       y1="141"
+       x2="591"
+       y2="141"
+       id="line112" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="373,141 377,137 377,145"
+       id="polygon114" />
+  </g>
+  <g
+     id="g116">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="373"
+       y1="213"
+       x2="591"
+       y2="213"
+       id="line118" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="591,213 587,209 587,217"
+       id="polygon120" />
+  </g>
+  <g
+     id="g122">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="163"
+       y1="104"
+       x2="362"
+       y2="104"
+       id="line124" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="362,104 358,100 358,108"
+       id="polygon126" />
+  </g>
+  <g
+     id="g128">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="373"
+       y1="166"
+       x2="757"
+       y2="166"
+       id="line130" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="757,166 753,162 753,170"
+       id="polygon132" />
+  </g>
+  <g
+     id="g134">
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 603 113 L 620 113 L 620 120 L 603 120"
+       id="path136" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="603,120 607,124 607,116"
+       id="polygon138" />
+  </g>
+  <g
+     id="g140">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="373"
+       y1="188"
+       x2="757"
+       y2="188"
+       id="line142" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="373,188 377,184 377,192"
+       id="polygon144" />
+  </g>
+  <g
+     id="g146">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="69"
+       y="80"
+       id="text148">acceder_web()</text>
+  </g>
+  <g
+     id="g150">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="188"
+       y="93"
+       id="text152">enlace:listar_entidades()</text>
+  </g>
+  <g
+     id="g154">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="414"
+       y="106"
+       id="text156">redirigir_listar_entidades()</text>
+  </g>
+  <g
+     id="g158">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="640"
+       y="114"
+       id="text160">validar()</text>
+  </g>
+  <g
+     id="g162">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="456"
+       y="131"
+       id="text164">confirmar()</text>
+  </g>
+  <g
+     id="g166">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="556"
+       y="157"
+       id="text168">guardar_cambios()</text>
+  </g>
+  <g
+     id="g170">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="507"
+       y="182"
+       id="text172">resultado_guardar_cambios()</text>
+  </g>
+  <g
+     id="g174">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="441"
+       y="204"
+       id="text176">notificar_cambio()</text>
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="9.6728973"
+     y="-6.0420551"
+     id="text2990"><tspan
+       sodipodi:role="line"
+       id="tspan2992"
+       x="9.6728973"
+       y="-6.0420551">Habilitar/Deshabilitar Entidades Verificadoras</tspan></text>
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g4"
+     id="use2994"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g10"
+     id="use2996"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g20"
+     id="use2998"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g30"
+     id="use3000"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g34"
+     id="use3002"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g40"
+     id="use3004"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g44"
+     id="use3006"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g48"
+     id="use3008"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g52"
+     id="use3010"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g62"
+     id="use3012"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g66"
+     id="use3014"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g70"
+     id="use3016"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g74"
+     id="use3018"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g78"
+     id="use3020"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g82"
+     id="use3022"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g86"
+     id="use3024"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g90"
+     id="use3026"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g94"
+     id="use3028"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g98"
+     id="use3030"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g104"
+     id="use3032"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g110"
+     id="use3034"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g116"
+     id="use3036"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g122"
+     id="use3038"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g128"
+     id="use3040"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g134"
+     id="use3042"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g140"
+     id="use3044"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g146"
+     id="use3046"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g150"
+     id="use3048"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g154"
+     id="use3050"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g158"
+     id="use3052"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g162"
+     id="use3054"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g166"
+     id="use3056"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g170"
+     id="use3058"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g174"
+     id="use3060"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#text2990"
+     id="use3062"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Habilitar_Deshabilitar_Entidades_Verificadoras.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+</svg>

@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="785"
+   height="229"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Crear_Auditoria.svg">
+  <metadata
+     id="metadata178">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs176">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 114.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="785 : 114.5 : 1"
+       inkscape:persp3d-origin="392.5 : 76.333333 : 1"
+       id="perspective180" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview174"
+     showgrid="false"
+     inkscape:zoom="0.96382708"
+     inkscape:cx="403.03535"
+     inkscape:cy="126.4667"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g4">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="769"
+       y="8"
+       width="3"
+       height="21"
+       id="rect6" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="684"
+       y="26"
+       width="88"
+       height="3"
+       id="rect8" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="680"
+       y="4"
+       width="89"
+       height="22"
+       id="rect10" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="725"
+       y="19"
+       id="text12">Modelo:Usuarios</text>
+  </g>
+  <g
+     id="g14">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="726"
+       y1="45"
+       x2="726"
+       y2="229"
+       id="line16" />
+  </g>
+  <g
+     id="g18">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="164"
+       y1="45"
+       x2="164"
+       y2="229"
+       id="line20" />
+  </g>
+  <g
+     id="g22">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="164"
+       cy="14"
+       rx="10"
+       ry="10"
+       id="ellipse24" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="165"
+       y="37"
+       id="text26">:Vista:Pagina_Inicio</text>
+  </g>
+  <g
+     id="g28">
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="78"
+       y="8"
+       width="3"
+       height="21"
+       id="rect30" />
+    <rect
+       fill="#808080"
+       stroke="none"
+       stroke-opacity="1"
+       x="5"
+       y="26"
+       width="76"
+       height="3"
+       id="rect32" />
+    <rect
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="1"
+       y="4"
+       width="77"
+       height="22"
+       id="rect34" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-decoration="underline"
+       text-anchor="middle"
+       x="40"
+       y="19"
+       id="text36">:Administrador</text>
+  </g>
+  <g
+     id="g38">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="376"
+       y1="45"
+       x2="376"
+       y2="229"
+       id="line40" />
+  </g>
+  <g
+     id="g42">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="376"
+       cy="19"
+       rx="10"
+       ry="10"
+       id="ellipse44" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="376"
+       y1="9"
+       x2="381"
+       y2="4"
+       id="line46" />
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="376"
+       y1="9"
+       x2="381"
+       y2="14"
+       id="line48" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="376"
+       y="42"
+       id="text50">:Controlador:Crear_Auditoria</text>
+  </g>
+  <g
+     id="g52">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="41"
+       y1="45"
+       x2="41"
+       y2="229"
+       id="line54" />
+  </g>
+  <g
+     id="g56">
+    <ellipse
+       fill="#ffffc0"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       cx="551"
+       cy="14"
+       rx="10"
+       ry="10"
+       id="ellipse58" />
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       text-anchor="middle"
+       x="552"
+       y="37"
+       id="text60">:Vista:Crear_Auditoria</text>
+  </g>
+  <g
+     id="g62">
+    <line
+       stroke="black"
+       stroke-dasharray="18,6"
+       stroke-opacity="1"
+       x1="551"
+       y1="45"
+       x2="551"
+       y2="229"
+       id="line64" />
+  </g>
+  <g
+     id="g66">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="36"
+       y="70"
+       width="10"
+       height="24"
+       id="rect68" />
+  </g>
+  <g
+     id="g70">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="159"
+       y="69"
+       width="10"
+       height="24"
+       id="rect72" />
+  </g>
+  <g
+     id="g74">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="371"
+       y="75"
+       width="10"
+       height="27"
+       id="rect76" />
+  </g>
+  <g
+     id="g78">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="546"
+       y="89"
+       width="10"
+       height="34"
+       id="rect80" />
+  </g>
+  <g
+     id="g82">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="371"
+       y="106"
+       width="10"
+       height="102"
+       id="rect84" />
+  </g>
+  <g
+     id="g86">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="721"
+       y="142"
+       width="10"
+       height="48"
+       id="rect88" />
+  </g>
+  <g
+     id="g90">
+    <rect
+       fill="none"
+       stroke="black"
+       stroke-width="1"
+       stroke-opacity="1"
+       x="546"
+       y="187"
+       width="10"
+       height="30"
+       id="rect92" />
+  </g>
+  <g
+     id="g94">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="47"
+       y1="75"
+       x2="159"
+       y2="75"
+       id="line96" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="159,75 155,71 155,79"
+       id="polygon98" />
+  </g>
+  <g
+     id="g100">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="170"
+       y1="81"
+       x2="371"
+       y2="81"
+       id="line102" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="371,81 367,77 367,85"
+       id="polygon104" />
+  </g>
+  <g
+     id="g106">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="382"
+       y1="94"
+       x2="546"
+       y2="94"
+       id="line108" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="546,94 542,90 542,98"
+       id="polygon110" />
+  </g>
+  <g
+     id="g112">
+    <path
+       fill="none"
+       stroke="black"
+       stroke-opacity="1"
+       d="M 558 90 L 575 90 L 575 97 L 558 97"
+       id="path114" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="558,97 562,101 562,93"
+       id="polygon116" />
+  </g>
+  <g
+     id="g118">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="382"
+       y1="118"
+       x2="546"
+       y2="118"
+       id="line120" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="382,118 386,114 386,122"
+       id="polygon122" />
+  </g>
+  <g
+     id="g124">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="382"
+       y1="149"
+       x2="721"
+       y2="149"
+       id="line126" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="721,149 717,145 717,153"
+       id="polygon128" />
+  </g>
+  <g
+     id="g130">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="461"
+       y="107"
+       id="text132">confirmar()</text>
+  </g>
+  <g
+     id="g134">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="516"
+       y="138"
+       id="text136">guardar_datos()</text>
+  </g>
+  <g
+     id="g138">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="496"
+       y="164"
+       id="text140">resultado_guardar_datos()</text>
+  </g>
+  <g
+     id="g142">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="434"
+       y="192"
+       id="text144">notificar_registro()</text>
+  </g>
+  <g
+     id="g146">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="69"
+       y="64"
+       id="text148">acceder_web</text>
+  </g>
+  <g
+     id="g150">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="198"
+       y="70"
+       id="text152">enlace:crear_auditoria()</text>
+  </g>
+  <g
+     id="g154">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="442"
+       y="82"
+       id="text156">enviar_auditoria()</text>
+  </g>
+  <g
+     id="g158">
+    <text
+       font-family="Helvetica"
+       font-size="8"
+       fill="#000000"
+       xml:space="preserve"
+       x="555"
+       y="81"
+       id="text160">validar()</text>
+  </g>
+  <g
+     id="g162">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="382"
+       y1="175"
+       x2="721"
+       y2="175"
+       id="line164" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="382,175 386,171 386,179"
+       id="polygon166" />
+  </g>
+  <g
+     id="g168">
+    <line
+       stroke="black"
+       stroke-opacity="1"
+       x1="382"
+       y1="203"
+       x2="546"
+       y2="203"
+       id="line170" />
+    <polygon
+       fill="#000000"
+       stroke="none"
+       points="546,203 542,199 542,207"
+       id="polygon172" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-size:18;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="5.1876526"
+     y="-10.669548"
+     id="text2986"><tspan
+       sodipodi:role="line"
+       id="tspan2988"
+       x="5.1876526"
+       y="-10.669548">Crear Auditoria</tspan></text>
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g4"
+     id="use2990"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g14"
+     id="use2992"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g18"
+     id="use2994"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g22"
+     id="use2996"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g28"
+     id="use2998"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g38"
+     id="use3000"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g42"
+     id="use3002"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g52"
+     id="use3004"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g56"
+     id="use3006"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g62"
+     id="use3008"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g66"
+     id="use3010"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g70"
+     id="use3012"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g74"
+     id="use3014"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g78"
+     id="use3016"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g82"
+     id="use3018"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g86"
+     id="use3020"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g90"
+     id="use3022"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g94"
+     id="use3024"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g100"
+     id="use3026"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g106"
+     id="use3028"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g112"
+     id="use3030"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g118"
+     id="use3032"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g124"
+     id="use3034"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g130"
+     id="use3036"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g134"
+     id="use3038"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g138"
+     id="use3040"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g142"
+     id="use3042"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g146"
+     id="use3044"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g150"
+     id="use3046"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g154"
+     id="use3048"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g158"
+     id="use3050"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g162"
+     id="use3052"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#g168"
+     id="use3054"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+  <use
+     x="0"
+     y="0"
+     xlink:href="#text2986"
+     id="use3056"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Crear_Auditoria.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
+</svg>

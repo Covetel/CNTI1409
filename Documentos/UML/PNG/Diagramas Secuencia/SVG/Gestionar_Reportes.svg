@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="785"
+   height="218"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Gestionar_Reportes.svg">
+  <metadata
+     id="metadata172">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs170">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="785 : 109 : 1"
+       inkscape:persp3d-origin="392.5 : 72.666667 : 1"
+       id="perspective174" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview168"
+     showgrid="false"
+     inkscape:zoom="1.3630573"
+     inkscape:cx="394.60187"
+     inkscape:cy="143.31793"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g2984">
+    <g
+       id="g4">
+      <rect
+         id="rect6"
+         height="21"
+         width="3"
+         y="8"
+         x="77"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect8"
+         height="3"
+         width="76"
+         y="26"
+         x="4"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect10"
+         height="22"
+         width="77"
+         y="4"
+         x="0"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text12"
+         y="19"
+         x="39"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Administrador</text>
+    </g>
+    <g
+       id="g14">
+      <ellipse
+         id="ellipse16"
+         ry="10"
+         rx="10"
+         cy="15"
+         cx="551"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text18"
+         y="38"
+         x="551"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Reportes</text>
+    </g>
+    <g
+       id="g20">
+      <line
+         id="line22"
+         y2="218"
+         x2="551"
+         y1="46"
+         x1="551"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g24">
+      <line
+         id="line26"
+         y2="218"
+         x2="40"
+         y1="45"
+         x1="40"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g28">
+      <rect
+         id="rect30"
+         height="21"
+         width="3"
+         y="8"
+         x="769"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect32"
+         height="3"
+         width="88"
+         y="26"
+         x="684"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect34"
+         height="22"
+         width="89"
+         y="4"
+         x="680"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text36"
+         y="19"
+         x="725"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">Modelo:Usuarios</text>
+    </g>
+    <g
+       id="g38">
+      <line
+         id="line40"
+         y2="218"
+         x2="726"
+         y1="45"
+         x1="726"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g42">
+      <line
+         id="line44"
+         y2="218"
+         x2="369"
+         y1="46"
+         x1="369"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g46">
+      <ellipse
+         id="ellipse48"
+         ry="10"
+         rx="10"
+         cy="20"
+         cx="369"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <line
+         id="line50"
+         y2="5"
+         x2="374"
+         y1="10"
+         x1="369"
+         stroke-opacity="1"
+         stroke="black" />
+      <line
+         id="line52"
+         y2="15"
+         x2="374"
+         y1="10"
+         x1="369"
+         stroke-opacity="1"
+         stroke="black" />
+      <text
+         id="text54"
+         y="43"
+         x="370"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Controlador:Reportes</text>
+    </g>
+    <g
+       id="g56">
+      <line
+         id="line58"
+         y2="218"
+         x2="164"
+         y1="45"
+         x1="164"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g60">
+      <ellipse
+         id="ellipse62"
+         ry="10"
+         rx="10"
+         cy="14"
+         cx="164"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text64"
+         y="37"
+         x="165"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Pagina_Inicio</text>
+    </g>
+    <g
+       id="g66">
+      <rect
+         id="rect68"
+         height="24"
+         width="10"
+         y="182"
+         x="546"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g70">
+      <rect
+         id="rect72"
+         height="24"
+         width="10"
+         y="70"
+         x="35"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g74">
+      <rect
+         id="rect76"
+         height="24"
+         width="10"
+         y="69"
+         x="159"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g78">
+      <rect
+         id="rect80"
+         height="27"
+         width="10"
+         y="75"
+         x="364"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g82">
+      <rect
+         id="rect84"
+         height="47"
+         width="10"
+         y="83"
+         x="546"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g86">
+      <rect
+         id="rect88"
+         height="57"
+         width="10"
+         y="106"
+         x="721"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g90">
+      <rect
+         id="rect92"
+         height="55"
+         width="10"
+         y="137"
+         x="364"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g94">
+      <line
+         id="line96"
+         y2="155"
+         x2="721"
+         y1="155"
+         x1="375"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon98"
+         points="375,155 379,151 379,159"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g100">
+      <line
+         id="line102"
+         y2="187"
+         x2="546"
+         y1="187"
+         x1="375"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon104"
+         points="546,187 542,183 542,191"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g106">
+      <line
+         id="line108"
+         y2="75"
+         x2="159"
+         y1="75"
+         x1="46"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon110"
+         points="159,75 155,71 155,79"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g112">
+      <line
+         id="line114"
+         y2="123"
+         x2="721"
+         y1="123"
+         x1="557"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon116"
+         points="721,123 717,119 717,127"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g118">
+      <line
+         id="line120"
+         y2="83"
+         x2="364"
+         y1="83"
+         x1="170"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon122"
+         points="364,83 360,79 360,87"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g124">
+      <rect
+         id="rect126"
+         height="24"
+         width="10"
+         y="91"
+         x="552"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g128">
+      <line
+         id="line130"
+         y2="88"
+         x2="546"
+         y1="88"
+         x1="375"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon132"
+         points="546,88 542,84 542,92"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g134">
+      <text
+         id="text136"
+         y="115"
+         x="600"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">confirmar_datps()</text>
+    </g>
+    <g
+       id="g138">
+      <text
+         id="text140"
+         y="146"
+         x="509"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">generar_reporte()</text>
+    </g>
+    <g
+       id="g142">
+      <text
+         id="text144"
+         y="178"
+         x="415"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">notificar_reporte</text>
+    </g>
+    <g
+       id="g146">
+      <text
+         id="text148"
+         y="86"
+         x="563"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">validar()</text>
+    </g>
+    <g
+       id="g150">
+      <text
+         id="text152"
+         y="64"
+         x="69"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">acceder_web</text>
+    </g>
+    <g
+       id="g154">
+      <text
+         id="text156"
+         y="73"
+         x="212"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">enlace:reportes()</text>
+    </g>
+    <g
+       id="g158">
+      <text
+         id="text160"
+         y="78"
+         x="401"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">seleccionar_tipo_reporte()</text>
+    </g>
+    <g
+       id="g162">
+      <path
+         id="path164"
+         d="M 564 92 L 581 92 L 581 99 L 564 99"
+         stroke-opacity="1"
+         stroke="black"
+         fill="none" />
+      <polygon
+         id="polygon166"
+         points="564,99 568,103 568,95"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <text
+       id="text2980"
+       y="-8.5654211"
+       x="0.20093465"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="-8.5654211"
+         x="0.20093465"
+         id="tspan2982"
+         sodipodi:role="line">Gestiona Reportes</tspan></text>
+  </g>
+</svg>

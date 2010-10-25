@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="785"
+   height="229"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Registrar_Entidad_Verificadora.svg">
+  <metadata
+     id="metadata178">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs176">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 114.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="785 : 114.5 : 1"
+       inkscape:persp3d-origin="392.5 : 76.333333 : 1"
+       id="perspective180" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1280"
+     inkscape:window-height="716"
+     id="namedview174"
+     showgrid="false"
+     inkscape:zoom="1.3630573"
+     inkscape:cx="371.48127"
+     inkscape:cy="79.235119"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     id="g2990"
+     inkscape:export-filename="/home/liramusik/Escritorio/BoUML/1409/DiagramaCasos/Secuencias/Registrar_Entidad_Verificadora.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90">
+    <g
+       id="g4">
+      <ellipse
+         id="ellipse6"
+         ry="10"
+         rx="10"
+         cy="14"
+         cx="552"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text8"
+         y="37"
+         x="552"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Registrar_Entidad</text>
+    </g>
+    <g
+       id="g10">
+      <line
+         id="line12"
+         y2="229"
+         x2="552"
+         y1="45"
+         x1="552"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g14">
+      <rect
+         id="rect16"
+         height="21"
+         width="3"
+         y="8"
+         x="78"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect18"
+         height="3"
+         width="76"
+         y="26"
+         x="5"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect20"
+         height="22"
+         width="77"
+         y="4"
+         x="1"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text22"
+         y="19"
+         x="40"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Administrador</text>
+    </g>
+    <g
+       id="g24">
+      <line
+         id="line26"
+         y2="229"
+         x2="41"
+         y1="45"
+         x1="41"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g28">
+      <rect
+         id="rect30"
+         height="21"
+         width="3"
+         y="8"
+         x="769"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect32"
+         height="3"
+         width="88"
+         y="26"
+         x="684"
+         stroke-opacity="1"
+         stroke="none"
+         fill="#808080" />
+      <rect
+         id="rect34"
+         height="22"
+         width="89"
+         y="4"
+         x="680"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text36"
+         y="19"
+         x="725"
+         text-anchor="middle"
+         text-decoration="underline"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">Modelo:Usuarios</text>
+    </g>
+    <g
+       id="g38">
+      <line
+         id="line40"
+         y2="229"
+         x2="726"
+         y1="45"
+         x1="726"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g42">
+      <line
+         id="line44"
+         y2="229"
+         x2="164"
+         y1="45"
+         x1="164"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g46">
+      <ellipse
+         id="ellipse48"
+         ry="10"
+         rx="10"
+         cy="14"
+         cx="164"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <text
+         id="text50"
+         y="37"
+         x="165"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Vista:Pagina_Inicio</text>
+    </g>
+    <g
+       id="g52">
+      <line
+         id="line54"
+         y2="229"
+         x2="376"
+         y1="45"
+         x1="376"
+         stroke-opacity="1"
+         stroke-dasharray="18,6"
+         stroke="black" />
+    </g>
+    <g
+       id="g56">
+      <ellipse
+         id="ellipse58"
+         ry="10"
+         rx="10"
+         cy="19"
+         cx="376"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="#ffffc0" />
+      <line
+         id="line60"
+         y2="4"
+         x2="381"
+         y1="9"
+         x1="376"
+         stroke-opacity="1"
+         stroke="black" />
+      <line
+         id="line62"
+         y2="14"
+         x2="381"
+         y1="9"
+         x1="376"
+         stroke-opacity="1"
+         stroke="black" />
+      <text
+         id="text64"
+         y="42"
+         x="377"
+         text-anchor="middle"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">:Controlador:Registrar_Entidad</text>
+    </g>
+    <g
+       id="g66">
+      <rect
+         id="rect68"
+         height="24"
+         width="10"
+         y="70"
+         x="36"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g70">
+      <rect
+         id="rect72"
+         height="24"
+         width="10"
+         y="69"
+         x="159"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g74">
+      <rect
+         id="rect76"
+         height="27"
+         width="10"
+         y="75"
+         x="371"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g78">
+      <rect
+         id="rect80"
+         height="34"
+         width="10"
+         y="89"
+         x="547"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g82">
+      <rect
+         id="rect84"
+         height="102"
+         width="10"
+         y="106"
+         x="371"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g86">
+      <rect
+         id="rect88"
+         height="48"
+         width="10"
+         y="142"
+         x="721"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g90">
+      <rect
+         id="rect92"
+         height="30"
+         width="10"
+         y="187"
+         x="547"
+         stroke-opacity="1"
+         stroke-width="1"
+         stroke="black"
+         fill="none" />
+    </g>
+    <g
+       id="g94">
+      <line
+         id="line96"
+         y2="75"
+         x2="159"
+         y1="75"
+         x1="47"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon98"
+         points="159,75 155,71 155,79"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g100">
+      <line
+         id="line102"
+         y2="80"
+         x2="371"
+         y1="80"
+         x1="170"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon104"
+         points="371,80 367,76 367,84"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g106">
+      <line
+         id="line108"
+         y2="94"
+         x2="547"
+         y1="94"
+         x1="382"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon110"
+         points="547,94 543,90 543,98"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g112">
+      <path
+         id="path114"
+         d="M 559 90 L 576 90 L 576 97 L 559 97"
+         stroke-opacity="1"
+         stroke="black"
+         fill="none" />
+      <polygon
+         id="polygon116"
+         points="559,97 563,101 563,93"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g118">
+      <line
+         id="line120"
+         y2="118"
+         x2="547"
+         y1="118"
+         x1="382"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon122"
+         points="382,118 386,114 386,122"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g124">
+      <line
+         id="line126"
+         y2="149"
+         x2="721"
+         y1="149"
+         x1="382"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon128"
+         points="721,149 717,145 717,153"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g130">
+      <text
+         id="text132"
+         y="64"
+         x="69"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">acceder_web</text>
+    </g>
+    <g
+       id="g134">
+      <text
+         id="text136"
+         y="69"
+         x="183"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">enlace:registrar_entidades()</text>
+    </g>
+    <g
+       id="g138">
+      <text
+         id="text140"
+         y="82"
+         x="442"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">enviar_registro()</text>
+    </g>
+    <g
+       id="g142">
+      <text
+         id="text144"
+         y="81"
+         x="555"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">validar()</text>
+    </g>
+    <g
+       id="g146">
+      <text
+         id="text148"
+         y="107"
+         x="461"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">confirmar()</text>
+    </g>
+    <g
+       id="g150">
+      <text
+         id="text152"
+         y="138"
+         x="516"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">guardar_datos()</text>
+    </g>
+    <g
+       id="g154">
+      <text
+         id="text156"
+         y="164"
+         x="496"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">resultado_guardar_datos()</text>
+    </g>
+    <g
+       id="g158">
+      <text
+         id="text160"
+         y="192"
+         x="434"
+         xml:space="preserve"
+         fill="#000000"
+         font-size="8"
+         font-family="Helvetica">notificar_registro()</text>
+    </g>
+    <g
+       id="g162">
+      <line
+         id="line164"
+         y2="175"
+         x2="721"
+         y1="175"
+         x1="382"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon166"
+         points="382,175 386,171 386,179"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <g
+       id="g168">
+      <line
+         id="line170"
+         y2="203"
+         x2="547"
+         y1="203"
+         x1="382"
+         stroke-opacity="1"
+         stroke="black" />
+      <polygon
+         id="polygon172"
+         points="547,203 543,199 543,207"
+         stroke="none"
+         fill="#000000" />
+    </g>
+    <text
+       id="text2986"
+       y="-7.9672899"
+       x="1.7050533e-07"
+       style="font-size:18px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="-7.9672899"
+         x="1.7050533e-07"
+         id="tspan2988"
+         sodipodi:role="line">Registrar Entidad Verificadora</tspan></text>
+  </g>
+</svg>
