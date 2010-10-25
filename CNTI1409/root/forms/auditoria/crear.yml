@@ -85,7 +85,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor seleccione el archivo con las URLs de la muestra a auditar.'
+          content: 'Por favor seleccione el archivo con los URLs de la muestra a auditar.'
           attributes:
               class: informacion
 
@@ -94,7 +94,7 @@ elements:
           label: Muestra
           name: Examinar
           attributes:
-              title: 'Por favor presiones el botón "Examinar" y seleccione el archivo de la muestra que desea evaluar. Recuerde que debe tener formato TXT.'
+              title: 'Por favor presione el botón "Examinar" y seleccione el archivo de la muestra que desea evaluar. Recuerde que debe tener formato TXT.'
               type: 'text'
           constraints:
               - Required
