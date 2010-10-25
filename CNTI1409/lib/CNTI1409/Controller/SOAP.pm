@@ -38,8 +38,8 @@ sub getAuditoria: WSDLPort('AuditoriaSOAP')  {
 		$a->{'portal'} = $auditoria->portal;
 		$a->{'entidadverificadora'} = $auditoria->idev->nombre;
 		$a->{'institucion'} = $auditoria->idinstitucion->nombre;
-		$a->{'disposicionesfallidas'} = $auditoria->fallidas;
-		$a->{'disposicionesvalidas'} = $auditoria->validas;
+		$a->{'disposicionesfallidas'} = $auditoria->fallidas | -1;
+		$a->{'disposicionesvalidas'} = $auditoria->validas | -1;
 		$a->{'nombre'} = $auditoria->idev->nombre . " " . $auditoria->portal;
 		$c->stash->{soap}->compile_return({Auditoria => $a});
 	} else {
