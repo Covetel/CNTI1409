@@ -202,7 +202,6 @@ $(document).ready(function(){
 	$("input#usuario_cambiar_password_submit").click(function(){
 		var p1 = $("#passwd").val();
 		var p2 = $("#passwd2").val();
-		console.log("actualizar password");
 		if (p1 == '' && p2 == ''){
 			alert("Error: Debe indicar un par de contraseñas válidas");
 			return false;

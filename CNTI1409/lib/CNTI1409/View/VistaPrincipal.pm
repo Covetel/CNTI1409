@@ -2,6 +2,7 @@ package CNTI1409::View::VistaPrincipal;
 
 use strict;
 use base 'Catalyst::View::TT';
+use CNTI1409;
 
 __PACKAGE__->config({
 	ENCODING     => 'UTF-8',
