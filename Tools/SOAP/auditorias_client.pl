@@ -7,9 +7,13 @@ use Data::Dumper;
 
 my $soap = SOAP::Lite->uri("http://localhost/soap/")->proxy("http://127.0.0.1:3000/soap/");
 
-my $auditoria = $soap->getAuditoria(10)->result();
-my $mensaje = $soap->get_mensaje('Esto es un mensaje')->result();
+#my $auditoria = $soap->getAuditoria(121)->result();
+my $auditoria = $soap->getAuditoria(121)->result();
+my @auditorias = $soap->get_lista_auditorias('c')->result();
 
-print Dumper $mensaje;
 print Dumper $auditoria;
+print Dumper @auditorias;
+
+print "El portal es: ", $auditoria->{'portal'}, "\n";
+print "La institucion es: ", $auditoria->{'institucion'}, "\n";
 
