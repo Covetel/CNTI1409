@@ -86,7 +86,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor seleccione el archivo con las URLs de la muestra a auditar.'
+          content: 'Por favor seleccione el archivo con los URLs de la muestra a auditar.'
           attributes:
               class: informacion
 
