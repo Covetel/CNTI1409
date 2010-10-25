@@ -61,21 +61,7 @@ requires 'Sub::Uplevel' => '0.22';
 requires 'CSS::Tiny' => '1.15';
 requires 'Template::Latex' => '3.0001';
 requires 'LaTeX::Encode' => '0.03';
-
-# Nuestras librerias.
-=pod
-requires 'CNTI::Validator::CSS';
-requires 'CNTI::ValidatorDB';
-requires 'CNTI::Validator::Jobs';
-requires 'CNTI::Validator::LibXML';
-requires 'CNTI::Validator::Monitor::Event';
-requires 'CNTI::Validator::Monitor::Job';
-requires 'CNTI::Validator::Monitor::Result';
-requires 'CNTI::Validator::Monitor::URL';
-requires 'CNTI::Validator::Schema';
-requires 'CNTI::Validator::Test';
-requires 'CNTI::Validator::Tests';
-=cut
+requires 'Catalyst::Controller::SOAP';
 
 test_requires 'Test::More' => '0.88';
 catalyst;
