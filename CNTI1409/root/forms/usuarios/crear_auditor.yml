@@ -79,7 +79,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese un par de contraseñas fuertes, recuerde que debe ser igual en los dos campos.'
+          content: 'Por favor ingrese una contraseñas fuerte, de al menos cuatro caracteres y repitala en el siguiente campo, recuerde que debe ser igual en ambos campos.'
           attributes:
               class: informacion
 
