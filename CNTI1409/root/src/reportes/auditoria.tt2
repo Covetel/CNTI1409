@@ -101,7 +101,7 @@
                     [% IF disp.value.result == "fail" %]
                         Falló
                     [% ELSE %]
-                        Pasó
+                        Aprobado
                     [% END %]
                 </li>
 				[% IF disp.value.resolutoria %]
@@ -115,7 +115,7 @@
 							<ol>
 								<li> <span class="strong"> Resultado:  </span> 
                  	               [% IF url.value.result == "pass" %]
-                  	                  Pasó
+                  	                 Aprobado
                    	             [% ELSE %]
                    	                 Falló
                     	            [% END %]
