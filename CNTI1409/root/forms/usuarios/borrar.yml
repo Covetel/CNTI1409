@@ -17,7 +17,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Debe estar totalmente seguro de lo que esta haciendo. Para eliminar el usuario presione el boton Eliminar'
+          content: 'Si usted esta completamente seguro que desea eliminar este usuario, presione el boton Eliminar'
           attributes:
               class: informacion
 

@@ -126,7 +126,7 @@ elements:
       elements:
         - type: Block
           tag: div
-          content: 'Por favor ingrese un par de contraseñas fuertes, recuerde que debe ser igual en los dos campos, la longitud minima es de cuatro (4) dígitos.'
+          content: 'Por favor ingrese una contraseña fuerte, de al menos cuatro caracteres y repitala en el siguiente campo, recuerde que debe ser igual en ambos campos.'
           attributes:
               class: informacion
 

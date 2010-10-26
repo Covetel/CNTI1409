@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:auditoriat="auditoria:tipos"
+	xmlns:auditorias="auditoria:servicio"
+	targetNamespace="auditoria:servicio">
+	
+	<wsdl:types> 
+		<xsd:schema 
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+			version="1.0" 
+			xml:lang="es" 
+			xmlns:auditoriat="auditoria:tipos"  
+			targetNamespace="auditoria:tipos">
+			<xsd:complexType name="TipoDatosAuditoria">
+				<xsd:sequence> 
+		    		<xsd:element name="idauditoria" type="xsd:int" />
+		    		<xsd:element name="nombre" type="xsd:string" />
+		    		<xsd:element name="disposicionesvalidas" type="xsd:int" />
+		    		<xsd:element name="disposicionesfallidas" type="xsd:int" />
+		    		<xsd:element name="institucion" type="xsd:string" />
+		    		<xsd:element name="portal" type="xsd:string" />
+		    		<xsd:element name="entidadverificadora" type="xsd:string" />
+		   		</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="Auditoria" type="auditoriat:TipoDatosAuditoria" />
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="getAuditoriaSolicitud">
+  		<wsdl:part name="AuditoriaId" type="xsd:int"/>
+	</wsdl:message>
+
+	<wsdl:message name="getAuditoriaRespuesta">
+  		<wsdl:part name="Auditoria" element="auditoriat:Auditoria" />
+	</wsdl:message>
+	
+	<wsdl:message name="mensaje_solicitud">
+  		<wsdl:part name="mensaje_solicitud" type="xsd:string" />
+	</wsdl:message>
+	
+	<wsdl:message name="mensaje_respuesta">
+  		<wsdl:part name="mensaje_respuesta" type="xsd:string" />
+	</wsdl:message>
+
+	<wsdl:portType name="AuditoriaSOAP">
+  		<wsdl:operation name="getAuditoria">
+   			<wsdl:input message="auditorias:getAuditoriaSolicitud" />
+   			<wsdl:output message="auditorias:getAuditoriaRespuesta" />
+		</wsdl:operation>
+  		<wsdl:operation name="get_mensaje">
+   			<wsdl:input message="auditorias:mensaje_solicitud" />
+   			<wsdl:output message="auditorias:mensaje_respuesta" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="AuditoriaSOAPHTTP" type="auditorias:AuditoriaSOAP">
+  		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"/>
+  		<wsdl:operation name="getAuditoria">
+   			<soap:operation style="rpc" />
+   			<wsdl:input>
+				<soap:body namespace="auditoria:servicio" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body namespace="auditoria:servicio" use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+  		<wsdl:operation name="get_mensaje">
+   			<soap:operation style="rpc" />
+   			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+ 
+	<wsdl:service name="AuditoriaServicio">
+		<wsdl:port name="AuditoriaSOAP" binding="auditorias:AuditoriaSOAPHTTP">
+			<soap:address location="http://localhost:3000/soap/"/>
+		</wsdl:port>	
+	</wsdl:service>
+
+</wsdl:definitions>

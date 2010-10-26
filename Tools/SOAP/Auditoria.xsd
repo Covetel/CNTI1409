@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Copyright 2010, 2011 - Cooperativa Venezolana de Tecnologías Libres R.S.
+# Este archivo es parte del programa CNT1409
+# Este archivo es Software Libre - Bajo la licencia GPL 3.
+-->
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	version="1.0" 
+	xml:lang="es" 
+	xmlns:auditoriat="auditoria:tipos"  
+	targetNamespace="auditoria:tipos">
+	<xsd:annotation>
+		<xsd:documentation>
+			Este esquema XML describe los tipos de datos correspondientes 
+			para la comunicacion con el sistema de validación de portales. 
+
+			El tipo de dato principal es Auditoria. 
+
+			Una Auditoria posee los siguientes datos: 
+			* idauditoria (Int)
+ 			* nombre (String)
+         	* disposicionesvalidas (Int)
+		 	* disposicionesfallidas (Int)
+          	* institucion (String)
+          	* portal (String)
+    		* entidadverificadora (String)
+		</xsd:documentation>
+	</xsd:annotation>
+  
+	<xsd:complexType name="TipoDatosAuditoria">
+		<xsd:sequence> <!--Esto indica que los elementos hijos deben aparecer en el orden en que estan declarados -->
+    		<xsd:element name="idauditoria" type="xsd:int" />
+    		<xsd:element name="nombre" type="xsd:string" />
+    		<xsd:element name="disposicionesvalidas" type="xsd:int" />
+    		<xsd:element name="disposicionesfallidas" type="xsd:int" />
+    		<xsd:element name="institucion" type="xsd:string" />
+    		<xsd:element name="portal" type="xsd:string" />
+    		<xsd:element name="entidadverificadora" type="xsd:string" />
+   		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="Auditoria" type="auditoriat:TipoDatosAuditoria" />
+		
+</xsd:schema>
