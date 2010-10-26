@@ -5,7 +5,7 @@ use warnings;
 use SOAP::Lite; 
 use Data::Dumper;
 
-my $soap = SOAP::Lite->uri("http://localhost/CNTI1409/SOAP/Auditorias")->proxy("http://127.0.0.1:8083");
+my $soap = SOAP::Lite->uri("http://localhost/CNTI1409/SOAP/Auditorias")->proxy("http://192.168.1.241:4180");
 
 my $n = 10;
 
