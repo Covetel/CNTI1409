@@ -175,7 +175,7 @@ sub disposiciones {
 sub grafica {
 	my ($cumple,$no_cumple,$institucion) = @_;
 	
-	my $title = 'Gráfico de indice de cumplimento';
+	my $title = 'Gráfico de índice de cumplimento';
 	utf8::decode($title);
 	utf8::decode($institucion);
 	my $obj = Chart::Bars->new(600,300); 
