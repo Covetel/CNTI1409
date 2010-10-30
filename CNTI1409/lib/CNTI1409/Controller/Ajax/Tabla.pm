@@ -69,7 +69,7 @@ sub instituciones_GET {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               $_->direccion, $_->web,      &field_habilitado($_->habilitado,$_->id,"instituciones"),
+               ($_->direccion) ? $_->direccion : '', $_->web,      &field_habilitado($_->habilitado,$_->id,"instituciones"),
            ]
          } $rs->all
     ];
@@ -183,7 +183,7 @@ sub entidades_GET {
            [
                $_->id,        $_->registro,  $_->nombre,   
                $_->rif,       $_->correo,    $_->telefono, 
-               $_->contacto,  $_->direccion, $_->web,      
+               $_->contacto,  ($_->direccion) ? $_->direccion : '', $_->web,      
 			   &field_habilitado($_->habilitado,$_->id,"entidades"),
 
            ]
