@@ -25,6 +25,15 @@ function sugerencia (label, value){
 	this.value = value;
 }
 
+
+function boton_editar(){
+	$("button.editar").click(function(){
+		var editar_id = $(this).attr('id');
+		var editar = editar_id.split('_');
+		window.location.href = "/"+editar[0]+"/editar/"+editar[1];
+	});	
+}
+
 // Esta fución ejecuta las siguientes tareas: 
 // * Agrega background rojo a la fila que esta desactivada. 
 // * Remueve a los td hijos la posibilidad de ser editados. 
@@ -299,23 +308,26 @@ $("#loading").ajaxStop(function(){
 		"aaSorting": [[ 8, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
 						//{"bSearchable": false, "bSortable": false, "sClass": "tDesactivar"},
+						{"bSearchable": false, "bSortable": false},
 						{"bSearchable": false, "bSortable": true},
 					], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			// Editar 
+			boton_editar();
 			//Aplicar aspecto a las filas inhabilitadas.	
 			fila_desactivar('tabla_instituciones');
-			$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
+			//$("#tabla_instituciones tbody td.tEdit").editable(submitEdit);
 			//$("div.borrar").html("<button class='borrar'> Desactivar </button>");
 			boton_desactivar_activar();
 			$("button.borrar").click(function (){
@@ -353,20 +365,22 @@ $("#loading").ajaxStop(function(){
 		"aaSorting": [[ 9, "desc" ]],
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{"bSearchable": false, "bSortable": false},
 						{"bSearchable": false, "sClass": "tDesactivar"},
                     ], 
  		"oLanguage": {
             "sUrl": "/static/javascripts/dataTables.spanish.txt"
         },
 		"fnDrawCallback": function () {
+			boton_editar();
 			fila_desactivar('tabla_entidades');
 			$("#tabla_entidades tbody td.tEdit").editable(submitEditEntidad);
             $("div.borrar").html("<button class='borrar'> Desactivar </button>");

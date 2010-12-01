@@ -88,6 +88,31 @@ sub listar : Local {
 	$c->stash->{template} = 'entidades/listar.tt2';	
 } 
 
+sub editar : Local : FormConfig('entidades/editar.yml') {
+    my ( $self, $c, $id ) = @_;
+    my $form = $c->stash->{form};
+	$c->stash->{titulo} = "Actualizar Entidad Verificadora";
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+
+    if ($form->submitted_and_valid) { 
+		$id = $form->param_value('id');
+ 	    my $entidad = $c->model('DB::Entidadverificadora')->find($form->param_value('id'));
+        $form->model->update($entidad);
+        my $mensaje = "La Entidad Verificadora " . $form->param_value('nombre') . " se ha actualizado con éxito";
+		$c->stash->{mensaje} = $mensaje;
+	} elsif ($form->has_errors && $form->submitted) {
+		$id = $form->param_value('id');
+        $c->stash->{error} = 1;
+        my @err_fields = $form->has_errors;
+		my $label = $form->get_field($err_fields[0])->label; 
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong'> $label </span> ";
+    }
+    my $entidad = $c->model('DB::Entidadverificadora')->find($id);
+	$form->model->default_values($entidad);
+    $c->stash->{template} = 'entidades/registrar.tt2';
+}
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>

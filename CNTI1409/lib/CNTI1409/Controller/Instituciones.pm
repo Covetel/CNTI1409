@@ -62,6 +62,33 @@ sub registrar : Local : FormConfig {
     $c->stash->{template} = 'instituciones/registrar.tt2';
 }
 
+sub editar : Local : FormConfig('instituciones/editar.yml') {
+    my ( $self, $c, $id ) = @_;
+	$c->stash->{titulo} = "Actualizar Institución";
+    $c->stash->{mensaje} = $c->req->params->{mensaje};
+    my $form = $c->stash->{form};
+	
+	# Clases para los campos requeridos. 
+	$form->auto_constraint_class( 'constraint_%t' );
+    if ($form->submitted_and_valid) { 
+		# Obtengo el id escondido en el campo id.
+		$id = $form->param_value('id');
+    	my $instituciones = $c->model('DB::Institucion')->find($form->param_value('id'));
+        $form->model->update($instituciones);
+        my $mensaje = "La Institución " . $form->param_value('nombre') . " se ha actualizado con éxito";
+		$c->stash->{mensaje} = $mensaje;
+	} elsif ($form->has_errors && $form->submitted) {
+		$id = $form->param_value('id');
+        $c->stash->{error} = 1;
+        my @err_fields = $form->has_errors;
+		my $label = $form->get_field($err_fields[0])->label; 
+        $c->stash->{mensaje} = "Ha ocurrido un error en el campo <span class='strong'> $label </span> ";
+    }
+    my $instituciones = $c->model('DB::Institucion')->find($id);
+	$form->model->default_values($instituciones);
+    $c->stash->{template} = 'instituciones/registrar.tt2';
+}
+
 sub listar : Local {
     my ( $self, $c ) = @_;
 	$c->stash->{template} = 'instituciones/listar.tt2';	

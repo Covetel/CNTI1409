@@ -16,12 +16,9 @@ use Catalyst::Runtime 5.80;
 # Static::Simple: will serve static files from the application's root
 #                 directory
 
-=pod
 use Catalyst qw/
 	-Debug
 	StackTrace
-=cut
-use Catalyst qw/
     ConfigLoader
     Static::Simple
     Unicode::Encoding

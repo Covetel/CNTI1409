@@ -13,6 +13,9 @@ elements:
       name: datos_institucion
       legend: Datos de la Institución
       elements:
+        - type: Hidden
+          name: id
+
         - type: Block
           tag: div
           content: Por favor indique correctamente sus datos en los campos correspondientes
@@ -31,7 +34,7 @@ elements:
               min: 4
               max: 250
               message: "El nombre debe contener al menos 4 caracteres"
-          validator: 'CNTI1409::Unico::InstitucionNombre'
+          #validator: 'CNTI1409::Unico::InstitucionNombre'
 
         - type: Text
           name: rif
@@ -47,7 +50,7 @@ elements:
               min: 4
               max: 15
               message: "El RIF debe contener menos de 15 caracteres"
-          validator: 'CNTI1409::Unico::InstitucionRIF'
+          #validator: 'CNTI1409::Unico::InstitucionRIF'
 
         - type: Text
           name: telefono
@@ -108,7 +111,7 @@ elements:
         - type: Submit
           name: submit
           # The text to be displayed
-          value: Registrar Institución
+          value: Actualizar
           attributes:
               title: Presione este botón para registrar la institución.
               class: input_submit

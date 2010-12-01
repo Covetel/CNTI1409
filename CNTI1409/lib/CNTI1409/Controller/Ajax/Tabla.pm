@@ -69,7 +69,9 @@ sub instituciones_GET {
            [
                $_->id,        $_->nombre,   $_->rif,
                $_->correo,    $_->telefono, $_->contacto,
-               ($_->direccion) ? $_->direccion : '', $_->web,      &field_habilitado($_->habilitado,$_->id,"instituciones"),
+               ($_->direccion) ? $_->direccion : '', $_->web,      
+				"<button class='editar' id='instituciones_".$_->id."' class='ui-button ui-button-pencil'> Editar </button>",
+				&field_habilitado($_->habilitado,$_->id,"instituciones"), 
            ]
          } $rs->all
     ];
@@ -184,6 +186,7 @@ sub entidades_GET {
                $_->id,        $_->registro,  $_->nombre,   
                $_->rif,       $_->correo,    $_->telefono, 
                $_->contacto,  ($_->direccion) ? $_->direccion : '', $_->web,      
+				"<button class='editar' id='entidades_".$_->id."' class='ui-button ui-button-pencil'> Editar </button>",
 			   &field_habilitado($_->habilitado,$_->id,"entidades"),
 
            ]

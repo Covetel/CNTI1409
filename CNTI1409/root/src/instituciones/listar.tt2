@@ -11,6 +11,7 @@
 		<th id="contacto">Persona Contacto</th>
 		<th id="direccion">Dirección</th>
 		<th id="web">Página Web</th>
+		<th id="editar">Editar</th>
 		<th id="desactivar">Desactivar</th>
 	</tr>
 	</thead>
