@@ -45,7 +45,7 @@ elements:
               min: 4
               max: 250
               message: "El nombre debe contener al menos 4 caracteres"
-          validator: 'CNTI1409::Unico::EntidadNombre'
+          validator: 'CNTI1409::Nombre'
 
         - type: Text
           name: rif
@@ -56,8 +56,11 @@ elements:
               id: rif
               maxlength: 15
           constraints:
-              - Required
-          validator: 'CNTI1409::Unico::EntidadRIF'
+            - type: Regex
+              regex: '^(J|G)-\d{8}-\d$'
+              message: "No corresponde a un R.I.F. válido"
+            - Required
+          validator: 'CNTI1409::RIF'
 
         - type: Text
           name: telefono
@@ -66,6 +69,9 @@ elements:
           attributes:
               title: 'Por favor indique el número telefónico de la Entidad Verificadora, con su respectivo código de área'
               class: input_text
+          constraints:
+              - Required
+          validator: 'CNTI1409::Telefono'
 
         - type: Textarea
           name: direccion
@@ -98,6 +104,7 @@ elements:
           constraints:
             - Required
             - type: Email
+          validator: 'CNTI1409::Correo'
 
         - type: Text
           name: web
@@ -107,8 +114,10 @@ elements:
               title: 'Por favor indique la dirección electrónica (URL) de la página web de la entidad, Ejemplo: http://www.covetel.com.ve.'
               class: input_text
           constraints:
+            - Required
             - type: Regex
               common: [ URI, HTTP, { '-scheme': 'ftp|https?' } ]
+          validator: 'CNTI1409::Web'
 
 
     # The Submit button

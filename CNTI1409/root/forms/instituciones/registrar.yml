@@ -31,7 +31,7 @@ elements:
               min: 4
               max: 250
               message: "El nombre debe contener al menos 4 caracteres"
-          validator: 'CNTI1409::Unico::InstitucionNombre'
+          validator: 'CNTI1409::Nombre'
 
         - type: Text
           name: rif
@@ -42,20 +42,22 @@ elements:
               maxlength: 15
               id: rif
           constraints:
+            - type: Regex
+              regex: '^(J|G)-\d{8}-\d$'
+              message: "No corresponde a un R.I.F. válido"
             - Required
-            - type: Length
-              min: 4
-              max: 15
-              message: "El RIF debe contener menos de 15 caracteres"
-          validator: 'CNTI1409::Unico::InstitucionRIF'
+          validator: 'CNTI1409::RIF'
 
         - type: Text
           name: telefono
           label: Teléfono
           id: phone
           attributes:
-              title: 'Por favor ingrese el número de teléfono de la Institución. Debe estar conformado por once (11) digitos. Ejemplo: 0212XXXXXXX'
+              title: 'Por favor ingrese el número de teléfono de la Institución.'
               class: input_text
+          constraints:
+              - Required
+          validator: 'CNTI1409::Telefono'
 
         - type: Textarea
           name: direccion
@@ -88,6 +90,7 @@ elements:
           constraints:
             - Required
             - type: Email
+          validator: 'CNTI1409::Correo'
 
         - type: Text
           name: web
@@ -97,8 +100,10 @@ elements:
               title: 'Ingrese el nombre de la página web institucional. Ejemplo: http://www.cnti.gob.ve'
               class: input_text
           constraints:
+            - Required
             - type: Regex
               common: [ URI, HTTP, { '-scheme': 'ftp|https?' } ]
+          validator: 'CNTI1409::Web'
 
 
     # The Submit button
