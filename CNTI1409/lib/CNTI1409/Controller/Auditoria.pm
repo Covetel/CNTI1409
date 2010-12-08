@@ -442,7 +442,7 @@ sub detalle : Local {
             # $hash = $job->as_hash;
 			my $it = $job->children();
 			while ( my $u = $it->() ){
-				next if $u->path eq '/';
+				#next if $u->path eq '/';
 				my $it2 = $u->children;
                 my $sitios;
 	           	while ( my $r = $it2->() ) {
