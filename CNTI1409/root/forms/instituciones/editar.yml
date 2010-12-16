@@ -120,14 +120,6 @@ elements:
               title: Presione este botón para registrar la institución.
               class: input_submit
        
-        - type: Reset
-          name: reset
-          # The text to be displayed
-          value: Reiniciar
-          attributes:
-              title: Presione este botón para inicializar en blanco los campos del formulario.
-              class: input_reset
-
 filter:
     - TrimEdges
     - HTMLEscape
