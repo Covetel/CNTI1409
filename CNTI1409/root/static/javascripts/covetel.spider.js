@@ -22,6 +22,12 @@ function getDatos (){
 		if (datos.estado == 2){
 			$("#spider_estado").html("Terminado").addClass("important");
 			$("button#spider_descargar_muestra").button("enable");
+			// Si la cantidad de urls obtenidas es igual a 0 entonces hay un problema. 
+			var turls = $("#spider_total_urls").html();
+			if (turls == 0){
+				alert("Ocurrió un error obteniendo la muestra automáticamente, contacte al administrador.");
+				$("#spider_estado").html("Error").addClass("important");
+			}
 			window.clearInterval(intervalo);
 			$("button#spider_descargar_muestra").click(function(){
 				location.href = '/spider/muestra/'+id;

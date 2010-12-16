@@ -462,16 +462,16 @@ $("#loading").ajaxStop(function(){
 	oAuditorias = $("#tabla_auditorias").dataTable({
 		"sAjaxSource": '/ajax/tabla/auditorias',
         "bAutoWidth": false,
-		"bProcessing": false,
+		"bProcessing": true,
 		"bJQueryUI": true,
 		"aoColumns": [
 						{"bSearchable": false, "bVisible": false},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
 						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
-						{"sClass": "tEdit"},
+						{"sType": "date"},
+						{"sType": "date"},
+						{"sType": "date"},
 						{"sClass": "estado"},
                     ], 
  		"oLanguage": {

@@ -269,8 +269,8 @@ sub auditorias_GET {
        map {
            [
                $_->id,        $_->idev->nombre,   $_->idinstitucion->nombre,
-               $_->portal,    $_->fechacreacion->dmy(),  $_->fechaini ? $_->fechaini->dmy() : "N/A",
-               $_->fechafin ? $_->fechafin->dmy() : "N/A", &estado($_->estado) ,
+               $_->portal,    $_->fechacreacion->dmy('/'),  $_->fechaini ? $_->fechaini->dmy('/') : "N/A",
+               $_->fechafin ? $_->fechafin->dmy('/') : "N/A", &estado($_->estado) ,
            ]
          } $rs->all
     ];
