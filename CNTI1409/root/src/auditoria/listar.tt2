@@ -13,5 +13,10 @@
 		<th>Estado</th>
 	</tr>
 	</thead>
+	<tbody>
+		<tr> 
+			<td> &nbsp; </td>
+		</tr>
+	</tbody>
 </table>
 </div>

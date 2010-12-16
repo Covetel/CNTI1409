@@ -16,5 +16,10 @@
 		<th id="desactivar">Desactivar</th>
 	</tr>
 	</thead>
+	<tbody>
+		<tr> 
+			<td> &nbsp; </td>
+		</tr>
+	</tbody>
 </table>
 </div>
