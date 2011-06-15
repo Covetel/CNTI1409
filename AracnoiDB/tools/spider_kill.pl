@@ -10,9 +10,9 @@ use CNTI::Spider::UrlList;
 
 $SIG{CHLD} = "IGNORE";
 
-my $url = "http://www.cnti.gob.ve/";
+my $url = "http://www.mppee.gob.ve";
 
-my $spider = CNTI::Spider::State->new( base => $url, depth => 2, num => 20, dir => 0 );
+my $spider = CNTI::Spider::State->new( base => $url, depth => 5, num => 100, dir => 0 );
 
 my $pid = $spider->run;
 
@@ -33,8 +33,14 @@ if ($pid){
                 printf "%s %s\n", $_->sum, $_->title;
             }
         } 
+        if ($_ =~ /state/){
+            print $monitor->state, "\n";
+          
+        }
         if ($_ =~ /kill/){
             print "Intentando matar al proceso $pid \n";
+            $monitor->state(2);
+            $monitor->update();
             my $kp = kill 9, $pid;
             if ($kp){
                 print "Devolvio $kp\n";
