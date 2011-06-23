@@ -22,17 +22,16 @@ __PACKAGE__->table("entidadverificadora");
 
 =head2 id
 
-  data_type: integer
-  default_value: SCALAR(0x9ddd280)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'entidadverificadora_id_seq'
 
 Numero de identificacion unico para las Entidades Verificadoras
 
 =head2 nombre
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 0
   size: 250
 
@@ -40,8 +39,7 @@ nombre o Razon Social de la Entidad Verificadora
 
 =head2 rif
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 1
   size: 15
 
@@ -49,8 +47,7 @@ Numero fiscal de la Entidad Verificadora
 
 =head2 correo
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 0
   size: 100
 
@@ -58,8 +55,7 @@ correo electronico de la entidad verificadora
 
 =head2 telefono
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 0
   size: 15
 
@@ -67,8 +63,7 @@ Numero de telefono de la Entidad Verificadora
 
 =head2 contacto
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 0
   size: 250
 
@@ -76,28 +71,27 @@ nombre de la persona contacto de la Entidad Verificadora
 
 =head2 direccion
 
-  data_type: character varying
-  default_value: N/A
+  data_type: 'varchar'
+  default_value: 'N/A'
   is_nullable: 1
   size: 500
 
 =head2 web
 
-  data_type: character varying
-  default_value: N/A
+  data_type: 'varchar'
+  default_value: 'N/A'
   is_nullable: 1
   size: 250
 
 =head2 habilitado
 
-  data_type: boolean
-  default_value: SCALAR(0x9ddad98)
+  data_type: 'boolean'
+  default_value: true
   is_nullable: 0
 
 =head2 registro
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 1
   size: 30
 
@@ -109,55 +103,30 @@ __PACKAGE__->add_columns(
   "id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('entidadverificadora_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "entidadverificadora_id_seq",
   },
   "nombre",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 250,
-  },
+  { data_type => "varchar", is_nullable => 0, size => 250 },
   "rif",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 15,
-  },
+  { data_type => "varchar", is_nullable => 1, size => 15 },
   "correo",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 100,
-  },
+  { data_type => "varchar", is_nullable => 0, size => 100 },
   "telefono",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 15,
-  },
+  { data_type => "varchar", is_nullable => 0, size => 15 },
   "contacto",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 250,
-  },
+  { data_type => "varchar", is_nullable => 0, size => 250 },
   "direccion",
   {
-    data_type => "character varying",
+    data_type => "varchar",
     default_value => "N/A",
     is_nullable => 1,
     size => 500,
   },
   "web",
   {
-    data_type => "character varying",
+    data_type => "varchar",
     default_value => "N/A",
     is_nullable => 1,
     size => 250,
@@ -165,12 +134,7 @@ __PACKAGE__->add_columns(
   "habilitado",
   { data_type => "boolean", default_value => \"true", is_nullable => 0 },
   "registro",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 30,
-  },
+  { data_type => "varchar", is_nullable => 1, size => 30 },
 );
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("idxregistro", ["registro"]);
@@ -190,11 +154,12 @@ __PACKAGE__->has_many(
   "auditorias",
   "Validador::Esquema::Result::Auditoria",
   { "foreign.idev" => "self.id" },
+  {},
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:wnDHIUs60xOuO96y767F2w
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-20 11:32:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:53J/cHN09YlRjslxsJoexA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -26,17 +26,16 @@ __PACKAGE__->table("auditoriadetalle");
 
 =head2 id
 
-  data_type: bigint
-  default_value: SCALAR(0x9dc7f78)
+  data_type: 'bigint'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'auditoriadetalle_id_seq'
 
 Numero de identificacion unica para los detalles de las auditorias
 
 =head2 idauditoria
 
-  data_type: bigint
-  default_value: undef
+  data_type: 'bigint'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -44,18 +43,17 @@ Clave que relaciona los detalles de la auditoria con sus datos maestros
 
 =head2 iddisposicion
 
-  data_type: bigint
-  default_value: SCALAR(0x9dd5b88)
+  data_type: 'bigint'
   is_auto_increment: 1
   is_foreign_key: 1
   is_nullable: 0
+  sequence: 'auditoriadetalle_iddisposicion_seq'
 
 Clave que relaciona los detalles de las auditorias con cada disposicion
 
 =head2 resolutoria
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 1
   size: 200
 
@@ -67,32 +65,22 @@ __PACKAGE__->add_columns(
   "id",
   {
     data_type         => "bigint",
-    default_value     => \"nextval('auditoriadetalle_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "auditoriadetalle_id_seq",
   },
   "idauditoria",
-  {
-    data_type      => "bigint",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
   "iddisposicion",
   {
     data_type         => "bigint",
-    default_value     => \"nextval('auditoriadetalle_iddisposicion_seq'::regclass)",
     is_auto_increment => 1,
     is_foreign_key    => 1,
     is_nullable       => 0,
+    sequence          => "auditoriadetalle_iddisposicion_seq",
   },
   "resolutoria",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 1,
-    size => 200,
-  },
+  { data_type => "varchar", is_nullable => 1, size => 200 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -129,8 +117,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:3PodCYDsOLAogUWO3J2rHw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-20 11:31:02
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:go1OhC55L5b4jqp8/zw6Ew
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

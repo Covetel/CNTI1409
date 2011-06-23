@@ -22,34 +22,30 @@ __PACKAGE__->table("events");
 
 =head2 id
 
-  data_type: integer
-  default_value: SCALAR(0x9ddd290)
+  data_type: 'integer'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'events_id_seq'
 
 =head2 pid
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_foreign_key: 1
   is_nullable: 1
 
 =head2 class
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 message
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =head2 data
 
-  data_type: text
-  default_value: undef
+  data_type: 'text'
   is_nullable: 1
 
 =cut
@@ -58,23 +54,18 @@ __PACKAGE__->add_columns(
   "id",
   {
     data_type         => "integer",
-    default_value     => \"nextval('events_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "events_id_seq",
   },
   "pid",
-  {
-    data_type      => "integer",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 1,
-  },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "class",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "message",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
   "data",
-  { data_type => "text", default_value => undef, is_nullable => 1 },
+  { data_type => "text", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -96,8 +87,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Y4RVUmKjeGVhj6QvNasRDQ
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-20 11:32:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oMSCds08o9pEZFw4ZdZDmA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -26,17 +26,16 @@ __PACKAGE__->table("auditoria");
 
 =head2 id
 
-  data_type: bigint
-  default_value: SCALAR(0x9cb0cb8)
+  data_type: 'bigint'
   is_auto_increment: 1
   is_nullable: 0
+  sequence: 'auditoria_id_seq'
 
 Numero de identificacion unica de las auditorias
 
 =head2 idev
 
-  data_type: bigint
-  default_value: undef
+  data_type: 'bigint'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -44,8 +43,7 @@ Clave de relacion entre las entidades verificadoras y las auditorias
 
 =head2 idinstitucion
 
-  data_type: bigint
-  default_value: undef
+  data_type: 'bigint'
   is_foreign_key: 1
   is_nullable: 0
 
@@ -53,8 +51,7 @@ Clave que relaciona las instituciones con las auditorias
 
 =head2 portal
 
-  data_type: character varying
-  default_value: undef
+  data_type: 'varchar'
   is_nullable: 0
   size: 100
 
@@ -62,32 +59,28 @@ Almacena el nombre del portal a auditar
 
 =head2 fechaini
 
-  data_type: date
-  default_value: undef
+  data_type: 'date'
   is_nullable: 1
 
 Fecha de inicio de la auditoria
 
 =head2 fechafin
 
-  data_type: date
-  default_value: undef
+  data_type: 'date'
   is_nullable: 1
 
 Fecha de finalizacion de la auditoria, si este campo contiene un dato se da la auditoria como cerrada
 
 =head2 fechacreacion
 
-  data_type: date
-  default_value: undef
+  data_type: 'date'
   is_nullable: 0
 
 Fecha de creacion de la audioria
 
 =head2 url
 
-  data_type: character varying[]
-  default_value: undef
+  data_type: 'character varying[]'
   is_nullable: 1
   size: 1000
 
@@ -95,8 +88,8 @@ Almacena el listado de las url a auditar en un portal
 
 =head2 estado
 
-  data_type: character
-  default_value: p
+  data_type: 'char'
+  default_value: 'p'
   is_nullable: 0
   size: 1
 
@@ -104,30 +97,26 @@ Campo que determina el estado de una auditoria, los posibles valores son: p (pen
 
 =head2 job
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 =head2 resultado
 
-  data_type: boolean
-  default_value: undef
+  data_type: 'boolean'
   is_nullable: 1
 
 Resultado General de la Auditoria, de tipo boolean, TRUE para auditoria sin fallas, FALSE para auditoria fallidas
 
 =head2 fallidas
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 Numero de disposiciones fallidas
 
 =head2 validas
 
-  data_type: integer
-  default_value: undef
+  data_type: 'integer'
   is_nullable: 1
 
 Numero de disposiciones sin fallas
@@ -138,54 +127,34 @@ __PACKAGE__->add_columns(
   "id",
   {
     data_type         => "bigint",
-    default_value     => \"nextval('auditoria_id_seq'::regclass)",
     is_auto_increment => 1,
     is_nullable       => 0,
+    sequence          => "auditoria_id_seq",
   },
   "idev",
-  {
-    data_type      => "bigint",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
   "idinstitucion",
-  {
-    data_type      => "bigint",
-    default_value  => undef,
-    is_foreign_key => 1,
-    is_nullable    => 0,
-  },
+  { data_type => "bigint", is_foreign_key => 1, is_nullable => 0 },
   "portal",
-  {
-    data_type => "character varying",
-    default_value => undef,
-    is_nullable => 0,
-    size => 100,
-  },
+  { data_type => "varchar", is_nullable => 0, size => 100 },
   "fechaini",
-  { data_type => "date", default_value => undef, is_nullable => 1 },
+  { data_type => "date", is_nullable => 1 },
   "fechafin",
-  { data_type => "date", default_value => undef, is_nullable => 1 },
+  { data_type => "date", is_nullable => 1 },
   "fechacreacion",
-  { data_type => "date", default_value => undef, is_nullable => 0 },
+  { data_type => "date", is_nullable => 0 },
   "url",
-  {
-    data_type => "character varying[]",
-    default_value => undef,
-    is_nullable => 1,
-    size => 1000,
-  },
+  { data_type => "character varying[]", is_nullable => 1, size => 1000 },
   "estado",
-  { data_type => "character", default_value => "p", is_nullable => 0, size => 1 },
+  { data_type => "char", default_value => "p", is_nullable => 0, size => 1 },
   "job",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "resultado",
-  { data_type => "boolean", default_value => undef, is_nullable => 1 },
+  { data_type => "boolean", is_nullable => 1 },
   "fallidas",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
   "validas",
-  { data_type => "integer", default_value => undef, is_nullable => 1 },
+  { data_type => "integer", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("id");
 
@@ -233,11 +202,12 @@ __PACKAGE__->has_many(
   "auditoriadetalles",
   "Validador::Esquema::Result::Auditoriadetalle",
   { "foreign.idauditoria" => "self.id" },
+  {},
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.05001 @ 2010-08-23 07:11:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:kg6CQmT2Ms2BERys76unpw
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-20 11:31:02
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5U4yi/kCIiVhg625q4UIQQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
