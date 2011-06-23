@@ -39,6 +39,12 @@ function getDatos (){
 }
 
 $(document).ready(function(){
+	var id = $("div.spider_id").attr('id');
+    if (id){
+	    var fields = id.split('_');
+	    var pid = fields[3];
+	    id = fields[2];
+    }
 	$("button#spider_descargar_muestra").click(function(){
 		location.href = '/spider/muestra/'+id;
 	});
@@ -46,12 +52,9 @@ $(document).ready(function(){
     $("#spider_stop").button({ icons: {primary:'ui-icon-circle-close'} });
     $("#spider_stop").click(function(){
         //Obtengo el PID del proceso. 
-	    var id = $("div.spider_id").attr('id');
-		var fields = id.split('_');
-		pid = fields[3];
-		id = fields[2];
 	    window.clearInterval(intervalo);
 	    $("#spider_stop").button("disable");
+		$("#spider_descargar_muestra").button("enable");
 		$("#spider_estado").html("Detenido").addClass("important");
 	    location.href = '/spider/kill/'+pid+'/'+id;
     });
