@@ -12,7 +12,7 @@
 		Nivel de profundidad: <span class="strong"> [% prof %] </span> <br />
 		Número de direcciones máximo por nivel: <span class="strong"> [% numero %] </span>
 	</p>
-	<div class="spider_id" id="spider_urls_[% id %]">
+	<div class="spider_id" id="spider_urls_[% id %]_[% pid %]">
 
 	</div>
 	<p>
@@ -21,8 +21,8 @@
 	</p>
 	<p>
 		<button disabled="disabled" id="spider_descargar_muestra"> Descargar Muestra </button>
+		<button id="spider_stop"> Detener </button>
 	</p>
 	<p>
-		<a href="/spider/iniciar"> Volver </a>
 	</p>
 [% END %]

@@ -66,8 +66,10 @@ sub iniciar : Local : FormConfig {
             num   => $c->req->params->{numero},
             dir   => 0
         );
-		if ($spider->run){
+        my $pid = $spider->run;
+		if ($pid){
 			$c->stash->{id} = $spider->id;
+            $c->stash->{pid} = $pid;
 		}
 	} elsif ($form->has_errors && $form->submitted) {
         $c->stash->{error} = 1;
@@ -78,6 +80,19 @@ sub iniciar : Local : FormConfig {
 	$c->log->debug($form->has_errors);
 	$c->log->debug($form->submitted);
 	$c->stash->{template} = 'spider/spider_form.tt2';
+}
+
+sub kill : Local {
+    $SIG{CHLD} = "IGNORE";
+	my ( $self, $c, $pid, $id ) = @_;
+    my $spider = CNTI::Spider::State->new( id => $id);
+    $spider->state(2);
+    $spider->update();
+    if (kill 9, $pid){
+        $c->detach($self, 'muestra', [$id]);
+    } else {
+        $c->res->body(0); 
+    }
 }
 
 sub muestra : Local {
