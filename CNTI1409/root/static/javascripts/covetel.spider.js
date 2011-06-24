@@ -52,12 +52,16 @@ $(document).ready(function(){
 	$("#spider_stop").button();
     $("#spider_stop").button({ icons: {primary:'ui-icon-circle-close'} });
     $("#spider_stop").click(function(){
-        //Obtengo el PID del proceso. 
-	    window.clearInterval(intervalo);
-	    $("#spider_stop").button("disable");
-		$("#spider_descargar_muestra").button("enable");
-		$("#spider_estado").html("Detenido").addClass("important");
-	    location.href = '/spider/kill/'+pid+'/'+id;
+        if (confirm("¿Esta usted seguro?")){
+            //Obtengo el PID del proceso. 
+	        window.clearInterval(intervalo);
+	        $("#spider_stop").button("disable");
+		    $("#spider_descargar_muestra").button("enable");
+		    $("#spider_estado").html("Detenido").addClass("important");
+	        location.href = '/spider/kill/'+pid+'/'+id;
+        } else {
+            return false;
+        }
     });
 });
 
