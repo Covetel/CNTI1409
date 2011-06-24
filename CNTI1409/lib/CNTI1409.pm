@@ -29,7 +29,6 @@ use Catalyst qw/
     Session::State::Cookie
     Breadcrumbs
 /;
-
 extends 'Catalyst';
 
 __PACKAGE__->config(
