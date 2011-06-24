@@ -19,6 +19,7 @@
 </div>
 <div>
 	<button id="detalle_auditoria"> Detalle de la Auditoria </button>
+	<button id="detener_auditoria"> Detener el proceso </button>
 </div>
 <div>
 	<a href="/auditoria/resumen/[% id %]" title=""> Volver al resumen</a> 
