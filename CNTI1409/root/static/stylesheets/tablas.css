@@ -138,3 +138,18 @@ div.muestra{
     background-color: #FFFFCE;
 }
 
+button#detener_auditoria {
+    float: right;
+}
+
+td#total_url, td#total_pendientes, td#total_done {
+    text-align: right;
+}
+
+div#barra_progreso {
+    padding: 0;
+}
+
+div#barra_progreso div {
+    padding: 0;
+}
