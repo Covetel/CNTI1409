@@ -1,0 +1,382 @@
+% Graphic for TeX using PGF
+% Title: /Users/elsanto/CNTI-14-09/Diagramas/validador.dia
+% Creator: Dia v0.97.1
+% CreationDate: Fri Jun 24 01:11:07 2011
+% For: elsanto
+% \usepackage{tikz}
+% The following commands are not supported in PSTricks at present
+% We define them conditionally, so when they are implemented,
+% this pgf file will use them.
+\ifx\du\undefined
+  \newlength{\du}
+\fi
+\setlength{\du}{15\unitlength}
+\begin{tikzpicture}
+\pgftransformxscale{1.000000}
+\pgftransformyscale{-1.000000}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (32.225000\du,7.535000\du)--(32.225000\du,10.935000\du)--(48.040000\du,10.935000\du)--(48.040000\du,7.535000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.225000\du,7.535000\du)--(32.225000\du,10.935000\du)--(48.040000\du,10.935000\du)--(48.040000\du,7.535000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.132500\du,8.485000\du){auditoria};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.132500\du,9.485000\du){Almacena los datos de las auditoria ...};
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.132500\du,10.485000\du){ales.};
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (32.225000\du,10.935000\du)--(32.225000\du,21.535000\du)--(48.040000\du,21.535000\du)--(48.040000\du,10.935000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.225000\du,10.935000\du)--(32.225000\du,21.535000\du)--(48.040000\du,21.535000\du)--(48.040000\du,10.935000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,11.635000\du){   id: bigserial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,12.435000\du){   idev: bigint};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,13.235000\du){   idinstitucion: bigint};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,14.035000\du){   portal: character varying(100)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,14.835000\du){   fechaini: date};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,15.635000\du){   fechafin: date};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,16.435000\du){   fechacreacion: date};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,17.235000\du){   url: character varying(1000)\ensuremath{[}\ensuremath{]}};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,18.035000\du){   estado: character(1) = 'p'::bpchar};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,18.835000\du){   job: integer};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,19.635000\du){   resultado: boolean};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,20.435000\du){   fallidas: integer};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (32.375000\du,21.235000\du){   validas: integer};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (32.925000\du,28.535000\du)--(32.925000\du,31.935000\du)--(49.012500\du,31.935000\du)--(49.012500\du,28.535000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.925000\du,28.535000\du)--(32.925000\du,31.935000\du)--(49.012500\du,31.935000\du)--(49.012500\du,28.535000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.968750\du,29.485000\du){auditoriadetalle};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.968750\du,30.485000\du){Almacena los detalles de una audito ...};
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (40.968750\du,31.485000\du){ortal};
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (32.925000\du,31.935000\du)--(32.925000\du,35.335000\du)--(49.012500\du,35.335000\du)--(49.012500\du,31.935000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.925000\du,31.935000\du)--(32.925000\du,35.335000\du)--(49.012500\du,35.335000\du)--(49.012500\du,31.935000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (33.075000\du,32.635000\du){   id: bigserial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (33.075000\du,33.435000\du){   idauditoria: bigint};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (33.075000\du,34.235000\du){   iddisposicion: bigserial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (33.075000\du,35.035000\du){   resolutoria: character varying(200)};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (9.525000\du,30.235000\du)--(9.525000\du,33.635000\du)--(22.345000\du,33.635000\du)--(22.345000\du,30.235000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (9.525000\du,30.235000\du)--(9.525000\du,33.635000\du)--(22.345000\du,33.635000\du)--(22.345000\du,30.235000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (15.935000\du,31.185000\du){disposicion};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (15.935000\du,32.185000\du){Contiene los datos sobre las};
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (15.935000\du,33.185000\du){disposiciones};
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (9.525000\du,33.635000\du)--(9.525000\du,38.635000\du)--(22.345000\du,38.635000\du)--(22.345000\du,33.635000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (9.525000\du,33.635000\du)--(9.525000\du,38.635000\du)--(22.345000\du,38.635000\du)--(22.345000\du,33.635000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,34.335000\du){   id: serial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,35.135000\du){   nombre: character varying(25)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,35.935000\du){   descripcion: text};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,36.735000\du){   habilitado: boolean = true};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,37.535000\du){   modulo: character varying(10)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (9.675000\du,38.335000\du){   descripcion\_prueba: text};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (2.525000\du,1.535000\du)--(2.525000\du,4.935000\du)--(27.280000\du,4.935000\du)--(27.280000\du,1.535000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (2.525000\du,1.535000\du)--(2.525000\du,4.935000\du)--(27.280000\du,4.935000\du)--(27.280000\du,1.535000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.902500\du,2.485000\du){entidadverificadora};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.902500\du,3.485000\du){Datos maestros de las Entidades Ver ...};
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.902500\du,4.485000\du){doras};
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (2.525000\du,4.935000\du)--(2.525000\du,13.135000\du)--(27.280000\du,13.135000\du)--(27.280000\du,4.935000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (2.525000\du,4.935000\du)--(2.525000\du,13.135000\du)--(27.280000\du,13.135000\du)--(27.280000\du,4.935000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,5.635000\du){   id: serial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,6.435000\du){   nombre: character varying(250)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,7.235000\du){   rif: character varying(15)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,8.035000\du){   correo: character varying(100)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,8.835000\du){   telefono: character varying(15)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,9.635000\du){   contacto: character varying(250)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,10.435000\du){   direccion: character varying(500) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,11.235000\du){   web: character varying(250) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,12.035000\du){   habilitado: boolean = true};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.675000\du,12.835000\du){   registro: character varying(30)};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (2.325000\du,15.035000\du)--(2.325000\du,18.435000\du)--(27.080000\du,18.435000\du)--(27.080000\du,15.035000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (2.325000\du,15.035000\du)--(2.325000\du,18.435000\du)--(27.080000\du,18.435000\du)--(27.080000\du,15.035000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.702500\du,15.985000\du){institucion};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.702500\du,16.985000\du){Contiene los datos maestros de las  ...};
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node at (14.702500\du,17.985000\du){iones};
+\definecolor{dialinecolor}{rgb}{1.000000, 1.000000, 1.000000}
+\pgfsetfillcolor{dialinecolor}
+\fill (2.325000\du,18.435000\du)--(2.325000\du,25.835000\du)--(27.080000\du,25.835000\du)--(27.080000\du,18.435000\du)--cycle;
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (2.325000\du,18.435000\du)--(2.325000\du,25.835000\du)--(27.080000\du,25.835000\du)--(27.080000\du,18.435000\du)--cycle;
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,19.135000\du){   id: serial};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,19.935000\du){   nombre: character varying(250)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,20.735000\du){   rif: character varying(15) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,21.535000\du){   correo: character varying(100) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,22.335000\du){   telefono: character varying(15)};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,23.135000\du){   contacto: character varying(250) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,23.935000\du){   direccion: character varying(500) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,24.735000\du){   web: character varying(250) = 'N/A'::character varying};
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (2.475000\du,25.535000\du){   habilitado: boolean = true};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{}{0pt}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{to}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.225000\du,12.235000\du)--(27.280000\du,5.435000\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (29.752500\du,8.835000\du){\{fkev\}};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{to}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.225000\du,13.035000\du)--(27.080000\du,18.935000\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (29.652500\du,15.985000\du){\{fkinst\}};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{to}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.925000\du,33.235000\du)--(48.040000\du,11.435000\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (40.482500\du,22.335000\du){\{fkauditoria\}};
+\pgfsetlinewidth{0.100000\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetdash{{0.400000\du}{0.400000\du}}{0\du}
+\pgfsetbuttcap
+{
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetfillcolor{dialinecolor}
+% was here!!!
+\pgfsetarrowsend{to}
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\draw (32.925000\du,34.035000\du)--(22.345000\du,34.135000\du);
+}
+% setfont left to latex
+\definecolor{dialinecolor}{rgb}{0.000000, 0.000000, 0.000000}
+\pgfsetstrokecolor{dialinecolor}
+\node[anchor=west] at (27.635000\du,34.085000\du){\{fkdisp\}};
+\end{tikzpicture}
