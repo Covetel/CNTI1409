@@ -61,6 +61,7 @@ requires 'Sub::Uplevel' => '0.22';
 requires 'CSS::Tiny' => '1.15';
 requires 'Template::Latex' => '3.0001';
 requires 'LaTeX::Encode' => '0.03';
+requires 'Chart::Bars';
 requires 'Catalyst::Controller::SOAP';
 
 test_requires 'Test::More' => '0.88';
