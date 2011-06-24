@@ -23,6 +23,7 @@ function getDatos (){
 			if (datos.estado == 2){
 				$("#spider_estado").html("Terminado").addClass("important");
 				$("button#spider_descargar_muestra").button("enable");
+	            $("#spider_stop").button("disable");
 				// Si la cantidad de urls obtenidas es igual a 0 entonces hay un problema. 
 				var turls = $("#spider_total_urls").html();
 				if (turls == 0){
