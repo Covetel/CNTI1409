@@ -9,12 +9,12 @@ Model::DB:
   connect_info:
     user: admin
     password: 123321...
-    dsn: dbi:Pg:dbname=validador;host=localhost
+    dsn: dbi:Pg:dbname=validador;host=192.168.5.126
     pg_enable_utf8: 1
 
 # Configuración General LDAP. 
 Model::LDAP:
-   host: 192.168.5.3
+   host: localhost
    # Base de busqueda general
    base: ou=cnti1409,dc=cnti,dc=gob,dc=ve
    # Usuario de LDAP.
@@ -47,7 +47,7 @@ authentication:
                 password_type:  self_check
             store:
                 class: LDAP
-                ldap_server: 192.168.5.3
+                ldap_server: localhost
                 ldap_server_options:
                     timeout: 30
                 binddn: cn=admin,dc=cnti,dc=gob,dc=ve
