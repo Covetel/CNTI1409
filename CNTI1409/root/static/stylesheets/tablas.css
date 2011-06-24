@@ -130,3 +130,11 @@ table.lista_disposiciones td.disp_name {
  font-weight: bold;
  text-align: center;
 }
+
+div.muestra{
+	overflow: auto;
+	height: 110px;
+    font-size: 0.7em;
+    background-color: #FFFFCE;
+}
+

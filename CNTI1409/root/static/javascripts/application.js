@@ -135,6 +135,10 @@ function boton_desactivar_activar(){
 
 $(document).ready(function(){
 
+$("#back").click(function(){
+    history.back();
+});
+
 jQuery(function($){
    $.mask.definitions['~']='[JG]';
    $("#rif").mask("~-99999999-9");

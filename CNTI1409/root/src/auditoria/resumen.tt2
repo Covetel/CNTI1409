@@ -8,7 +8,7 @@
 		[% END %]
 		<tr> <td> <label> Institución </label> </td> <td> [% institucion %] </td> </tr> 
 		<tr> <td> <label> Entidad Verificadora </label> </td> <td> [% entidad %] </td> </tr> 
-		<tr> <td> <label> Muestra </label> </td> <td> [% muestra %]</td> </tr> 
+		<tr> <td> <label> Muestra </label> </td> <td> <div class="muestra">[% muestra %]</div></td> </tr> 
 	</table>
 	
 </div>
