@@ -91,8 +91,12 @@ sub kill : Local {
     if (kill 9, $pid){
         $c->detach($self, 'muestra', [$id]);
     } else {
-        $c->res->body(0); 
+        
+        $c->stash->{error} = 1;
+        $c->stash->{mensaje} = "Ha ocurrido un error: El proceso que esta
+        intentando detener no se encuentra.";
     }
+	$c->stash->{template} = 'spider/kill.tt2';
 }
 
 sub muestra : Local {
