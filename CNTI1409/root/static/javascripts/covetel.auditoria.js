@@ -9,6 +9,7 @@ $("document").ready(function(){
 	//Cambio el boton Iniciar Auditoria, por un boton jquery ui
 	$("button#iniciar_auditoria").button({ icons: {primary:'ui-icon-gear'} });
 	$("button#detalle_auditoria").button({ icons: {primary:'ui-icon-circle-zoomin'} });
+	$("button#detener_auditoria").button({ icons: {primary:'ui-icon-circle-close'} });
 	//No se puede ver el detalle hasta que el job halla terminado su trabajo.
 	$("button#detalle_auditoria").button({ disabled: true });
 	$("button#reporte").button({ icons: {primary:'ui-icon-note'} });
@@ -134,11 +135,6 @@ $("document").ready(function(){
 		} 
     }
     
-    // click de las UL
-    //$("ul.urls").children().each.click(function(){
-    //   alert("hola"); 
-    //});
-        
     $("button#guardar").click(function(){
 		//Obtengo el valor del textarea acciones_correctivas. 
 		var acciones_correctivas = $("#acciones_correctivas").val();
@@ -215,6 +211,17 @@ $("document").ready(function(){
 
 
 	});
+
+
+    $("button#detener_auditoria").click(function(){
+		var id = $("table.resumen").attr('id');
+		if (id){
+			var fields = id.split('_');
+			id = fields[1];
+            alert(id);
+        } 
+    
+    });
 
 	//$("#reporte_disposiciones").accordion();
 });
