@@ -1,0 +1,6 @@
+[% INCLUDE mensajes.tt2 %]
+[% titulo = 'Error' %]
+
+<p>
+<button type="button" id="back"> Regresar </button>
+</p>
