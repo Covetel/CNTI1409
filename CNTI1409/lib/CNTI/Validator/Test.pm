@@ -318,7 +318,7 @@ sub run {
         $self->cache->get($uri);
         my $type = $mm->checktype_contents( $self->cache->response->content );
         unless ( lc($type) eq 'image/png' ) {
-            $self->event_log( error => "Tipo de imagen ilegal $type" );
+            $self->event_log( error => "Tipo de imagen ilegal $type, $src" );
             $errors++;
         }
     }
@@ -695,6 +695,7 @@ sub run {
     }
     else {
         $self->event_log( error => "El tipo de documento es: $type" ) if $type;
+        $self->event_log( error => "No se pudo identificar el tipo del documento" ) unless $type;
         $self->ok(0);
     }
 }
