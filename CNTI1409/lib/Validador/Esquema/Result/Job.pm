@@ -120,4 +120,41 @@ __PACKAGE__->has_many(
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+
+sub urls_done {
+ my $self = shift; 
+ my $n = $self->urls->search({ state => 'done'})->count;
+ return $n;
+}
+
+sub urls_new {
+ my $self = shift; 
+ my $n = $self->urls->search({ state => 'new'})->count;
+ return $n;
+}
+
+sub urls_total {
+ my $self = shift; 
+ my $n = $self->urls->search->count;
+ return $n;
+}
+
+sub paths {
+ my $self = shift;
+ my @urls = $self->urls->search({},{columns => [qw/path/]});
+ my @paths; 
+ push @paths, $_->path foreach @urls; 
+ return \@paths;
+}
+
+sub path_run {
+ my $self = shift;
+ my $url = $self->urls->search({ state => 'run'},{columns => [qw/path/]});
+ if ($url->count > 0){
+    return $url->first->path; 
+ } else {
+    return undef;
+ }
+}
+
 1;
