@@ -59,6 +59,7 @@ $("document").ready(function(){
 		$.getJSON('/ajax/monitor/auditoria/'+id,function(datos){
 			$("#total_done").html(datos.total_done);
 			$("#total_pendientes").html(datos.total_pendientes);
+			$("#url_actual").html(datos.url_actual);
 			total_url = datos.total_url;
 			total_done = datos.total_done;
 			var porcentaje = (total_done / total_url) * 100; 
@@ -214,13 +215,15 @@ $("document").ready(function(){
 
 
     $("button#detener_auditoria").click(function(){
-		var id = $("table.resumen").attr('id');
-		if (id){
-			var fields = id.split('_');
-			id = fields[1];
-            alert(id);
-        } 
-    
+        if (confirm("¿Esta usted seguro?")){
+		    var id = $("table.resumen").attr('id');
+		    if (id){
+			    var fields = id.split('_');
+			    id = fields[1];
+	            window.clearInterval(intervalo);
+			    window.location = "/auditoria/kill/"+id;
+            } 
+        }
     });
 
 	//$("#reporte_disposiciones").accordion();
