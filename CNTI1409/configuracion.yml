@@ -9,7 +9,7 @@ Model::DB:
   connect_info:
     user: admin
     password: 123321...
-    dsn: dbi:Pg:dbname=validador;host=192.168.5.126
+    dsn: dbi:Pg:dbname=validador;host=192.168.56.101
     pg_enable_utf8: 1
 
 # Configuración General LDAP. 
@@ -87,5 +87,5 @@ breadcrumbs:
     /reportes/wizard: Auditorías
 
 # Validador W3C.
-css_validator_uri: http://jigsaw.w3.org/css-validator/validator
-html_validator_uri: http://validator.w3.org/check
+css_validator_uri: http://192.168.5.191:8180/css-validator/validator
+html_validator_uri: http://192.168.5.191/w3c-markup-validator/check
