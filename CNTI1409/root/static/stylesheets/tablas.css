@@ -142,8 +142,12 @@ button#detener_auditoria {
     float: right;
 }
 
-td#total_url, td#total_pendientes, td#total_done {
+td#total_url, td#total_pendientes, td#total_done, td#url_actual {
     text-align: right;
+}
+
+td#url_actual {
+    font-weight: bold;
 }
 
 div#barra_progreso {
@@ -153,3 +157,8 @@ div#barra_progreso {
 div#barra_progreso div {
     padding: 0;
 }
+
+span.state {
+    font-style: italic;
+}
+
