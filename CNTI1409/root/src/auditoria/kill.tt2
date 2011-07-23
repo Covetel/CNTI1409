@@ -1,0 +1,14 @@
+[% titulo = 'Detener Proceso de Auditoria'%]
+[% INCLUDE mensajes.tt2 %]
+
+[% UNLESS error %]
+<p>
+El proceso de la auditoria [% auditoria.id %] fue detenido satisfactoriamente.
+Para volver a iniciar el proceso de esta auditoría, debe ir a la pantalla de
+resumen de la auditoría.  
+</p>
+
+<p>
+<a href="/auditoria/resumen/[% auditoria.id %]"> Ir al resumen de la auditoria </a>
+</p>
+[% END %]
