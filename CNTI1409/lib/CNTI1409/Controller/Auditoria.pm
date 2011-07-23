@@ -32,6 +32,42 @@ sub auto :Private {
     return 1;
 }
 
+
+=head2 kill
+
+Detiene una auditoria. 
+
+=cut 
+
+sub kill :Local {
+    my ($self, $c, $id) = @_;
+    $SIG{CHLD} = "IGNORE";
+    if ($id){
+        my $auditoria = $c->model('DB::Auditoria')->find($id);
+        if ($auditoria){
+	        $c->stash->{auditoria} = $auditoria;
+	        my $job = $c->model('DB::Job')->find($auditoria->job);
+	        my $pid = $job->proc;
+	        my $rkill = kill 9, $pid;
+	        if ($rkill){
+	            $job->delete();
+	            $auditoria->estado('p');
+                $auditoria->update();
+	        } else {
+	            $c->stash->{mensaje} = "Esta tratando de detener un proceso que ya no existe";
+	            $c->stash->{error} = 1;
+	        }
+        } else {
+            $c->stash->{mensaje} = "La auditoria no existe";
+            $c->stash->{error} = 1;
+        }
+    } else {
+        $c->stash->{mensaje} = "Debe indicar el ID de la auditoria";
+        $c->stash->{error} = 1;
+    }
+    $c->stash->{template} = 'auditoria/kill.tt2';
+}
+
 =head2 index
 
 =cut
@@ -189,6 +225,7 @@ sub resumen : Local {
 		$c->stash->{entidad} = $auditoria->idev->nombre;
 		$c->stash->{muestra} = $muestra;
 		$c->stash->{estado} = $estado;
+        $c->stash->{url_count} = $auditoria->url_count;
 	} else {
 		$c->stash->{titulo} = "Auditoría no encontrada: $id";
 	}
@@ -261,51 +298,14 @@ sub monitor : Local {
 		
 		# Busco el job.
 		my $job = CNTI::Validator::Jobs->find_job( $job_id );
+        my $j = $c->model('DB::Job')->find($job_id);
 		
-		# Obtengo las url ya procesadas del Job. 
-		my @url_done;
-		my @url_run;
-		my @url_new;
-		my $it = $job->children();
-		my $url = 0;
-		while ( my $u = $it->() ){
-			next if $u->path eq '/';
-			push @url_done,$u->path if $u->state eq 'done';
-			push @url_new,$u->path if $u->state eq 'new';
-			push @url_run,$u->path if $u->state eq 'run';
-			$url++;
-            # Pruebas para ingresar los datos en BD
-            my $uchild = $u->children;
-            # $u este hash tengo los siguientes datos
-            # path = URL evaluada
-            # $uchild
-            # haciendo child de este hash obtengo
-            # pass = (pass|fail) paso o no la disposicion
-            # name = Nombre de la disposicion evaluada
-            # $failchild
-            # haciendo child de este
-            # Solo en caso de pass = fail se crea un hijo con la siguiente info
-            # message = Errores obtenidos en la disposicion.
-            #while ( my $temp = $uchild->() ) {
-                
-            #}
-
-
-		}
-		
-		my $u_done = $#url_done + 1;
-		my $u_pendientes = ($#url_new + 1) + ($#url_run + 1);
-
 		$c->stash->{id} = $id;
-		$c->stash->{total_url} = $url;
-		$c->stash->{total_done} = $u_done;
-		$c->stash->{total_pendientes} = $u_pendientes;
-		$c->stash->{url_done} = \@url_done;
-
-        # Variables que tengo disponibles
-        # id - id de la auditoria
-        # job_id - ID del Job, sirve para consultar los datos necesarios al Job (disposicion, url fallidas, etc.).
-        # 
+		$c->stash->{total_url} =  $j->urls_total;
+		$c->stash->{total_done} = $j->urls_done;
+		$c->stash->{total_pendientes} =  $j->urls_new;
+		$c->stash->{url_done} = $j->paths;
+        $c->stash->{url_actual} = $j->path_run;
 	}
 }
 
@@ -412,14 +412,39 @@ sub detalle : Local {
 	}
 	if ($disposicion && $id) {
 		my $h;
-        my $errores; #variable donde intento meter los errores por URL
-		my $ndis; #Nombre disposicion
-		my $ddis; #Descripcion disposicion
-		my $pass = 'pass'; #Resultado general de la disposicion 
-		my $hash;
 		my $site;
 		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id });
+	    $c->stash->{auditoria} = $auditoria;
+	    my $job = CNTI::Validator::Jobs->find_job( $auditoria->job );
+	    $c->stash->{portal} = $job->site; 
 		my $d = $c->model('DB::Disposicion')->find({ modulo => $disposicion });
+	    $c->stash->{d} = $d;
+	    $c->stash->{disposicion} = $disposicion;
+
+        # Hash con las urls y los mensajes de error por cada url de esta
+        # disposicion 
+        my $disposiciones = $c->model('DB::ResultadosDisposicion')->disposiciones($auditoria->job);
+        $c->stash->{disposiciones} = $disposiciones;
+
+
+        my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
+                { idauditoria => $id, iddisposicion => $d->id },
+                { columns => qw / resolutoria / }
+            );
+
+        if ($resolutoria) {
+            $c->stash->{acciones} = $resolutoria->resolutoria;
+        }
+        if ($auditoria->estado eq "c") { 
+            $c->stash->{cierra} = 1;
+        } else {
+            $c->stash->{cierra} = 0;
+        }
+	
+		$c->stash->{template} = 'auditoria/detalle.tt2';
+
+
+=pod        
 		my $disposiciones = $c->model('DB::Disposicion')->search();
 		my @disp = $disposiciones->all;
 		my $superh;
@@ -463,32 +488,10 @@ sub detalle : Local {
 			}
 		}
         
+=cut
+
         # Verificamos si existe un comentario de acciones correctivas
         # para esta disposicion
-        my $dispo =
-          $c->model('DB::Disposicion')
-          ->find( { modulo => "$disposicion" }, { columns => [qw / id /] } );
-
-        my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
-                { idauditoria => $id, iddisposicion => $dispo->id },
-                { columns => qw / resolutoria / }
-            );
-
-        if ($resolutoria) {
-            $c->stash->{acciones} = $resolutoria->resolutoria;
-        }
-        if ($auditoria->estado eq "c") { 
-            $c->stash->{cierra} = 1;
-        } else {
-            $c->stash->{cierra} = 0;
-        }
-            
-		$c->stash->{urls} = \@{$h->{url}};
-		$c->stash->{er} = \@{$errores->{er}};
-		$c->stash->{disposiciones} = \@{$superh->{disposiciones}};
-		$c->stash->{fail} = 1 if $pass eq 'fail'; 
-		$c->stash->{portal} = $site; 
-		$c->stash->{template} = 'auditoria/detalle.tt2';
 	}
 }
 
