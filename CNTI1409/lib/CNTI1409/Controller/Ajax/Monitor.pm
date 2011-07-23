@@ -63,32 +63,17 @@ sub auditoria_GET {
 			# Obtengo el id del job asociado con esta auditoria
 			my $job_id = $auditoria->job;
 			
-			# Busco el job.
-			my $job = CNTI::Validator::Jobs->find_job( $job_id );
-			
+            # Busco el job en la base de datos. 
+            my $j = $c->model('DB::Job')->find($auditoria->job);
+            
 			# Obtengo las url ya procesadas del Job. 
-			my @url_done;
-			my @url_run;
-			my @url_new;
-			my $it = $job->children();
-			my $url = 0;
-			while ( my $u = $it->() ){
-				next if $u->path eq '/';
-				push @url_done,$u->path if $u->state eq 'done';
-				push @url_new,$u->path if $u->state eq 'new';
-				push @url_run,$u->path if $u->state eq 'run';
-				$url++;
-			}
-			
-			my $u_done = $#url_done + 1;
-			my $u_pendientes = ($#url_new + 1) + ($#url_run + 1);
-			
 			my $datos;
 			$datos->{id} = $id;
-			$datos->{total_url} = $url;
-			$datos->{total_done} = $u_done;
-			$datos->{total_pendientes} = $u_pendientes;
-			$datos->{url_done} = \@url_done;
+			$datos->{total_url} = $j->urls_total;
+			$datos->{total_done} = $j->urls_done;
+			$datos->{total_pendientes} = $j->urls_new;
+			$datos->{url_done} = $j->paths;
+			$datos->{url_actual} = $j->path_run;
     		$self->status_ok($c, entity => $datos);
 			
 		}
