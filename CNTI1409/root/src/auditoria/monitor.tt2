@@ -14,6 +14,7 @@
 			<tr> <td> Total URL </td> <td id="total_url">[% total_url %]</td> </tr>
 			<tr> <td> Total URL Pendientes  </td> <td id="total_pendientes">[% total_pendientes %]</td> </tr>
 			<tr> <td> Total URL Procesadas  </td> <td id="total_done">[% total_done %]</td> </tr>
+			<tr> <td> Auditando la URL  </td> <td id="url_actual">[% url_actual %]</td> </tr>
 		</table>
 	</div> 
 </div>
