@@ -205,9 +205,24 @@ __PACKAGE__->has_many(
   {},
 );
 
+=head2 auditoria_results
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-20 11:31:02
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:5U4yi/kCIiVhg625q4UIQQ
+Type: has_many
+
+Related object: L<Validador::Esquema::Result::AuditoriaResult>
+
+=cut
+
+__PACKAGE__->has_many(
+  "auditoria_results",
+  "Validador::Esquema::Result::AuditoriaResult",
+  { "foreign.id_auditoria" => "self.id" },
+  {},
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-07-23 19:38:21
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Xx6Z4TW8joEJRZ4gM29xWQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
