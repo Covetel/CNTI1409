@@ -92,9 +92,32 @@ sub fromjson {
 
     my $json = encode("UTF-8", $self->json);
     my $json_decode = JSON->new->utf8->decode($json);
-    $DB::single = 1;
     return $json_decode;
 }
     
+=head2 total_pass
+
+Retorna el total de disposiciones que pasaron los test
+
+=cut 
+
+sub total_pass_fail {
+    my $self = shift;
+    
+    # Obtengo el hash
+    my $hash = $self->fromjson; 
+    
+    my $total_pass = 0;
+    my $total_fail = 0;
+
+    foreach (keys %{$hash}){
+        if ($hash->{$_}->{'state'} eq 'pass' ){
+            $total_pass++;
+        } else {
+            $total_fail++;
+        }
+    }
+    return ($total_pass, $total_fail);
+}
 
 1;

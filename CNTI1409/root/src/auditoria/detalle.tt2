@@ -131,5 +131,5 @@ En caso de que uno o más URLs de la muestra hallan fallado las pruebas, por fav
 </form>
 
 <div> 
- <a href="/auditoria/resumen/[% idAuditoria %]"> Volver al resumen  </a>
+ <a href="/auditoria/resumen/[% auditoria.id %]"> Volver al resumen  </a>
 </div>

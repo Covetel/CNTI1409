@@ -148,7 +148,20 @@ Devuelve un hash con las disposiciones de un job.
 =cut
 
 sub disposiciones {
-    my ( $job_id ) = @_; 
+    my ( $auditoria_results ) = @_;
+    my $disp = {}; 
+    foreach my $disp_name (keys %{$auditoria_results}){
+        $disp->{$disp_name}->{name} = $disp_name;
+        $disp->{$disp_name}->{result} = $auditoria_results->{$disp_name}->{'state'};
+        foreach my $u (keys %{ $auditoria_results->{$disp_name}->{'urls'} }){
+           $disp->{$disp_name}->{urls}->{$u} = { result => 'fail' };
+           $disp->{$disp_name}->{urls}->{$u}->{mensajes} = $auditoria_results->{$disp_name}->{'urls'}->{$u}->{mensajes}; 
+        }
+    
+    }
+    return $disp;
+    
+=pod 
     my $j = CNTI::Validator::Jobs->find_job($job_id);
 	my $site = $j->site;
     my $it = $j->children;
@@ -168,8 +181,9 @@ sub disposiciones {
                 $disp->{$r->name}->{urls}->{$url}->{mensajes} = $m->message;
             }   
         }   
-    }   
+    } 
     return $disp;
+=cut 
 }
 
 sub grafica {
@@ -206,7 +220,8 @@ sub auditoria : Local {
 	if ($id) {
 		my $auditoria = $c->model('DB::Auditoria')->find({ id => $id },{join => 'idev', join => 'idinstitucion'});
 			if ($auditoria && $auditoria->estado eq 'c') {	
-				my $disposiciones = disposiciones $auditoria->job;
+                
+				my $disposiciones = disposiciones $auditoria->results->fromjson;
 				foreach (keys %{$disposiciones}){
 					my $name = $disposiciones->{$_}->{name};
         			my $dispo = $c->model('DB::Disposicion')->find(
@@ -262,6 +277,17 @@ sub auditoria : Local {
 				$c->stash->{mensaje} = 'La auditoría no existe o no esta cerrada. Solo se generan reportes para las auditorías cuyo estado es Cerrado';
 			}
 	}
+}
+
+sub urls_report : Local {
+	my ( $self, $c, $id, $disp ) = @_;
+	my $auditoria = $c->model('DB::Auditoria')->find($id);
+    my $disposiciones = disposiciones $auditoria->results->fromjson;
+    my $d = $disposiciones->{$disp};
+    $c->stash->{disp} = $d;
+	$c->stash->{template} = 'reportes/urls.tt2';
+    $c->detach( 'CNTI1409::View::Ajax' );
+    
 }
 
 =head2 auditoria_struct ($id) 

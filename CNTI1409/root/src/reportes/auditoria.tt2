@@ -65,6 +65,9 @@
 		</span>
 		<span class="icono"> <img src="/static/images/[% resultados.general %].png" alt="[%resultados.general%]" title="[%resultados.general%]" /> </span>
 	</div>
+        <div>
+        <span class="strong"> Identificador de la Auditoria </span> <span id="auditoria_id">[% id %]</span>
+        </div>
 	[% IF resultados.general == 'fallo' %]
 		<div> 
 			<span class="strong"> Número de Disposiciones que cumple: </span>
@@ -85,17 +88,9 @@
 	<img src="/static/images/grafica.png" Alt="Gráfica de Índice de Cumplimiento"/> 
 </div>
 <div id="reporte_disposiciones">
-	<table class="lista_disposiciones">
-	<thead>
-		<tr>
-		<th class="ui-state-default"> Disposición </th> <th class="ui-state-default" > Resultado </th>
-		</tr>
-	</thead>
-	<tbody>
 	[% FOREACH disp IN disposiciones %]
-	<tr>
-		<td class="disp_name"> [% disp.value.name %] </td>	
-		<td>
+	<ul>
+		<li> [% disp.value.name %] 
 			<ol class="disposiciones">
 				<li> <span class="strong"> Resultado General: </span> 
                     [% IF disp.value.result == "fail" %]
@@ -107,33 +102,19 @@
 				[% IF disp.value.resolutoria %]
 					<li> <span class="strong"> Acciones Correctivas: </span> [% disp.value.resolutoria %] </li>
 				[% END %]
-				<li> <span class="strong"> Urls: </span> 
-					<ul>
-					[% FOREACH url IN disp.value.urls %]
-						<li>[% url.key.replace('&','&amp;') %]</li>
-						<li>
-							<ol>
-								<li> <span class="strong"> Resultado:  </span> 
-                 	               [% IF url.value.result == "pass" %]
-                  	                 Aprobado
-                   	             [% ELSE %]
-                   	                 Falló
-                    	            [% END %]
-                    	        </li>
-								[% IF url.value.mensajes %]
-								    <li> <span class="strong"> Mensajes:  </span> [% url.value.mensajes.replace('&','&amp;') %] </li>
-								[% END %]
-							</ol>
-						</li>
-					[% END %]
-		 			</ul>
+                [% IF disp.value.urls %]
+				<li> <span class="strong"> Urls: <button id="ver_urls"
+                class="[% disp.value.name %]"> Abrir </button> 
+                <button id="cerrar_urls" class="[% disp.value.name %]"> Cerrar </button> </span> 
+                    <div class="urls_[% disp.value.name %]"> 
+					</div>
 				</li>
+                [% END %]
 			</ol>
-		</td>
-	</tr>
+		</li>
+	</ul>
 	[% END %]
-	</tbody>
-	</table>
+
 </div>
 
 
