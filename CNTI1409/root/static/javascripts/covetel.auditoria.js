@@ -72,9 +72,26 @@ $("document").ready(function(){
 			});
 			$("ul.urls").html(ul);
 			$("#barra_progreso").progressbar({ value: porcentaje });
+
+            // Si la evaluación termina. 
 			if (porcentaje == 100){
 				window.clearInterval(intervalo);
-				$("button#detalle_auditoria").button("enable");
+                // Guardar los resultados de la auditoria en JSON. 
+				var id = $("table.resumen").attr('id');
+				if (id){
+					var fields = id.split('_');
+					id = fields[1];
+                    $.get("/auditoria/save_results/"+id, function(datos){
+                        if (datos == 1){
+				            $("button#detalle_auditoria").button("enable");
+                            alert("Los resultados de la auditoria fueron guardados satisfactoriamente");
+                        } else if (datos == 2) {
+                            alert("No se provee el identificador de la auditoria");
+                        } else if (datos == 3) {
+                            alert("No se encuentra la auditoria");
+                        }
+                    });
+				}
 			}
 		});
 	}

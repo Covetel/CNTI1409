@@ -499,6 +499,41 @@ sub detalle : Local {
 	}
 }
 
+
+=head2 save_results
+
+Recibe el id de la auditoría, construye un hash con los resultados,  los
+serializa en JSON y los guarda en base de datos. 
+
+=cut 
+
+
+sub save_results : Local {
+	my ( $self, $c, $id ) = @_;
+    if ($id) {
+        # Busco la auditoria    
+        my $auditoria = $c->model('DB::Auditoria')->find($id);
+        if ($auditoria){
+            # Construyo el hash
+            my $disp = $c->model('DB::ResultadosDisposicion')->disposiciones($auditoria->job);
+
+            # Serializo en JSON codificado UTF8
+            my $json_disp = JSON::XS->new->utf8(1)->encode($disp);
+            
+            # Guardo los datos.
+			my $json_db = $c->model('DB::AuditoriaResult')->create({
+			        id_auditoria => $auditoria->id, 
+			        json => $json_disp,
+			});
+        } else {
+            $c->res->body("3"); # Auditoria no encontrada 
+        } 
+    } else {
+        $c->res->body("2");  # ID no suministrado
+    }
+    $c->res->body("1"); # Resultados guardados
+}
+
 =head1 AUTHOR
 
 Walter Vargas <walter@covetel.com.ve>
