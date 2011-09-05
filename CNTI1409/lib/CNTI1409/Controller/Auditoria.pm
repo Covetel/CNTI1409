@@ -423,8 +423,12 @@ sub detalle : Local {
 
         # Hash con las urls y los mensajes de error por cada url de esta
         # disposicion 
-        my $disposiciones = $c->model('DB::ResultadosDisposicion')->disposiciones($auditoria->job);
-        $c->stash->{disposiciones} = $disposiciones;
+        #my $disposiciones = $c->model('DB::ResultadosDisposicion')->disposiciones($auditoria->job);
+        #$c->stash->{disposiciones} = $disposiciones;
+        $DB::single=1;
+        $c->log->debug($auditoria->results->id);
+        my $scalar = $auditoria->results->fromjson;
+        $c->stash->{disposiciones} = $scalar; 
 
 
         my $resolutoria = $c->model("DB::Auditoriadetalle")->find(

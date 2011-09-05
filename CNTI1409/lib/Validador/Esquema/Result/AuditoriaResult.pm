@@ -4,6 +4,7 @@ package Validador::Esquema::Result::AuditoriaResult;
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
 
 use strict;
+use utf8;
 use warnings;
 
 use base 'DBIx::Class::Core';
@@ -83,20 +84,17 @@ __PACKAGE__->belongs_to(
 Recibe el hash y lo serializa a json.
 
 =cut 
+
+sub fromjson {
+    my $self = shift;
+    use JSON;
+    use Encode; 
+
+    my $json = encode("UTF-8", $self->json);
+    my $json_decode = JSON->new->utf8->decode($json);
+    $DB::single = 1;
+    return $json_decode;
+}
     
-
-use JSON::XS;
-
-sub to_json {
-    my $self = shift;
-    my $json = encode_json $self->json;
-    return $json;
-}
-
-sub json {
-    my $self = shift;
-    my $json = decode_json $self->json;
-    return $json;
-}
 
 1;

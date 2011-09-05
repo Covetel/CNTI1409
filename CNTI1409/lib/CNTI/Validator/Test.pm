@@ -1,5 +1,6 @@
 package CNTI::Validator::Test;
 use Moose;
+use utf8; 
 
 has url => ( is => 'ro', isa => 'CNTI::Validator::Monitor::URL', required => 1, handles => { uri => "uri" } );
 has task => (

@@ -233,4 +233,11 @@ sub url_count {
     return $total;
 }
 
+__PACKAGE__->belongs_to(
+  "results",
+  "Validador::Esquema::Result::AuditoriaResult",
+  { "foreign.id_auditoria" => "self.id" },
+  {},
+);
+
 1;
