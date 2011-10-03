@@ -7,13 +7,14 @@ use CNTI::Validator::Monitor::Job;
 use CNTI::Validator::Monitor::URL;
 
 my $job = CNTI::Validator::Jobs->new_job(
-    site => "http://192.168.5.240",
+    site => "http://fundabit.me.gob.ve",
     sample => [
-"/", 
-"/lenny/", 
-"/lenny/?C=D;O=A", 
-"/lenny/?C=M;O=A", 
-"/lenny/?C=M;O=D", 
+'http://fundabit.me.gob.ve/',
+'http://fundabit.me.gob.ve/#/images/favicon.ico',
+'http://fundabit.me.gob.ve/index.php',
+'http://fundabit.me.gob.ve/index.php?option=com_content&task=view&id=100&Itemid=78',
+'http://fundabit.me.gob.ve/index.php?option=com_content&task=view&id=101&Itemid=68',
+'http://fundabit.me.gob.ve/index.php?option=com_content&task=view&id=101&Itemid=78',
         ], 
 );
 
@@ -22,9 +23,11 @@ printf "El job %d tiene estado %s\n", $j->id, $j->state;
 
 my $it = $j->children;
 
-while (my $u = $it->()){
-    printf "URL: %s\n", $u->uri;
+while ($j->state == 1){
+    while (my $u = $it->()){
+        printf "URL: %s %s %d\n", $u->uri, $u->fail, $u->state;
+    }
+    
 }
-
 
 1;

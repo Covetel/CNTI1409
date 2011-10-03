@@ -20,7 +20,7 @@ my $dispid = shift;
 
 # Busco las disposiciones. 
 my $disp = $schema->resultset('ResultadosDisposicion')->disposiciones($jobid,$dispid);
-#my $json_disp = JSON::XS->new->utf8(1)->encode($disp);
+my $json_disp = JSON::XS->new->utf8(1)->encode($disp);
 #my $json_disp = to_json($disp, {utf8 => 1});
 
 #my $json_db = $schema->resultset('AuditoriaResult')->create({
