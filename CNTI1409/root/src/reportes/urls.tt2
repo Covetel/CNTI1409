@@ -1,0 +1,22 @@
+[% FOREACH url IN disp.urls %]
+	<li>[% url.key.replace('&','&amp;') %]</li>
+	<li>
+		<ol>
+			<li> <span class="strong"> Resultado:  </span> 
+               [% IF url.result == "pass" %]
+                 Aprobado
+             [% ELSE %]
+                 Falló
+	            [% END %]
+	        </li>
+			[% IF url.value.mensajes %]
+			    <li> <span class="strong"> Mensajes:  </span> 
+                       [% FOREACH mensaje IN url.value.mensajes %]
+                            [% mensaje.replace('&','&amp;') %] <br /> 
+                       [% END %]
+                </li>
+			[% END %]
+		</ol>
+	</li>
+[% END %]
+</ul>
