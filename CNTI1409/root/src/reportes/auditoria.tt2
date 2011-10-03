@@ -85,7 +85,7 @@
 		</div>
 </div>
 <div id="reporte_grafica">
-	<img src="/static/images/grafica.png" Alt="Gráfica de Índice de Cumplimiento"/> 
+	<img src="/static/images/auditoria-[% id %].png" Alt="Gráfica de Índice de Cumplimiento"/> 
 </div>
 <div id="reporte_disposiciones">
 	[% FOREACH disp IN disposiciones %]
