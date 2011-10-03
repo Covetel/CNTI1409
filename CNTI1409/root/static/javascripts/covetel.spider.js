@@ -73,7 +73,6 @@ $(document).ready(function(){
 		id = fields[2];
 		if (id > 0){
 			$("button#spider_descargar_muestra").button({ icons: {primary:'ui-icon-note'} });
-			//console.log("HOlaa");
 			intervalo = window.setInterval(getDatos,1000);
 		}
 	}
