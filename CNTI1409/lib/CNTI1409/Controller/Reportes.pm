@@ -160,8 +160,9 @@ sub disposiciones {
     
     }
     return $disp;
-    
-=pod 
+
+=pod
+    my ( $job_id ) = @_;
     my $j = CNTI::Validator::Jobs->find_job($job_id);
 	my $site = $j->site;
     my $it = $j->children;
@@ -184,10 +185,11 @@ sub disposiciones {
     } 
     return $disp;
 =cut 
+
 }
 
 sub grafica {
-	my ($cumple,$no_cumple,$institucion) = @_;
+	my ($cumple,$no_cumple,$institucion,$id) = @_;
 	
 	my $title = 'Gráfico de índice de cumplimento';
 	utf8::decode($title);
@@ -203,7 +205,7 @@ sub grafica {
 	$obj->add_dataset($institucion);
 	$obj->add_dataset($no_cumple);
 	$obj->add_dataset($cumple);
-	$obj->png('root/static/images/grafica.png');
+	$obj->png("root/static/images/auditoria-$id.png");
 }
 
 =head2 auditoria($id)
@@ -271,7 +273,7 @@ sub auditoria : Local {
                 $c->stash->{id}         = $auditoria->id;
                 $c->stash->{titulo}     = "Reporte de la auditoría 000$id";
 				
-				&grafica($resultados->{dpass}, $resultados->{dfail}, $producto->{solicitante});
+				&grafica($resultados->{dpass}, $resultados->{dfail},$producto->{solicitante}, $id);
 			} else {
 				$c->stash->{error} = 1;
 				$c->stash->{mensaje} = 'La auditoría no existe o no esta cerrada. Solo se generan reportes para las auditorías cuyo estado es Cerrado';
@@ -336,27 +338,40 @@ sub auditoria_struct {
 	my $disp = &disposiciones_struct;
 
 	# Busco los resultados por disposicion. 
-	my $resultados = disposiciones $aud->job;
+	my $resultados = disposiciones $aud->results->fromjson;
+
+    $c->stash->{resultados} = $aud->results->fromjson;
 	
 	# Itero por todas las disposiciones.
-	foreach my $disposicion (keys %{ $disp }) {
+	foreach my $disposicion (keys %{ $resultados }) {
 		# Si no hay resultados para la disposición en el Job, entonces next.
-		next if $resultados->{$disposicion} eq '' ;
 		$auditoria->{disposiciones}->{$disposicion} = $disp->{$disposicion};
-		my @urls;
-		foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
-			my $path = latex_encode($url); 
-			my $u = { latex_url => $path, path => $url, datos => $resultados->{$disposicion}->{urls}->{$url}};
-			my $mensaje = $u->{datos}->{mensajes};
-			if ($mensaje){
-				$mensaje = latex_encode($mensaje);
-				$u->{datos}->{mensajes} = $mensaje;
-			}
+        if ($resultados->{$disposicion}->{urls}) { 
+		    my @urls;
+		    foreach my $url (keys %{$resultados->{$disposicion}->{urls}}){
+			    my $path = latex_encode($url); 
+			    my $u = { latex_url => $path, path => $url, datos => $resultados->{$disposicion}->{urls}->{$url} };
+			    my $mensaje = $u->{datos}->{mensajes};
+			    if ($mensaje){
+                    my @mensajes; 
+
+                    foreach (@{$mensaje}){
+                        if (/http:\/\//){
+                            s!<a href=http://.*a>!!;
+                            s!,!!;
+                        } 
+                        
+                        push @mensajes,latex_encode($_);
+                    }
+				    $u->{datos}->{mensajes} = \@mensajes;
+			    }
 			push @urls, $u;	
-		}
+		    }
 		$auditoria->{disposiciones}->{$disposicion}->{rutas} = \@urls;
-		if ($resultados->{$disposicion}->{result}){
-			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'Incumple';
+        }
+		if ($resultados->{$disposicion}->{result} eq 'fail'){
+			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'No Cumple';
+
 			# Busco la resolutoria que agrego el auditor a la disposicion. 
 			my $resolutoria = $c->model("DB::Auditoriadetalle")->find(
 				{ idauditoria => $id, iddisposicion => $disp->{$disposicion}->{id} },
@@ -365,7 +380,7 @@ sub auditoria_struct {
 			if ($resolutoria && $resolutoria->resolutoria) {
 				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = $resolutoria->resolutoria;
 			} else {
-				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'El auditor no indico una acción resolutoria';
+				$auditoria->{disposiciones}->{$disposicion}->{resolutoria} = 'El auditor no indicó una acción resolutoria';
 			}
 		} else {
 			$auditoria->{disposiciones}->{$disposicion}->{resultado} = 'Cumple';
@@ -402,6 +417,7 @@ sub pdf : Local {
 		my $auditoria = auditoria_struct($self,$c,$id);
 		my $file = "auditoria-".$auditoria->{id}.".pdf";
 		$c->stash->{auditoria} = $auditoria;
+        $c->stash->{grafica} = $c->path_to('root', 'static', 'images',"auditoria-$id.png") ;
 		if ($c->forward( 'CNTI1409::View::PDF' ) ) {
      	# Only set the content type if we sucessfully processed the template
      		$c->response->content_type('application/pdf');
