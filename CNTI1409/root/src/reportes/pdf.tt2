@@ -1,9 +1,13 @@
 [%- USE Latex;
      FILTER latex("pdf") %]
+
+[% USE Dumper %]
+
 \documentclass[oneside,spanish]{scrbook}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \setcounter{secnumdepth}{3}
+\usepackage{graphicx}
 \setcounter{tocdepth}{3}
 \usepackage{array}
 \usepackage{longtable}
@@ -155,6 +159,7 @@ Portales de Internet.
 \caption{Resumen de los resultados}
 \end{table}
 
+
 \bigskip{}
 
 %% Firmas
@@ -170,17 +175,30 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
 \tabularnewline
 \end{tabular}
 
+\clearpage
+
+\subsection{Gráfico de índice de cumplimiento}
+
+En el siguiente gráfico de barras se puede observar el índice de cumplimiento
+para esta auditoria.
+
+\begin{figure}[H]
+    \caption{Gráfica de Índice de Cumplimiento}
+    \centering
+    \includegraphics[scale=0.7]{[% grafica %]}
+\end{figure}
 
 \newpage{}
 \section{Disposiciones}
 
+ 
  [% FOREACH disposicion IN auditoria.disposiciones %]
  \subsection{[% disposicion.value.nombre %]}
  [% disposicion.value.descripcion %]
 
  \begin{table}[H]
  \caption{Resultados}
- \begin{longtable}{|>{\centering}p{0.02\paperwidth}||>{\raggedright}p{0.3\paperwidth}||>{\centering}m{0.05\paperwidth}||>{\raggedright}p{0.25\paperwidth}|}
+ \begin{longtable}{|>{\centering}p{0.02\paperwidth}||>{\raggedright}p{0.25\paperwidth}||>{\centering}m{0.10\paperwidth}||>{\raggedright}p{0.20\paperwidth}|}
  
  \hline
  \noalign{\vskip\doublerulesep}
@@ -194,7 +212,12 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
 
  [% disposicion.value.id %] & 
  [% disposicion.value.descripcion_prueba %] & 
- \textbf{\textcolor{red}{ [% disposicion.value.resultado %] }} & 
+ [% IF disposicion.value.resultado == 'No Cumple' %]
+    \footnotesize{\textcolor{red}{ [% disposicion.value.resultado %] }}
+ [% ELSE %]
+    \textbf{[% disposicion.value.resultado %]} 
+ [% END %]
+ & 
  [% disposicion.value.resolutoria %]
 
  \tabularnewline
@@ -206,6 +229,8 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
  \end{longtable}
 
  \end{table}
+    [%# c.log.debug(Dumper.dump(disposicion.value.rutas)) %]
+    [% IF disposicion.value.rutas.size > 0 %]
 	\subsubsection{Resultados por URL}
 		{\scriptsize
 		\begin{enumerate}
@@ -214,15 +239,28 @@ Firma del Solicitante &  & Firma del Responsable de la Auditoria
 			\begin{enumerate}
 				\item \textbf{Resultado: } 	[% IF ruta.datos.result == 'fail' %]
 												\textcolor{red}{No Cumple}
-												\item \textbf{Mensajes:} [% ruta.datos.mensajes %] 
+												\item \textbf{Mensajes:} 
+                                                [% IF ruta.datos.mensajes.size > 0 %]
+                                                    \begin{minipage}{0.5\textwidth}
+                                                    \begin{flushleft}
+                                                    \begin{enumerate}
+                                                    [% FOREACH mensaje IN ruta.datos.mensajes %] 
+                                                        \item [% mensaje %]
+                                                        
+                                                    [% END %]
+                                                    \end{enumerate}
+                                                    \end{flushleft}
+                                                    \end{minipage}
+                                                [% END %]
 											[% ELSE %]
 												Cumple 
 											[% END %] 
 			\end{enumerate}
 		[% END %]
+
 		\end{enumerate}		
 		}
-
+     [% END %]
  \clearpage
  [% END %]
 \end{document}
