@@ -383,7 +383,7 @@ sub detalle : Local {
             my $modulo = $c->req->params->{disposicion};
             my $idAuditoria = $c->req->params->{id};
             my $resolutoria = $c->req->params->{acciones};
-            my $auditoria = $c->model('DB::Auditoria')->find({ id => $idAuditoria });
+            my $auditoria = $c->model('DB::Auditoria')->find($c->req->params->{id});
             if ($auditoria->estado eq "c") { 
                 $c->stash->{cierra} = "true";
             } else {
