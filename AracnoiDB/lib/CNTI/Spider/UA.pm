@@ -19,8 +19,8 @@ my $cache;
 sub _build_ua {
     return $cache->clone if $cache;
     $cache = WWW::Mechanize::Cached->new( agent => "Mozilla/5.0 (X11; U; Linux i686; es-ES; rv:1.9.2.8) Gecko/20100722 Firefox/3.6.8");
+    $cache->add_header('Accept', 'text/html');
     $cache->env_proxy();
-    #$cache->agent_alias("Linux Mozilla");
     return $cache;
 }
 
