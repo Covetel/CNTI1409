@@ -314,12 +314,12 @@ sub run {
     my @images = $self->htmlt->find('img');
     my $errors = 0;
     for my $img (@images) {
-        my $src = $img->attr('src');
+        my $src = $img->attr('src') ? $img->attr('src') : '';
         my $uri = URI->new_abs( $src, $self->uri );
         $self->cache->get($uri);
         my $type = $mm->checktype_contents( $self->cache->response->content );
         unless ( lc($type) eq 'image/png' ) {
-            $self->event_log( error => "Tipo de imagen ilegal $type, $src" );
+            $self->event_log( error => "Formato de imagen no permitido $type, $src" );
             $errors++;
         }
     }
