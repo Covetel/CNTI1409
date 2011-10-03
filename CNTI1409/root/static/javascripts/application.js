@@ -113,7 +113,6 @@ function boton_desactivar_activar(){
 					contentType: 'application/json',
 					complete: function (data) {
 						var datos = $.parseJSON(data.responseText);
-						//console.log(datos.valor);
 						if (datos.valor == 1){
 							tr.addClass('field_disabled');	
 							tr.removeClass('odd');
